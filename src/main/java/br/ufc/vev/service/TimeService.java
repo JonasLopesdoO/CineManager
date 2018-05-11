@@ -1,14 +1,14 @@
-package br.ufc.npi.service;
+package br.ufc.vev.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.ufc.npi.bean.Jogador;
-import br.ufc.npi.bean.Time;
-import br.ufc.npi.repositorio.JogadorRepositorio;
-import br.ufc.npi.repositorio.TimeRepositorio;
+import br.ufc.vev.bean.Jogador;
+import br.ufc.vev.bean.Time;
+import br.ufc.vev.repositorio.JogadorRepositorio;
+import br.ufc.vev.repositorio.TimeRepositorio;
 
 @Service
 public class TimeService {

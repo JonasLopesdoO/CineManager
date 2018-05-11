@@ -1,4 +1,4 @@
-package br.ufc.npi.controller;
+package br.ufc.vev.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.ufc.npi.service.JogadorService;
+import br.ufc.vev.service.JogadorService;
 
 @Controller
 @RequestMapping(path = "/jogadores/")

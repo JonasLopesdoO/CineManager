@@ -1,4 +1,4 @@
-package br.ufc.npi;
+package br.ufc.vev;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

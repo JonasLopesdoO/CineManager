@@ -1,4 +1,4 @@
-package br.ufc.npi.controller;
+package br.ufc.vev.controller;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.ufc.npi.bean.Jogador;
-import br.ufc.npi.bean.Time;
-import br.ufc.npi.service.JogadorService;
-import br.ufc.npi.service.TimeService;
+import br.ufc.vev.bean.Jogador;
+import br.ufc.vev.bean.Time;
+import br.ufc.vev.service.JogadorService;
+import br.ufc.vev.service.TimeService;
 
 @Controller
 @RequestMapping(path= "/times/")

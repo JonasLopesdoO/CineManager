@@ -1,4 +1,4 @@
-package br.ufc.npi.bean;
+package br.ufc.vev.bean;
 
 
 import java.util.List;

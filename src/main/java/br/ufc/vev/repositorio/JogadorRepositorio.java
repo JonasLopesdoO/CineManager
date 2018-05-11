@@ -1,4 +1,4 @@
-package br.ufc.npi.repositorio;
+package br.ufc.vev.repositorio;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import br.ufc.npi.bean.Jogador;
+import br.ufc.vev.bean.Jogador;
 
 @Repository
 @Transactional
