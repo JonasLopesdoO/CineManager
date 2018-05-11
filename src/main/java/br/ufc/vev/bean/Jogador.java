@@ -12,7 +12,7 @@ public class Jogador {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer id;
-	
+	//editar
 	String nome;
 	Integer idade;
 	
