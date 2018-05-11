@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Jogador {
-
+//aqui
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer id;
