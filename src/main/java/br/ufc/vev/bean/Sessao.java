@@ -17,8 +17,20 @@ public class Sessao {
 	
 	String nome;
 	
+	
 	Date dataInicio;
 	Date dataFim;
+	
+	@OneToOne
+	Filme filme;
+	
+	@OneToOne
+	Sala sala;
+	
+	public Sessao() {
+		
+	}
+	
 	
 	public Integer getId() {
 		return id;
@@ -68,13 +80,4 @@ public class Sessao {
 		this.sala = sala;
 	}
 
-	@OneToOne
-	Filme filme;
-	
-	@OneToOne
-	Sala sala;
-	
-	public Sessao() {
-		
-	}
 }
