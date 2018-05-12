@@ -17,7 +17,6 @@ public class Sessao {
 	
 	String nome;
 	
-	
 	Date dataInicio;
 	Date dataFim;
 	
@@ -30,7 +29,6 @@ public class Sessao {
 	public Sessao() {
 		
 	}
-	
 	
 	public Integer getId() {
 		return id;
