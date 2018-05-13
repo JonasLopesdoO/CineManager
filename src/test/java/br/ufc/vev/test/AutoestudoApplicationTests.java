@@ -1,4 +1,4 @@
-package br.ufc.npi;
+package br.ufc.vev.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
