@@ -2,6 +2,10 @@ package br.ufc.vev.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Date;
+
+import javax.validation.ConstraintViolationException;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,11 +29,33 @@ public class SessaoRepositoryTest {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void createShouldPersistData() {
 		Sessao sessao = new Sessao();
-		 this.sessaoRepo.save(sessao);
-		 Assertions.assertThat(sessao.getId()).isNotNull();
+		sessao.setId(1);
+		
+		Date dataInicio = new Date();
+		dataInicio.setYear(2018);
+		dataInicio.setMonth(5);
+		dataInicio.setDate(22);
+		sessao.setDataInicio(dataInicio);
+		Date dataFim = new Date();
+		dataFim.setYear(2018);
+		dataFim.setMonth(5);
+		dataFim.setDate(30);
+		sessao.setDataFim(dataFim);
+		
+		this.sessaoRepo.save(sessao);
+		Assertions.assertThat(sessao.getId()).isNotNull();
+		Assertions.assertThat(sessao.getDataInicio()).isNotNull();
+		Assertions.assertThat(sessao.getDataFim()).isNotNull();
+	}
+	
+	@Test 
+	public void criarSessaoComDataInicioNula() {
+		thrown.expect(ConstraintViolationException.class);
+		
 	}
 	
 	@Test

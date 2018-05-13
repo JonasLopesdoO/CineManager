@@ -31,6 +31,10 @@ public class Sessao {
 	public Integer getId() {
 		return id;
 	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Date getDataInicio() {
 		return dataInicio;
