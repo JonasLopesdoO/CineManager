@@ -1,6 +1,8 @@
 package br.ufc.vev.service;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,11 +26,49 @@ public class SessaoService {
 	@Autowired
 	SalaController salaController;
 	
-	public void adicionaSessao(Date inicio, Date fim, int filme, int sala) {
-		Filme filmeCompleto = filmeController.leFilmePorId(filme);
-		Sala salaCompleta = salaController.leSalaPorId(sala);
+	public Sessao salvarSessao( Filme filme,  Sala sala,  LocalTime horario, LocalDate dataInicio, LocalDate dataFim) {
+		Sessao sessao = new Sessao();
+		sessao.setFilme(filme);
+		sessao.setSala(sala);
+		sessao.setHorario(horario);
+		sessao.setDataInicio(dataInicio);
+		sessao.setDataFim(dataFim);
 		
-		Sessao sessao = new Sessao(inicio, fim, filmeCompleto, salaCompleta);
+		sessaoRepositorio.save(sessao);
 		
+		return sessao;
 	}
+	
+	public Sessao atualizarSessao(Integer idSessao, Filme filme, Sala sala, LocalTime horario, LocalDate dataInicio,
+			LocalDate dataFim) {
+
+		Sessao sessao = new Sessao();
+		sessao.setFilme(filme);
+		sessao.setSala(sala);
+		sessao.setHorario(horario);
+		sessao.setDataInicio(dataInicio);
+		sessao.setDataFim(dataFim);
+		
+		sessaoRepositorio.save(sessao);
+		
+		return sessao;
+	}
+
+	public Sessao getSessaoPorId(Integer id) {
+		return sessaoRepositorio.findOne(id);
+	}
+	
+	public List<Sessao> getTodasSessoes() {
+		return sessaoRepositorio.findAll();
+	}
+
+	public Sessao deletarSessao(Integer idSessao) {
+		
+		Sessao sessao = sessaoRepositorio.getOne(idSessao);
+		sessaoRepositorio.delete(sessao);
+		
+		return sessao; 
+	}
+
+	
 }

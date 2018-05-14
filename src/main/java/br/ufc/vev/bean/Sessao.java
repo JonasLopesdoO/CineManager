@@ -1,6 +1,7 @@
 package br.ufc.vev.bean;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +16,9 @@ public class Sessao {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer id;
 	
-	Date dataInicio;
-	Date dataFim;
+	LocalDate dataInicio;
+	LocalDate dataFim;
+	LocalTime horario;
 	
 	@OneToOne
 	Filme filme;
@@ -24,8 +26,10 @@ public class Sessao {
 	@OneToOne
 	Sala sala;
 	
-	public Sessao(Date inicio, Date fim, Filme filme, Sala sala) {
-		this.setDataInicio(inicio);
+	public Sessao(Filme filme, Sala sala, LocalTime horario, LocalDate inicio, LocalDate fim) {
+		this.setFilme(filme);
+		this.setSala(sala);
+		this.setHorario(horario);
 		this.setDataFim(fim);
 		this.setFilme(filme);
 		this.setSala(sala);
@@ -42,20 +46,28 @@ public class Sessao {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public Date getDataInicio() {
+	
+	public LocalTime getHorario() {
+		return horario;
+	}
+	
+	public void setHorario(LocalTime horario) {
+		this.horario = horario;
+	}
+	
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Date dataInicio) {
+	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public Date getDataFim() {
+	public LocalDate getDataFim() {
 		return dataFim;
 	}
 
-	public void setDataFim(Date dataFim) {
+	public void setDataFim(LocalDate dataFim) {
 		this.dataFim = dataFim;
 	}
 

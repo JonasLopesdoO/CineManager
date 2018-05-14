@@ -6,5 +6,6 @@ import br.ufc.vev.bean.Sala;
 
 @Controller
 public interface SalaController {
-	public Sala leSalaPorId(int sala);
+	public Sala getSalaPorId(int sala);
+	
 }
