@@ -1,5 +1,10 @@
 package br.ufc.vev.controller;
 
-public interface SalaController {
+import org.springframework.stereotype.Controller;
 
+import br.ufc.vev.bean.Sala;
+
+@Controller
+public interface SalaController {
+	public Sala leSalaPorId(int sala);
 }

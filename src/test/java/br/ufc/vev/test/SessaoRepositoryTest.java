@@ -35,15 +35,9 @@ public class SessaoRepositoryTest {
 		Sessao sessao = new Sessao();
 		sessao.setId(1);
 		
-		Date dataInicio = new Date();
-		dataInicio.setYear(2018);
-		dataInicio.setMonth(5);
-		dataInicio.setDate(22);
+		Date dataInicio = new Date(2018, 05, 22);
 		sessao.setDataInicio(dataInicio);
-		Date dataFim = new Date();
-		dataFim.setYear(2018);
-		dataFim.setMonth(5);
-		dataFim.setDate(30);
+		Date dataFim = new Date(2018, 05, 30);
 		sessao.setDataFim(dataFim);
 		
 		this.sessaoRepo.save(sessao);
