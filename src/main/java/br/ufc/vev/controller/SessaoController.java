@@ -9,8 +9,9 @@ import br.ufc.vev.service.SessaoService;
 @Controller
 @RequestMapping(path= "/sessao/")
 public class SessaoController {
-	
+		
 	@Autowired
 	SessaoService sessaoService;
+	
 	
 }

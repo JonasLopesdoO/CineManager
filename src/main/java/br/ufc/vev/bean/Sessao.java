@@ -24,6 +24,13 @@ public class Sessao {
 	@OneToOne
 	Sala sala;
 	
+	public Sessao(Date inicio, Date fim, Filme filme, Sala sala) {
+		this.setDataInicio(inicio);
+		this.setDataFim(fim);
+		this.setFilme(filme);
+		this.setSala(sala);
+	}
+	
 	public Sessao() {
 		
 	}

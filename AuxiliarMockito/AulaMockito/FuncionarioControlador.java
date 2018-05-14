@@ -18,6 +18,7 @@ public class FuncionarioControlador {
 		Funcionario funcionario = new Funcionario(nome, senha, departamentoCompleto);
 		return funcionarioRepositorio.adicionaFuncionario(funcionario);
 	}
+	
 	public Funcionario encontreFuncionario(int indice) {
 		return funcionarioRepositorio.encontreFuncionario(indice);
 	}
