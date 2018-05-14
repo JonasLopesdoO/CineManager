@@ -42,7 +42,7 @@ public class SessaoService {
 	public Sessao atualizarSessao(Integer idSessao, Filme filme, Sala sala, LocalTime horario, LocalDate dataInicio,
 			LocalDate dataFim) {
 
-		Sessao sessao = new Sessao();
+		Sessao sessao = sessaoRepositorio.findOne(idSessao);
 		sessao.setFilme(filme);
 		sessao.setSala(sala);
 		sessao.setHorario(horario);

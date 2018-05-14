@@ -31,8 +31,6 @@ public class Sessao {
 		this.setSala(sala);
 		this.setHorario(horario);
 		this.setDataFim(fim);
-		this.setFilme(filme);
-		this.setSala(sala);
 	}
 	
 	public Sessao() {
