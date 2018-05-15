@@ -26,15 +26,9 @@ public class SessaoService {
 	@Autowired
 	SalaController salaController;
 	
-	public Sessao salvarSessao( Filme filme,  Sala sala,  LocalTime horario, LocalDate dataInicio, LocalDate dataFim) {
-			Sessao sessao = new Sessao();
-			sessao.setFilme(filme);
-			sessao.setSala(sala);
-			sessao.setHorario(horario);
-			sessao.setDataInicio(dataInicio);
-			sessao.setDataFim(dataFim);
-			
-			return sessao;
+	public Sessao salvarSessao(Sessao sessao) {
+		
+			return sessaoRepositorio.save(sessao);
 	}
 	
 	public Sessao atualizarSessao(Integer idSessao, Filme filme, Sala sala, LocalTime horario, LocalDate dataInicio,
