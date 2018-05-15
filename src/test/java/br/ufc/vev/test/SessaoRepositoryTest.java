@@ -2,10 +2,13 @@ package br.ufc.vev.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 import javax.validation.ConstraintViolationException;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -29,6 +32,13 @@ import br.ufc.vev.repositorio.SessaoRepositorio;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class SessaoRepositoryTest {
 
+	private static final LocalTime horario = LocalTime.parse("12:00");
+	private static final LocalDate dataInicio = LocalDate.parse("2018/05/22");
+	private static final LocalDate dataFim = LocalDate.parse("2018/05/30");
+	private static final Filme filme = new Filme();
+	private static final Sala sala = new Sala();
+	
+	
 	@MockBean
 	private FilmeController filmeControl;
 	@MockBean
@@ -38,25 +48,22 @@ public class SessaoRepositoryTest {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
-	@SuppressWarnings({ "deprecation", "unused" })
 	@Test
 	public void adicionarSessaoTest() {
 		
-		Date dataInicio = new Date(2018, 05, 22);
-		Date dataFim = new Date(2018, 05, 30);
+		BDDMockito.when(filmeControl.getFilmePorId(1)).thenReturn(filme);
+		BDDMockito.when(salaControl.getSalaPorId(1)).thenReturn(sala);
 		
-		Filme filme = new Filme();
-		Sala sala = new Sala();
+		Sessao sessao = new Sessao(filmeControl.getFilmePorId(1), 
+				salaControl.getSalaPorId(1), horario, dataInicio, dataFim);
 		
-		BDDMockito.when(filmeControl.leFilmePorId(1)).thenReturn(filme);
-		BDDMockito.when(salaControl.leSalaPorId(1)).thenReturn(sala);
+		System.out.println(sessao.getId());
 		
-		//Sessao sessao = new Sessao(dataInicio, dataFim, 1, 1);
-		
-//		this.sessaoRepo.save(sessao);
-//		Assertions.assertThat(sessao.getId()).isNotNull();
-//		Assertions.assertThat(sessao.getDataInicio()).isNotNull();
-//		Assertions.assertThat(sessao.getDataFim()).isNotNull();
+		this.sessaoRepo.save(sessao);
+		Assertions.assertThat(sessao.getId()).isNotNull();
+		Assertions.assertThat(sessao.getHorario()).isNotNull();
+		Assertions.assertThat(sessao.getDataInicio()).isNotNull();
+		Assertions.assertThat(sessao.getDataFim()).isNotNull();
 	}
 	
 	@Test 
@@ -66,16 +73,28 @@ public class SessaoRepositoryTest {
 	}
 	
 	@Test
-	public void deleteShouldRemoveData() {
-		Sessao sessao = new Sessao();
-		this.sessaoRepo.delete(sessao);
+	public void deleteSessaoTest() {
+
+		BDDMockito.when(filmeControl.getFilmePorId(1)).thenReturn(filme);
+		BDDMockito.when(salaControl.getSalaPorId(1)).thenReturn(sala);
+		
+		Sessao sessao = new Sessao(filmeControl.getFilmePorId(1), 
+				salaControl.getSalaPorId(1), horario, dataInicio, dataFim);
+		
+		sessaoRepo.save(sessao);
 		sessaoRepo.delete(sessao);
 		assertThat(sessaoRepo.findOne(sessao.getId())).isNull();
 	}
 	
 	@Test
 	public void updateShouldChangeAndPersistData() {
-		Sessao sessao = new Sessao();
+
+		BDDMockito.when(filmeControl.getFilmePorId(1)).thenReturn(filme);
+		BDDMockito.when(salaControl.getSalaPorId(1)).thenReturn(sala);
+		
+		Sessao sessao = new Sessao(filmeControl.getFilmePorId(1), 
+				salaControl.getSalaPorId(1), horario, dataInicio, dataFim);
+		
 		this.sessaoRepo.save(sessao);
 		//mudar as caracteristicas do pelos metodos set e tentar editar.
 		

@@ -26,10 +26,15 @@ public class SessaoService {
 	@Autowired
 	SalaController salaController;
 	
-	public Sessao salvarSessao(Sessao sessao) {
-		sessaoRepositorio.save(sessao);
-		
-		return sessao;
+	public Sessao salvarSessao( Filme filme,  Sala sala,  LocalTime horario, LocalDate dataInicio, LocalDate dataFim) {
+			Sessao sessao = new Sessao();
+			sessao.setFilme(filme);
+			sessao.setSala(sala);
+			sessao.setHorario(horario);
+			sessao.setDataInicio(dataInicio);
+			sessao.setDataFim(dataFim);
+			
+			return sessao;
 	}
 	
 	public Sessao atualizarSessao(Integer idSessao, Filme filme, Sala sala, LocalTime horario, LocalDate dataInicio,
@@ -63,5 +68,12 @@ public class SessaoService {
 		return sessao; 
 	}
 
+	public List<Sessao> getSessaoPorData(LocalDate dataInicial, LocalDate dataFinal) {
+		return sessaoRepositorio.findByStartDateBetween(dataInicial, dataFinal);
+	}
+
+	public List<Sessao> getSessaoPorCidade(String cidade) {
+		return sessaoRepositorio.findByFirstname(cidade);
+	}
 	
 }
