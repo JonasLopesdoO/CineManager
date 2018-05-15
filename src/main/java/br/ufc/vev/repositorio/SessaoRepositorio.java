@@ -15,21 +15,21 @@ import br.ufc.vev.bean.Sessao;
 @Transactional
 public interface SessaoRepositorio extends JpaRepository<Sessao, Integer>{
 
-<<<<<<< HEAD
 	Sessao save(Sessao sessao);
 	
 	Sessao findOne(Integer id);
 
-=======
 	@Query("select * from Sessao s where s.startDate between ?1 and ?2")
 	List<Sessao> findByStartDateBetween(LocalDate dataInicial, LocalDate dataFinal);
 
 	@Query("select * from Sessao s where s.ci between ?1 and ?2")
 	List<Sessao> findByFirstname(String cidade);
 
-	Sessao findOne(Integer id);
-
 	
+	@Query("select * from Sessao s where s.startDate between ?1 and ?2")
+	List<Sessao> findByStartDateBetween(LocalDate dataInicial, LocalDate dataFinal);
 
->>>>>>> da09f1e5f1b888e99a8d157305bee4fce9fe373d
+	@Query("select * from Sessao s where s.ci between ?1 and ?2")
+	List<Sessao> findByFirstname(String cidade);
+
 }
