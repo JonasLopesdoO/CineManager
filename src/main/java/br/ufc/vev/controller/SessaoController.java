@@ -68,11 +68,35 @@ public class SessaoController {
 	}
 	
 	@RequestMapping(path = "/sessao/porCidade", method = RequestMethod.POST)
-	public ModelAndView verTodasPorData(@RequestParam String cidade) {
+	public ModelAndView verTodasPorCidade(@RequestParam String cidade) {
 // 	todasAsSessoesPorData
 		ModelAndView model = new ModelAndView("sessao-porCidade");
 		
 		List<Sessao> sessoes = sessaoService.getSessaoPorCidade(cidade);
+		
+		model.addObject("sessao", sessoes);
+		
+		return model;
+	}
+	
+	@RequestMapping(path = "/sessao/porFilme", method = RequestMethod.POST)
+	public ModelAndView verTodasPorFilme(@RequestParam String filme) {
+// 	todasAsSessoesPorData
+		ModelAndView model = new ModelAndView("sessao-porFilme");
+		
+		List<Sessao> sessoes = sessaoService.getSessaoPorFilme(filme);
+		
+		model.addObject("sessao", sessoes);
+		
+		return model;
+	}
+	
+	@RequestMapping(path = "/sessao/porGenero", method = RequestMethod.POST)
+	public ModelAndView verTodasPorGenero(@RequestParam String genero) {
+// 	todasAsSessoesPorData
+		ModelAndView model = new ModelAndView("sessao-porGenero");
+		
+		List<Sessao> sessoes = sessaoService.getSessaoPorGenero(genero);
 		
 		model.addObject("sessao", sessoes);
 		

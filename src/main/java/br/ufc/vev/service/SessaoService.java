@@ -73,7 +73,15 @@ public class SessaoService {
 	}
 
 	public List<Sessao> getSessaoPorCidade(String cidade) {
-		return sessaoRepositorio.findByFirstname(cidade);
+		return sessaoRepositorio.findByFirstNameCidade(cidade);
+	}
+
+	public List<Sessao> getSessaoPorFilme(String filme) {
+		return sessaoRepositorio.findByFirstNameFilme(filme);
+	}
+
+	public List<Sessao> getSessaoPorGenero(String genero) {
+		return sessaoRepositorio.findByFirstNameGenero(genero);
 	}
 	
 }
