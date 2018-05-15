@@ -70,5 +70,9 @@ public class SessaoService {
 		return sessao; 
 	}
 
+	public List<Sessao> getSessaoPorData(LocalDate dataInicial, LocalDate dataFinal) {
+		return sessaoRepositorio.findByStartDateBetween(dataInicial, dataFinal);
+	}
+
 	
 }
