@@ -107,8 +107,9 @@ public class SessaoController {
 	public String salvarSessao(@RequestParam Filme filme, @RequestParam Sala sala, @RequestParam LocalTime horario,
 							@RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFim) {
 //	+ addSessao(sessao : Sessao) : Sessao
+		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
 		
-		sessaoService.salvarSessao(filme, sala, horario, dataInicio, dataFim);
+		sessaoService.salvarSessao(sessao);
 		return "redirect:/sessao/";
 	}
 	
