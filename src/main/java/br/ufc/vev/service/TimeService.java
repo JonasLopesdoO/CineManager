@@ -41,6 +41,7 @@ public class TimeService {
 		    time.getJogadores().add(jogador);
 		    jogador.setTime(time);
 		    timeRepositorio.save(time);
+		    
 		    jogadorRepositorio.save(jogador);
 		    return true;
 		}
