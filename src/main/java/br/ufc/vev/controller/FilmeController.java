@@ -4,8 +4,15 @@ import br.ufc.vev.bean.Filme;
 
 public interface FilmeController {
 
-	public Filme getFilmePorId(int filme);
-	public Filme getFilmePorNome(String nomeFilme);
+	public Filme buscarFilmeId(int filme);
 	
-
+	public Filme buscarFilmeNome(String nomeFilme);
+	
+	public Filme atualizarFilme(Filme filme);
+	
+	public Filme addFilme(Filme filme);
+	
+	public Filme removerFilme(int id);
+	
+	
 }
