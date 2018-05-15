@@ -10,5 +10,7 @@ import br.ufc.vev.bean.Sessao;
 @Repository
 @Transactional
 public interface SessaoRepositorio extends JpaRepository<Sessao, Integer>{
+	Sessao save(Sessao sessao);
+	
 	Sessao findOne(Integer id);
 }

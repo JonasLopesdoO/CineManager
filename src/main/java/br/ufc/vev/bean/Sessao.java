@@ -8,23 +8,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "sessao")
 public class Sessao {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	Integer id;
+	private Integer id;
 	
-	LocalDate dataInicio;
-	LocalDate dataFim;
-	LocalTime horario;
-	
-	@OneToOne
-	Filme filme;
+	private LocalDate dataInicio;
+	private LocalDate dataFim;
+	private LocalTime horario;
 	
 	@OneToOne
-	Sala sala;
+	private Filme filme;
+	
+	@OneToOne
+	private Sala sala;
 	
 	public Sessao(Filme filme, Sala sala, LocalTime horario, LocalDate inicio, LocalDate fim) {
 		this.setFilme(filme);
@@ -79,6 +81,22 @@ public class Sessao {
 
 	public void setSala(Sala sala) {
 		this.sala = sala;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		
+		Sessao sessao = (Sessao) obj;
+		if (this.getId() == sessao.getId()) {
+			return true;
+		} else
+			return false;
 	}
 
 }
