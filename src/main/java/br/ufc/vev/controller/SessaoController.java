@@ -53,6 +53,32 @@ public class SessaoController {
 	  return model;
 	}
 	
+	@RequestMapping(path = "/sessao/porData", method = RequestMethod.POST)
+	public ModelAndView verTodasPorData(@RequestParam String dataInicio, @RequestParam String dataFim) {
+// 	todasAsSessoesPorData
+		ModelAndView model = new ModelAndView("sessao-porData");
+		LocalDate dataInicial = LocalDate.parse(dataInicio);
+		LocalDate dataFinal = LocalDate.parse(dataFim);
+		
+		List<Sessao> sessoes = sessaoService.getSessaoPorData(dataInicial, dataFinal);
+		
+		model.addObject("sessao", sessoes);
+		
+		return model;
+	}
+	
+	@RequestMapping(path = "/sessao/porCidade", method = RequestMethod.POST)
+	public ModelAndView verTodasPorData(@RequestParam String cidade) {
+// 	todasAsSessoesPorData
+		ModelAndView model = new ModelAndView("sessao-porCidade");
+		
+		List<Sessao> sessoes = sessaoService.getSessaoPorCidade(cidade);
+		
+		model.addObject("sessao", sessoes);
+		
+		return model;
+	}
+	
 	@RequestMapping(path="/salvar", method = RequestMethod.POST)
 	public String salvarSessao(@RequestParam Filme filme, @RequestParam Sala sala, @RequestParam LocalTime horario,
 							@RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFim) {
@@ -76,6 +102,6 @@ public class SessaoController {
 //	+ removerSessao(id : int) : Sessao
 		
 		sessaoService.deletarSessao(idSessao);
-		return "redirect:/times/";
+		return "redirect:/sessao/";
 	}
 }
