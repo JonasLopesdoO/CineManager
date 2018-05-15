@@ -25,20 +25,12 @@ public interface SessaoRepositorio extends JpaRepository<Sessao, Integer>{
 	@Query("select * from Sessao s, Filme f where f.id = s.id_filme and f.cidade = ?1")
 	List<Sessao> findByFirstNameCidade(String cidade);
 
-<<<<<<< HEAD
 	@Query("select * from Sessao s, Filme f where s.id_filme = f.id and f.nome = ?1")
 	List<Sessao> findByFirstNameFilme(String filme);
 	
 	@Query("select * from Sessao s, Filme f, Genero g where s.id_filme = f.id and f.id_genero = g.id and g.nome = ?1")
 	List<Sessao> findByFirstNameGenero(String genero);
 	
-	Sessao findOne(Integer id);
-
-=======
->>>>>>> 388a248051451312346cd558015a6dbbb6cb790a
-	
-	@Query("select * from Sessao s where s.startDate between ?1 and ?2")
-	List<Sessao> findByStartDateBetween(LocalDate dataInicial, LocalDate dataFinal);
 
 	@Query("select * from Sessao s where s.ci between ?1 and ?2")
 	List<Sessao> findByFirstname(String cidade);

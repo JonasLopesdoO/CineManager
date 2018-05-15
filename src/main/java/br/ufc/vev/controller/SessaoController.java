@@ -42,13 +42,12 @@ public class SessaoController {
 	}
 	
 	@RequestMapping(path="/{id}")
-	public ModelAndView detalhesSessao(@PathVariable("id") Integer id, @RequestParam(required=false) String erro){
+	public ModelAndView detalhesSessao(@PathVariable("id") Integer id){
 	//+ getSessaoPorIdI(id : int) : Sessao		
 	  ModelAndView model = new ModelAndView("detalhes-sessao");
 	  Sessao sessao = sessaoService.getSessaoPorId(id);
 			
 	  model.addObject("sessao", sessao);
-	  model.addObject("erro", erro);
 			
 	  return model;
 	}
