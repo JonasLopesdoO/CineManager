@@ -42,7 +42,7 @@ public class SessaoService {
 	public Sessao atualizarSessao(Integer idSessao, Filme filme, Sala sala, LocalTime horario, LocalDate dataInicio,
 			LocalDate dataFim) {
 
-		Sessao sessao = sessaoRepositorio.findOne(idSessao);
+		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		sessao.setFilme(filme);
 		sessao.setSala(sala);
 		sessao.setHorario(horario);
@@ -54,8 +54,8 @@ public class SessaoService {
 		return sessao;
 	}
 
-	public Sessao getSessaoPorId(Integer id) {
-		return sessaoRepositorio.findOne(id);
+	public Sessao getSessaoPorId(Integer idSessao) {
+		return sessaoRepositorio.getOne(idSessao);
 	}
 	
 	public List<Sessao> getTodasSessoes() {
