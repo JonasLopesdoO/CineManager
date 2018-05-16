@@ -97,6 +97,111 @@ public class SessaoControllerTest {
 	}
 	
 	@Test
+	public void adicionarUmaSessaoComHorarioNulo() {
+
+		filmeControlMock = Mockito.mock(FilmeController.class);
+		Filme filme1 = new Filme(1); //interestelar
+		
+		Mockito.when(filmeControlMock.buscarFilmeId(1)).thenReturn(filme1);
+		Mockito.when(filmeControlMock.buscarFilmeNome("interestelar")).thenReturn(filme1);
+		
+		salaControlMock= Mockito.mock(SalaController.class);
+		
+		Sala sala1 = new Sala(1); 
+			
+		Mockito.when(salaControlMock.buscarSalaId(1)).thenReturn(sala1);
+		
+		
+		LocalDate dataInicio = LocalDate.parse("2018-05-22");
+		LocalDate dataFim = LocalDate.parse("2018-05-30");
+		
+		sessaoController.addSessao(filme1, sala1, null, dataInicio, dataFim);
+		
+		assertEquals(sessaoRepositorio.getOne(1), null);
+		
+	}
+	
+	@Test
+	public void adicionarUmaSessaoComDataInicioNula() {
+
+		filmeControlMock = Mockito.mock(FilmeController.class);
+		Filme filme1 = new Filme(1); //interestelar
+		
+		Mockito.when(filmeControlMock.buscarFilmeId(1)).thenReturn(filme1);
+		Mockito.when(filmeControlMock.buscarFilmeNome("interestelar")).thenReturn(filme1);
+		
+		salaControlMock= Mockito.mock(SalaController.class);
+		
+		Sala sala1 = new Sala(1); 
+			
+		Mockito.when(salaControlMock.buscarSalaId(1)).thenReturn(sala1);
+		
+		LocalTime horario = LocalTime.parse("20:30");
+		LocalDate dataInicio = null;
+		LocalDate dataFim = LocalDate.parse("2018-05-30");
+		
+		sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim);
+		
+		assertEquals(sessaoRepositorio.getOne(1), null);
+		
+	}
+	
+	@Test
+	public void adicionarUmaSessaoComDataFimNula() {
+
+		filmeControlMock = Mockito.mock(FilmeController.class);
+		Filme filme1 = new Filme(1); //interestelar
+		
+		Mockito.when(filmeControlMock.buscarFilmeId(1)).thenReturn(filme1);
+		Mockito.when(filmeControlMock.buscarFilmeNome("interestelar")).thenReturn(filme1);
+		
+		salaControlMock= Mockito.mock(SalaController.class);
+		
+		Sala sala1 = new Sala(1); 
+			
+		Mockito.when(salaControlMock.buscarSalaId(1)).thenReturn(sala1);
+		
+		LocalTime horario = LocalTime.parse("20:30");
+		LocalDate dataInicio = LocalDate.parse("2018-05-22");
+		LocalDate dataFim = null;
+		
+		sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim);
+		
+		assertEquals(sessaoRepositorio.getOne(1), null);
+		
+	}
+	
+	@Test
+	public void adicionarUmaSessaoComFilmeNulo() {
+
+		Filme filme1 = null;
+		Sala sala1 = new Sala(1); 
+		LocalTime horario = LocalTime.parse("20:30");
+		LocalDate dataInicio = LocalDate.parse("2018-05-22");
+		LocalDate dataFim = LocalDate.parse("2018-05-22");
+		
+		sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim);
+		
+		assertEquals(sessaoRepositorio.getOne(1), null);
+		
+	}
+	
+	@Test
+	public void adicionarUmaSessaoComSalaNula() {
+
+		Filme filme1 = new Filme(1); //interestelar
+		Sala sala1 = null; 
+		LocalTime horario = LocalTime.parse("20:30");
+		LocalDate dataInicio = LocalDate.parse("2018-05-22");
+		LocalDate dataFim = LocalDate.parse("2018-05-30");
+		
+		sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim);
+		
+		assertEquals(sessaoRepositorio.getOne(1), null);
+		
+	}
+	
+	@Test
 	public void excluirSessao() {
 		filmeControlMock = Mockito.mock(FilmeController.class);
 		Filme filme1 = new Filme(1); //interestelar
@@ -118,6 +223,22 @@ public class SessaoControllerTest {
 		sessaoController.excluirSessao(1);
 		
 		assertEquals(sessaoRepositorio.getOne(1), null);
+	}
+	
+	@Test
+	public void excluirSessaoComIdInconsistenteComOsSalvoNoBanco() {
+		
+		Filme filme1 = new Filme(1); //interestelar
+		Sala sala1 = new Sala(1); 
+		LocalTime horario = LocalTime.parse("20:30");
+		LocalDate dataInicio = LocalDate.parse("2018-05-22");
+		LocalDate dataFim = LocalDate.parse("2018-05-30");
+		
+		Sessao sessao = (Sessao) sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim).getModel().get("sessao");
+		sessaoController.excluirSessao(2);
+		
+		assertEquals(sessaoRepositorio.getOne(1), sessao);
+		assertEquals(sessaoRepositorio.getOne(2), null);
 	}
 	
 	@Test
