@@ -42,7 +42,6 @@ public class SessaoServiceTest {
 		sessao.setDataInicio(dataInicio);
 		sessao.setDataFim(dataFim);
 		filme = new Filme();
-		sala = new Sala();
 		
 		sService.salvarSessao(sessao);
 		

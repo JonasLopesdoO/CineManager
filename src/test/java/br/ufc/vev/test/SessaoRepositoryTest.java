@@ -36,7 +36,6 @@ public class SessaoRepositoryTest {
 	private static final LocalDate dataInicio = LocalDate.parse("2018/05/22");
 	private static final LocalDate dataFim = LocalDate.parse("2018/05/30");
 	private static final Filme filme = new Filme();
-	private static final Sala sala = new Sala();
 	
 	
 	@MockBean

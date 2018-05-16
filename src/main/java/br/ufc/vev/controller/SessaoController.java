@@ -102,9 +102,9 @@ public class SessaoController {
 		return model;
 	}
 	
-	@RequestMapping(path="/adicionar", method = RequestMethod.POST)
-	public ModelAndView addSessao(@RequestParam Filme filme, @RequestParam Sala sala, @RequestParam LocalTime horario,
-							@RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFim) {
+//	@RequestMapping(path="/adicionar", method = RequestMethod.POST)
+	public ModelAndView addSessao(Filme filme,Sala sala,LocalTime horario,
+								LocalDate dataInicio,LocalDate dataFim) {
 //	+ addSessao(sessao : Sessao) : Sessao
 		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
 		
@@ -120,10 +120,11 @@ public class SessaoController {
 	public ModelAndView atualizarSessao(@RequestParam Integer idSessao, @RequestParam Filme filme,@RequestParam Sala sala, 
 			@RequestParam LocalTime horario, @RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFim){
 //	+ atualizarSessao(sessao : Sessao) : Sessao
-		sessaoService.atualizarSessao(idSessao, filme, sala, horario, dataInicio, dataFim);
+		
+		Sessao sessaoRetorno = sessaoService.atualizarSessao(idSessao, filme, sala, horario, dataInicio, dataFim);
 		
 		ModelAndView model = new ModelAndView("sessao");
-		
+		model.addObject("sessao", sessaoRetorno);
 		return model;
 	}
 	

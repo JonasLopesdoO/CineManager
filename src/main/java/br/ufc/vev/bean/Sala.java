@@ -16,5 +16,9 @@ public class Sala {
 		return id;
 	}
 	
+	public Sala(int id) {
+		
+	}
+	
 	
 }

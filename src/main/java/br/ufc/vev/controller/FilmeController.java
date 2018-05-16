@@ -8,11 +8,11 @@ public interface FilmeController {
 	
 	public Filme buscarFilmeNome(String nomeFilme);
 	
-	public Filme atualizarFilme(Filme filme);
-	
-	public Filme addFilme(Filme filme);
-	
-	public Filme removerFilme(int id);
+//	public Filme atualizarFilme(Filme filme);
+//	
+//	public Filme addFilme(Filme filme);
+//	
+//	public Filme removerFilme(int id);
 	
 	
 }

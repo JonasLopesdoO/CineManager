@@ -14,4 +14,11 @@ public class Cinema {
 	public Integer getId() {
 		return id;
 	}
+	
+	public Cinema() {
+	}
+	
+	public Cinema(int id) {
+		
+	}
 }

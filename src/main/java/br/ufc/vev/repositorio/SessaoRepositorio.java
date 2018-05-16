@@ -12,9 +12,11 @@ import org.springframework.stereotype.Repository;
 import br.ufc.vev.bean.Sessao;
 
 @Repository
-@Transactional
 public interface SessaoRepositorio extends JpaRepository<Sessao, Integer>{
-/*
+
+	
+	
+	/*
 	Sessao findOne(Integer id);
 
 	@Query("from Sessao s where s.startDate between ?1 and ?2")
