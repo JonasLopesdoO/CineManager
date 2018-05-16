@@ -37,6 +37,40 @@ public class SessaoControllerTest {
 	private SessaoController sessaoController;
 	
 	@Test
+	public void atualizaSessaoExistente() {
+		filmeControlMock = Mockito.mock(FilmeController.class);
+		Filme filme1 = new Filme(1); //interestelar
+		Filme filme2 = new Filme(2);
+		
+		Mockito.when(filmeControlMock.buscarFilmeId(1)).thenReturn(filme1);
+		Mockito.when(filmeControlMock.buscarFilmeId(2)).thenReturn(filme2);
+		Mockito.when(filmeControlMock.buscarFilmeNome("interestelar")).thenReturn(filme1);
+		
+		salaControlMock= Mockito.mock(SalaController.class);
+		Sala sala1 = new Sala(1);
+		Sala sala2 = new Sala(2); 
+			
+		Mockito.when(salaControlMock.buscarSalaId(1)).thenReturn(sala1);
+		Mockito.when(salaControlMock.buscarSalaId(2)).thenReturn(sala2);
+		
+		LocalTime horario = LocalTime.parse("20:30");
+		LocalDate dataInicio = LocalDate.parse("2018-05-22");
+		LocalDate dataFim = LocalDate.parse("2018-05-30");
+		
+		LocalTime horario2 = LocalTime.parse("20:30");
+		LocalDate dataInicio2 = LocalDate.parse("2018-06-22");
+		LocalDate dataFim2 = LocalDate.parse("2018-06-30");
+		
+		sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim);
+		
+		//atualizando a sessão criada
+		Sessao sessaoAtualizada = (Sessao) sessaoController.atualizarSessao(1, filme2, sala2, horario2, dataInicio2, dataFim2).getModel().get("sessao");
+		
+		assertEquals(sessaoRepositorio.getOne(1), sessaoAtualizada);
+	}
+	
+	
+	@Test
 	public void adicionarUmaSessaoCorretamete() {
 
 		filmeControlMock = Mockito.mock(FilmeController.class);
