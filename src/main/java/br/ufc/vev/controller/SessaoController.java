@@ -52,10 +52,10 @@ public class SessaoController {
 	  return model;
 	}
 	
-	@RequestMapping(path = "/sessao/porData", method = RequestMethod.POST)
+	@RequestMapping(path = "/porData", method = RequestMethod.GET)
 	public ModelAndView verTodasPorData(@RequestParam String dataInicio, @RequestParam String dataFim) {
 // 	todasAsSessoesPorData
-		ModelAndView model = new ModelAndView("sessao-porData");
+		ModelAndView model = new ModelAndView("sessao");
 		LocalDate dataInicial = LocalDate.parse(dataInicio);
 		LocalDate dataFinal = LocalDate.parse(dataFim);
 		
@@ -66,10 +66,10 @@ public class SessaoController {
 		return model;
 	}
 	
-	@RequestMapping(path = "/sessao/porCidade", method = RequestMethod.POST)
+	@RequestMapping(path = "/porCidade", method = RequestMethod.GET)
 	public ModelAndView verTodasPorCidade(@RequestParam String cidade) {
 // 	todasAsSessoesPorData
-		ModelAndView model = new ModelAndView("sessao-porCidade");
+		ModelAndView model = new ModelAndView("sessao");
 		
 		List<Sessao> sessoes = sessaoService.getSessaoPorCidade(cidade);
 		
@@ -78,10 +78,10 @@ public class SessaoController {
 		return model;
 	}
 	
-	@RequestMapping(path = "/sessao/porFilme", method = RequestMethod.POST)
+	@RequestMapping(path = "/porFilme", method = RequestMethod.GET)
 	public ModelAndView verTodasPorFilme(@RequestParam String filme) {
 // 	todasAsSessoesPorData
-		ModelAndView model = new ModelAndView("sessao-porFilme");
+		ModelAndView model = new ModelAndView("sessao");
 		
 		List<Sessao> sessoes = sessaoService.getSessaoPorFilme(filme);
 		
@@ -90,10 +90,10 @@ public class SessaoController {
 		return model;
 	}
 	
-	@RequestMapping(path = "/sessao/porGenero", method = RequestMethod.POST)
+	@RequestMapping(path = "/porGenero", method = RequestMethod.GET)
 	public ModelAndView verTodasPorGenero(@RequestParam String genero) {
 // 	todasAsSessoesPorData
-		ModelAndView model = new ModelAndView("sessao-porGenero");
+		ModelAndView model = new ModelAndView("sessao");
 		
 		List<Sessao> sessoes = sessaoService.getSessaoPorGenero(genero);
 		
@@ -102,30 +102,39 @@ public class SessaoController {
 		return model;
 	}
 	
-	@RequestMapping(path="/salvar", method = RequestMethod.POST)
-	public String salvarSessao(@RequestParam Filme filme, @RequestParam Sala sala, @RequestParam LocalTime horario,
+	@RequestMapping(path="/adicionar", method = RequestMethod.POST)
+	public ModelAndView addSessao(@RequestParam Filme filme, @RequestParam Sala sala, @RequestParam LocalTime horario,
 							@RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFim) {
 //	+ addSessao(sessao : Sessao) : Sessao
 		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
 		
-		sessaoService.salvarSessao(sessao);
-		return "redirect:/sessao/";
+		Sessao sessaoRetorno = sessaoService.salvarSessao(sessao);
+		
+		ModelAndView model = new ModelAndView("sessao");
+		model.addObject("sessao", sessaoRetorno);
+		
+		return model;
 	}
 	
 	@RequestMapping(path="/atualizar", method = RequestMethod.POST)
-	public String atualizarSessao(@RequestParam Integer idSessao, @RequestParam Filme filme,@RequestParam Sala sala, 
-					@RequestParam LocalTime horario, @RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFim){
+	public ModelAndView atualizarSessao(@RequestParam Integer idSessao, @RequestParam Filme filme,@RequestParam Sala sala, 
+			@RequestParam LocalTime horario, @RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFim){
 //	+ atualizarSessao(sessao : Sessao) : Sessao
 		sessaoService.atualizarSessao(idSessao, filme, sala, horario, dataInicio, dataFim);
 		
-		return "redirect:/sessao/";
+		ModelAndView model = new ModelAndView("sessao");
+		
+		return model;
 	}
 	
 	@RequestMapping(path="/excluir", method = RequestMethod.POST)
-	public String excluirSessao(@RequestParam Integer idSessao) {
+	public ModelAndView excluirSessao(@RequestParam Integer idSessao) {
 //	+ removerSessao(id : int) : Sessao
 		
 		sessaoService.deletarSessao(idSessao);
-		return "redirect:/sessao/";
+		
+		ModelAndView model = new ModelAndView("sessao");
+		
+		return model;
 	}
 }
