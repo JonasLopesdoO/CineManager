@@ -110,7 +110,7 @@ public class SessaoController {
 		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
 		
 		try {
-			if (this.validaSessao(sessao) != true) {
+			if (this.validaSessao(sessao) == false) {
 				return null;
 			}
 		} catch (Exception e) {
@@ -142,8 +142,23 @@ public class SessaoController {
 //	+ removerSessao(id : int) : Sessao
 		
 		if (sessaoService.getSessaoPorId(idSessao) != null) {
-			sessaoService.deletarSessao(idSessao);
+			Sessao sessao = sessaoService.deletarSessao(idSessao);
 			ModelAndView model = new ModelAndView("sessao");
+			model.addObject("sessao", sessao);
+			return model;
+		}
+		return null;
+	}
+	
+	@RequestMapping(path="/busca", method = RequestMethod.POST)
+	public ModelAndView buscaSessao(@RequestParam Integer idSessao) {
+//	+ removerSessao(id : int) : Sessao
+		
+		if (sessaoService.getSessaoPorId(idSessao) != null) {
+			Sessao sessao = sessaoService.getSessaoPorId(idSessao);
+			
+			ModelAndView model = new ModelAndView("sessao");
+			model.addObject("sessao", sessao);
 			return model;
 		}
 		return null;

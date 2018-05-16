@@ -38,11 +38,12 @@ public class SessaoControllerTest {
 	public void atualizaSessaoExistente() {
 		filmeControlMock = Mockito.mock(FilmeController.class);
 		Filme filme1 = new Filme(1); //interestelar
-		Filme filme2 = new Filme(2);
+		Filme filme2 = new Filme(2); //deadpool
 		
 		Mockito.when(filmeControlMock.buscarFilmeId(1)).thenReturn(filme1);
 		Mockito.when(filmeControlMock.buscarFilmeId(2)).thenReturn(filme2);
 		Mockito.when(filmeControlMock.buscarFilmeNome("interestelar")).thenReturn(filme1);
+		Mockito.when(filmeControlMock.buscarFilmeNome("deadpool")).thenReturn(filme2);
 		
 		salaControlMock= Mockito.mock(SalaController.class);
 		Sala sala1 = new Sala(1);
@@ -51,15 +52,15 @@ public class SessaoControllerTest {
 		Mockito.when(salaControlMock.buscarSalaId(1)).thenReturn(sala1);
 		Mockito.when(salaControlMock.buscarSalaId(2)).thenReturn(sala2);
 		
-		LocalTime horario = LocalTime.parse("20:30");
-		LocalDate dataInicio = LocalDate.parse("2018-05-22");
-		LocalDate dataFim = LocalDate.parse("2018-05-30");
+		LocalTime horario1 = LocalTime.parse("20:30");
+		LocalDate dataInicio1 = LocalDate.parse("2018-05-22");
+		LocalDate dataFim1 = LocalDate.parse("2018-05-30");
 		
 		LocalTime horario2 = LocalTime.parse("20:30");
 		LocalDate dataInicio2 = LocalDate.parse("2018-06-22");
 		LocalDate dataFim2 = LocalDate.parse("2018-06-30");
 		
-		sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim);
+		sessaoController.addSessao(filme1, sala1, horario1, dataInicio1, dataFim1);
 		
 		//atualizando a sessão criada
 		Sessao sessaoAtualizada = (Sessao) sessaoController.atualizarSessao(1, filme2, sala2, horario2, dataInicio2, dataFim2).getModel().get("sessao");
@@ -223,19 +224,12 @@ public class SessaoControllerTest {
 	}
 	
 	@Test
-	public void excluirSessaoComIdInconsistenteComOsSalvoNoBanco() {
+	public void excluirSessaoComIdNaoSalvoNoBanco() {
 		
-		Filme filme1 = new Filme(1); //interestelar
-		Sala sala1 = new Sala(1); 
-		LocalTime horario = LocalTime.parse("20:30");
-		LocalDate dataInicio = LocalDate.parse("2018-05-22");
-		LocalDate dataFim = LocalDate.parse("2018-05-30");
+		sessaoController.excluirSessao(1);
+		//tenta excluir uma sessão de um banco vazio, ou seja não esta no banco
 		
-		Sessao sessao = (Sessao) sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim).getModel().get("sessao");
-		sessaoController.excluirSessao(2);
-		
-		assertEquals(sessaoRepositorio.getOne(1), sessao);
-		assertEquals(sessaoRepositorio.getOne(2), null);
+		assertEquals(sessaoRepositorio.getOne(1), null);
 	}
 	
 	@Test
