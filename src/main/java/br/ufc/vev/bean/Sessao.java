@@ -103,4 +103,11 @@ public class Sessao {
 			return false;
 	}
 
+	@Override
+	public String toString() {
+		return "Sessao [id=" + id + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", horario=" + horario
+				+ ", filme=" + filme + ", sala=" + sala + "]";
+	}
+
+	
 }

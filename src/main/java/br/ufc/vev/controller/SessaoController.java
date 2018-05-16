@@ -109,6 +109,9 @@ public class SessaoController {
 //	+ addSessao(sessao : Sessao) : Sessao
 		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
 		
+		System.out.println("Sessao: "+sessao);
+		
+		
 		try {
 			if (this.validaSessao(sessao) == false) {
 				return null;

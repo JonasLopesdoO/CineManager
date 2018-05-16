@@ -5,13 +5,14 @@ import static org.junit.Assert.assertEquals;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.ufc.vev.bean.Filme;
@@ -23,14 +24,19 @@ import br.ufc.vev.controller.SessaoController;
 import br.ufc.vev.repositorio.SessaoRepositorio;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
+@SpringBootTest
+
 public class SessaoControllerTest {
 	
-	@MockBean
+	@Autowired
 	private SessaoRepositorio sessaoRepositorio;
+	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	
 	private FilmeController filmeControlMock;
 	private SalaController salaControlMock;
+
 	@Autowired
 	private SessaoController sessaoController;
 	
@@ -63,9 +69,9 @@ public class SessaoControllerTest {
 		sessaoController.addSessao(filme1, sala1, horario1, dataInicio1, dataFim1);
 		
 		//atualizando a sessão criada
-		Sessao sessaoAtualizada = (Sessao) sessaoController.atualizarSessao(1, filme2, sala2, horario2, dataInicio2, dataFim2).getModel().get("sessao");
-		
-		assertEquals(sessaoRepositorio.getOne(1), sessaoAtualizada);
+		Sessao sessaoAtualizada = (Sessao) sessaoController.atualizarSessao(1, filme2, sala2, 
+								horario2, dataInicio2, dataFim2).getModel().get("sessao");
+		assertEquals(sessaoController.buscaSessao(1), sessaoAtualizada);
 	}
 	
 	@Test
@@ -89,7 +95,7 @@ public class SessaoControllerTest {
 		
 		Sessao sessao = (Sessao) sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim).getModel().get("sessao");
 		
-		assertEquals(sessaoRepositorio.getOne(1), sessao);
+		assertEquals(sessaoRepositorio.getOne(2), sessao);
 		assertEquals(filmeControlMock.buscarFilmeId(1), filme1);
 		assertEquals(salaControlMock.buscarSalaId(1), sala1);	
 	}
