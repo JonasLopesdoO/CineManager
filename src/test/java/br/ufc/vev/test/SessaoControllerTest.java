@@ -68,7 +68,6 @@ public class SessaoControllerTest {
 		Sessao sessaoAtualizada = (Sessao) sessaoController.atualizarSessao(1, filme2, sala2, horario2, dataInicio2, dataFim2).getModel().get("sessao");
 		
 		assertEquals(sessaoRepositorio.getOne(1), sessaoAtualizada);
-//		assertEquals(sessaoController., actual);
 	}
 	
 	

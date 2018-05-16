@@ -109,7 +109,7 @@ public class SessaoController {
 		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
 		
 		try {
-			if (this.validaSessao(sessao) != true) {
+			if (this.validaSessao(sessao) == false) {
 				return null;
 			}
 		} catch (Exception e) {
