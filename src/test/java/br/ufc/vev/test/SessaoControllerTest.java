@@ -40,7 +40,7 @@ public class SessaoControllerTest {
 	public void atualizaSessaoExistente() {
 		filmeControlMock = Mockito.mock(FilmeController.class);
 		Filme filme1 = new Filme(1); //interestelar
-		Filme filme2 = new Filme(2);
+		Filme filme2 = new Filme(2); //deadpool
 		
 		Mockito.when(filmeControlMock.buscarFilmeId(1)).thenReturn(filme1);
 		Mockito.when(filmeControlMock.buscarFilmeId(2)).thenReturn(filme2);
@@ -226,7 +226,7 @@ public class SessaoControllerTest {
 	}
 	
 	@Test
-	public void excluirSessaoComIdInconsistenteComOsSalvoNoBanco() {
+	public void excluirSessaoComIdNaoSalvoNoBanco() {
 		
 		Filme filme1 = new Filme(1); //interestelar
 		Sala sala1 = new Sala(1); 
@@ -234,11 +234,13 @@ public class SessaoControllerTest {
 		LocalDate dataInicio = LocalDate.parse("2018-05-22");
 		LocalDate dataFim = LocalDate.parse("2018-05-30");
 		
-		Sessao sessao = (Sessao) sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim).getModel().get("sessao");
-		sessaoController.excluirSessao(2);
+		sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim);
 		
-		assertEquals(sessaoRepositorio.getOne(1), sessao);
-		assertEquals(sessaoRepositorio.getOne(2), null);
+		sessaoController.excluirSessao(1);
+		//tenta excluir a sessao que acabou de ser excluida
+		sessaoController.excluirSessao(1);
+		
+		assertEquals(sessaoRepositorio.getOne(1), null);
 	}
 	
 	@Test
