@@ -2,7 +2,6 @@ package br.ufc.vev.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +16,7 @@ import br.ufc.vev.repositorio.SessaoRepositorio;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class SessaoIntegracaoTest {
+public class SessaoControllerTest {
 	@MockBean
 	private FilmeRepositorio filmeRepositorio;
 	@MockBean
