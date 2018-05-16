@@ -27,7 +27,6 @@ import br.ufc.vev.repositorio.SessaoRepositorio;
 @AutoConfigureMockMvc
 public class SessaoControllerTest {
 	
-	@MockBean
 	private SessaoRepositorio sessaoRepositorio;
 	private FilmeController filmeControlMock;
 	private SalaController salaControlMock;
@@ -89,7 +88,7 @@ public class SessaoControllerTest {
 		
 		Sessao sessao = (Sessao) sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim).getModel().get("sessao");
 		
-		assertEquals(sessaoRepositorio.getOne(1), sessao);
+		assertEquals(sessaoRepositorio.getOne(2), sessao);
 		assertEquals(filmeControlMock.buscarFilmeId(1), filme1);
 		assertEquals(salaControlMock.buscarSalaId(1), sala1);	
 	}
