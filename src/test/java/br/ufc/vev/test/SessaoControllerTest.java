@@ -29,9 +29,7 @@ public class SessaoControllerTest {
 	
 	@MockBean
 	private SessaoRepositorio sessaoRepositorio;
-	
 	private FilmeController filmeControlMock;
-	
 	private SalaController salaControlMock;
 	@Autowired
 	private SessaoController sessaoController;
@@ -68,7 +66,6 @@ public class SessaoControllerTest {
 		
 		assertEquals(sessaoRepositorio.getOne(1), sessaoAtualizada);
 	}
-	
 	
 	@Test
 	public void adicionarUmaSessaoCorretamete() {

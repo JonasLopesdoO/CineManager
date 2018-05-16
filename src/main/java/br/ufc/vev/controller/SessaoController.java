@@ -102,9 +102,10 @@ public class SessaoController {
 		return model;
 	}
 	
-//	@RequestMapping(path="/adicionar", method = RequestMethod.POST)
-	public ModelAndView addSessao(Filme filme,Sala sala,LocalTime horario,
-								LocalDate dataInicio,LocalDate dataFim) {
+	@RequestMapping(path="/adicionar", method = RequestMethod.POST)
+	public ModelAndView addSessao(@RequestParam Filme filme,@RequestParam Sala sala, 
+								@RequestParam LocalTime horario, @RequestParam 
+								LocalDate dataInicio, @RequestParam LocalDate dataFim) {
 //	+ addSessao(sessao : Sessao) : Sessao
 		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
 		
