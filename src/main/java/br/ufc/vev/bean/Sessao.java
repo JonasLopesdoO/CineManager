@@ -22,10 +22,10 @@ public class Sessao {
 	private LocalDate dataFim;
 	private LocalTime horario;
 	
-
+	@OneToOne
 	private Filme filme;
 	
-
+	@OneToOne
 	private Sala sala;
 	
 	public Sessao(Filme filme, Sala sala, LocalTime horario, LocalDate inicio, LocalDate fim) {
