@@ -38,6 +38,7 @@ public class SessaoControllerTest {
 	
 	@Test
 	public void adicionarUmaSessaoCorretamete() {
+
 		filmeControlMock = Mockito.mock(FilmeController.class);
 		Filme filme1 = new Filme(1); //interestelar
 		
@@ -58,7 +59,31 @@ public class SessaoControllerTest {
 		
 		assertEquals(sessaoRepositorio.getOne(1), sessao);
 		assertEquals(filmeControlMock.buscarFilmeId(1), filme1);
+		assertEquals(salaControlMock.buscarSalaId(1), sala1);	
+	}
+	
+	@Test
+	public void excluirSessao() {
+		filmeControlMock = Mockito.mock(FilmeController.class);
+		Filme filme1 = new Filme(1); //interestelar
 		
+		Mockito.when(filmeControlMock.buscarFilmeId(1)).thenReturn(filme1);
+		Mockito.when(filmeControlMock.buscarFilmeNome("interestelar")).thenReturn(filme1);
+		
+		salaControlMock= Mockito.mock(SalaController.class);
+		
+		Sala sala1 = new Sala(1); 
+			
+		Mockito.when(salaControlMock.buscarSalaId(1)).thenReturn(sala1);
+		
+		LocalTime horario = LocalTime.parse("20:30");
+		LocalDate dataInicio = LocalDate.parse("2018-05-22");
+		LocalDate dataFim = LocalDate.parse("2018-05-30");
+		
+		sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim);
+		sessaoController.excluirSessao(1);
+		
+		assertEquals(sessaoRepositorio.getOne(1), null);
 	}
 	
 	@Test

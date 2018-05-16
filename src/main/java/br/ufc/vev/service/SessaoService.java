@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import br.ufc.vev.bean.Filme;
 import br.ufc.vev.bean.Sala;
 import br.ufc.vev.bean.Sessao;
-import br.ufc.vev.controller.FilmeController;
-import br.ufc.vev.controller.SalaController;
 import br.ufc.vev.repositorio.SessaoRepositorio;
 
 @Service
