@@ -26,16 +26,7 @@ public class SessaoService {
 			return sessaoRepositorio.save(sessao);
 	}
 	
-	public Sessao atualizarSessao(Integer idSessao, Filme filme, Sala sala, LocalTime horario, LocalDate dataInicio,
-			LocalDate dataFim) {
-
-		Sessao sessao = new Sessao();
-		sessao.setId(idSessao);
-		sessao.setFilme(filme);
-		sessao.setSala(sala);
-		sessao.setHorario(horario);
-		sessao.setDataInicio(dataInicio);
-		sessao.setDataFim(dataFim);
+	public Sessao atualizarSessao(Sessao sessao) {
 		
 		sessaoRepositorio.save(sessao);
 		

@@ -128,16 +128,26 @@ public class SessaoController {
 		return model;
 	}
 	
+	@SuppressWarnings("finally")
 	@RequestMapping(path="/atualizar", method = RequestMethod.POST)
 	public ModelAndView atualizarSessao(@RequestParam Integer idSessao, @RequestParam Filme filme,@RequestParam Sala sala, 
 			@RequestParam LocalTime horario, @RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFim){
 //	+ atualizarSessao(sessao : Sessao) : Sessao
 		
-		Sessao sessaoRetorno = sessaoService.atualizarSessao(idSessao, filme, sala, horario, dataInicio, dataFim);
+		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
 		
-		ModelAndView model = new ModelAndView("sessao");
-		model.addObject("sessao", sessaoRetorno);
-		return model;
+		try {
+			if (this.validaSessao(sessao) == true) {
+				sessao.setId(idSessao);
+				sessaoService.atualizarSessao(sessao);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ModelAndView model = new ModelAndView("sessao");
+			model.addObject("sessao", sessao);
+			return model;
+		}		
 	}
 	
 	@RequestMapping(path="/excluir", method = RequestMethod.POST)
