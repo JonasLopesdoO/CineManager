@@ -19,13 +19,10 @@ public class SessaoService {
 	
 	@Autowired
 	SessaoRepositorio sessaoRepositorio;
-	
+	/*
 	@Autowired
 	FilmeController filmeController;
-	
-	@Autowired
-	SalaController salaController;
-	
+	*/
 	public Sessao salvarSessao(Sessao sessao) {
 		
 			return sessaoRepositorio.save(sessao);
@@ -63,19 +60,23 @@ public class SessaoService {
 	}
 
 	public List<Sessao> getSessaoPorData(LocalDate dataInicial, LocalDate dataFinal) {
-		return sessaoRepositorio.findByStartDateBetween(dataInicial, dataFinal);
+	//	return sessaoRepositorio.findByStartDateBetween(dataInicial, dataFinal);
+		return null;
 	}
 
 	public List<Sessao> getSessaoPorCidade(String cidade) {
-		return sessaoRepositorio.findByFirstNameCidade(cidade);
+	//	return sessaoRepositorio.findByFirstNameCidade(cidade);
+		return null;
 	}
 
 	public List<Sessao> getSessaoPorFilme(String filme) {
-		return sessaoRepositorio.findByFirstNameFilme(filme);
+		//return sessaoRepositorio.findByFirstNameFilme(filme);
+		return null;
 	}
 
 	public List<Sessao> getSessaoPorGenero(String genero) {
-		return sessaoRepositorio.findByFirstNameGenero(genero);
+		//return sessaoRepositorio.findByFirstNameGenero(genero);
+		return null;
 	}
 	
 }

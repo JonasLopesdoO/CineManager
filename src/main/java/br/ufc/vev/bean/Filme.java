@@ -14,4 +14,8 @@ public class Filme {
 	public Integer getId() {
 		return id;
 	}
+	
+	public Filme() {
+		
+	}
 }
