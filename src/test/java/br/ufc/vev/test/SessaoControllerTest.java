@@ -90,10 +90,11 @@ public class SessaoControllerTest {
 		Mockito.when(salaControlMock.buscarSalaId(1)).thenReturn(sala1);
 		
 		LocalTime horario = LocalTime.parse("20:30");
-		LocalDate dataInicio = LocalDate.parse("2018-05-22");
+		LocalDate dataInicio = LocalDate.parse("2018-05-29");
 		LocalDate dataFim = LocalDate.parse("2018-05-30");
 		
 		Sessao sessao = (Sessao) sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim).getModel().get("sessao");
+		System.out.println(sessao.toString());
 		
 		assertEquals(sessaoRepositorio.getOne(2), sessao);
 		assertEquals(filmeControlMock.buscarFilmeId(1), filme1);

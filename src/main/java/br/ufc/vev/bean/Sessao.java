@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.lang.NonNull;
+
 @Entity
 @Table(name = "sessao")
 public class Sessao {
@@ -18,8 +20,11 @@ public class Sessao {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NonNull
 	private LocalDate dataInicio;
+	@NonNull
 	private LocalDate dataFim;
+	@NonNull
 	private LocalTime horario;
 	
 	@OneToOne
