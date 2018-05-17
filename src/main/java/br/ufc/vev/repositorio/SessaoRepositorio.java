@@ -16,7 +16,7 @@ public interface SessaoRepositorio extends JpaRepository<Sessao, Integer>{
 
 //	@Query("from Sessao s where s.startDate between ?1 and ?2")
 //	List<Sessao> findByStartDateBetween(LocalDate dataInicial, LocalDate dataFinal);
-//	/*
+	/*
 	@Query("from Sessao s, Filme f where f.id = s.id_filme and f.cidade = ?1")
 	List<Sessao> findByFirstNameCidade(String cidade);
 
