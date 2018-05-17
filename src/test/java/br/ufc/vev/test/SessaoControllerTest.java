@@ -5,13 +5,10 @@ import static org.junit.Assert.assertEquals;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -28,11 +25,7 @@ import br.ufc.vev.repositorio.SessaoRepositorio;
 
 public class SessaoControllerTest {
 	
-	@Autowired
 	private SessaoRepositorio sessaoRepositorio;
-	
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 	
 	private FilmeController filmeControlMock;
 	private SalaController salaControlMock;
@@ -96,7 +89,7 @@ public class SessaoControllerTest {
 		Sessao sessao = (Sessao) sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim).getModel().get("sessao");
 		System.out.println(sessao.toString());
 		
-		assertEquals(sessaoRepositorio.getOne(2), sessao);
+		assertEquals(sessaoRepositorio.getOne(sessao.getId()), sessao);
 		assertEquals(filmeControlMock.buscarFilmeId(1), filme1);
 		assertEquals(salaControlMock.buscarSalaId(1), sala1);	
 	}
@@ -239,17 +232,4 @@ public class SessaoControllerTest {
 		assertEquals(sessaoRepositorio.getOne(1), null);
 	}
 	
-	@Test
-	public void listarSessaoPorData() {
-		
-	}
-	
-	@Test
-	public void listarSessaoPorFilme() {}
-
-	@Test
-	public void listarSessaoPorCinema() {}
-	
-	@Test
-	public void listarSessaoPorGenero() {}
 }
