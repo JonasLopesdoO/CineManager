@@ -122,7 +122,6 @@ public class SessaoController {
 		return model;
 	}
 	
-	@SuppressWarnings("finally")
 	@RequestMapping(path="/atualizar", method = RequestMethod.POST)
 	public ModelAndView atualizarSessao(@RequestParam Integer idSessao, @RequestParam Filme filme,@RequestParam Sala sala, 
 			@RequestParam LocalTime horario, @RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFim){
@@ -130,12 +129,8 @@ public class SessaoController {
 		
 		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
 		
-	
-	
 				sessao.setId(idSessao);
 				sessaoService.atualizarSessao(sessao);
-			
-		
 		
 			ModelAndView model = new ModelAndView("sessao");
 			model.addObject("sessao", sessao);
