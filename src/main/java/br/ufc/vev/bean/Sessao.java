@@ -42,6 +42,15 @@ public class Sessao {
 		this.setDataFim(fim);
 	}
 	
+	public Sessao(Integer id, Filme filme, Sala sala, LocalTime horario, LocalDate inicio, LocalDate fim) {
+		this.setId(id);
+		this.setFilme(filme);
+		this.setSala(sala);
+		this.setHorario(horario);
+		this.setDataInicio(inicio);
+		this.setDataFim(fim);
+	}
+	
 	public Sessao() {
 		
 	}
