@@ -23,7 +23,10 @@ import br.ufc.vev.bean.Sessao;
 import br.ufc.vev.controller.FilmeController;
 import br.ufc.vev.controller.SalaController;
 import br.ufc.vev.controller.SessaoController;
+<<<<<<< HEAD
 import br.ufc.vev.mock.Mock;
+=======
+>>>>>>> parent of 8369a8e... Testes
 import br.ufc.vev.repositorio.SessaoRepositorio;
 
 @RunWith(SpringRunner.class)
@@ -93,6 +96,34 @@ public class SessaoControllerTest {
 		
 	}
 	
+<<<<<<< HEAD
+=======
+	@Test
+	public void adicionarUmaSessaoCorretamete() {
+
+		filmeControlMock = Mockito.mock(FilmeController.class);
+		Filme filme1 = new Filme(1); //interestelar
+		
+		Mockito.when(filmeControlMock.buscarFilmeId(1)).thenReturn(filme1);
+		Mockito.when(filmeControlMock.buscarFilmeNome("interestelar")).thenReturn(filme1);
+		
+		salaControlMock= Mockito.mock(SalaController.class);
+		
+		Sala sala1 = new Sala(1); 
+			
+		Mockito.when(salaControlMock.buscarSalaId(1)).thenReturn(sala1);
+		
+		LocalTime horario = LocalTime.of(20, 00);
+		LocalDate dataInicio = LocalDate.of(2018, 05, 15);
+		LocalDate dataFim = LocalDate.of(2018, 05, 30);
+		
+		Sessao sessao = (Sessao) sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim).getModel().get("sessao");
+
+		assertNotNull(sessao);
+		
+	}
+	
+>>>>>>> parent of 8369a8e... Testes
 	@Test
 	public void adicionarUmaSessaoComHorarioNulo() {
 
@@ -203,6 +234,7 @@ public class SessaoControllerTest {
 		
 		Mockito.when(filmeControlMock.buscarFilmeId(1)).thenReturn(filme1);
 		Mockito.when(filmeControlMock.buscarFilmeNome("interestelar")).thenReturn(filme1);
+<<<<<<< HEAD
 		
 		salaControlMock= Mockito.mock(SalaController.class);
 		
@@ -226,6 +258,31 @@ public class SessaoControllerTest {
 		sessaoController.excluirSessao(1);
 		//tenta excluir uma sessão de um banco vazio, ou seja não esta no banco
 		
+=======
+		
+		salaControlMock= Mockito.mock(SalaController.class);
+		
+		Sala sala1 = new Sala(1); 
+			
+		Mockito.when(salaControlMock.buscarSalaId(1)).thenReturn(sala1);
+		
+		LocalTime horario = LocalTime.parse("20:30");
+		LocalDate dataInicio = LocalDate.parse("2018-05-22");
+		LocalDate dataFim = LocalDate.parse("2018-05-30");
+		
+		sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim);
+		sessaoController.excluirSessao(1);
+		
+		assertEquals(sessaoRepositorio.getOne(1), null);
+	}
+	
+	@Test
+	public void excluirSessaoComIdNaoSalvoNoBanco() {
+		
+		sessaoController.excluirSessao(1);
+		//tenta excluir uma sessão de um banco vazio, ou seja não esta no banco
+		
+>>>>>>> parent of 8369a8e... Testes
 		assertEquals(sessaoRepositorio.getOne(1), null);
 	}
 	

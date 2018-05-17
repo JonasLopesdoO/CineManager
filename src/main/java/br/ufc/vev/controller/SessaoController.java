@@ -109,6 +109,7 @@ public class SessaoController {
 //	+ addSessao(sessao : Sessao) : Sessao
 		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
 		
+<<<<<<< HEAD
 //		try {
 //			if (this.validaSessao(sessao)) {
 				Sessao sessaoRetorno = sessaoService.salvarSessao(sessao);
@@ -129,6 +130,19 @@ public class SessaoController {
 //
 //		
 //		return null;
+=======
+		System.out.println("Sessao: "+sessao);
+		
+		
+		
+		
+		Sessao sessaoRetorno = sessaoService.salvarSessao(sessao);
+		
+		ModelAndView model = new ModelAndView("sessao");
+		model.addObject("sessao", sessaoRetorno);
+		
+		return model;
+>>>>>>> parent of 8369a8e... Testes
 	}
 	
 	@RequestMapping(path="/atualizar", method = RequestMethod.POST)
@@ -175,7 +189,11 @@ public class SessaoController {
 		model.addObject("sessao", sessao);
 		return model;
 	}
+<<<<<<< HEAD
 	
+=======
+//	
+>>>>>>> parent of 8369a8e... Testes
 //	public boolean validaSessao(Sessao sessao) throws Exception {
 //		
 //		if (sessao.getHorario() == null) {
