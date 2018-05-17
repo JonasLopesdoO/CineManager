@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.lang.NonNull;
+
 @Entity
 @Table(name = "sessao")
 public class Sessao {
@@ -33,15 +35,6 @@ public class Sessao {
 	private Sala sala;
 	
 	public Sessao(Filme filme, Sala sala, LocalTime horario, LocalDate inicio, LocalDate fim) {
-		this.setFilme(filme);
-		this.setSala(sala);
-		this.setHorario(horario);
-		this.setDataInicio(inicio);
-		this.setDataFim(fim);
-	}
-	
-	public Sessao(Integer id, Filme filme, Sala sala, LocalTime horario, LocalDate inicio, LocalDate fim) {
-		this.setId(id);
 		this.setFilme(filme);
 		this.setSala(sala);
 		this.setHorario(horario);

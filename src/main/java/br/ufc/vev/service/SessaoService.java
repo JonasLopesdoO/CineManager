@@ -50,9 +50,8 @@ public class SessaoService {
 	}
 
 	public List<Sessao> getSessaoPorData(LocalDate dataInicial, LocalDate dataFinal) {
+	//	return sessaoRepositorio.findByStartDateBetween(dataInicial, dataFinal);
 		return null;
-//		return sessaoRepositorio.findByStartDateBetween(dataInicial, dataFinal);
-	
 	}
 
 	public List<Sessao> getSessaoPorCidade(String cidade) {

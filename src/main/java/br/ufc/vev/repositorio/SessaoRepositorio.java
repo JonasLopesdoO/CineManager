@@ -1,10 +1,6 @@
 package br.ufc.vev.repositorio;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import br.ufc.vev.bean.Sessao;
@@ -12,11 +8,12 @@ import br.ufc.vev.bean.Sessao;
 @Repository
 public interface SessaoRepositorio extends JpaRepository<Sessao, Integer>{
 
-	
-
-//	@Query("from Sessao s where s.startDate between ?1 and ?2")
-//	List<Sessao> findByStartDateBetween(LocalDate dataInicial, LocalDate dataFinal);
 	/*
+	Sessao findOne(Integer id);
+
+	@Query("from Sessao s where s.startDate between ?1 and ?2")
+	List<Sessao> findByStartDateBetween(LocalDate dataInicial, LocalDate dataFinal);
+
 	@Query("from Sessao s, Filme f where f.id = s.id_filme and f.cidade = ?1")
 	List<Sessao> findByFirstNameCidade(String cidade);
 

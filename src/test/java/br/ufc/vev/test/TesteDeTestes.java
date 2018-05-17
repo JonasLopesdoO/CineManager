@@ -7,7 +7,6 @@ import java.time.LocalTime;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -15,8 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import br.ufc.vev.bean.Filme;
 import br.ufc.vev.bean.Sala;
 import br.ufc.vev.bean.Sessao;
-import br.ufc.vev.controller.FilmeController;
-import br.ufc.vev.controller.SalaController;
 import br.ufc.vev.controller.SessaoController;
 import br.ufc.vev.mock.Mock;
 import br.ufc.vev.repositorio.SessaoRepositorio;
