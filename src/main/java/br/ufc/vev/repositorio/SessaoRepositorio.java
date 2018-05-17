@@ -8,10 +8,6 @@ import br.ufc.vev.bean.Sessao;
 @Repository
 public interface SessaoRepositorio extends JpaRepository<Sessao, Integer>{
 
-	@SuppressWarnings("unchecked")
-	public default Sessao save(Sessao sessao) {
-		return sessao;}
-	
 	/*
 	Sessao findOne(Integer id);
 

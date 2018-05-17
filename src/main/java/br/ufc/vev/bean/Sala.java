@@ -17,7 +17,11 @@ public class Sala {
 	}
 	
 	public Sala(int id) {
-		
+		this.id = id;
+	}
+	
+	public Sala() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	

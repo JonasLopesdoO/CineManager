@@ -18,7 +18,7 @@ public class Mock {
 		
 	}
 	
-	public static void mockFilme() {
+	public static FilmeController mockFilme() {
 		filmeControlMock = Mockito.mock(FilmeController.class);
 		
 		Filme filme1 = new Filme(1); //interestelar
@@ -34,9 +34,10 @@ public class Mock {
 		Mockito.when(filmeControlMock.buscarFilmeId(3)).thenReturn(filme3);
 		Mockito.when(filmeControlMock.buscarFilmeNome("break")).thenReturn(filme3);
 		
+		return filmeControlMock;
 	}
 	
-	public static void mockSala() {
+	public static SalaController mockSala() {
 		salaControlMock= Mockito.mock(SalaController.class);
 		
 		Sala sala1 = new Sala(1); 
@@ -49,6 +50,7 @@ public class Mock {
 		
 		Mockito.when(salaControlMock.buscarSalaId(3)).thenReturn(sala3);
 		
+		return salaControlMock;
 	}
 	
 	public void mockCinema() {

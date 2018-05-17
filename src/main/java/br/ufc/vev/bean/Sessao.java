@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.lang.NonNull;
 
@@ -20,11 +21,11 @@ public class Sessao {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NonNull
+	@NotNull
 	private LocalDate dataInicio;
-	@NonNull
+	@NotNull
 	private LocalDate dataFim;
-	@NonNull
+	@NotNull
 	private LocalTime horario;
 	
 	@OneToOne
@@ -37,6 +38,7 @@ public class Sessao {
 		this.setFilme(filme);
 		this.setSala(sala);
 		this.setHorario(horario);
+		this.setDataInicio(inicio);
 		this.setDataFim(fim);
 	}
 	

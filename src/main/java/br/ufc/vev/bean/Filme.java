@@ -11,8 +11,6 @@ public class Filme {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	
-	
 	public Integer getId() {
 		return id;
 	}
@@ -22,6 +20,6 @@ public class Filme {
 	}
 	
 	public Filme(int id) {
-		
+		this.id = id;
 	}
 }

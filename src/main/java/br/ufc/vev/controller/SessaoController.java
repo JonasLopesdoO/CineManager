@@ -112,13 +112,7 @@ public class SessaoController {
 		System.out.println("Sessao: "+sessao);
 		
 		
-		try {
-			if (this.validaSessao(sessao) == false) {
-				return null;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 		
 		Sessao sessaoRetorno = sessaoService.salvarSessao(sessao);
 		
@@ -136,18 +130,17 @@ public class SessaoController {
 		
 		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
 		
-		try {
-			if (this.validaSessao(sessao) == true) {
+	
+	
 				sessao.setId(idSessao);
 				sessaoService.atualizarSessao(sessao);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
+			
+		
+		
 			ModelAndView model = new ModelAndView("sessao");
 			model.addObject("sessao", sessao);
 			return model;
-		}		
+				
 	}
 	
 	@RequestMapping(path="/excluir", method = RequestMethod.POST)
@@ -176,21 +169,21 @@ public class SessaoController {
 		}
 		return null;
 	}
-	
-	public boolean validaSessao(Sessao sessao) throws Exception {
-		
-		if (sessao.getHorario() == null) {
-			throw new Exception();
-		} else if (sessao.getDataInicio() == null) {
-			throw new Exception();
-		} else if (sessao.getDataFim() == null) {
-			throw new Exception();
-		} else if (sessao.getFilme() == null) {
-			throw new Exception();
-		} else if (sessao.getSala() == null) {
-			throw new Exception();
-		}
-			
-		return true;
-	}
+//	
+//	public boolean validaSessao(Sessao sessao) throws Exception {
+//		
+//		if (sessao.getHorario() == null) {
+//			throw new Exception();
+//		} else if (sessao.getDataInicio() == null) {
+//			throw new Exception();
+//		} else if (sessao.getDataFim() == null) {
+//			throw new Exception();
+//		} else if (sessao.getFilme() == null) {
+//			throw new Exception();
+//		} else if (sessao.getSala() == null) {
+//			throw new Exception();
+//		}
+//			
+//		return true;
+//	}
 }
