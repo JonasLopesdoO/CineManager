@@ -1,10 +1,12 @@
 package br.ufc.vev.test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -226,5 +228,21 @@ public class SessaoControllerTest {
 		
 		assertEquals(sessaoRepositorio.getOne(1), null);
 	}
+	
+//	@Test
+//	public void listarPorData() {
+//
+//		Filme filme       = Mock.mockFilme().buscarFilmeId(1);
+//		Sala sala         = Mock.mockSala().buscarSalaId(1);
+//		LocalTime horario = LocalTime.of(20,30);
+//		LocalDate inicio  = LocalDate.of(2018, 05, 01);
+//		LocalDate fim     = LocalDate.of(2018, 05, 30);
+//		
+//		sessaoController.addSessao(filme, sala, horario, inicio, fim);
+//		
+//		List<Sessao> sessoes = (List<Sessao>) sessaoController.verTodasPorData("2018-04-01", "2018-06-01").getModel().get("sessao");
+//		
+//		assertThat(sessoes.size() > 0);
+//	}
 	
 }
