@@ -109,7 +109,6 @@ public class SessaoController {
 //	+ addSessao(sessao : Sessao) : Sessao
 		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
 		
-<<<<<<< HEAD
 		try {
 			if (this.validaSessao(sessao)) {
 				Sessao sessaoRetorno = sessaoService.salvarSessao(sessao);
@@ -129,19 +128,8 @@ public class SessaoController {
 		ModelAndView model = new ModelAndView("sessao");
 		model.addObject("sessao", sessaoRetorno);
 
-=======
-		System.out.println("Sessao: "+sessao);
->>>>>>> parent of 8369a8e... Testes
 		
-		
-		
-		
-		Sessao sessaoRetorno = sessaoService.salvarSessao(sessao);
-		
-		ModelAndView model = new ModelAndView("sessao");
-		model.addObject("sessao", sessaoRetorno);
-		
-		return model;
+		return null;
 	}
 	
 	@RequestMapping(path="/atualizar", method = RequestMethod.POST)
@@ -188,21 +176,21 @@ public class SessaoController {
 		model.addObject("sessao", sessao);
 		return model;
 	}
-//	
-//	public boolean validaSessao(Sessao sessao) throws Exception {
-//		
-//		if (sessao.getHorario() == null) {
-//			throw new Exception();
-//		} else if (sessao.getDataInicio() == null) {
-//			throw new Exception();
-//		} else if (sessao.getDataFim() == null) {
-//			throw new Exception();
-//		} else if (sessao.getFilme() == null) {
-//			throw new Exception();
-//		} else if (sessao.getSala() == null) {
-//			throw new Exception();
-//		}
-//			
-//		return true;
-//	}
+	
+	public boolean validaSessao(Sessao sessao) throws Exception {
+		
+		if (sessao.getHorario() == null) {
+			throw new Exception();
+		} else if (sessao.getDataInicio() == null) {
+			throw new Exception();
+		} else if (sessao.getDataFim() == null) {
+			throw new Exception();
+		} else if (sessao.getFilme() == null) {
+			throw new Exception();
+		} else if (sessao.getSala() == null) {
+			throw new Exception();
+		}
+			
+		return true;
+	}
 }
