@@ -1,14 +1,11 @@
 package br.ufc.vev.service;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.ufc.vev.bean.Filme;
-import br.ufc.vev.bean.Sala;
 import br.ufc.vev.bean.Sessao;
 import br.ufc.vev.repositorio.SessaoRepositorio;
 
