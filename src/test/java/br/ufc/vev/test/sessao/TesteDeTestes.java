@@ -44,9 +44,7 @@ public class TesteDeTestes {
 		Sessao s = new Sessao(filme, sala, horario, inicio, fim);
 		
 		Sessao sessaoRecebida = repositorio.save(s);
-		
-		System.out.println(sessaoRecebida);
-		
+				
 		assertNotNull(sessaoRecebida);
 	}
 	
@@ -61,9 +59,7 @@ public class TesteDeTestes {
 		Sessao s = new Sessao(filme, sala, horario, inicio, fim);
 		
 		Sessao sessaoRecebida = service.salvarSessao(s);
-		
-		System.out.println(sessaoRecebida);
-		
+				
 		assertNotNull(sessaoRecebida);
 	}
 	
@@ -75,11 +71,7 @@ public class TesteDeTestes {
 		LocalDate inicio  = LocalDate.of(2018, 05, 01);
 		LocalDate fim     = LocalDate.of(2018, 05, 30);
 		
-		//Sessao s = new Sessao(filme, sala, horario, inicio, fim);
-		
 		Sessao sessaoRecebida = (Sessao) controller.addSessao(filme, sala, horario, inicio, fim).getModel().get("sessao");
-		
-		System.out.println(sessaoRecebida);
 		
 		assertNotNull(sessaoRecebida);
 	}
