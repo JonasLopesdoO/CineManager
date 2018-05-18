@@ -21,7 +21,6 @@ import br.ufc.vev.service.SessaoService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-
 public class TesteDeTestes {
 
 	@Autowired
