@@ -121,13 +121,6 @@ public class SessaoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		
-		Sessao sessaoRetorno = sessaoService.salvarSessao(sessao);
-		
-		ModelAndView model = new ModelAndView("sessao");
-		model.addObject("sessao", sessaoRetorno);
-
 		
 		return null;
 	}
@@ -137,18 +130,13 @@ public class SessaoController {
 			@RequestParam LocalTime horario, @RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFim){
 //	+ atualizarSessao(sessao : Sessao) : Sessao
 		
-			Sessao sessaoRecebida = sessaoService.getSessaoPorId(idSessao);
-			sessaoRecebida.setSala(sala);
-			sessaoRecebida.setDataFim(dataFim);
-			sessaoRecebida.setDataInicio(dataInicio);
-			sessaoRecebida.setHorario(horario);
-			sessaoRecebida.setFilme(filme);
-			
-			sessaoService.atualizarSessao(sessaoRecebida);
-			
+		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
+		
+				sessao.setId(idSessao);
+				sessaoService.atualizarSessao(sessao);
+		
 			ModelAndView model = new ModelAndView("sessao");
-			model.addObject("sessao", sessaoRecebida);
-			
+			model.addObject("sessao", sessao);
 			return model;
 				
 	}
@@ -169,12 +157,15 @@ public class SessaoController {
 	@RequestMapping(path="/busca", method = RequestMethod.POST)
 	public ModelAndView buscaSessao(@RequestParam Integer idSessao) {
 //	+ removerSessao(id : int) : Sessao
-	
-		Sessao sessao = sessaoService.getSessaoPorId(idSessao);
 		
-		ModelAndView model = new ModelAndView("sessao");
-		model.addObject("sessao", sessao);
-		return model;
+		if (sessaoService.getSessaoPorId(idSessao) != null) {
+			Sessao sessao = sessaoService.getSessaoPorId(idSessao);
+			
+			ModelAndView model = new ModelAndView("sessao");
+			model.addObject("sessao", sessao);
+			return model;
+		}
+		return null;
 	}
 	
 	public boolean validaSessao(Sessao sessao) throws Exception {
