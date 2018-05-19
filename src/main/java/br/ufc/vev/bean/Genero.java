@@ -6,18 +6,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "genero")
 public class Genero {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	private String nome;
 	
-	@ManyToOne
-	@JoinColumn(name = "id")
-	Filme filme;
+	@ManyToOne(optional=false)
+	@JoinColumn(name="id",referencedColumnName="id", insertable=false, updatable=false)
+	private Filme filme;
 	
 	public Genero(String nome) {
 		this.setNome(nome);
@@ -39,6 +42,12 @@ public class Genero {
 		this.nome = nome;
 	}
 	
+	public Filme getFilme() {
+		return filme;
+	}
 	
+	public void setFilme(Filme filme) {
+		this.filme = filme;
+	}
 
 }

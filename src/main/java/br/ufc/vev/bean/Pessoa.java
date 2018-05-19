@@ -3,9 +3,8 @@ package br.ufc.vev.bean;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
+@javax.persistence.MappedSuperclass
 public abstract class Pessoa {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
