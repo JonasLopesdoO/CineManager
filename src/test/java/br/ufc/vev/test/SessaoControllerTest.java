@@ -67,30 +67,30 @@ public class SessaoControllerTest {
 		assertEquals(sessaoController.buscaSessao(sessaoAtualizada.getId()), sessaoAtualizada);
 	}
 	
-//	@Test
-//	public void adicionarUmaSessaoCorretamete() {
-//
-//		filmeControlMock = Mockito.mock(FilmeController.class);
-//		Filme filme1 = new Filme(1); //interestelar
-//		
-//		Mockito.when(filmeControlMock.buscarFilmeId(1)).thenReturn(filme1);
-//		Mockito.when(filmeControlMock.buscarFilmeNome("interestelar")).thenReturn(filme1);
-//		
-//		salaControlMock= Mockito.mock(SalaController.class);
-//		
-//		Sala sala1 = new Sala(1); 
-//			
-//		Mockito.when(salaControlMock.buscarSalaId(1)).thenReturn(sala1);
-//		
-//		LocalTime horario = LocalTime.of(20, 00);
-//		LocalDate dataInicio = LocalDate.of(2018, 05, 15);
-//		LocalDate dataFim = LocalDate.of(2018, 05, 30);
-//		
-//		Sessao sessao = (Sessao) sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim).getModel().get("sessao");
-//
-//		assertNotNull(sessao);
-//		
-//	}
+	@Test
+	public void adicionarUmaSessaoCorretamete() {
+
+		filmeControlMock = Mockito.mock(FilmeController.class);
+		Filme filme1 = new Filme(1); //interestelar
+		
+		Mockito.when(filmeControlMock.buscarFilmeId(1)).thenReturn(filme1);
+		Mockito.when(filmeControlMock.buscarFilmeNome("interestelar")).thenReturn(filme1);
+		
+		salaControlMock= Mockito.mock(SalaController.class);
+		
+		Sala sala1 = new Sala(1); 
+			
+		Mockito.when(salaControlMock.buscarSalaId(1)).thenReturn(sala1);
+		
+		LocalTime horario = LocalTime.of(20, 00);
+		LocalDate dataInicio = LocalDate.of(2018, 05, 15);
+		LocalDate dataFim = LocalDate.of(2018, 05, 30);
+		
+		Sessao sessao = (Sessao) sessaoController.addSessao(filme1, sala1, horario, dataInicio, dataFim).getModel().get("sessao");
+
+		assertNotNull(sessao);
+		
+	}
 	
 	@Test
 	public void adicionarUmaSessaoComHorarioNulo() {

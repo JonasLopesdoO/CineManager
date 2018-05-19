@@ -41,7 +41,7 @@ public class SessaoServiceTest {
 		sessao.setHorario(horario);
 		sessao.setDataInicio(dataInicio);
 		sessao.setDataFim(dataFim);
-		filme = new Filme();
+		filme = new Filme(1);
 		
 		sService.salvarSessao(sessao);
 		

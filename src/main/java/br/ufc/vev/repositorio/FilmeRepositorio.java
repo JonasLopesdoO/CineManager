@@ -7,4 +7,6 @@ import br.ufc.vev.bean.Filme;
 
 @Repository
 public interface FilmeRepositorio extends JpaRepository<Filme, Integer>{
+	
+	
 }
