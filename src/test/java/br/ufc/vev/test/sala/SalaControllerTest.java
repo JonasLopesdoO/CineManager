@@ -28,7 +28,6 @@ public class SalaControllerTest {
 		
 		Sala salaRecebida = new Sala();
 		salaRecebida = controller.salvaSala(nome, capacidade);
-		
 		assertNotNull(salaRecebida);
 		
 	}
@@ -92,14 +91,66 @@ public class SalaControllerTest {
 		assertFalse("Erro ID não pode ser negativo", controller.excluiSala(-1));
 	}
 	
-//	@Test
-//	public void adicionaSalaComNomeNuloControllerTest() {
-//		String nome = null;
-//		int capacidade = 150;
-//		
-//		controller.salvaSala(nome, capacidade);
-//		
-//		assertThatException(controller.salvaSala(nome, capacidade));
-//		
-//	}
+	@Test
+	public void listAllSalaControllerTest() {
+		assertTrue(controller.getAllSala().size() >= 0);
+	}
+	
+	@Test 
+	public void atualizaSalaControllerTest() {
+		Sala sala = new Sala();
+		sala = controller.salvaSala("Sala B1", 100);
+		
+		sala.setNome("Sala B2");
+		sala.setCapacidade(130);
+		
+		assertTrue(controller.atualizaSala(sala));	
+		
+	}
+	
+	@Test 
+	public void atualizaSalaComNomeNuloControllerTest() {
+		Sala sala = new Sala();
+		sala = controller.salvaSala("Sala B1", 100);
+		sala.setNome(null);
+		sala.setCapacidade(130);
+		
+		assertFalse("Nome não pode ser nulo", controller.atualizaSala(sala));	
+		
+	}
+	@Test 
+	public void atualizaSalaComNomeVazioControllerTest() {
+		Sala sala = new Sala();
+		sala = controller.salvaSala("Sala B1", 100);
+		
+		sala.setNome("");
+		sala.setCapacidade(130);
+		
+		assertFalse("Nome não pode ser vazio", controller.atualizaSala(sala));	
+		
+	}
+	@Test 
+	public void atualizaSalaComCapacidadeZeroControllerTest() {
+		Sala sala = new Sala();
+		sala = controller.salvaSala("Sala B1", 100);
+		
+		sala.setNome("Sala B2");
+		sala.setCapacidade(0);
+		
+		assertFalse("Erro ID deve ser maior que zero", controller.atualizaSala(sala));	
+		
+	}
+	
+	@Test 
+	public void atualizaSalaComCapacidadeNegativaControllerTest() {
+		Sala sala = new Sala();
+		sala = controller.salvaSala("Sala B1", 100);
+		
+		sala.setNome("Sala B2");
+		sala.setCapacidade(-1);
+		
+		assertFalse("Erro ID não pode ser negativo", controller.atualizaSala(sala));	
+		
+	}
+			
 }

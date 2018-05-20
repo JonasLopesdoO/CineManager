@@ -1,5 +1,7 @@
 package br.ufc.vev.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -11,10 +13,6 @@ public class SalaController {
 	
 	@Autowired
 	private SalaService service;
-	
-	//public Sala buscarSalaId(int sala);
-	
-	//public Sala buscarSalaNome(String nomeSala);
 
 	public Sala salvaSala(String nome, int capacidade) {
 		try {
@@ -71,10 +69,23 @@ public class SalaController {
 		}
 		return false;
 	}
-	
-//	public Sala atualizarFilme(Sala sala);
-//	
-//	public Sala addFilme(Sala filme);
-//	
-//	public Sala removerSala(int id);
+
+	public List<Sala> getAllSala() {		
+		return service.getAllSala();
+	}
+
+	public boolean atualizaSala(Sala sala) {
+		try {
+			if (buscaSala(sala.getId()) != null && 
+					validaSala(sala.getNome(), sala.getCapacidade()) &&
+					validaIdSala(sala.getId())) {
+				service.atualizaSala(sala);
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }
