@@ -1,9 +1,7 @@
 package br.ufc.vev.test.sala;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,52 +10,50 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.ufc.vev.bean.Sala;
-import br.ufc.vev.repositorio.SalaRepositorio;
+import br.ufc.vev.service.SalaService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SalaRepositoryTest {
+public class SalaServiceTest {
 	
 	@Autowired
-	private SalaRepositorio repository;
-	
+	SalaService service;
+
 	@Test
-	public void salvaSalaRepositoryTest() {
+	public void adicionarSalaServiceTest() {
 		String nome = "Sala A1";
 		int capacidade = 150;
 		
 		Sala sala = new Sala(nome, capacidade);
-		Sala salaRecebida = repository.save(sala);
+		Sala salaRecebida = service.salvarSala(sala);
 		
 		assertNotNull(salaRecebida);
 	}
 	
 	@Test
-	public void buscaSalaRepositoryTest() {
+	public void buscaSalaServiceTest() {
 		String nome = "Sala A1";
 		int capacidade = 150;
 		
 		Sala sala = new Sala(nome, capacidade);
 		Sala salaRecebida = new Sala(); 
-		salaRecebida = repository.save(sala);
-		
-		int id = salaRecebida.getId();
-		
-		assertTrue(repository.existsById(id));
+		salaRecebida = service.salvarSala(sala);
+	
+		assertNotNull(service.buscarSala(salaRecebida.getId()));
 	}
 	
 	@Test
-	public void excluiSalaRepositoryTest() {
+	public void excluiSalaServiceTest() {
 		String nome = "Sala A1";
 		int capacidade = 150;
 		
 		Sala sala = new Sala();
 		
-		sala =  repository.save(new Sala(nome, capacidade));
+		sala =  service.salvarSala(new Sala(nome, capacidade));
 		
-		repository.delete(sala);
+		service.excluirSala(sala);
 		
-		assertFalse(repository.existsById(sala.getId()));
+		assertThat(service.buscarSala(sala.getId()));
 
 	}
 	
@@ -73,12 +69,13 @@ public class SalaRepositoryTest {
 		int capacidadeUp = 120;
 		Sala salaAtualizada = new Sala();
 		
-		salaAtualizada = repository.save(salaAtual);
+		salaAtualizada = service.salvarSala(salaAtual);
 		salaAtualizada.setNome(nomeUp);
 		salaAtualizada.setCapacidade(capacidadeUp);
 		
-		repository.save(salaAtualizada);
+		service.atualizaSala(salaAtualizada);
 		
-		assertTrue(repository.existsById(salaAtualizada.getId()));
+		assertThat(service.buscarSala(salaAtualizada.getId()));
 	}
+	
 }

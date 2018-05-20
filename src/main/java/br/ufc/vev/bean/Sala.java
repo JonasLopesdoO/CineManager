@@ -31,6 +31,10 @@ public class Sala {
 		setNome(nome);
 		setCapacidade(capacidade);
 	}
+	
+	public Sala() {
+		
+	}
 
 	public String getNome() {
 		return nome;
