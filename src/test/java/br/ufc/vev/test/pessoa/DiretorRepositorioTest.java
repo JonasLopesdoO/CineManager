@@ -38,24 +38,24 @@ public class DiretorRepositorioTest {
 		assertNotNull(diretorRecebido);
 	}
 	
-	@Test
-	public void removerDiretorCorretamente() {
-		String nome = "Christopher Nolan";
-		String sobre = "Atividades Diretor, Roteirista, Produtor mais\\r\\n\"" + 
-						"\"Nome de nascimento Christopher Edward Nolan\\r\\n\"" + 
-						"\"Nacionalidade Britânico\\r\\n\"" + 
-						"\"Nascimento 30 de julho de 1970 (Londres, Inglaterra)\\r\\n\"" + 
-						"\"Idade 47 anos";
-		
-		Diretor diretor = new Diretor(nome, sobre);
-		
-		Diretor diretorRecebido = new Diretor();
-		
-		diretorRecebido = diretorRepositorio.save(diretor);
-		
-		diretorRepositorio.delete(diretorRecebido);
-		
-		assertFalse(diretorRepositorio.existsById(diretorRecebido.getId()));
-	}
+//	@Test
+//	public void removerDiretorCorretamente() {
+//		String nome = "Christopher Nolan";
+//		String sobre = "Atividades Diretor, Roteirista, Produtor mais\\r\\n\"" + 
+//						"\"Nome de nascimento Christopher Edward Nolan\\r\\n\"" + 
+//						"\"Nacionalidade Britânico\\r\\n\"" + 
+//						"\"Nascimento 30 de julho de 1970 (Londres, Inglaterra)\\r\\n\"" + 
+//						"\"Idade 47 anos";
+//		
+//		Diretor diretor = new Diretor(nome, sobre);
+//		
+//		Diretor diretorRecebido = new Diretor();
+//		
+//		diretorRecebido = diretorRepositorio.save(diretor);
+//		
+//		diretorRepositorio.delete(diretorRecebido);
+//		
+//		assertFalse(diretorRepositorio.existsById(diretorRecebido.getId()));
+//	}
 
 }

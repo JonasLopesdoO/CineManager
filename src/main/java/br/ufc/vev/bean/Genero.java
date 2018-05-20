@@ -18,8 +18,8 @@ public class Genero {
 	
 	private String nome;
 	
-	@ManyToOne(optional=false)
-	@JoinColumn(name="id",referencedColumnName="id", insertable=false, updatable=false)
+	@ManyToOne
+	@JoinColumn(name="id_filme",referencedColumnName="id", insertable=false, updatable=false)
 	private Filme filme;
 	
 	public Genero(String nome) {

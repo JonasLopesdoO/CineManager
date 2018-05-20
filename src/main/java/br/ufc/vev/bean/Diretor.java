@@ -1,5 +1,6 @@
 package br.ufc.vev.bean;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class Diretor{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	
 	private String nome;
 	private String sobre;
 	
@@ -28,7 +30,7 @@ public class Diretor{
 	}
 	
 	@ManyToOne
-	@JoinColumn(name="id" ,referencedColumnName="id", insertable=false, updatable=false)
+	@JoinColumn(name="id_filme",referencedColumnName="id", insertable=false, updatable=false)
 	Filme filme;
 
 	public Filme getFilme() {
