@@ -19,6 +19,10 @@ public abstract class Pessoa {
 		this.setSobre(sobre);
 	}
 	
+	public Pessoa() {
+		
+	}
+	
 	public Integer getId() {
 		return id;
 	}

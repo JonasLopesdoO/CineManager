@@ -1,4 +1,4 @@
-package br.ufc.vev.test;
+package br.ufc.vev.test.filme;
 
 import static org.junit.Assert.assertNotNull;
 
