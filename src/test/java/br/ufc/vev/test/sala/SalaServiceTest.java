@@ -2,6 +2,7 @@ package br.ufc.vev.test.sala;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -76,6 +77,16 @@ public class SalaServiceTest {
 		service.atualizaSala(salaAtualizada);
 		
 		assertThat(service.buscarSala(salaAtualizada.getId()));
+	}
+	
+	@Test
+	public void getAllSalaServiceTest() {
+		String nome = "Sala A1";
+		int capacidade = 150;
+				
+		service.salvarSala(new Sala(nome, capacidade));
+				
+		assertTrue(service.getAllSala().size() >= 1);
 	}
 	
 }
