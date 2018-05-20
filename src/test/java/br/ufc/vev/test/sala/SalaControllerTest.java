@@ -1,7 +1,9 @@
 package br.ufc.vev.test.sala;
 
-import static org.assertj.core.api.Assertions.assertThatNullPointerException;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,10 +27,69 @@ public class SalaControllerTest {
 		int capacidade = 150;
 		
 		Sala salaRecebida = new Sala();
-		controller.salvaSala(nome, capacidade);
+		salaRecebida = controller.salvaSala(nome, capacidade);
 		
-		//assertNotNull(salaRecebida);
+		assertNotNull(salaRecebida);
 		
+	}
+	
+	@Test
+	public void adicionaSalaComNomeNullControllerTest() {
+		assertNull("Nome não pode ser nulo", controller.salvaSala(null , 120));
+	}
+	
+	@Test
+	public void adicionaSalaComNomeVazioControllerTest() {
+		assertNull("Nome não pode ser vazio", controller.salvaSala("", 100));
+	}
+	
+	@Test
+	public void adicionaSalaComCapacidadeZeroControllerTest() {
+		assertNull("Quantidades de lugares não pode ser menor ou igual a zero", 
+				controller.salvaSala("Sala B1", 0));
+	}
+	
+	@Test
+	public void adicionaSalaComCapacidadeNegativaControllerTest() {
+		assertNull("Quantidades de lugares não pode ser menor ou igual a zero", 
+				controller.salvaSala("Sala B1", -1));
+	}
+	
+	@Test
+	public void buscaSalaControllerTest() {
+		Sala sala = new Sala();
+		sala = controller.salvaSala("Sala A3", 120);
+		
+		assertNotNull(controller.buscaSala(sala.getId()));
+	}
+	
+	@Test 
+	public void buscaSalaComIdZeroControllerTest() {
+		assertNull("Erro ID deve ser maior que zero", controller.buscaSala(0));
+	}
+	
+	@Test 
+	public void buscaSalaComIdNegativoControllerTest() {
+		assertNull("Erro ID não pode ser negativo", controller.buscaSala(-1));
+	}
+	
+	@Test
+	public void excluiSalaControllerTest() {
+		Sala sala = new Sala();
+		sala = controller.salvaSala("Sala A7", 120);
+		
+		assertTrue(controller.excluiSala(sala.getId()));
+		
+	}
+	
+	@Test 
+	public void excluiSalaComIdZeroControllerTest() {
+		assertFalse("Erro ID deve ser maior que zero", controller.excluiSala(0));
+	}
+	
+	@Test 
+	public void excluiSalaComIdNegativoControllerTest() {
+		assertFalse("Erro ID não pode ser negativo", controller.excluiSala(-1));
 	}
 	
 //	@Test
