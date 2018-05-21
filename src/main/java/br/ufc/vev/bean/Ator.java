@@ -75,6 +75,11 @@ public class Ator{
 		
 		return id == ator.id;
 	}
+
+	@Override
+	public String toString() {
+		return "Ator [id=" + id + ", nome=" + nome + ", sobre=" + sobre + "]";
+	}
 	
 	
 }

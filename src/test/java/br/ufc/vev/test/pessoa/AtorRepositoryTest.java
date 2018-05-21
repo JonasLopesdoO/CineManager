@@ -1,6 +1,9 @@
 package br.ufc.vev.test.pessoa;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import javax.transaction.Transactional;
 
@@ -15,7 +18,6 @@ import br.ufc.vev.bean.Ator;
 import br.ufc.vev.bean.Filme;
 import br.ufc.vev.repositorio.AtorRepositorio;
 import br.ufc.vev.repositorio.FilmeRepositorio;
-import junit.framework.Assert;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,28 +31,112 @@ public class AtorRepositoryTest {
 	@Autowired
 	FilmeRepositorio filmeRepositorio;
 	
+	@Test 
+	public void salvarAtorRepositoryTest() {
+		String nome = "Peeter clarck";
+		String sobre = "Este é um ator muito bom!";
+		
+		Ator ator = new Ator();
+		ator.setNome(nome);
+		ator.setSobre(sobre);
+		
+		Ator atorRecebido = atorRepositorio.save(ator);
+		
+		assertNotNull(atorRecebido);
+	}
+	
+	@Test
+	public void excluirAtorRepositoryTest() {
+		String nome = "Peeter clarck";
+		String sobre = "Este é um ator muito bom!";
+		
+		Ator ator = new Ator();
+		ator.setNome(nome);
+		ator.setSobre(sobre);
+		
+		Ator atorRecebido = atorRepositorio.save(ator);
+		
+		atorRepositorio.delete(atorRecebido);
+		
+		assertFalse(atorRepositorio.existsById(atorRecebido.getId()));
+	}
+	
+	@Test 
+	public void buscarAtorRepository() {
+		String nome = "Peeter clarck";
+		String sobre = "Este é um ator muito bom!";
+		
+		Ator ator = new Ator();
+		ator.setNome(nome);
+		ator.setSobre(sobre);
+		
+		Ator atorRecebido = new Ator();
+		
+		atorRecebido = atorRepositorio.save(ator);
+		
+		int idAtor = atorRecebido.getId();
+		
+		assertTrue(atorRepositorio.existsById(idAtor));
+	}
+	
+	@Test
+	public void updateAtorRepository() {
+		//ator atual
+		String nome = "Peeter clarck";
+		String sobre = "Este é um ator muito bom!";
+		
+		Ator ator = new Ator();
+		ator.setNome(nome);
+		ator.setSobre(sobre);
+		
+//		ator atualizado
+		String nomeNovo = "José Raimundo";
+		String sobreNovo = "Este é um ator muito arretado!";
+		
+		Ator atorAtualizado = new Ator();
+		
+		atorAtualizado = atorRepositorio.save(ator);
+		atorAtualizado.setNome(nomeNovo);
+		atorAtualizado.setSobre(sobreNovo);
+		
+		Ator atorAtualizadoRecebido = new Ator();
+		atorAtualizadoRecebido = atorRepositorio.getOne(atorAtualizado.getId());
+		
+		assertEquals(atorAtualizado.getId(), atorAtualizadoRecebido.getId());
+		assertEquals(atorAtualizado.getNome(), atorAtualizadoRecebido.getNome());
+//		assertTrue(atorRepositorio.existsById(atorAtualizado.getId()));
+	}
 	@Test
 	public void addAtorFilme() {
-		Ator ator = new Ator("GAJHGKGKAG", "Sobre teste");
-		Filme filme = new Filme("NGOAGOAQEQ", "sinopse teste", 180);
+		Ator ator = new Ator("atortesteeeeeeeeeeeeeeee", "Sobre teste");
+		Filme filme = new Filme("filmetesteeeeeeeeeeeee", "sinopse teste", 180);
 		
 		ator.addFilme(filme);
-		Filme filmeResponse = filmeRepositorio.save(filme);
+		Filme filmeRecebido = filmeRepositorio.save(filme);
 
-		assertNotNull(filmeResponse);		
+		assertNotNull(filmeRecebido);		
 	}
 	
 	@Test
 	public void removerAtorFilme() {//voltar depois para ver
-		Ator ator = atorRepositorio.getOne(2);
-		Filme filme = filmeRepositorio.getOne(2);
+		Ator ator = new Ator();
+		Filme filme = new Filme();
+		ator = atorRepositorio.getOne(11);
+		filme = filmeRepositorio.getOne(7);
 		
 		ator.removerFilme(filme);
-//		Filme filmeResponse = filmeRepositorio.save(filme);
-		Ator atorResponse = atorRepositorio.save(ator);
-
-//		assertNotNull(filmeResponse);		
+		
+		Filme filmeResponse = new Filme();
+		Ator atorResponse = new Ator();
+		
+		filmeResponse = filmeRepositorio.save(filme);
+		atorResponse = atorRepositorio.save(ator);
+		
+//		atorRepositorio.deleteFilmeAtores(atorResponse.getId(),filmeResponse.getId());
+		
+		assertNotNull(filmeResponse);		
 		assertNotNull(atorResponse);
 	}
-	
 }
+
+	

@@ -37,8 +37,11 @@ public class Filme {
 	           inverseJoinColumns = @JoinColumn(name = "ator_id", referencedColumnName = "id"))
 	private List<Ator> atores;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "filme")
-	@JsonManagedReference
+	@ManyToMany
+	(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "filme_diretores",
+			   joinColumns = @JoinColumn(name = "filme_id", referencedColumnName = "id"),
+			   inverseJoinColumns = @JoinColumn(name = "diretor_id", referencedColumnName = "id"))
  	private List<Diretor> diretores;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "filme")
