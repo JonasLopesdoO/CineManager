@@ -8,8 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -24,8 +27,8 @@ public class Filme {
 	private String sinopse;
 	private LocalTime duracao;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "filme")
-	@JsonManagedReference
+	@Autowired
+	@ManyToMany
 	private List<Ator> atores;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "filme")

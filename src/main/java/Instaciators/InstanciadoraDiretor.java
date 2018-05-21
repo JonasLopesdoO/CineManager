@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufc.vev.bean.Diretor;
-import br.ufc.vev.bean.Diretor;
-import br.ufc.vev.bean.Diretor;
 
 public class InstanciadoraDiretor {
 

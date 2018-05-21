@@ -1,6 +1,5 @@
 package br.ufc.vev.bean;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "diretor")
 public class Diretor{
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
@@ -19,6 +19,8 @@ public class Diretor{
 	
 	private String nome;
 	private String sobre;
+	
+	
 	
 	public Diretor(String nome, String sobre) {
 		this.setNome(nome);

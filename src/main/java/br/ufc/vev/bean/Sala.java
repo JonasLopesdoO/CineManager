@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +19,8 @@ public class Sala {
 //	private TipoSala tipo;
 	private int capacidade;
 	
+	@ManyToOne
+	private Cinema cinema;
 	
 	public Integer getId() {
 		return id;
@@ -74,6 +77,14 @@ public class Sala {
 			return true;
 		} else
 			return false;
+	}
+
+	public Cinema getCinema() {
+		return cinema;
+	}
+
+	public void setCinema(Cinema cinema) {
+		this.cinema = cinema;
 	}
 	
 }
