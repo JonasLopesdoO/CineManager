@@ -1,6 +1,7 @@
 package br.ufc.vev.bean;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,10 +28,13 @@ public class Filme {
 	private Integer id;
 	private String nome;
 	private String sinopse;
-	private LocalTime duracao;
+	private int duracao;
 	
-	@Autowired
 	@ManyToMany
+	(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "filme_atores",
+	           joinColumns = @JoinColumn(name = "filme_id", referencedColumnName = "id"),
+	           inverseJoinColumns = @JoinColumn(name = "ator_id", referencedColumnName = "id"))
 	private List<Ator> atores;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "filme")
@@ -39,13 +45,18 @@ public class Filme {
 	@JsonManagedReference
 	private List<Genero> generos;
 	
-	public Filme(String nome, String sinopse, LocalTime duracao, List<Ator> atores, List<Diretor> diretores, List<Genero> generos){
+	public Filme() {
+		
+	}
+	
+	
+	public Filme(String nome, String sinopse, int duracao){
 		this.setNome(nome);
 		this.setSinopse(sinopse);
 		this.setDuracao(duracao);
-		this.setAtores(atores);
-		this.setDiretores(diretores);
-		this.setGeneros(generos);
+		this.atores = new ArrayList<>();
+		this.diretores = new ArrayList<>();
+		this.generos = new ArrayList<>();
 	}
 	public Filme(Integer id) {
 		this.setId(id);
@@ -75,11 +86,11 @@ public class Filme {
 		this.sinopse = sinopse;
 	}
 
-	public LocalTime getDuracao() {
+	public int getDuracao() {
 		return duracao;
 	}
 
-	public void setDuracao(LocalTime duracao) {
+	public void setDuracao(int duracao) {
 		this.duracao = duracao;
 	}
 
@@ -112,4 +123,16 @@ public class Filme {
 		return "Filme [id=" + id + ", nome=" + nome + ", sinopse =" + sinopse + ", duração=" + duracao
 				+ ", atores=" + atores + ", diretores =" + diretores + ", generos =" + generos + "]";
 	}
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null || getClass() != obj.getClass()) return false;
+		
+		Filme filme = (Filme) obj;
+		
+		return id == filme.id;
+	}
+
 }

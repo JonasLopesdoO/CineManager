@@ -1,11 +1,13 @@
 package br.ufc.vev.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,27 +20,19 @@ public class Ator{
 	private String nome;
 	private String sobre;
 	
+	@ManyToMany(mappedBy = "atores")
+	private List<Filme> filmes;
+	
 	public Ator(String nome, String sobre) {
 		this.setNome(nome);
 		this.setSobre(sobre);
+		this.filmes = new ArrayList<>();
 	}
 	
 	public Ator() {
 		
 	}
-	
-	@ManyToOne
-	@JoinColumn(name="id" ,referencedColumnName="id", insertable=false, updatable=false)
-	Filme filme;
-
-	public Filme getFilme() {
-		return filme;
-	}
-
-	public void setFilme(Filme filme) {
-		this.filme = filme;
-	}
-	
+		
 	public Integer getId() {
 		return id;
 	}
@@ -57,4 +51,30 @@ public class Ator{
 	public void setSobre(String sobre) {
 		this.sobre = sobre;
 	}
+	
+	public List<Filme> getFilmes(){
+		return filmes;
+	}
+	
+	public boolean addFilme(Filme filme) {
+		this.filmes.add(filme);
+		return filme.getAtores().add(this);
+	}
+	
+	public boolean removerFilme(Filme filme) {
+		this.filmes.remove(filme);
+		return filme.getAtores().remove(this);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null || getClass() != obj.getClass()) return false;
+		
+		Ator ator = (Ator) obj;
+		
+		return id == ator.id;
+	}
+	
+	
 }
