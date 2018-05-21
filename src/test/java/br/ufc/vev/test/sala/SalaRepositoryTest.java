@@ -25,7 +25,10 @@ public class SalaRepositoryTest {
 		String nome = "Sala A1";
 		int capacidade = 150;
 		
-		Sala sala = new Sala(nome, capacidade);
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
+		
 		Sala salaRecebida = repository.save(sala);
 		
 		assertNotNull(salaRecebida);
@@ -36,7 +39,9 @@ public class SalaRepositoryTest {
 		String nome = "Sala A1";
 		int capacidade = 150;
 		
-		Sala sala = new Sala(nome, capacidade);
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
 		Sala salaRecebida = new Sala(); 
 		salaRecebida = repository.save(sala);
 		
@@ -51,12 +56,15 @@ public class SalaRepositoryTest {
 		int capacidade = 150;
 		
 		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
+		Sala salaRecebida = new Sala();
 		
-		sala =  repository.save(new Sala(nome, capacidade));
+		salaRecebida =  repository.save(sala);
 		
-		repository.delete(sala);
+		repository.delete(salaRecebida);
 		
-		assertFalse(repository.existsById(sala.getId()));
+		assertFalse(repository.existsById(salaRecebida.getId()));
 
 	}
 	
@@ -65,14 +73,17 @@ public class SalaRepositoryTest {
 		//Sala atual
 		String nome = "Sala A1";
 		int capacidade = 150;
-		Sala salaAtual = new Sala(nome, capacidade);
 		
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
+				
 		//Sala atualizada
 		String nomeUp = "Sala A2";
 		int capacidadeUp = 120;
 		Sala salaAtualizada = new Sala();
 		
-		salaAtualizada = repository.save(salaAtual);
+		salaAtualizada = repository.save(sala);
 		salaAtualizada.setNome(nomeUp);
 		salaAtualizada.setCapacidade(capacidadeUp);
 		

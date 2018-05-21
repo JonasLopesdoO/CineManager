@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Cinema {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
@@ -19,19 +20,14 @@ public class Cinema {
 	private String nome;
 	
 	@OneToMany
-	private List<Sala> salas;
+	List<Sala> salas;
 	
+	public Cinema() { }
+
 	public Integer getId() {
 		return id;
 	}
 	
-	public Cinema() {
-	}
-	
-	public Cinema(int id) {
-		this.id = id;
-	}
-
 	public String getCidade() {
 		return cidade;
 	}

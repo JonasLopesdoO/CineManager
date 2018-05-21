@@ -17,7 +17,9 @@ public class SalaController {
 	public Sala salvaSala(String nome, int capacidade) {
 		try {
 			if (this.validaSala(nome, capacidade)) {
-				Sala sala = new Sala(nome, capacidade);
+				Sala sala = new Sala();
+				sala.setNome(nome);
+				sala.setCapacidade(capacidade);
 				return service.salvarSala(sala);
 		 	}
 		} catch (Exception e) {

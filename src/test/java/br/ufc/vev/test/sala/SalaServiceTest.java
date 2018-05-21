@@ -25,7 +25,10 @@ public class SalaServiceTest {
 		String nome = "Sala A1";
 		int capacidade = 150;
 		
-		Sala sala = new Sala(nome, capacidade);
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
+		
 		Sala salaRecebida = service.salvarSala(sala);
 		
 		assertNotNull(salaRecebida);
@@ -36,7 +39,10 @@ public class SalaServiceTest {
 		String nome = "Sala A1";
 		int capacidade = 150;
 		
-		Sala sala = new Sala(nome, capacidade);
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
+		
 		Sala salaRecebida = new Sala(); 
 		salaRecebida = service.salvarSala(sala);
 	
@@ -49,12 +55,16 @@ public class SalaServiceTest {
 		int capacidade = 150;
 		
 		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
 		
-		sala =  service.salvarSala(new Sala(nome, capacidade));
+		Sala salaRecebida = new Sala();
 		
-		service.excluirSala(sala);
+		salaRecebida =  service.salvarSala(sala);
 		
-		assertThat(service.buscarSala(sala.getId()));
+		service.excluirSala(salaRecebida);
+		
+		assertThat(service.buscarSala(salaRecebida.getId()));
 
 	}
 	
@@ -63,14 +73,17 @@ public class SalaServiceTest {
 		//Sala atual
 		String nome = "Sala A1";
 		int capacidade = 150;
-		Sala salaAtual = new Sala(nome, capacidade);
+		
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
 		
 		//Sala atualizada
 		String nomeUp = "Sala A2";
 		int capacidadeUp = 120;
 		Sala salaAtualizada = new Sala();
 		
-		salaAtualizada = service.salvarSala(salaAtual);
+		salaAtualizada = service.salvarSala(sala);
 		salaAtualizada.setNome(nomeUp);
 		salaAtualizada.setCapacidade(capacidadeUp);
 		
@@ -83,8 +96,12 @@ public class SalaServiceTest {
 	public void getAllSalaServiceTest() {
 		String nome = "Sala A1";
 		int capacidade = 150;
-				
-		service.salvarSala(new Sala(nome, capacidade));
+		
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
+		
+		service.salvarSala(sala);
 				
 		assertTrue(service.getAllSala().size() >= 1);
 	}
