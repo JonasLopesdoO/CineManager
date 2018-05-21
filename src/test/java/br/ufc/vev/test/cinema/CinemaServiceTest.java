@@ -1,9 +1,7 @@
 package br.ufc.vev.test.cinema;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,22 +10,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.ufc.vev.bean.Cinema;
-import br.ufc.vev.repositorio.CinemaRepositorio;
+import br.ufc.vev.service.CinemaService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CinemaRepositoryTest {
+public class CinemaServiceTest {
+	
 	@Autowired
-	CinemaRepositorio cRepositorio;
+	private CinemaService service;
 	
 	@Test
-	public void salvaCinemaRepositoryTest() {
+	public void salvaCinemaServiceTest() {
 		Cinema cinema = new Cinema();
 		cinema.setCidade("Quixada");
 		cinema.setEndereco("Rua A, Planalto Universitario");
 		cinema.setNome("Cine o bom vizinho");		
 		
-		assertNotNull(cRepositorio.save(cinema));
+		assertNotNull(service.adicionaCinema(cinema));
 	}
 	
 	@Test 
@@ -39,9 +38,9 @@ public class CinemaRepositoryTest {
 		
 		Cinema cinemaBuscado = new Cinema();
 		
-		cinemaBuscado = cRepositorio.save(cinema);
+		cinemaBuscado = service.adicionaCinema(cinema);
 		
-		assertTrue(cRepositorio.existsById(cinemaBuscado.getId()));
+		assertNotNull(service.buscaCinema(cinemaBuscado.getId()));
 	}
 	
 	@Test
@@ -52,13 +51,13 @@ public class CinemaRepositoryTest {
 		cinema.setNome("Cine o bom vizinho");
 		
 		Cinema cinemaUp = new Cinema();
-		cinemaUp = cRepositorio.save(cinema);
+		cinemaUp = service.adicionaCinema(cinema);
 		
 		cinemaUp.setCidade("Quixadá");
 		cinemaUp.setEndereco("Rua José de Queiroz Pessoa, 2500 - Planalto Universitário");
 		cinemaUp.setNome("Cine Bom Vizinho");
 		
-		assertThat(cRepositorio.save(cinemaUp));
+		assertThat(service.atualizaCinema(cinemaUp));
 	}
 	
 	@Test
@@ -69,10 +68,9 @@ public class CinemaRepositoryTest {
 		cinema.setNome("Cine in Jucás");
 		
 		Cinema cinemaDel = new Cinema();
-		cinemaDel = cRepositorio.save(cinema);
-		cRepositorio.delete(cinemaDel);
+		cinemaDel = service.adicionaCinema(cinema);
+		service.excluiCinema(cinemaDel);
 		
-		assertFalse(cRepositorio.existsById(cinemaDel.getId()));
+		assertNotNull(service.buscaCinema(cinemaDel.getId()));
 	}
-	
 }
