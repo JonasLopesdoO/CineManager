@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.ufc.vev.bean.Cinema;
 import br.ufc.vev.bean.Sala;
 import br.ufc.vev.repositorio.CinemaRepositorio;
+import br.ufc.vev.repositorio.SalaRepositorio;
 
 @Service
 public class CinemaService {
