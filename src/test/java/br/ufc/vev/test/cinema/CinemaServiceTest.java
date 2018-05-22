@@ -112,4 +112,26 @@ public class CinemaServiceTest {
 		assertTrue(service.vinculaSalaAoCinema(idCine, idSala));
 		
 	}
+	
+	@Test
+	public void desvinculaSalaDoCinemaServiceTest() {
+		Cinema cinema = new Cinema();
+		cinema.setCidade("Jucás");
+		cinema.setEndereco("Travessa João Cavalcante, 2400 - Centro");
+		cinema.setNome("Cine in Jucás");
+		
+		Integer idCine = service.adicionaCinema(cinema).getId();
+		
+		String nome = "Sala A1";
+		int capacidade = 150;
+		
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
+		
+		Integer idSala = salaService.salvarSala(sala).getId();
+
+		service.vinculaSalaAoCinema(idCine, idSala);
+		service.desvinculaSalaDoCinema(idCine, idSala);
+	}
 }

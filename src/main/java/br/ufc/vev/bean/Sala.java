@@ -1,9 +1,11 @@
 package br.ufc.vev.bean;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,7 +21,9 @@ public class Sala {
 //	private TipoSala tipo;
 	private int capacidade;
 	
-	@ManyToOne
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "cinema_id")
 	private Cinema cinema;
 		
 	public Sala() {

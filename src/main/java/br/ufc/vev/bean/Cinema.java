@@ -3,6 +3,7 @@ package br.ufc.vev.bean;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,10 +20,10 @@ public class Cinema {
 	private String endereco;
 	private String nome;
 	
-	@OneToMany
-	List<Sala> salas;
+	@OneToMany(fetch=FetchType.LAZY)
+	private List<Sala> salas;
 	
-	public Cinema() { }
+	public Cinema() { } 
 
 	public Integer getId() {
 		return id;

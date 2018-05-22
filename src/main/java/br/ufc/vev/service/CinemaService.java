@@ -2,14 +2,19 @@ package br.ufc.vev.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.Rollback;
 
 import br.ufc.vev.bean.Cinema;
 import br.ufc.vev.bean.Sala;
 import br.ufc.vev.repositorio.CinemaRepositorio;
 
 @Service
+@Transactional
+@Rollback(false)
 public class CinemaService {
 	@Autowired
 	CinemaRepositorio repositorio;
@@ -42,10 +47,6 @@ public class CinemaService {
 		Sala sala = salaService.buscarSala(idSala);
 		Cinema cinema = repositorio.getOne(idCine);
 		
-		System.out.println("Cinema: " +cinema.getNome());
-		System.out.println("Sala:   " +sala.getNome());
-		
-		
 		if (sala.equals(null) || cinema.equals(null)) {
 			return false;
 		} else {
@@ -55,5 +56,18 @@ public class CinemaService {
 			salaService.salvarSala(sala);
 			return true;
 		}
+	}
+	
+	public void desvinculaSalaDoCinema(int idCine, int idSala) {
+		Sala sala = salaService.buscarSala(idSala);
+		Cinema cinema = repositorio.getOne(idCine);
+		
+		if (!sala.equals(null) || !cinema.equals(null)) {
+			cinema.getSalas().remove(sala);
+			sala.setCinema(null);
+			
+			repositorio.save(cinema);
+			salaService.salvarSala(sala);
+		} 
 	}
 }
