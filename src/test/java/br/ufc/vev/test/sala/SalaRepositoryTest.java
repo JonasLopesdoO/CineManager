@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.ufc.vev.bean.Sala;
+import br.ufc.vev.bean.TipoSala;
 import br.ufc.vev.repositorio.SalaRepositorio;
 
 @RunWith(SpringRunner.class)
@@ -25,9 +26,11 @@ public class SalaRepositoryTest {
 		String nome = "Sala A1";
 		int capacidade = 150;
 		
+		
 		Sala sala = new Sala();
 		sala.setNome(nome);
 		sala.setCapacidade(capacidade);
+		sala.setTipo(TipoSala.D2);
 		
 		Sala salaRecebida = repository.save(sala);
 		
@@ -42,6 +45,8 @@ public class SalaRepositoryTest {
 		Sala sala = new Sala();
 		sala.setNome(nome);
 		sala.setCapacidade(capacidade);
+		sala.setTipo(TipoSala.D3);
+		
 		Sala salaRecebida = new Sala(); 
 		salaRecebida = repository.save(sala);
 		
@@ -58,6 +63,8 @@ public class SalaRepositoryTest {
 		Sala sala = new Sala();
 		sala.setNome(nome);
 		sala.setCapacidade(capacidade);
+		sala.setTipo(TipoSala.D2);
+		
 		Sala salaRecebida = new Sala();
 		
 		salaRecebida =  repository.save(sala);
@@ -74,18 +81,22 @@ public class SalaRepositoryTest {
 		String nome = "Sala A1";
 		int capacidade = 150;
 		
+		
 		Sala sala = new Sala();
 		sala.setNome(nome);
 		sala.setCapacidade(capacidade);
+		sala.setTipo(TipoSala.D3);
 				
 		//Sala atualizada
 		String nomeUp = "Sala A2";
 		int capacidadeUp = 120;
 		Sala salaAtualizada = new Sala();
 		
+		
 		salaAtualizada = repository.save(sala);
 		salaAtualizada.setNome(nomeUp);
 		salaAtualizada.setCapacidade(capacidadeUp);
+		salaAtualizada.setTipo(TipoSala.D2);
 		
 		repository.save(salaAtualizada);
 		

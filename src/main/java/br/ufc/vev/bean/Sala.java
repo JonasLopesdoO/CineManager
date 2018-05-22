@@ -18,7 +18,7 @@ public class Sala {
 	private Integer id;
 	
 	private String nome;
-//	private TipoSala tipo;
+	private TipoSala tipo;
 	private int capacidade;
 	
 	
@@ -42,13 +42,13 @@ public class Sala {
 		this.nome = nome;
 	}
 
-//	public TipoSala getTipo() {
-//		return tipo;
-//	}
-//
-//	public void setTipo(TipoSala tipo) {
-//		this.tipo = tipo;
-//	}
+	public TipoSala getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoSala tipo) {
+		this.tipo = tipo;
+	}
 
 	public int getCapacidade() {
 		return capacidade;
