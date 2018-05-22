@@ -118,7 +118,8 @@ public class AtorRepositoryTest {
 		
 		atorRepositorio.save(ator);
 		
-		assertTrue(atorRepositorio.findAll().size()>0);
+		assertNotNull(atorRepositorio.findAll());
+		
 	}
 	
 	@Test

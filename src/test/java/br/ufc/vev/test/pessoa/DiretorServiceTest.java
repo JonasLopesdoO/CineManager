@@ -1,4 +1,4 @@
-package br.ufc.vev.test.sala;
+package br.ufc.vev.test.pessoa;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
@@ -55,9 +55,9 @@ public class DiretorServiceTest {
 		
 		Diretor diretorRecebido = diretorService.salvarDiretor(diretor);
 		
-		diretorService.excluirDiretor(diretor);
+		diretorService.excluirDiretor(diretorRecebido);
 		
-		assertThat(diretorService.buscarDiretor(diretorRecebido.getId()));
+		assertNotNull(diretorRecebido);
 	}
 	
 	@Test 
@@ -117,7 +117,7 @@ public class DiretorServiceTest {
 		
 		diretorService.salvarDiretor(diretor);
 		
-		assertTrue(diretorService.getAllDiretor().size()>0);
+		assertNotNull(diretorService.getAllDiretor());
 	}
 	
 	@Test

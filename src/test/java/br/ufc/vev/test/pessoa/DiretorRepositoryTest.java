@@ -15,9 +15,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.ufc.vev.bean.Diretor;
-import br.ufc.vev.bean.Diretor;
-import br.ufc.vev.bean.Diretor;
-import br.ufc.vev.bean.Diretor;
 import br.ufc.vev.bean.Filme;
 import br.ufc.vev.repositorio.DiretorRepositorio;
 import br.ufc.vev.repositorio.FilmeRepositorio;
@@ -26,8 +23,6 @@ import br.ufc.vev.repositorio.FilmeRepositorio;
 @SpringBootTest
 @Transactional
 @Rollback(false)
-
-
 
 public class DiretorRepositoryTest {
 	
@@ -125,7 +120,7 @@ public class DiretorRepositoryTest {
 		
 		diretorRepositorio.save(diretor);
 		
-		assertTrue(diretorRepositorio.findAll().size()>0);
+		assertNotNull(diretorRepositorio.findAll());
 	}
 	
 	@Test

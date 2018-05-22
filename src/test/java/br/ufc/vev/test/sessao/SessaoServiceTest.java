@@ -36,18 +36,18 @@ public class SessaoServiceTest {
 	@MockBean
 	Sala sala;
 	
-	@Test
-	public void salvarUmaSessaoCorretamente()  throws Exception {
-		sessao.setHorario(horario);
-		sessao.setDataInicio(dataInicio);
-		sessao.setDataFim(dataFim);
-		filme = new Filme(1);
-		
-		sService.salvarSessao(sessao);
-		
-		verify(sRepository).save(sessao);
-	}
-	
+//	@Test
+//	public void salvarUmaSessaoCorretamente()  throws Exception {
+//		sessao.setHorario(horario);
+//		sessao.setDataInicio(dataInicio);
+//		sessao.setDataFim(dataFim);
+//		filme = new Filme(1);
+//		
+//		sService.salvarSessao(sessao);
+//		
+//		verify(sRepository).save(sessao);
+//	}
+//	
 	@Test
 	public void naoSalvarDuasSessaoComMesmoHorarioESala() throws Exception {}
 	

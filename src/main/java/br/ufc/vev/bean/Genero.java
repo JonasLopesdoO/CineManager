@@ -1,11 +1,13 @@
 package br.ufc.vev.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,12 +20,16 @@ public class Genero {
 	
 	private String nome;
 	
-	@ManyToOne
-	@JoinColumn(name="id_filme",referencedColumnName="id", insertable=false, updatable=false)
-	private Filme filme;
+	@ManyToMany(mappedBy = "generos")
+	private List<Filme> filmes;
 	
 	public Genero(String nome) {
 		this.setNome(nome);
+		this.filmes = new ArrayList<>();
+	}
+	
+	public Genero() {
+		
 	}
 
 	public Integer getId() {
@@ -42,12 +48,35 @@ public class Genero {
 		this.nome = nome;
 	}
 	
-	public Filme getFilme() {
-		return filme;
+	public List<Filme> getFilmes() {
+		return filmes;
 	}
 	
-	public void setFilme(Filme filme) {
-		this.filme = filme;
+	public boolean addFilme(Filme filme) {
+		this.filmes.add(filme);
+		return filme.getGeneros().add(this);
+	}
+	
+	public boolean removerFilme(Filme filme) {
+		this.filmes.remove(filme);
+		return filme.getGeneros().remove(this);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null || getClass() != obj.getClass()) return false;
+		
+		Genero genero = (Genero) obj;
+		
+		return id == genero.id;
 	}
 
+	@Override
+	public String toString() {
+		return "Genero [id=" + id + ", nome=" + nome + "]";
+	}
+	
+	
+	
 }

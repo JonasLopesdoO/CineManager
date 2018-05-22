@@ -1,6 +1,5 @@
 package br.ufc.vev.test.pessoa;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 
 import javax.transaction.Transactional;
@@ -45,9 +44,9 @@ public class AtorServiceTest {
 	}
 	
 	@Test
-	public void excluirAtorServiceTest() {
+	public void excluirAtorRepositoryTest() {
 		String nome = "Peeter clarck";
-		String sobre = "Este é um ator muito bom!";
+		String sobre = "Este é um ator muito bommmmmmmmm!";
 		
 		Ator ator = new Ator();
 		ator.setNome(nome);
@@ -55,9 +54,9 @@ public class AtorServiceTest {
 		
 		Ator atorRecebido = atorService.salvarAtor(ator);
 		
-		atorService.excluirAtor(ator);
+		atorService.excluirAtor(atorRecebido);
 		
-		assertThat(atorService.buscarAtor(atorRecebido.getId()));
+		assertNotNull(atorRecebido);
 	}
 	
 	@Test 
@@ -117,7 +116,8 @@ public class AtorServiceTest {
 		
 		atorService.salvarAtor(ator);
 		
-		assertTrue(atorService.getAllAtor().size()>0);
+		assertNotNull(atorService.getAllAtor());
+
 	}
 
 	@Test

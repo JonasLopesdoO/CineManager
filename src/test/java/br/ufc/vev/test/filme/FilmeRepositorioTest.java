@@ -1,9 +1,9 @@
 package br.ufc.vev.test.filme;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-
-import java.time.LocalTime;
-import java.util.List;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,14 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import Instaciators.InstanciadoraAtor;
-import Instaciators.InstanciadoraDiretor;
-import Instaciators.InstanciadoraGenero;
-import br.ufc.vev.bean.Ator;
-import br.ufc.vev.bean.Diretor;
 import br.ufc.vev.bean.Filme;
 import br.ufc.vev.bean.Genero;
 import br.ufc.vev.repositorio.FilmeRepositorio;
+import br.ufc.vev.repositorio.GeneroRepositorio;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,24 +23,128 @@ public class FilmeRepositorioTest {
 	@Autowired
 	FilmeRepositorio filmeRepositorio;
 	
-	@Test
-	public void salvarFilmeCorretamente() {
-//		String nome = "Interestelar";
-//		String sinopse = "As reservas naturais da Terra estão chegando ao fim e um grupo de astronautas"
-//						+ " recebe a missão de verificar possíveis planetas para receberem a população mundial, "
-//						+ "possibilitando a continuação da espécie.";
-//		LocalTime duracao = LocalTime.of(02, 39);
-//		List<Ator> atores = InstanciadoraAtor.getInstance().instanciaAtores();
-//		List<Diretor> diretores = InstanciadoraDiretor.getInstance().instanciaDiretores();
-//		List<Genero> generos = InstanciadoraGenero.getInstance().instanciaGenero();
-//		
-//		Filme filme = new Filme(nome, sinopse, duracao, atores, diretores, generos);
-//		
-//		Filme filmeRecebido = filmeRepositorio.save(filme);
-//		
-//		System.out.println(filmeRecebido);
-//		
-//		assertNotNull(filmeRecebido); 
+	@Autowired
+	GeneroRepositorio generoRepositorio;
+	
+	@Test 
+	public void salvarGeneroRepositoryTest() {
+		String nome = "Romance";
+		
+		Genero genero = new Genero();
+		genero.setNome(nome);
+		
+		Genero generoRecebido = generoRepositorio.save(genero);
+		
+		assertNotNull(generoRecebido);
 	}
+	
+//	@Test
+//	public void excluirGeneroRepositoryTest() {
+//		String nome = "Peeter clarck";
+//		String sobre = "Este é um genero muito bom!";
+//		
+//		Genero genero = new Genero();
+//		genero.setNome(nome);
+//		genero.setSobre(sobre);
+//		
+//		Genero generoRecebido = generoRepositorio.save(genero);
+//		
+//		generoRepositorio.delete(generoRecebido);
+//		
+//		assertFalse(generoRepositorio.existsById(generoRecebido.getId()));
+//	}
+//	
+//	@Test 
+//	public void buscarGeneroRepository() {
+//		String nome = "Peeter clarck";
+//		String sobre = "Este é um genero muito bom!";
+//		
+//		Genero genero = new Genero();
+//		genero.setNome(nome);
+//		genero.setSobre(sobre);
+//		
+//		Genero generoRecebido = new Genero();
+//		
+//		generoRecebido = generoRepositorio.save(genero);
+//		
+//		int idGenero = generoRecebido.getId();
+//		
+//		assertTrue(generoRepositorio.existsById(idGenero));
+//	}
+//	
+//	@Test
+//	public void updateGeneroRepository() {
+//		//genero atual
+//		String nome = "Peeter clarck";
+//		String sobre = "Este é um genero muito bom!";
+//		
+//		Genero genero = new Genero();
+//		genero.setNome(nome);
+//		genero.setSobre(sobre);
+//		
+////		genero atualizado
+//		String nomeNovo = "José Raimundo";
+//		String sobreNovo = "Este é um genero muito arretado!";
+//		
+//		Genero generoAtualizado = new Genero();
+//		
+//		generoAtualizado = generoRepositorio.save(genero);
+//		generoAtualizado.setNome(nomeNovo);
+//		generoAtualizado.setSobre(sobreNovo);
+//		
+//		Genero generoAtualizadoRecebido = new Genero();
+//		generoAtualizadoRecebido = generoRepositorio.getOne(generoAtualizado.getId());
+//		
+//		assertEquals(generoAtualizado.getId(), generoAtualizadoRecebido.getId());
+//		assertEquals(generoAtualizado.getNome(), generoAtualizadoRecebido.getNome());
+////		assertTrue(generoRepositorio.existsById(generoAtualizado.getId()));
+//	}
+//	
+//	@Test
+//	public void buscaTodosGeneroRepository() {
+//		String nome = "Peeter clarck";
+//		String sobre = "Este é um genero muito bom!";
+//		
+//		Genero genero = new Genero();
+//		genero.setNome(nome);
+//		genero.setSobre(sobre);
+//		
+//		generoRepositorio.save(genero);
+//		
+//		assertTrue(generoRepositorio.findAll().size()>0);
+//	}
+//	
+//	@Test
+//	public void addGeneroFilme() {
+//		Genero genero = new Genero("generotesteeeeeeeeeeeeeeee", "Sobre teste");
+//		Filme filme = new Filme("filmetesteeeeeeeeeeeee", "sinopse teste", 180);
+//		
+//		genero.addFilme(filme);
+//		Filme filmeRecebido = filmeRepositorio.save(filme);
+//
+//		assertNotNull(filmeRecebido);		
+//	}
+//	
+//	@Test
+//	public void removerGeneroFilme() {//voltar depois para ver
+//		Genero genero = new Genero();
+//		Filme filme = new Filme();
+//		genero = generoRepositorio.getOne(11);
+//		filme = filmeRepositorio.getOne(7);
+//		
+//		genero.removerFilme(filme);
+//		
+//		Filme filmeResponse = new Filme();
+//		Genero generoResponse = new Genero();
+//		
+//		filmeResponse = filmeRepositorio.save(filme);
+//		generoResponse = generoRepositorio.save(genero);
+//		
+////		generoRepositorio.deleteFilmegeneroes(generoResponse.getId(),filmeResponse.getId());
+//		
+//		assertNotNull(filmeResponse);		
+//		assertNotNull(generoResponse);
+//	}
+//	
 
 }

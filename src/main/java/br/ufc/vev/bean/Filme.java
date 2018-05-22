@@ -1,6 +1,5 @@
 package br.ufc.vev.bean;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "filme")
@@ -44,8 +39,11 @@ public class Filme {
 			   inverseJoinColumns = @JoinColumn(name = "diretor_id", referencedColumnName = "id"))
  	private List<Diretor> diretores;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "filme")
-	@JsonManagedReference
+	@ManyToMany
+	(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "filme_generos",
+			   joinColumns = @JoinColumn(name = "filme_id", referencedColumnName = "id"),
+			   inverseJoinColumns = @JoinColumn(name = "genero_id", referencedColumnName = "id"))
 	private List<Genero> generos;
 	
 	public Filme() {
@@ -60,9 +58,6 @@ public class Filme {
 		this.atores = new ArrayList<>();
 		this.diretores = new ArrayList<>();
 		this.generos = new ArrayList<>();
-	}
-	public Filme(Integer id) {
-		this.setId(id);
 	}
 
 	public Integer getId() {
