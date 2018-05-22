@@ -21,6 +21,7 @@ public class Filme {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nome;
 	private String sinopse;
 	private int duracao;

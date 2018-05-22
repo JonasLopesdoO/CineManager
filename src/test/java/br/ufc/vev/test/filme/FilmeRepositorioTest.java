@@ -1,6 +1,6 @@
 package br.ufc.vev.test.filme;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -12,139 +12,73 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.ufc.vev.bean.Filme;
-import br.ufc.vev.bean.Genero;
 import br.ufc.vev.repositorio.FilmeRepositorio;
-import br.ufc.vev.repositorio.GeneroRepositorio;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class FilmeRepositorioTest {
 	
 	@Autowired
-	FilmeRepositorio filmeRepositorio;
+	FilmeRepositorio repositorio;
 	
-	@Autowired
-	GeneroRepositorio generoRepositorio;
-	
-	@Test 
-	public void salvarGeneroRepositoryTest() {
-		String nome = "Romance";
+	@Test
+	public void salvaFilmeRepositoryTest() {
+		Filme Filme = new Filme();
+		Filme.setNome("DeadPool");
+		Filme.setSinopse("Filme Top");;
+		Filme.setDuracao(90);		
 		
-		Genero genero = new Genero();
-		genero.setNome(nome);
-		
-		Genero generoRecebido = generoRepositorio.save(genero);
-		
-		assertNotNull(generoRecebido);
+		assertNotNull(repositorio.save(Filme));
 	}
 	
-//	@Test
-//	public void excluirGeneroRepositoryTest() {
-//		String nome = "Peeter clarck";
-//		String sobre = "Este é um genero muito bom!";
-//		
-//		Genero genero = new Genero();
-//		genero.setNome(nome);
-//		genero.setSobre(sobre);
-//		
-//		Genero generoRecebido = generoRepositorio.save(genero);
-//		
-//		generoRepositorio.delete(generoRecebido);
-//		
-//		assertFalse(generoRepositorio.existsById(generoRecebido.getId()));
-//	}
-//	
-//	@Test 
-//	public void buscarGeneroRepository() {
-//		String nome = "Peeter clarck";
-//		String sobre = "Este é um genero muito bom!";
-//		
-//		Genero genero = new Genero();
-//		genero.setNome(nome);
-//		genero.setSobre(sobre);
-//		
-//		Genero generoRecebido = new Genero();
-//		
-//		generoRecebido = generoRepositorio.save(genero);
-//		
-//		int idGenero = generoRecebido.getId();
-//		
-//		assertTrue(generoRepositorio.existsById(idGenero));
-//	}
-//	
-//	@Test
-//	public void updateGeneroRepository() {
-//		//genero atual
-//		String nome = "Peeter clarck";
-//		String sobre = "Este é um genero muito bom!";
-//		
-//		Genero genero = new Genero();
-//		genero.setNome(nome);
-//		genero.setSobre(sobre);
-//		
-////		genero atualizado
-//		String nomeNovo = "José Raimundo";
-//		String sobreNovo = "Este é um genero muito arretado!";
-//		
-//		Genero generoAtualizado = new Genero();
-//		
-//		generoAtualizado = generoRepositorio.save(genero);
-//		generoAtualizado.setNome(nomeNovo);
-//		generoAtualizado.setSobre(sobreNovo);
-//		
-//		Genero generoAtualizadoRecebido = new Genero();
-//		generoAtualizadoRecebido = generoRepositorio.getOne(generoAtualizado.getId());
-//		
-//		assertEquals(generoAtualizado.getId(), generoAtualizadoRecebido.getId());
-//		assertEquals(generoAtualizado.getNome(), generoAtualizadoRecebido.getNome());
-////		assertTrue(generoRepositorio.existsById(generoAtualizado.getId()));
-//	}
-//	
-//	@Test
-//	public void buscaTodosGeneroRepository() {
-//		String nome = "Peeter clarck";
-//		String sobre = "Este é um genero muito bom!";
-//		
-//		Genero genero = new Genero();
-//		genero.setNome(nome);
-//		genero.setSobre(sobre);
-//		
-//		generoRepositorio.save(genero);
-//		
-//		assertTrue(generoRepositorio.findAll().size()>0);
-//	}
-//	
-//	@Test
-//	public void addGeneroFilme() {
-//		Genero genero = new Genero("generotesteeeeeeeeeeeeeeee", "Sobre teste");
-//		Filme filme = new Filme("filmetesteeeeeeeeeeeee", "sinopse teste", 180);
-//		
-//		genero.addFilme(filme);
-//		Filme filmeRecebido = filmeRepositorio.save(filme);
-//
-//		assertNotNull(filmeRecebido);		
-//	}
-//	
-//	@Test
-//	public void removerGeneroFilme() {//voltar depois para ver
-//		Genero genero = new Genero();
-//		Filme filme = new Filme();
-//		genero = generoRepositorio.getOne(11);
-//		filme = filmeRepositorio.getOne(7);
-//		
-//		genero.removerFilme(filme);
-//		
-//		Filme filmeResponse = new Filme();
-//		Genero generoResponse = new Genero();
-//		
-//		filmeResponse = filmeRepositorio.save(filme);
-//		generoResponse = generoRepositorio.save(genero);
-//		
-////		generoRepositorio.deleteFilmegeneroes(generoResponse.getId(),filmeResponse.getId());
-//		
-//		assertNotNull(filmeResponse);		
-//		assertNotNull(generoResponse);
-//	}
-//	
+	@Test 
+	public void buscaFilmeRepositoryTest() {
+		Filme Filme = new Filme();
+		Filme.setNome("DeadPool");
+		Filme.setSinopse("Filme Top");;
+		Filme.setDuracao(90);		
+		
+		Filme FilmeBuscado = new Filme();
+		
+		FilmeBuscado = repositorio.save(Filme);
+		
+		assertTrue(repositorio.existsById(FilmeBuscado.getId()));
+	}
+	
+	@Test
+	public void atualizaFilmeRepositoryTest() {
+		Filme Filme = new Filme();
+		Filme.setNome("DeadPool");
+		Filme.setSinopse("Filme Top");;
+		Filme.setDuracao(90);		
+		
+		Filme FilmeUp = new Filme();
+		
+		FilmeUp = repositorio.save(Filme);
+		
+		FilmeUp.setNome("DeadPool 2");
+		FilmeUp.setSinopse("Filme Top 2");;
+		FilmeUp.setDuracao(100);		
+		
+		assertThat(repositorio.save(FilmeUp));
+	}
+	
+	@Test
+	public void excluiFilmeRepositoryTest() {
+		Filme Filme = new Filme();
+		Filme.setNome("DeadPool");
+		Filme.setSinopse("Filme Top");;
+		Filme.setDuracao(90);		
+		
+		Filme FilmeBuscado = new Filme();
+		
+		FilmeBuscado = repositorio.save(Filme);
+		repositorio.delete(FilmeBuscado);
+		
+		assertFalse(repositorio.existsById(FilmeBuscado.getId()));
+	}
+	
+
+	
 
 }

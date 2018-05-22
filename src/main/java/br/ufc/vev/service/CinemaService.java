@@ -11,7 +11,6 @@ import org.springframework.test.annotation.Rollback;
 import br.ufc.vev.bean.Cinema;
 import br.ufc.vev.bean.Sala;
 import br.ufc.vev.repositorio.CinemaRepositorio;
-import br.ufc.vev.repositorio.SalaRepositorio;
 
 @Service
 @Transactional
