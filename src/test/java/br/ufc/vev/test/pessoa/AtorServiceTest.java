@@ -1,9 +1,7 @@
 package br.ufc.vev.test.pessoa;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.*;
 
 import javax.transaction.Transactional;
 
@@ -16,37 +14,38 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import br.ufc.vev.bean.Ator;
 import br.ufc.vev.bean.Filme;
-import br.ufc.vev.repositorio.AtorRepositorio;
-import br.ufc.vev.repositorio.FilmeRepositorio;
+import br.ufc.vev.service.AtorService;
+import br.ufc.vev.service.FilmeService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
 @Rollback(false)
-public class AtorRepositoryTest {
-
-	@Autowired
-	AtorRepositorio atorRepositorio;
+public class AtorServiceTest {
 	
-	@Autowired
-	FilmeRepositorio filmeRepositorio;
+	@Autowired 
+	AtorService atorService;
 	
-	@Test 
-	public void salvarAtorRepositoryTest() {
-		String nome = "Peeter clarck";
-		String sobre = "Este é um ator muito bom!";
+	@Autowired 
+	FilmeService filmeService;
+	
+	@Test
+	public void adicionarAtorServiceTest() {
+		String nome = "José Amadeu";
+		String sobre = "Caba arretado";
 		
 		Ator ator = new Ator();
+		
 		ator.setNome(nome);
 		ator.setSobre(sobre);
 		
-		Ator atorRecebido = atorRepositorio.save(ator);
+		Ator atorRecebido = atorService.salvarAtor(ator);
 		
 		assertNotNull(atorRecebido);
 	}
 	
 	@Test
-	public void excluirAtorRepositoryTest() {
+	public void excluirAtorServiceTest() {
 		String nome = "Peeter clarck";
 		String sobre = "Este é um ator muito bom!";
 		
@@ -54,15 +53,15 @@ public class AtorRepositoryTest {
 		ator.setNome(nome);
 		ator.setSobre(sobre);
 		
-		Ator atorRecebido = atorRepositorio.save(ator);
+		Ator atorRecebido = atorService.salvarAtor(ator);
 		
-		atorRepositorio.delete(atorRecebido);
+		atorService.excluirAtor(ator);
 		
-		assertFalse(atorRepositorio.existsById(atorRecebido.getId()));
+		assertThat(atorService.buscarAtor(atorRecebido.getId()));
 	}
 	
 	@Test 
-	public void buscarAtorRepository() {
+	public void buscarAtorServiceTest() {
 		String nome = "Peeter clarck";
 		String sobre = "Este é um ator muito bom!";
 		
@@ -72,17 +71,17 @@ public class AtorRepositoryTest {
 		
 		Ator atorRecebido = new Ator();
 		
-		atorRecebido = atorRepositorio.save(ator);
+		atorRecebido = atorService.salvarAtor(ator);
 		
 		int idAtor = atorRecebido.getId();
 		
-		assertTrue(atorRepositorio.existsById(idAtor));
+		assertNotNull(atorService.buscarAtor(idAtor));
 	}
 	
 	@Test
 	public void updateAtorRepository() {
 		//ator atual
-		String nome = "Peeter clarck";
+		String nome = "Peeter clarckeeeeeerr";
 		String sobre = "Este é um ator muito bom!";
 		
 		Ator ator = new Ator();
@@ -95,12 +94,12 @@ public class AtorRepositoryTest {
 		
 		Ator atorAtualizado = new Ator();
 		
-		atorAtualizado = atorRepositorio.save(ator);
+		atorAtualizado = atorService.salvarAtor(ator);
 		atorAtualizado.setNome(nomeNovo);
 		atorAtualizado.setSobre(sobreNovo);
 		
 		Ator atorAtualizadoRecebido = new Ator();
-		atorAtualizadoRecebido = atorRepositorio.getOne(atorAtualizado.getId());
+		atorAtualizadoRecebido = atorService.atualizaAtor(atorAtualizado);
 		
 		assertEquals(atorAtualizado.getId(), atorAtualizadoRecebido.getId());
 		assertEquals(atorAtualizado.getNome(), atorAtualizadoRecebido.getNome());
@@ -116,18 +115,18 @@ public class AtorRepositoryTest {
 		ator.setNome(nome);
 		ator.setSobre(sobre);
 		
-		atorRepositorio.save(ator);
+		atorService.salvarAtor(ator);
 		
-		assertTrue(atorRepositorio.findAll().size()>0);
+		assertTrue(atorService.getAllAtor().size()>0);
 	}
-	
+
 	@Test
 	public void addAtorFilme() {
 		Ator ator = new Ator("atortesteeeeeeeeeeeeeeee", "Sobre teste");
 		Filme filme = new Filme("filmetesteeeeeeeeeeeee", "sinopse teste", 180);
 		
 		ator.addFilme(filme);
-		Filme filmeRecebido = filmeRepositorio.save(filme);
+		Filme filmeRecebido = filmeService.salvarFilme(filme);
 
 		assertNotNull(filmeRecebido);		
 	}
@@ -136,22 +135,21 @@ public class AtorRepositoryTest {
 	public void removerAtorFilme() {//voltar depois para ver
 		Ator ator = new Ator();
 		Filme filme = new Filme();
-		ator = atorRepositorio.getOne(11);
-		filme = filmeRepositorio.getOne(7);
+		ator = atorService.buscarAtor(20);
+		filme = filmeService.buscarFilme(9);
 		
 		ator.removerFilme(filme);
 		
 		Filme filmeResponse = new Filme();
 		Ator atorResponse = new Ator();
 		
-		filmeResponse = filmeRepositorio.save(filme);
-		atorResponse = atorRepositorio.save(ator);
+		filmeResponse = filmeService.salvarFilme(filme);
+		atorResponse = atorService.salvarAtor(ator);
 		
 //		atorRepositorio.deleteFilmeAtores(atorResponse.getId(),filmeResponse.getId());
 		
 		assertNotNull(filmeResponse);		
 		assertNotNull(atorResponse);
 	}
-}
 
-	
+}
