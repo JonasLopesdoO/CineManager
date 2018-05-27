@@ -157,4 +157,54 @@ public class FilmeController {
 		}
 	}
 
+	public boolean atorPertenceAoFilme(int idFilme, int idAtor) {
+		try {
+			if (validaId(idAtor) && validaId(idFilme)) {
+				Filme filme = new Filme();
+				filme = buscaFilme(idFilme);
+				for (int i = 0; i < filme.getAtores().size(); i++) {
+					if (filme.getAtores().get(i).getId() == idAtor) {
+						return true;
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return false;
+	}
+	
+	public boolean diretorPertenceAoFilme(int idFilme, int idDir) {
+		try {
+			if (validaId(idDir) && validaId(idFilme)) {
+				Filme filme = new Filme();
+				filme = buscaFilme(idFilme);
+				for (int i = 0; i < filme.getDiretores().size(); i++) {
+					if (filme.getDiretores().get(i).getId() == idDir) {
+						return true;
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return false;
+	}
+	
+	public boolean generoPertenceAoFilme(int idFilme, int idGen) {
+		try {
+			if (validaId(idGen) && validaId(idFilme)) {
+				Filme filme = new Filme();
+				filme = buscaFilme(idFilme);
+				for (int i = 0; i < filme.getGeneros().size(); i++) {
+					if (filme.getGeneros().get(i).getId() == idGen) {
+						return true;
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return false;
+	}
 }
