@@ -5,11 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import br.ufc.vev.bean.Filme;
 import br.ufc.vev.bean.Genero;
-import br.ufc.vev.service.FilmeService;
 import br.ufc.vev.service.GeneroService;
-import br.ufc.vev.service.SalaService;
 
 @Controller
 public class GeneroController {
