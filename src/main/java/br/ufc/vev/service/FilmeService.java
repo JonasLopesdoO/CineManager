@@ -58,6 +58,20 @@ public class FilmeService {
 		}
 	}
 	
+	public void desvinculaAtorDoFilme(int idFilme, int idAtor) {
+		Filme filme = buscarFilme(idFilme);
+		Ator ator = atorService.buscarAtor(idAtor);
+		
+		if (!filme.equals(null) || !ator.equals(null)) {
+			
+			filme.getAtores().remove(ator);
+			ator.getFilmes().remove(filme);
+			
+			repositorio.save(filme);
+			atorService.salvarAtor(ator);
+		} 
+	}
+	
 	public boolean vinculaDiretorAoFilme(int idFilme, int idDir) {
 		Filme filme = repositorio.getOne(idFilme);
 		Diretor diretor = diretorService.buscarDiretor(idDir);
@@ -71,6 +85,20 @@ public class FilmeService {
 			diretorService.salvarDiretor(diretor);
 			return true;
 		}
+	}
+	
+	public void desvinculaDiretorDoFilme(int idFilme, int idDir) {
+		Filme filme = buscarFilme(idFilme);
+		Diretor diretor = diretorService.buscarDiretor(idDir);
+		
+		if (!filme.equals(null) || !diretor.equals(null)) {
+			
+			filme.getDiretores().remove(diretor);
+			diretor.getFilmes().remove(filme);
+			
+			repositorio.save(filme);
+			diretorService.salvarDiretor(diretor);
+		} 
 	}
 	
 	public boolean vinculaGeneroAoFilme(int idFilme, int idGenero) {
@@ -87,5 +115,20 @@ public class FilmeService {
 			return true;
 		}
 	}
+	
+	public void desvinculaGeneroDoFilme(int idFilme, int idGen) {
+		Filme filme = buscarFilme(idFilme);
+		Genero genero = generoService.buscarGenero(idGen);
+		
+		if (!filme.equals(null) || !genero.equals(null)) {
+			
+			filme.getGeneros().remove(genero);
+			genero.getFilmes().remove(filme);
+			
+			repositorio.save(filme);
+			generoService.salvarGenero(genero);
+		} 
+	}
+	
 	
 }

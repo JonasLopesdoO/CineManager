@@ -105,6 +105,16 @@ public class FilmeController {
 		return false;
 	}
 	
+	public void desvinculaAtorDoFilme(int idFilme, int idAtor) {
+		try {
+			if (validaId(idFilme) && validaId(idAtor)) {
+				service.desvinculaAtorDoFilme(idFilme, idAtor);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public boolean vinculaDiretorAoFilme(int idFilme, int idDir) {
 		try {
 			if (validaId(idFilme) && validaId(idDir)) {
@@ -114,6 +124,16 @@ public class FilmeController {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public void desvinculaDiretorDoFilme(int idFilme, int idDir) {
+		try {
+			if (validaId(idFilme) && validaId(idDir)) {
+				service.desvinculaDiretorDoFilme(idFilme, idDir);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean vinculaGeneroAoFilme(int idFilme, int idGen) {
@@ -127,18 +147,14 @@ public class FilmeController {
 		return false;
 	}
 	
-	
-//	
-//	public void desvinculaSalaAoCinema(int idCine, int idSala) {
-//		try {
-//			if (validaId(idCine) && validaId(idSala)) {
-//				service.desvinculaSalaDoCinema(idCine, idSala);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
-	
-	
+	public void desvinculaGeneroDoFilme(int idFilme, int idGen) {
+		try {
+			if (validaId(idFilme) && validaId(idGen)) {
+				service.desvinculaGeneroDoFilme(idFilme, idGen);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
