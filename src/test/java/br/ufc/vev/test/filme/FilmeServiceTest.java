@@ -11,27 +11,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.ufc.vev.bean.Filme;
-import br.ufc.vev.repositorio.FilmeRepositorio;
+import br.ufc.vev.service.FilmeService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FilmeRepositorioTest {
-	
+public class FilmeServiceTest {
 	@Autowired
-	FilmeRepositorio repositorio;
+	private FilmeService service;
+	
 	
 	@Test
-	public void salvaFilmeRepositoryTest() {
+	public void salvaFilmeServiceTest() {
 		Filme Filme = new Filme();
 		Filme.setNome("DeadPool");
 		Filme.setSinopse("Filme Top");;
 		Filme.setDuracao(90);		
 		
-		assertNotNull(repositorio.save(Filme));
+		assertNotNull(service.salvarFilme(Filme));
 	}
 	
 	@Test 
-	public void buscaFilmeRepositoryTest() {
+	public void buscaFilmeServiceTest() {
 		Filme Filme = new Filme();
 		Filme.setNome("DeadPool");
 		Filme.setSinopse("Filme Top");;
@@ -39,13 +39,13 @@ public class FilmeRepositorioTest {
 		
 		Filme FilmeBuscado = new Filme();
 		
-		FilmeBuscado = repositorio.save(Filme);
+		FilmeBuscado = service.salvarFilme(Filme);
 		
-		assertTrue(repositorio.existsById(FilmeBuscado.getId()));
+		assertNotNull(service.buscarFilme(FilmeBuscado.getId()));
 	}
 	
 	@Test
-	public void atualizaFilmeRepositoryTest() {
+	public void atualizaFilmeServiceTest() {
 		Filme Filme = new Filme();
 		Filme.setNome("DeadPool");
 		Filme.setSinopse("Filme Top");;
@@ -53,31 +53,37 @@ public class FilmeRepositorioTest {
 		
 		Filme FilmeUp = new Filme();
 		
-		FilmeUp = repositorio.save(Filme);
+		FilmeUp = service.salvarFilme(Filme);
 		
 		FilmeUp.setNome("DeadPool 2");
 		FilmeUp.setSinopse("Filme Top 2");;
 		FilmeUp.setDuracao(100);		
 		
-		assertThat(repositorio.save(FilmeUp));
+		assertThat(service.atualizaFilme(FilmeUp));
 	}
 	
 	@Test
-	public void excluiFilmeRepositoryTest() {
+	public void excluiFilmeServiceTest() {
 		Filme Filme = new Filme();
-		Filme.setNome("DeadPool 2");
+		Filme.setNome("DeadPool");
 		Filme.setSinopse("Filme Top");;
 		Filme.setDuracao(90);		
 		
 		Filme FilmeBuscado = new Filme();
 		
-		FilmeBuscado = repositorio.save(Filme);
-		repositorio.delete(FilmeBuscado);
-		
-		assertNotNull(repositorio.existsById(FilmeBuscado.getId()));
+		FilmeBuscado = service.salvarFilme(Filme);
+		service.excluirFilme(FilmeBuscado);		
 	}
 	
-	
-	
-
+	@Test
+	public void getAllFilmeRepositoryTest() {
+		Filme Filme = new Filme();
+		Filme.setNome("DeadPool 2");
+		Filme.setSinopse("Filme Top");;
+		Filme.setDuracao(90);		
+		
+		service.salvarFilme(Filme);
+		
+		assertTrue(service.getAllFilme().size() >= 1);
+	}
 }
