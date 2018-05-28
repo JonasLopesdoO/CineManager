@@ -33,7 +33,7 @@ public class FilmeControllerTest {
 	GeneroController generoController;
 	
 	@Test
-	public void salvaFilmeRepositoryTest() {
+	public void salvaFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;		
@@ -42,7 +42,7 @@ public class FilmeControllerTest {
 	}
 	
 	@Test 
-	public void buscaFilmeRepositoryTest() {
+	public void buscaFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;		
@@ -55,7 +55,7 @@ public class FilmeControllerTest {
 	}
 	
 	@Test
-	public void atualizaFilmeRepositoryTest() {
+	public void atualizaFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;		
@@ -71,7 +71,7 @@ public class FilmeControllerTest {
 	}
 	
 	@Test
-	public void excluiFilmeRepositoryTest() {
+	public void excluiFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;		
@@ -84,7 +84,7 @@ public class FilmeControllerTest {
 	}
 	
 	@Test
-	public void vinculaAtorAoFilme() {
+	public void vinculaAtorAoFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;

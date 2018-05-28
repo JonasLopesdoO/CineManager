@@ -3,13 +3,18 @@ package br.ufc.vev.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.Rollback;
 
 import br.ufc.vev.bean.Sessao;
 import br.ufc.vev.repositorio.SessaoRepositorio;
 
 @Service
+@Transactional
+@Rollback(false)
 public class SessaoService {
 	
 	@Autowired

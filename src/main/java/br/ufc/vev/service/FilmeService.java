@@ -2,8 +2,11 @@ package br.ufc.vev.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.Rollback;
 
 import br.ufc.vev.bean.Ator;
 import br.ufc.vev.bean.Diretor;
@@ -12,6 +15,8 @@ import br.ufc.vev.bean.Genero;
 import br.ufc.vev.repositorio.FilmeRepositorio;
 
 @Service
+@Transactional
+@Rollback(false)
 public class FilmeService {
 	@Autowired
 	FilmeRepositorio repositorio;
