@@ -3,11 +3,14 @@ package br.ufc.vev.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import br.ufc.vev.bean.Filme;
 import br.ufc.vev.service.FilmeService;
 
+@Controller
 public class FilmeController {
+	
 	@Autowired
 	FilmeService service;
 	@Autowired
