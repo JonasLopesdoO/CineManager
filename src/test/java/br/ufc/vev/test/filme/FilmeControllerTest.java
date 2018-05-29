@@ -1,6 +1,5 @@
 package br.ufc.vev.test.filme;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -66,7 +65,7 @@ public class FilmeControllerTest {
 		String sinopse = "";
 		int duracao = 90;		
 		
-		assertNotNull(filmeController.salvaFilme(nome, sinopse, duracao));
+		assertNull(filmeController.salvaFilme(nome, sinopse, duracao));
 	}
 	
 	@Test
@@ -75,7 +74,7 @@ public class FilmeControllerTest {
 		String sinopse = null;
 		int duracao = 90;		
 		
-		assertNotNull(filmeController.salvaFilme(nome, sinopse, duracao));
+		assertNull(filmeController.salvaFilme(nome, sinopse, duracao));
 	}
 	
 	@Test
@@ -84,7 +83,7 @@ public class FilmeControllerTest {
 		String sinopse = "Filme Top";
 		int duracao = -1;		
 		
-		assertNotNull(filmeController.salvaFilme(nome, sinopse, duracao));
+		assertNull(filmeController.salvaFilme(nome, sinopse, duracao));
 	}
 	
 	@Test
@@ -93,7 +92,7 @@ public class FilmeControllerTest {
 		String sinopse = "Filme Top";
 		int duracao = 0;		
 		
-		assertNotNull(filmeController.salvaFilme(nome, sinopse, duracao));
+		assertNull(filmeController.salvaFilme(nome, sinopse, duracao));
 	}
 	
 	@Test 
@@ -234,7 +233,7 @@ public class FilmeControllerTest {
 	}
 	
 	@Test
-	public void desvinculaAtorDeFilme() {
+	public void desvinculaAtorDeFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;
@@ -256,7 +255,7 @@ public class FilmeControllerTest {
 	}
 	
 	@Test
-	public void vinculaDiretorAoFilme() {
+	public void vinculaDiretorAoFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;
@@ -278,7 +277,7 @@ public class FilmeControllerTest {
 	}
 	
 	@Test
-	public void desvinculaDiretorDeFilme() {
+	public void desvinculaDiretorDeFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;
@@ -301,7 +300,7 @@ public class FilmeControllerTest {
 	}
 	
 	@Test
-	public void vinculaGeneroAoFilme() {
+	public void vinculaGeneroAoFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;
@@ -319,7 +318,7 @@ public class FilmeControllerTest {
 	}
 	
 	@Test
-	public void desvinculaGeneroDeFilme() {
+	public void desvinculaGeneroDeFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;

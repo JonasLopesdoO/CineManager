@@ -26,6 +26,10 @@ public class GeneroService {
 	public Genero buscarGenero(Integer id) {
 		return generoRepositorio.getOne(id);
 	}
+	
+	public boolean buscaGenero(Integer id) {
+		return generoRepositorio.existsById(id);
+	}
 
 	public void excluirGenero(Genero genero) {
 		generoRepositorio.delete(genero);

@@ -66,7 +66,7 @@ public class GeneroController {
 
 	public Genero buscaGenero(int id) {
 		try {
-			if (validaIdGenero(id)) {
+			if (validaIdGenero(id) && existByIdGenero(id)) {
 				return generoService.buscarGenero(id);
 			}
 		} catch (Exception e) {
@@ -77,7 +77,7 @@ public class GeneroController {
 
 	public boolean excluiGenero(int id) {
 		try {
-			if (validaIdGenero(id)) {
+			if (validaIdGenero(id) && existByIdGenero(id)) {
 				generoService.excluirGenero((generoService.buscarGenero(id)));
 				return true;
 			}
@@ -93,7 +93,7 @@ public class GeneroController {
 
 	public boolean atualizaGenero(Genero genero) {
 		try {
-			if (buscaGenero(genero.getId()) != null && 
+			if (existByIdGenero(genero.getId()) && 
 					validaGenero(genero.getNome()) &&
 					validaIdGenero(genero.getId())) {
 				generoService.atualizaGenero(genero);
@@ -111,7 +111,14 @@ public class GeneroController {
 			throw new Exception("Nome não pode ser vazio");
 		} else if (nome.equals(null)) {
 			throw new Exception("Nome não pode ser nulo");
+		} 
+		for (Genero genero : getAllGenero()) {
+			// Verifica se existe um genero de mesmo nome no banco de dados
+			if (genero.getNome().equals(nome)) {
+				return false;
+			}
 		}
+		
 		return true;
 	}
 	
@@ -120,17 +127,16 @@ public class GeneroController {
 			throw new Exception("Erro, ID deve ser maior que zero");
 		} else if (id < 0) {
 			throw new Exception("Erro, ID não pode ser negativo");
-		}
+		} 
 		return true;
 	}
 	
-//	public boolean vincularGeneroAoFilme(Genero genero, Filme filme) {
-//		try {
-//			
-//		}catch(Exception e) {
-//			e.printStackTrace(e);
-//		}
-//	}
-
-
+	public boolean existByIdGenero(int id) {
+		if (generoService.buscaGenero(id)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 }
