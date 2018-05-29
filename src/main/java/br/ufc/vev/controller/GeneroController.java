@@ -37,33 +37,28 @@ public class GeneroController {
 		return null;
 	}
 	
-	
+	@SuppressWarnings("finally")
 	@RequestMapping(path="/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaGenero(@RequestParam String nomeGenero) {
+		ModelAndView model = new ModelAndView("genero");
+		
 		try {
-			if (this.validaGenero(nomeGenero)) {
-				ModelAndView model = new ModelAndView("genero");
-				
+			if (this.validaGenero(nomeGenero)) { // adiciona um genero novo
 				Genero genero = new Genero();
 				genero.setNome(nomeGenero);
 				
 				Genero generoRetorno = generoService.salvarGenero(genero);
 				
 				model.addObject("generoRetorno", generoRetorno);
-				
-				List<Genero> generos = generoService.getAllGenero();
-				
-				model.addObject("generos", generos);
-				
-				return model;
-				
 		 	}
-		} catch (Exception e) {
+		} catch (Exception e) { 	// caso de erro 
 			e.printStackTrace();
+		} finally { // sempre será execultado
+			List<Genero> generos = generoService.getAllGenero();
+			model.addObject("generos", generos);
+			return model;
 		}
-		return null;
 	}
-	
 
 	public Genero buscaGenero(int id) {
 		try {
@@ -80,11 +75,10 @@ public class GeneroController {
 	@GetMapping("/excluir/{id}")
 	public ModelAndView excluiGenero(@PathVariable("id") Integer id) {
 		try {
-<<<<<<< HEAD
 			ModelAndView model = new ModelAndView("genero");
 			Genero genero = new Genero();
 			
-			if (validaIdGenero(id)) {
+			if (validaIdGenero(id) && existsByIdGenero(id)) {
 				genero = generoService.buscarGenero(id);
 				generoService.excluirGenero(genero);
 				
@@ -92,11 +86,6 @@ public class GeneroController {
 				model.addObject("generos", generos);
 				
 				return model;
-=======
-			if (validaIdGenero(id) && existsByIdGenero(id)) {
-				generoService.excluirGenero((generoService.buscarGenero(id)));
-				return true;
->>>>>>> d2936e2f68a2d0bb6e0de704d8e69e54f47f9aee
 			}
 			
 		} catch (Exception e) {
