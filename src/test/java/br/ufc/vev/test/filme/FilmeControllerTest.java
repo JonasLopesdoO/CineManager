@@ -5,10 +5,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.ufc.vev.bean.Ator;
@@ -23,6 +26,7 @@ import br.ufc.vev.controller.GeneroController;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class FilmeControllerTest {
+	
 	@Autowired
 	FilmeController filmeController;
 	@Autowired
@@ -208,7 +212,17 @@ public class FilmeControllerTest {
 		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
 		filmeController.excluiFilme(filmeBuscado.getId());
 		
-		assertNotNull(filmeController.buscaFilme(filmeBuscado.getId()));
+		assertFalse(filmeController.existsByIdFilme(filmeBuscado.getId()));
+	}
+	
+	@Test
+	public void excluiFilmePassandoIdZeroControllerTest() {
+		assertFalse(filmeController.excluiFilme(0));
+	}
+	
+	@Test
+	public void excluiFilmePassandoIdNegativoControllerTest() {
+		assertFalse(filmeController.excluiFilme(-2));
 	}
 	
 	@Test
@@ -233,7 +247,29 @@ public class FilmeControllerTest {
 	}
 	
 	@Test
-	public void desvinculaAtorDeFilmeControllerTest() {
+	public void vinculaAtorJaVinculadoAoFilmeControllerTest() {
+		String nome = "DeadPool";
+		String sinopse = "Filme Top";
+		int duracao = 90;
+		
+		Filme filmeBuscado = new Filme();
+		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
+		
+		String nomeAtor = "Ryan Reynolds";
+		String sobre = "ator canadense. Ele é conhecido por seus papeis em National "
+				+ "Lampoon's Van Wilder, Waiting..., The Amityville Horror, Just Friends, "
+				+ "Definitely, Maybe, The Proposal e Buried, bem como Wade Wilson/Deadpool "
+				+ "interpretando o papel do mercenário tagarela.";
+		Ator ator = new Ator();
+		ator = atorController.salvaAtor(nomeAtor, sobre);
+		
+		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), ator.getId()));
+		assertFalse(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), ator.getId()));
+		
+	}
+	
+	@Test
+	public void desvinculaAtorVinculadoAoFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;
@@ -255,6 +291,27 @@ public class FilmeControllerTest {
 	}
 	
 	@Test
+	public void desvinculaAtorNaoVinculadoAoFilmeControllerTest() {
+		String nome = "DeadPool";
+		String sinopse = "Filme Top";
+		int duracao = 90;
+		
+		Filme filmeBuscado = new Filme();
+		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
+		
+		String nomeAtor = "Ryan Reynolds";
+		String sobre = "ator canadense. Ele é conhecido por seus papeis em National "
+				+ "Lampoon's Van Wilder, Waiting..., The Amityville Horror, Just Friends, "
+				+ "Definitely, Maybe, The Proposal e Buried, bem como Wade Wilson/Deadpool "
+				+ "interpretando o papel do mercenário tagarela.";
+		Ator ator = new Ator();
+		ator = atorController.salvaAtor(nomeAtor, sobre);
+		
+		assertFalse(filmeController.desvinculaAtorDoFilme(filmeBuscado.getId(), ator.getId()));
+		
+	}
+	
+	@Test
 	public void vinculaDiretorAoFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
@@ -272,12 +329,12 @@ public class FilmeControllerTest {
 		Diretor diretor = new Diretor();
 		diretor = diretorController.salvaDiretor(nomeDir, sobre);
 		
-		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), diretor.getId()));
+		assertTrue(filmeController.vinculaDiretorAoFilme(filmeBuscado.getId(), diretor.getId()));
 		
 	}
 	
 	@Test
-	public void desvinculaDiretorDeFilmeControllerTest() {
+	public void vinculaDiretorJaVinculadoAoFilmeControllerTest() {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;
@@ -294,9 +351,54 @@ public class FilmeControllerTest {
 		Diretor diretor = new Diretor();
 		diretor = diretorController.salvaDiretor(nomeDir, sobre);
 		
-		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), diretor.getId()));
+		assertTrue(filmeController.vinculaDiretorAoFilme(filmeBuscado.getId(), diretor.getId()));
+		assertFalse(filmeController.vinculaDiretorAoFilme(filmeBuscado.getId(), diretor.getId()));
+		
+	}
+	
+	@Test
+	public void desvinculaDiretorVinculadoAoFilmeControllerTest() {
+		String nome = "DeadPool";
+		String sinopse = "Filme Top";
+		int duracao = 90;
+		
+		Filme filmeBuscado = new Filme();
+		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
+		
+		String nomeDir = "Tim Miller";
+		String sobre = "diretor de cinema e especialista em efeitos especiais americano."
+				+ " Tornou-se conhecido por dirigir o filme Deadpool, de 2016, sendo "
+				+ "também cofundador e diretor criativo da Blur Studio, uma empresa "
+				+ "especializada em efeitos especiais.";
+		
+		Diretor diretor = new Diretor();
+		diretor = diretorController.salvaDiretor(nomeDir, sobre);
+		
+		assertTrue(filmeController.vinculaDiretorAoFilme(filmeBuscado.getId(), diretor.getId()));
 		filmeController.desvinculaDiretorDoFilme(filmeBuscado.getId(), diretor.getId());
 		assertFalse(filmeController.diretorPertenceAoFilme(filmeBuscado.getId(), diretor.getId()));
+	}
+	
+	@Test
+	public void desvinculaDiretorNaoVinculadoAoFilmeControllerTest() {
+		String nome = "DeadPool";
+		String sinopse = "Filme Top";
+		int duracao = 90;
+		
+		Filme filmeBuscado = new Filme();
+		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
+		
+		String nomeDir = "Tim Miller";
+		String sobre = "diretor de cinema e especialista em efeitos especiais americano."
+				+ " Tornou-se conhecido por dirigir o filme Deadpool, de 2016, sendo "
+				+ "também cofundador e diretor criativo da Blur Studio, uma empresa "
+				+ "especializada em efeitos especiais.";
+		
+		Diretor diretor = new Diretor();
+		diretor = diretorController.salvaDiretor(nomeDir, sobre);
+		
+		assertFalse(filmeController.desvinculaDiretorDoFilme(filmeBuscado.getId(), diretor.getId()));
+		
 	}
 	
 	@Test

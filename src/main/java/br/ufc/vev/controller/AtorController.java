@@ -6,14 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import br.ufc.vev.bean.Ator;
-//import br.ufc.vev.bean.Filme;
 import br.ufc.vev.service.AtorService;
-//import br.ufc.vev.service.FilmeService;
+
 
 @Controller
 public class AtorController {
 	@Autowired
-	private AtorService atorService;
+	private AtorService service;
 	
 
 	public Ator salvaAtor(String nome, String sobre) {
@@ -22,7 +21,7 @@ public class AtorController {
 				Ator ator = new Ator();
 				ator.setNome(nome);
 				ator.setSobre(sobre);
-				return atorService.salvarAtor(ator);
+				return service.salvarAtor(ator);
 		 	}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,8 +54,8 @@ public class AtorController {
 
 	public Ator buscaAtor(int id) {
 		try {
-			if (validaId(id)) {
-				return atorService.buscarAtor(id);
+			if (validaId(id) && existsByIdAtor(id)) {
+				return service.buscarAtor(id);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,8 +65,8 @@ public class AtorController {
 
 	public boolean excluiAtor(int id) {
 		try {
-			if (validaId(id)) {
-				atorService.excluirAtor(atorService.buscarAtor(id));
+			if (validaId(id) && existsByIdAtor(id)) {
+				service.excluirAtor(service.buscarAtor(id));
 				return true;
 			}
 		} catch (Exception e) {
@@ -77,15 +76,15 @@ public class AtorController {
 	}
 
 	public List<Ator> getAllAtor() {		
-		return atorService.getAllAtor();
+		return service.getAllAtor();
 	}
 
 	public boolean atualizaAtor(Ator ator) {
 		try {
-			if (buscaAtor(ator.getId()) != null && 
+			if (existsByIdAtor(ator.getId()) && 
 					validaAtor(ator.getNome(), ator.getSobre()) &&
 					validaId(ator.getId())) {
-				atorService.atualizaAtor(ator);
+				service.atualizaAtor(ator);
 				return true;
 			}
 		} catch (Exception e) {
@@ -94,30 +93,7 @@ public class AtorController {
 		return false;
 	}
 	
-//	public boolean addFilme(Ator ator, Filme filme) {
-//		@Autowired
-//		private FilmeController filmeController;
-//		
-//		try {
-//			if (filmeController.validaFilme(filme) && validaAtor(ator.getNome() ator.getSobre()){
-//				return ator.addFilme(filme);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return false;
-//	}
-	
-//	public void removerFilme(Ator ator, Filme filme) {
-//		@Autowired
-//		private FilmeController filmeController;
-//		
-//		try {
-//			if (filmeController.validaFilme(filme) && validaId(filme.getId())) {
-//				ator.removerFilme(filme);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public boolean existsByIdAtor(int id) {
+		return service.buscaAtor(id);
+	}
 }

@@ -66,7 +66,7 @@ public class GeneroController {
 
 	public Genero buscaGenero(int id) {
 		try {
-			if (validaIdGenero(id) && existByIdGenero(id)) {
+			if (validaIdGenero(id) && existsByIdGenero(id)) {
 				return generoService.buscarGenero(id);
 			}
 		} catch (Exception e) {
@@ -77,7 +77,7 @@ public class GeneroController {
 
 	public boolean excluiGenero(int id) {
 		try {
-			if (validaIdGenero(id) && existByIdGenero(id)) {
+			if (validaIdGenero(id) && existsByIdGenero(id)) {
 				generoService.excluirGenero((generoService.buscarGenero(id)));
 				return true;
 			}
@@ -93,7 +93,7 @@ public class GeneroController {
 
 	public boolean atualizaGenero(Genero genero) {
 		try {
-			if (existByIdGenero(genero.getId()) && 
+			if (existsByIdGenero(genero.getId()) && 
 					validaGenero(genero.getNome()) &&
 					validaIdGenero(genero.getId())) {
 				generoService.atualizaGenero(genero);
@@ -131,12 +131,8 @@ public class GeneroController {
 		return true;
 	}
 	
-	public boolean existByIdGenero(int id) {
-		if (generoService.buscaGenero(id)) {
-			return true;
-		}
-		
-		return false;
+	public boolean existsByIdGenero(int id) {
+		return generoService.buscaGenero(id);
 	}
 	
 }

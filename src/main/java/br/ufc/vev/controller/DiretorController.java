@@ -93,31 +93,9 @@ public class DiretorController {
 		}
 		return false;
 	}
+
+	public boolean existsByIdDiretor(int id) {
+		return diretorService.buscaDiretor(id);
+	}
 	
-//	public boolean addFilme(Diretor ator, Filme filme) {
-//		@Autowired
-//		private FilmeController filmeController;
-//		
-//		try {
-//			if (filmeController.validaFilme(filme) && validaDiretor(ator.getNome() diretor.getSobre()){
-//				return diretor.addFilme(filme);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return false;
-//	}
-	
-//	public void removerFilme(Diretor ator, Filme filme) {
-//		@Autowired
-//		private FilmeController filmeController;
-//		
-//		try {
-//			if (filmeController.validaFilme(filme) && validaId(filme.getId())) {
-//				diretor.removerFilme(filme);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 }
