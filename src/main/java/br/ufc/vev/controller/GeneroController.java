@@ -38,13 +38,24 @@ public class GeneroController {
 	
 	
 	@RequestMapping(path="/salvar", method = RequestMethod.POST)
-	public Genero salvaGenero(@RequestParam String nomeGenero) {
+	public ModelAndView salvaGenero(@RequestParam String nomeGenero) {
 		try {
 			if (this.validaGenero(nomeGenero)) {
+				ModelAndView model = new ModelAndView("genero");
+				
 				Genero genero = new Genero();
 				genero.setNome(nomeGenero);
 				
-				return generoService.salvarGenero(genero);
+				Genero generoRetorno = generoService.salvarGenero(genero);
+				
+				model.addObject("generoRetorno", generoRetorno);
+				
+				List<Genero> generos = generoService.getAllGenero();
+				
+				model.addObject("generos", generos);
+				
+				return model;
+				
 		 	}
 		} catch (Exception e) {
 			e.printStackTrace();
