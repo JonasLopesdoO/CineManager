@@ -36,7 +36,7 @@ public class FilmeController {
 			throw new Exception("Nome não pode ser vazio");
 		} else if (nome.equals(null)) {
 			throw new Exception("Nome não pode ser nulo");
-		} else if (duracao == -1) {
+		} else if (duracao < 0) {
 			throw new Exception("Duração não pode ser negativa");
 		} else if (duracao == 0) {
 			throw new Exception("duração não pode ser zero");
@@ -84,17 +84,16 @@ public class FilmeController {
 		return service.getAllFilme();
 	}
 
-	public boolean atualizaFilme(Filme filme) {
+	public Filme atualizaFilme(Filme filme) {
 		try {
 			if (validaFilme(filme.getNome(), filme.getSinopse(), filme.getDuracao()) &&
 					validaId(filme.getId()) && buscaFilme(filme.getId()) != null) {
-				service.atualizaFilme(filme);
-				return true;
+				return service.atualizaFilme(filme);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return null;
 	}
 	
 	public boolean vinculaAtorAoFilme(int idFilme, int idAtor) {

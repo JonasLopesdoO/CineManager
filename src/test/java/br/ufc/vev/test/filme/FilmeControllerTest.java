@@ -3,6 +3,7 @@ package br.ufc.vev.test.filme;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -24,7 +25,7 @@ import br.ufc.vev.controller.GeneroController;
 @SpringBootTest
 public class FilmeControllerTest {
 	@Autowired
-	FilmeController controller;
+	FilmeController filmeController;
 	@Autowired
 	AtorController atorController;
 	@Autowired
@@ -38,7 +39,61 @@ public class FilmeControllerTest {
 		String sinopse = "Filme Top";
 		int duracao = 90;		
 		
-		assertNotNull(controller.salvaFilme(nome, sinopse, duracao));
+		assertNotNull(filmeController.salvaFilme(nome, sinopse, duracao));
+	}
+	
+	@Test
+	public void salvaFilmeComNomeVazioControllerTest() {
+		String nome = "";
+		String sinopse = "Filme Top";
+		int duracao = 90;		
+		
+		assertNull(filmeController.salvaFilme(nome, sinopse, duracao));
+	}
+	
+	@Test
+	public void salvaFilmeComNomeNuloControllerTest() {
+		String nome = null;
+		String sinopse = "Filme Top";
+		int duracao = 90;		
+		
+		assertNull(filmeController.salvaFilme(nome, sinopse, duracao));
+	}
+	
+	@Test
+	public void salvaFilmeComSinopseVaziaControllerTest() {
+		String nome = "DeadPool";
+		String sinopse = "";
+		int duracao = 90;		
+		
+		assertNotNull(filmeController.salvaFilme(nome, sinopse, duracao));
+	}
+	
+	@Test
+	public void salvaFilmeComSinopseNulaControllerTest() {
+		String nome = "DeadPool";
+		String sinopse = null;
+		int duracao = 90;		
+		
+		assertNotNull(filmeController.salvaFilme(nome, sinopse, duracao));
+	}
+	
+	@Test
+	public void salvaFilmeComDuracaoNegativaControllerTest() {
+		String nome = "DeadPool";
+		String sinopse = "Filme Top";
+		int duracao = -1;		
+		
+		assertNotNull(filmeController.salvaFilme(nome, sinopse, duracao));
+	}
+	
+	@Test
+	public void salvaFilmeComDuracaoZeroControllerTest() {
+		String nome = "DeadPool";
+		String sinopse = "Filme Top";
+		int duracao = 0;		
+		
+		assertNotNull(filmeController.salvaFilme(nome, sinopse, duracao));
 	}
 	
 	@Test 
@@ -49,9 +104,19 @@ public class FilmeControllerTest {
 		
 		Filme FilmeBuscado = new Filme();
 		
-		FilmeBuscado = controller.salvaFilme(nome, sinopse, duracao);
+		FilmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
 		
-		assertNotNull(controller.buscaFilme(FilmeBuscado.getId()));
+		assertNotNull(filmeController.buscaFilme(FilmeBuscado.getId()));
+	}
+	
+	@Test 
+	public void buscaFilmePassandoIdZeroControllerTest() {
+		assertNull(filmeController.buscaFilme(0));
+	}
+	
+	@Test 
+	public void buscaFilmePassandoIdNegativoControllerTest() {
+		assertNull(filmeController.buscaFilme(-1));
 	}
 	
 	@Test
@@ -61,13 +126,77 @@ public class FilmeControllerTest {
 		int duracao = 90;		
 		
 		Filme FilmeUp = new Filme();
-		FilmeUp = controller.salvaFilme(nome, sinopse, duracao);
+		FilmeUp = filmeController.salvaFilme(nome, sinopse, duracao);
 		
 		FilmeUp.setNome("DeadPool 2");
-		FilmeUp.setSinopse("Filme Top 2");;
+		FilmeUp.setSinopse("Filme Top 2");
 		FilmeUp.setDuracao(100);		
 		
-		assertThat(controller.atualizaFilme(FilmeUp));
+		assertNotNull(filmeController.atualizaFilme(FilmeUp));
+	}
+	
+	@Test
+	public void atualizaFilmeComNomeVazioControllerTest() {
+		String nome = "DeadPool";
+		String sinopse = "Filme Top";
+		int duracao = 90;		
+		
+		Filme FilmeUp = new Filme();
+		FilmeUp = filmeController.salvaFilme(nome, sinopse, duracao);
+		
+		FilmeUp.setNome("");
+		FilmeUp.setSinopse("Filme Top 2");
+		FilmeUp.setDuracao(100);		
+		
+		assertNull(filmeController.atualizaFilme(FilmeUp));
+	}
+	
+	@Test
+	public void atualizaFilmeComNomeNuloControllerTest() {
+		String nome = "DeadPool";
+		String sinopse = "Filme Top";
+		int duracao = 90;		
+		
+		Filme FilmeUp = new Filme();
+		FilmeUp = filmeController.salvaFilme(nome, sinopse, duracao);
+		
+		FilmeUp.setNome(null);
+		FilmeUp.setSinopse("Filme Top 2");
+		FilmeUp.setDuracao(100);		
+		
+		assertNull(filmeController.atualizaFilme(FilmeUp));
+	}
+	
+	@Test
+	public void atualizaFilmeComSinopseVazioControllerTest() {
+		String nome = "DeadPool";
+		String sinopse = "Filme Top";
+		int duracao = 90;		
+		
+		Filme FilmeUp = new Filme();
+		FilmeUp = filmeController.salvaFilme(nome, sinopse, duracao);
+		
+		FilmeUp.setNome("DeadPoll 2");
+		FilmeUp.setSinopse("");
+		FilmeUp.setDuracao(100);		
+		
+		assertNull(filmeController.atualizaFilme(FilmeUp));
+	}
+	
+	@Test
+	public void atualizaFilmeComSinopseNuloControllerTest() {
+		String nome = "DeadPool";
+		String sinopse = "Filme Top";
+		int duracao = 90;		
+		
+		Filme FilmeUp = new Filme();
+		FilmeUp = filmeController.salvaFilme(nome, sinopse, duracao);
+		
+		FilmeUp.setNome("DeadPool 2");
+		FilmeUp.setSinopse(null);
+		FilmeUp.setDuracao(100);		
+		
+		assertNull(filmeController.atualizaFilme(FilmeUp));
 	}
 	
 	@Test
@@ -77,10 +206,10 @@ public class FilmeControllerTest {
 		int duracao = 90;		
 		
 		Filme filmeBuscado = new Filme();
-		filmeBuscado = controller.salvaFilme(nome, sinopse, duracao);
-		controller.excluiFilme(filmeBuscado.getId());
+		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
+		filmeController.excluiFilme(filmeBuscado.getId());
 		
-		assertNotNull(controller.buscaFilme(filmeBuscado.getId()));
+		assertNotNull(filmeController.buscaFilme(filmeBuscado.getId()));
 	}
 	
 	@Test
@@ -90,7 +219,7 @@ public class FilmeControllerTest {
 		int duracao = 90;
 		
 		Filme filmeBuscado = new Filme();
-		filmeBuscado = controller.salvaFilme(nome, sinopse, duracao);
+		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
 		
 		String nomeAtor = "Ryan Reynolds";
 		String sobre = "ator canadense. Ele é conhecido por seus papeis em National "
@@ -100,7 +229,7 @@ public class FilmeControllerTest {
 		Ator ator = new Ator();
 		ator = atorController.salvaAtor(nomeAtor, sobre);
 		
-		assertTrue(controller.vinculaAtorAoFilme(filmeBuscado.getId(), ator.getId()));
+		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), ator.getId()));
 		
 	}
 	
@@ -111,7 +240,7 @@ public class FilmeControllerTest {
 		int duracao = 90;
 		
 		Filme filmeBuscado = new Filme();
-		filmeBuscado = controller.salvaFilme(nome, sinopse, duracao);
+		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
 		
 		String nomeAtor = "Ryan Reynolds";
 		String sobre = "ator canadense. Ele é conhecido por seus papeis em National "
@@ -121,9 +250,9 @@ public class FilmeControllerTest {
 		Ator ator = new Ator();
 		ator = atorController.salvaAtor(nomeAtor, sobre);
 		
-		assertTrue(controller.vinculaAtorAoFilme(filmeBuscado.getId(), ator.getId()));
-		controller.desvinculaAtorDoFilme(filmeBuscado.getId(), ator.getId());
-		assertFalse(controller.atorPertenceAoFilme(filmeBuscado.getId(), ator.getId()));
+		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), ator.getId()));
+		filmeController.desvinculaAtorDoFilme(filmeBuscado.getId(), ator.getId());
+		assertFalse(filmeController.atorPertenceAoFilme(filmeBuscado.getId(), ator.getId()));
 	}
 	
 	@Test
@@ -133,7 +262,7 @@ public class FilmeControllerTest {
 		int duracao = 90;
 		
 		Filme filmeBuscado = new Filme();
-		filmeBuscado = controller.salvaFilme(nome, sinopse, duracao);
+		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
 		
 		String nomeDir = "Tim Miller";
 		String sobre = "diretor de cinema e especialista em efeitos especiais americano."
@@ -144,7 +273,7 @@ public class FilmeControllerTest {
 		Diretor diretor = new Diretor();
 		diretor = diretorController.salvaDiretor(nomeDir, sobre);
 		
-		assertTrue(controller.vinculaAtorAoFilme(filmeBuscado.getId(), diretor.getId()));
+		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), diretor.getId()));
 		
 	}
 	
@@ -155,7 +284,7 @@ public class FilmeControllerTest {
 		int duracao = 90;
 		
 		Filme filmeBuscado = new Filme();
-		filmeBuscado = controller.salvaFilme(nome, sinopse, duracao);
+		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
 		
 		String nomeDir = "Tim Miller";
 		String sobre = "diretor de cinema e especialista em efeitos especiais americano."
@@ -166,9 +295,9 @@ public class FilmeControllerTest {
 		Diretor diretor = new Diretor();
 		diretor = diretorController.salvaDiretor(nomeDir, sobre);
 		
-		assertTrue(controller.vinculaAtorAoFilme(filmeBuscado.getId(), diretor.getId()));
-		controller.desvinculaDiretorDoFilme(filmeBuscado.getId(), diretor.getId());
-		assertFalse(controller.diretorPertenceAoFilme(filmeBuscado.getId(), diretor.getId()));
+		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), diretor.getId()));
+		filmeController.desvinculaDiretorDoFilme(filmeBuscado.getId(), diretor.getId());
+		assertFalse(filmeController.diretorPertenceAoFilme(filmeBuscado.getId(), diretor.getId()));
 	}
 	
 	@Test
@@ -178,14 +307,14 @@ public class FilmeControllerTest {
 		int duracao = 90;
 		
 		Filme filmeBuscado = new Filme();
-		filmeBuscado = controller.salvaFilme(nome, sinopse, duracao);
+		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
 		
 		String nomeGen = "Fantasia";
 		
 		Genero genero = new Genero();
 		genero = generoController.salvaGenero(nomeGen);
 		
-		assertTrue(controller.vinculaAtorAoFilme(filmeBuscado.getId(), genero.getId()));
+		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), genero.getId()));
 		
 	}
 	
@@ -196,16 +325,16 @@ public class FilmeControllerTest {
 		int duracao = 90;
 		
 		Filme filmeBuscado = new Filme();
-		filmeBuscado = controller.salvaFilme(nome, sinopse, duracao);
+		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
 		
 		String nomeGen = "Fantasia";
 		
 		Genero genero = new Genero();
 		genero = generoController.salvaGenero(nomeGen);
 		
-		assertTrue(controller.vinculaAtorAoFilme(filmeBuscado.getId(), genero.getId()));
-		controller.desvinculaGeneroDoFilme(filmeBuscado.getId(), genero.getId());
-		assertFalse(controller.generoPertenceAoFilme(filmeBuscado.getId(), genero.getId()));
+		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), genero.getId()));
+		filmeController.desvinculaGeneroDoFilme(filmeBuscado.getId(), genero.getId());
+		assertFalse(filmeController.generoPertenceAoFilme(filmeBuscado.getId(), genero.getId()));
 	}
 	
 }
