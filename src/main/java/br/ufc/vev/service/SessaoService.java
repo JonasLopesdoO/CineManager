@@ -24,14 +24,11 @@ public class SessaoService {
 	FilmeController filmeController;
 	*/
 	public Sessao salvarSessao(Sessao sessao) {
-		
 			return sessaoRepositorio.save(sessao);
 	}
 	
 	public Sessao atualizarSessao(Sessao sessao) {
-		
 		sessaoRepositorio.save(sessao);
-		
 		return sessao;
 	}
 
@@ -44,10 +41,8 @@ public class SessaoService {
 	}
 
 	public Sessao deletarSessao(Integer idSessao) {
-		
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		sessaoRepositorio.delete(sessao);
-		
 		return sessao; 
 	}
 
