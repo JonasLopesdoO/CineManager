@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	 <link href="css/bootstrap.min.css" rel="stylesheet">
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+	 		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	 <meta charset="utf-8">
+	 
+	<title>Gênero</title>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Cinema WEB</h1>
+			<h3 class = "header col s12 light">Gênero - PÁGINA PARA O GERENCIAMENTO DOS GÊNEROS DE FILMES</h3> 
+		</div>
+	</div>
+	
+	<div class="container">
+			
+			<div class = "row">
+				<form action="/genero/salvar" method="POST" class="col-sm-12 col-lg-12">
+					<div class = "row">
+						<fieldset>
+							<legend>Preencha os dados pedidos</legend>
+							<div class="form-group col-md-4">
+								<label for="genero">Nome do Gênero</label>
+								<input type="text" class="form-control" id="genero" name="genero" autofocus/>
+							</div>
+						</fieldset>
+					<!-- col-sm-12 -->
+					</div> 
+						<!-- row -->
+				</form>
+			</div>
+			<!-- row SALVAR SESSOES-->
+			<hr>
+			<div class = "row">
+				<div id="tabela" >
+				    <h3>Gêneros cadastrados</h3>
+			    	<table class="table table-hover">
+					   	 <thead>
+					      <tr>
+					        <th>ID</th>
+							<th>Nome</th>
+							<th>Excluir Gênero</th>
+					      </tr>
+					    </thead>
+					    
+					    <tbody>
+							<tr th:each="genero : ${generos}">
+								<td th:text="${genero.id}"></td>
+								<td th:text="${genero.nome}"></td>
+								<td><a class = "btn btn-outline-dark" role="button" th:href="@{${'/genero/excluir/'+genero.id}}"><b>X</a></td>
+							</tr>
+						</tbody>
+				  	</table>
+				</div>
+			</div>
+			<!-- row -->
+		</div>
+		<!-- container MOSTRAR SESSOES-->
+</body>
+</html>

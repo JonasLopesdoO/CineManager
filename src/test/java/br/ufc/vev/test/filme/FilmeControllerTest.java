@@ -183,7 +183,7 @@ public class FilmeControllerTest {
 		String nomeGen = "Fantasia";
 		
 		Genero genero = new Genero();
-		genero = generoController.salvaGernero(nomeGen);
+		genero = generoController.salvaGenero(nomeGen);
 		
 		assertTrue(controller.vinculaAtorAoFilme(filmeBuscado.getId(), genero.getId()));
 		
@@ -201,7 +201,7 @@ public class FilmeControllerTest {
 		String nomeGen = "Fantasia";
 		
 		Genero genero = new Genero();
-		genero = generoController.salvaGernero(nomeGen);
+		genero = generoController.salvaGenero(nomeGen);
 		
 		assertTrue(controller.vinculaAtorAoFilme(filmeBuscado.getId(), genero.getId()));
 		controller.desvinculaGeneroDoFilme(filmeBuscado.getId(), genero.getId());
