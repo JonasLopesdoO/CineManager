@@ -3,12 +3,15 @@ package br.ufc.vev.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "genero")
@@ -18,6 +21,8 @@ public class Genero {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column(nullable = false, length = 20)
+	@NotBlank(message = "Nome é uma informação obrigatória.")
 	private String nome;
 	
 	@ManyToMany(mappedBy = "generos")

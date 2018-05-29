@@ -56,7 +56,9 @@
 							<tr th:each="genero : ${generos}">
 								<td th:text="${genero.id}"></td>
 								<td th:text="${genero.nome}"></td>
-								<td><a class = "btn btn-outline-dark" role="button" th:href="@{${'/genero/excluir/'+genero.id}}"><b>X</a></td>
+								<td><a class = "btn btn-sm  btn-danger" role="button"  th:href="@{/genero/excluir/{id}(id=${genero.id})}" 
+									 th:method="delete" value="delete">X</a></td>
+								
 							</tr>
 						</tbody>
 				  	</table>

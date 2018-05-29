@@ -21,6 +21,7 @@ public class Sessao {
 	private Integer id;
 	
 	@NotNull
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataInicio;
 	@NotNull
 	private LocalDate dataFim;

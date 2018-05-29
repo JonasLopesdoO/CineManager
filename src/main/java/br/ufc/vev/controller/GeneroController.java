@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +29,6 @@ public class GeneroController {
 			List<Genero> generos = generoService.getAllGenero();
 			
 			model.addObject("generos", generos);
-			
 			return model;
 			
 		} catch (Exception e) {
@@ -75,16 +76,27 @@ public class GeneroController {
 		return null;
 	}
 
-	public boolean excluiGenero(int id) {
+//	@RequestMapping(path="/excluir", method = RequestMethod.DELETE)
+	@GetMapping("/excluir/{id}")
+	public ModelAndView excluiGenero(@PathVariable("id") Integer id) {
 		try {
+			ModelAndView model = new ModelAndView("genero");
+			Genero genero = new Genero();
+			
 			if (validaIdGenero(id)) {
-				generoService.excluirGenero((generoService.buscarGenero(id)));
-				return true;
+				genero = generoService.buscarGenero(id);
+				generoService.excluirGenero(genero);
+				
+				List<Genero> generos = generoService.getAllGenero();
+				model.addObject("generos", generos);
+				
+				return model;
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return null;
 	}
 
 	public List<Genero> getAllGenero() {		
