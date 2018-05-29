@@ -39,4 +39,8 @@ public class DiretorService {
 	public List<Diretor> getAllDiretor() {
 		return diretorRepositorio.findAll();
 	}
+
+	public boolean buscaDiretor(int id) {
+		return diretorRepositorio.existsById(id);
+	}
 }

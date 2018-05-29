@@ -27,6 +27,10 @@ public class AtorService {
 	public Ator buscarAtor(Integer id) {
 		return atorRepositorio.getOne(id);
 	}
+	
+	public boolean buscaAtor(Integer id) {
+		return atorRepositorio.existsById(id);
+	}
 
 	public void excluirAtor(Ator ator) {
 		atorRepositorio.delete(ator);

@@ -67,7 +67,7 @@ public class GeneroController {
 
 	public Genero buscaGenero(int id) {
 		try {
-			if (validaIdGenero(id)) {
+			if (validaIdGenero(id) && existsByIdGenero(id)) {
 				return generoService.buscarGenero(id);
 			}
 		} catch (Exception e) {
@@ -80,6 +80,7 @@ public class GeneroController {
 	@GetMapping("/excluir/{id}")
 	public ModelAndView excluiGenero(@PathVariable("id") Integer id) {
 		try {
+<<<<<<< HEAD
 			ModelAndView model = new ModelAndView("genero");
 			Genero genero = new Genero();
 			
@@ -91,6 +92,11 @@ public class GeneroController {
 				model.addObject("generos", generos);
 				
 				return model;
+=======
+			if (validaIdGenero(id) && existsByIdGenero(id)) {
+				generoService.excluirGenero((generoService.buscarGenero(id)));
+				return true;
+>>>>>>> d2936e2f68a2d0bb6e0de704d8e69e54f47f9aee
 			}
 			
 		} catch (Exception e) {
@@ -105,7 +111,7 @@ public class GeneroController {
 
 	public boolean atualizaGenero(Genero genero) {
 		try {
-			if (buscaGenero(genero.getId()) != null && 
+			if (existsByIdGenero(genero.getId()) && 
 					validaGenero(genero.getNome()) &&
 					validaIdGenero(genero.getId())) {
 				generoService.atualizaGenero(genero);
@@ -123,7 +129,14 @@ public class GeneroController {
 			throw new Exception("Nome não pode ser vazio");
 		} else if (nome.equals(null)) {
 			throw new Exception("Nome não pode ser nulo");
+		} 
+		for (Genero genero : getAllGenero()) {
+			// Verifica se existe um genero de mesmo nome no banco de dados
+			if (genero.getNome().equals(nome)) {
+				return false;
+			}
 		}
+		
 		return true;
 	}
 	
@@ -132,17 +145,12 @@ public class GeneroController {
 			throw new Exception("Erro, ID deve ser maior que zero");
 		} else if (id < 0) {
 			throw new Exception("Erro, ID não pode ser negativo");
-		}
+		} 
 		return true;
 	}
 	
-//	public boolean vincularGeneroAoFilme(Genero genero, Filme filme) {
-//		try {
-//			
-//		}catch(Exception e) {
-//			e.printStackTrace(e);
-//		}
-//	}
-
-
+	public boolean existsByIdGenero(int id) {
+		return generoService.buscaGenero(id);
+	}
+	
 }

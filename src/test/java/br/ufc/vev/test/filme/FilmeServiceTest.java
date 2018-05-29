@@ -76,7 +76,7 @@ public class FilmeServiceTest {
 	}
 	
 	@Test
-	public void getAllFilmeRepositoryTest() {
+	public void getAllFilmeServiceTest() {
 		Filme Filme = new Filme();
 		Filme.setNome("DeadPool 2");
 		Filme.setSinopse("Filme Top");;
