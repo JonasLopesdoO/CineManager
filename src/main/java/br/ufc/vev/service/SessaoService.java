@@ -1,6 +1,7 @@
 package br.ufc.vev.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.test.annotation.Rollback;
 
+import br.ufc.vev.bean.Genero;
 import br.ufc.vev.bean.Sessao;
 import br.ufc.vev.repositorio.SessaoRepositorio;
 
@@ -47,23 +49,45 @@ public class SessaoService {
 	}
 
 	public List<Sessao> getSessaoPorData(LocalDate dataInicial, LocalDate dataFinal) {
-	//	return sessaoRepositorio.findByStartDateBetween(dataInicial, dataFinal);
-		return null;
+		List<Sessao> s = new ArrayList<Sessao>();
+		for (Sessao sessao : getTodasSessoes()) {
+			if (sessao.getDataInicio().isBefore(dataInicial) && sessao.getDataFim().isAfter(dataFinal)) {
+				s.add(sessao);
+			}
+		}
+		return s;
 	}
 
 	public List<Sessao> getSessaoPorCidade(String cidade) {
-	//	return sessaoRepositorio.findByFirstNameCidade(cidade);
-		return null;
+		List<Sessao> s = new ArrayList<Sessao>();
+		for (Sessao sessao : getTodasSessoes()) {
+			if (sessao.getSala().getCinema().getCidade().equals(cidade)) {
+				s.add(sessao);
+			}
+		}
+		return s;
 	}
 
 	public List<Sessao> getSessaoPorFilme(String filme) {
-		//return sessaoRepositorio.findByFirstNameFilme(filme);
-		return null;
+		List<Sessao> s = new ArrayList<Sessao>();
+		for (Sessao sessao : getTodasSessoes()) {
+			if (sessao.getFilme().getNome().equals(filme)) {
+				s.add(sessao);
+			}
+		}
+		return s;
 	}
 
 	public List<Sessao> getSessaoPorGenero(String genero) {
-		//return sessaoRepositorio.findByFirstNameGenero(genero);
-		return null;
+		List<Sessao> s = new ArrayList<Sessao>();
+		for (Sessao sessao : getTodasSessoes()) {
+			for (Genero g : sessao.getFilme().getGeneros()) {
+				if (g.getNome().equals(genero)) {
+					s.add(sessao);
+				}
+			}
+		}
+		return s;
 	}
 	
 }
