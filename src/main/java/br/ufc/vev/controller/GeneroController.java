@@ -66,7 +66,7 @@ public class GeneroController {
 		ModelAndView model = new ModelAndView("genero");
 		
 		try {
-			if (this.validaIdGenero(id)) {
+			if(this.validaIdGenero(id)) {
 				if(existsByIdGenero(id)) {
 					Genero genero = new Genero();
 					
@@ -82,6 +82,8 @@ public class GeneroController {
 		} catch (Exception e) { 	// caso de erro 
 			e.printStackTrace();
 		} finally { // sempre será execultado
+			List<Genero> generos = generoService.getAllGenero();
+			model.addObject("generos", generos);
 			return model;
 		}
 	}

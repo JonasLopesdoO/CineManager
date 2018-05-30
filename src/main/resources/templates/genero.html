@@ -109,37 +109,54 @@
 									</div>
 
 									<div id="buscar" class="tab-pane fade">
-										<h3>Neste Menu você poderá buscar um gênero, passando
-											o ID, do gênero o qual você quer buscar.</h3>
-										<br>
-										<br>
-										<br>
+										<h3>Neste Menu você poderá buscar um gênero, passando o
+											ID, do gênero o qual você quer buscar.</h3>
+										<br> <br> <br>
 										<div class="row">
-												<div id="tabela">
-													<h3>Gênero</h3>
-													<table class="table table-hover">
-														<thead>
-															<tr>
-																<th>ID</th>
-																<th>Nome</th>
-																<th>Excluir Gênero</th>
-															</tr>
-														</thead>
+											<div id="tabela">
+												<form action="/genero/buscar{id}" method="POST"
+													class="col-sm-12 col-lg-12">
+													<div class="row">
 
-														<tbody>
-															<tr th:each="genero : ${generos}">
-																<td th:text="${genero.id}"></td>
-																<td th:text="${genero.nome}"></td>
-																<td><a class="btn btn-sm  btn-danger" role="button"
-																	th:href="@{/genero/excluir/{id}(id=${genero.id})}"
-																	th:method="delete" value="delete">X</a></td>
+														<fieldset>
+															<legend>Preencha os dados pedidos</legend>
+															<div class="form-group col-md-4">
+																<label for="genero">Nome do Gênero</label> <input
+																	type="text" placeholder="Nome do Genero"
+																	class="form-control" id="genero" name="nomeGenero"
+																	autofocus />
+															</div>
 
-															</tr>
-														</tbody>
-													</table>
-												</div>
+															<div class="form-group col-md-4">
+																<button type="submit" name="action"
+																	class="btn btn-success btn-lg btn-block">Buscar
+																	Gênero</button>
+															</div>
+														</fieldset>
+														<!-- col-sm-12 -->
+													</div>
+													<!-- row -->
+												</form>
+
+												<h3>Gênero</h3>
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th>ID</th>
+															<th>Nome</th>
+															<th>Excluir Gênero</th>
+														</tr>
+													</thead>
+
+													
+
+													<tbody>
+
+													</tbody>
+												</table>
 											</div>
-											<!-- row -->
+										</div>
+										<!-- row -->
 										<!-- container -->
 									</div>
 									<!-- tab-pane -->
