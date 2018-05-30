@@ -60,38 +60,53 @@ public class GeneroController {
 		}
 	}
 
-	public Genero buscaGenero(int id) {
+	@SuppressWarnings("finally")
+	@GetMapping("/buscar/{id}")
+	public ModelAndView buscaGenero(@PathVariable("id") Integer id) {
+		ModelAndView model = new ModelAndView("genero");
+		
 		try {
-			if (validaIdGenero(id) && existsByIdGenero(id)) {
-				return generoService.buscarGenero(id);
-			}
-		} catch (Exception e) {
+			if (this.validaIdGenero(id)) {
+				if(existsByIdGenero(id)) {
+					Genero genero = new Genero();
+					
+					genero = generoService.buscarGenero(id);
+					
+					model.addObject("generoRetorno", genero);
+				}else {
+					//mensagem de erro "id nao existente no banco"
+				}
+		 	}else {
+		 		//msg de id invalido
+		 	}
+		} catch (Exception e) { 	// caso de erro 
 			e.printStackTrace();
+		} finally { // sempre será execultado
+			return model;
 		}
-		return null;
 	}
 
 //	@RequestMapping(path="/excluir", method = RequestMethod.DELETE)
+	@SuppressWarnings("finally")
 	@GetMapping("/excluir/{id}")
 	public ModelAndView excluiGenero(@PathVariable("id") Integer id) {
+		ModelAndView model = new ModelAndView("genero");
 		try {
-			ModelAndView model = new ModelAndView("genero");
 			Genero genero = new Genero();
-			
-			if (validaIdGenero(id) && existsByIdGenero(id)) {
+			if (validaIdGenero(id) && existsByIdGenero(id)) { 
+				
 				genero = generoService.buscarGenero(id);
 				generoService.excluirGenero(genero);
-				
-				List<Genero> generos = generoService.getAllGenero();
-				model.addObject("generos", generos);
-				
-				return model;
-			}
+		 	}
 			
-		} catch (Exception e) {
+		} catch (Exception e) { 	// caso de erro 
 			e.printStackTrace();
+		} finally { // sempre será execultado
+			List<Genero> generos = generoService.getAllGenero();
+			model.addObject("generos", generos);
+			return model;
 		}
-		return null;
+		
 	}
 
 	public List<Genero> getAllGenero() {		
