@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Formulario</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+
+</head>
+<body>
+
+<form method="POST" action="/genero/atualizar" th:object="${genero}">
+<input type="hidden" th:field="*{id}">
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Nome</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" name="nome">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+
+<script src="/js/bootstrap.min.js">  </script>
+</body>
+</html>

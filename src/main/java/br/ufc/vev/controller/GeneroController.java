@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import br.ufc.vev.bean.Genero;
 import br.ufc.vev.service.GeneroService;
 
 @Controller
-@RequestMapping(path= "/genero/")
+@RequestMapping(path= "/genero")
 public class GeneroController {
 	
 	@Autowired
@@ -23,9 +24,8 @@ public class GeneroController {
 	
 	@RequestMapping(path="/")
 	public ModelAndView index() {
-		
+		ModelAndView model = new ModelAndView("genero");
 		try {
-			ModelAndView model = new ModelAndView("genero");
 			List<Genero> generos = generoService.getAllGenero();
 			
 			model.addObject("generos", generos);
@@ -34,7 +34,15 @@ public class GeneroController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return model;
+	}
+	
+	@RequestMapping("/formulario")
+	public ModelAndView formularioGenero() {
+		ModelAndView model = new ModelAndView("formulario");
+		model.addObject("genero", new Genero());
+		
+		return model;
 	}
 	
 	@SuppressWarnings("finally")
@@ -47,9 +55,8 @@ public class GeneroController {
 				Genero genero = new Genero();
 				genero.setNome(nomeGenero);
 				
-				Genero generoRetorno = generoService.salvarGenero(genero);
+				generoService.salvarGenero(genero);
 				
-				model.addObject("generoRetorno", generoRetorno);
 		 	}
 		} catch (Exception e) { 	// caso de erro 
 			e.printStackTrace();
@@ -61,10 +68,9 @@ public class GeneroController {
 	}
 
 	@SuppressWarnings("finally")
-	@GetMapping("/buscar/{id}")
-	public ModelAndView buscaGenero(@PathVariable("id") Integer id) {
+	@RequestMapping("/buscar/{id}")
+	public ModelAndView buscaGenero(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView("genero");
-		
 		try {
 			if(this.validaIdGenero(id)) {
 				if(existsByIdGenero(id)) {
@@ -88,7 +94,6 @@ public class GeneroController {
 		}
 	}
 
-//	@RequestMapping(path="/excluir", method = RequestMethod.DELETE)
 	@SuppressWarnings("finally")
 	@GetMapping("/excluir/{id}")
 	public ModelAndView excluiGenero(@PathVariable("id") Integer id) {
@@ -108,7 +113,6 @@ public class GeneroController {
 			model.addObject("generos", generos);
 			return model;
 		}
-		
 	}
 
 	public List<Genero> getAllGenero() {		
@@ -128,6 +132,17 @@ public class GeneroController {
 		}
 		return false;
 	}
+	
+//	@RequestMapping("/atualizar/{id}")
+//	public ModelAndView atualizarPessoa(@PathVariable Long id) {
+//		ModelAndView model = new ModelAndView("formulario");
+//		
+//		Pessoa pessoa = pessoaService.buscarPorId(id);
+//		
+//		model.addObject("pessoa",pessoa);
+//		
+//		return model;
+//	}
 	
 	public boolean validaGenero(String nome) throws Exception {
 		
@@ -158,5 +173,22 @@ public class GeneroController {
 	public boolean existsByIdGenero(int id) {
 		return generoService.buscaGenero(id);
 	}
+	
+//	@RequestMapping("/excluir/{id}")
+//	public ModelAndView excluirPessoa(@PathVariable Long id) {
+//		Pessoa pessoa = pessoaService.buscarPorId(id);
+//		ModelAndView mv = new ModelAndView("pagina-listagem");
+//		mv.addObject("pessoa", pessoa);
+//		return mv;
+//		
+//	}
+//	
+//<tr th:object="${pessoa}">
+//      <td th:text="${pessoa.id}">    </td>
+//      <td th:text="${pessoa.nome}">  </td>
+//      <td th:text="${pessoa.time}">  </td>
+//      <td> <a th:href="@{/pessoa/atualizar/{id}(id = ${pessoa.id})}"> <button type="button" class="btn btn-primary">Atualizar</button> </a> </td>
+//      <td> <a class="btn btn-danger" th:href="@{/pessoa/excluir/{id}(id = ${pessoa.id})}">  Excluir </a>
+//    </tr>
 	
 }
