@@ -10,14 +10,14 @@
 
 <meta charset="utf-8">
 
-<title>Gênero</title>
+<title>Diretor</title>
 </head>
 <body>
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Cinema WEB</h1>
-			<h3 style="color: darkgreen">Gênero - PÁGINA PARA O
-				GERENCIAMENTO DOS GÊNEROS DE FILMES</h3>
+			<h3 style="color: darkgreen">Diretores - PÁGINA PARA O
+				GERENCIAMENTO DOS DIRETORES DE FILMES</h3>
 		</div>
 	</div>
 
@@ -51,7 +51,7 @@
 		<!-- row -->
 
 		<div class="row">
-			<form action="/genero/salvar" th:object="${genero}" method="POST"
+			<form action="/diretor/salvar" th:object="${diretor}" method="POST"
 				class="col-sm-12 col-lg-12">
 				<br> <br> <br> <br> <br> <br>
 				<div class="row">
@@ -60,15 +60,21 @@
 
 						<legend>Preencha os dados pedidos</legend>
 						<div class="form-group col-md-4">
-							<label for="genero">Nome do Gênero</label> <input type="text"
-								placeholder="Nome do Genero" class="form-control" id="nome"
+							<label for="diretor">Nome do Diretor</label> <input type="text"
+								placeholder="Nome do diretor" class="form-control" id="nome"
 								name="nome" autofocus />
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label for="diretor">Sobre o Diretor</label> <input type="text"
+								placeholder="Sobre o diretor" class="form-control" id="sobre"
+								name="sobre" autofocus />
 						</div>
 
 						<div class="form-group col-md-4">
 							<button type="submit" name="action"
 								class="btn btn-success btn-lg btn-block">Adicionar
-								Gênero</button>
+								Diretor</button>
 						</div>
 					</fieldset>
 					<!-- col-sm-12 -->
@@ -80,26 +86,28 @@
 		<hr>
 		<div class="row">
 			<div id="tabela">
-				<h3>Gêneros cadastrados</h3>
+				<h3>Diretores cadastrados</h3>
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>ID</th>
 							<th>Nome</th>
+							<th>Sobre</th>
 							<th>Atualizar</th>
-							<th>Excluir Gênero</th>
+							<th>Excluir</th>
 						</tr>
 					</thead>
 
 					<tbody>
-						<tr th:each="genero : ${generos}">
-							<td th:text="${genero.id}"></td>
-							<td th:text="${genero.nome}"></td>
+						<tr th:each="diretor : ${diretores}">
+							<td th:text="${diretor.id}"></td>
+							<td th:text="${diretor.nome}"></td>
+							<td th:text="${diretor.sobre}"></td>
 							<td><a class="btn btn-primary"
-								th:href="@{/genero/atualizar/{id}(id = ${genero.id})}">Atualizar
+								th:href="@{/diretor/atualizar/{id}(id = ${diretor.id})}">Atualizar
 							</a></td>
 							<td><a class="btn btn-sm  btn-danger"
-								th:href="@{/genero/excluir/{id}(id=${genero.id})}">X</a></td>
+								th:href="@{/diretor/excluir/{id}(id=${diretor.id})}">X</a></td>
 
 						</tr>
 					</tbody>

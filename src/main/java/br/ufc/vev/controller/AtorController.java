@@ -4,29 +4,60 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import br.ufc.vev.bean.Ator;
 import br.ufc.vev.bean.Ator;
 import br.ufc.vev.service.AtorService;
 
 
 @Controller
+@RequestMapping(path= "/ator")
 public class AtorController {
-	@Autowired
-	private AtorService service;
 	
-
-	public Ator salvaAtor(String nome, String sobre) {
+	@Autowired
+	private AtorService atorService;
+	
+	@RequestMapping(path="/")
+	public ModelAndView index() {
+		ModelAndView model = new ModelAndView("ator");
 		try {
-			if (this.validaAtor(nome, sobre)) {
-				Ator ator = new Ator();
-				ator.setNome(nome);
-				ator.setSobre(sobre);
-				return service.salvarAtor(ator);
-		 	}
+			List<Ator> atores = getAllAtor();
+			
+			model.addObject("atores", atores);
+			return model;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return model;
+	}
+	
+	@RequestMapping("/formulario")
+	public ModelAndView formularioGenero() {
+		ModelAndView model = new ModelAndView("formulario-ator");
+		model.addObject("ator", new Ator());
+		
+		return model;
+	}
+
+	@SuppressWarnings("finally")
+	@RequestMapping(path="/salvar", method = RequestMethod.POST)
+	public ModelAndView salvaAtor(Ator ator) {
+		ModelAndView model = new ModelAndView("ator");
+		try {
+			if (this.validaAtor(ator.getNome(), ator.getSobre())) {
+				atorService.salvarAtor(ator);
+				model.addObject("atorRetorno", ator);
+		 	}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			return index();
+		}
 	}
 	
 	public boolean validaAtor(String nome, String sobre) throws Exception {
@@ -52,48 +83,74 @@ public class AtorController {
 		return true;
 	}
 
-	public Ator buscaAtor(int id) {
+	@SuppressWarnings("finally")
+	@RequestMapping("/buscar/{id}")
+	public ModelAndView buscaAtor(@PathVariable Integer id) {
+		ModelAndView model = new ModelAndView("ator");
 		try {
-			if (validaId(id) && existsByIdAtor(id)) {
-				return service.buscarAtor(id);
-			}
-		} catch (Exception e) {
+			if(this.validaId(id)) {
+				if(existsByIdAtor(id)) {
+					Ator ator = new Ator();
+					
+					ator = atorService.buscarAtor(id);
+					
+					model.addObject("atorRetorno", ator);
+				}else {
+					//mensagem de erro "id nao existente no banco"
+				}
+		 	}else {
+		 		//msg de id invalido
+		 	}
+		} catch (Exception e) { 	// caso de erro 
 			e.printStackTrace();
+		} finally { // sempre será execultado
+			return index();
 		}
-		return null;
 	}
 
-	public boolean excluiAtor(int id) {
+	@SuppressWarnings("finally")
+	@RequestMapping("/excluir/{id}")
+	public ModelAndView excluiAtor(@PathVariable("id") Integer id) {
+		ModelAndView model = new ModelAndView("ator");
+		
 		try {
+			Ator ator = new Ator();
 			if (validaId(id) && existsByIdAtor(id)) {
-				service.excluirAtor(service.buscarAtor(id));
-				return true;
+				ator = atorService.buscarAtor(id);
+				atorService.excluirAtor(ator);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			return index();
 		}
-		return false;
 	}
 
 	public List<Ator> getAllAtor() {		
-		return service.getAllAtor();
+		return atorService.getAllAtor();
 	}
+	
+	//o metodo utilizado para atualizar será o salvar, visto que o spring boot ja atualiza automaticamente o objeto passado.
+	//este método só redireciona para a digitação dos novos campos do model
+	@SuppressWarnings("finally")
+	@RequestMapping("/atualizar/{id}")
+	public ModelAndView atualizaAtor(@PathVariable("id") Integer id) {
+		ModelAndView model = new ModelAndView("formulario-ator");
 
-	public boolean atualizaAtor(Ator ator) {
 		try {
-			if (existsByIdAtor(ator.getId()) && 
-					validaAtor(ator.getNome(), ator.getSobre()) &&
-					validaId(ator.getId())) {
-				service.atualizaAtor(ator);
-				return true;
+			if (existsByIdAtor(id)) {
+				Ator ator = atorService.buscarAtor(id);
+				
+				model.addObject("ator", ator);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			return model;
 		}
-		return false;
 	}
 	
 	public boolean existsByIdAtor(int id) {
-		return service.buscaAtor(id);
+		return atorService.buscaAtor(id);
 	}
 }

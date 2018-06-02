@@ -10,14 +10,14 @@
 
 <meta charset="utf-8">
 
-<title>Gênero</title>
+<title>Sala</title>
 </head>
 <body>
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Cinema WEB</h1>
-			<h3 style="color: darkgreen">Gênero - PÁGINA PARA O
-				GERENCIAMENTO DOS GÊNEROS DE FILMES</h3>
+			<h3 style="color: darkgreen">Salas - PÁGINA PARA O
+				GERENCIAMENTO DAS SALAS DO CINEMA</h3>
 		</div>
 	</div>
 
@@ -51,7 +51,7 @@
 		<!-- row -->
 
 		<div class="row">
-			<form action="/genero/salvar" th:object="${genero}" method="POST"
+			<form action="/sala/salvar" th:object="${sala}" method="POST"
 				class="col-sm-12 col-lg-12">
 				<br> <br> <br> <br> <br> <br>
 				<div class="row">
@@ -60,15 +60,33 @@
 
 						<legend>Preencha os dados pedidos</legend>
 						<div class="form-group col-md-4">
-							<label for="genero">Nome do Gênero</label> <input type="text"
-								placeholder="Nome do Genero" class="form-control" id="nome"
+							<label for="sala">Nome da Sala</label> <input type="text"
+								placeholder="Nome da sala" class="form-control" id="nome"
 								name="nome" autofocus />
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label for="sala">Sobre a Sala</label> <input type="text"
+								placeholder="Sobre o diretor" class="form-control" id="sobre"
+								name="sobre" autofocus />
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label for="sala">Sobre a Sala</label> <input type="text"
+								placeholder="Sobre o diretor" class="form-control" id="sobre"
+								name="sobre" autofocus />
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label for="sala">Capacidade</label> <input type="number"
+								placeholder="Digite a capacidade" class="form-control" id="capacidade"
+								name="capacidade" autofocus />
 						</div>
 
 						<div class="form-group col-md-4">
 							<button type="submit" name="action"
 								class="btn btn-success btn-lg btn-block">Adicionar
-								Gênero</button>
+								Sala</button>
 						</div>
 					</fieldset>
 					<!-- col-sm-12 -->
@@ -80,26 +98,28 @@
 		<hr>
 		<div class="row">
 			<div id="tabela">
-				<h3>Gêneros cadastrados</h3>
+				<h3>Salas cadastradas</h3>
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>ID</th>
 							<th>Nome</th>
+							<th>Sobre</th>
 							<th>Atualizar</th>
-							<th>Excluir Gênero</th>
+							<th>Excluir</th>
 						</tr>
 					</thead>
 
 					<tbody>
-						<tr th:each="genero : ${generos}">
-							<td th:text="${genero.id}"></td>
-							<td th:text="${genero.nome}"></td>
+						<tr th:each="sala : ${salas}">
+							<td th:text="${sala.id}"></td>
+							<td th:text="${sala.nome}"></td>
+							<td th:text="${sala.sobre}"></td>
 							<td><a class="btn btn-primary"
-								th:href="@{/genero/atualizar/{id}(id = ${genero.id})}">Atualizar
+								th:href="@{/sala/atualizar/{id}(id = ${sala.id})}">Atualizar
 							</a></td>
 							<td><a class="btn btn-sm  btn-danger"
-								th:href="@{/genero/excluir/{id}(id=${genero.id})}">X</a></td>
+								th:href="@{/sala/excluir/{id}(id=${sala.id})}">X</a></td>
 
 						</tr>
 					</tbody>

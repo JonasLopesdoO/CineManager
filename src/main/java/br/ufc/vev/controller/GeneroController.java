@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -26,7 +25,7 @@ public class GeneroController {
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("genero");
 		try {
-			List<Genero> generos = generoService.getAllGenero();
+			List<Genero> generos = getAllGenero();
 			
 			model.addObject("generos", generos);
 			return model;
@@ -39,7 +38,7 @@ public class GeneroController {
 	
 	@RequestMapping("/formulario")
 	public ModelAndView formularioGenero() {
-		ModelAndView model = new ModelAndView("formulario");
+		ModelAndView model = new ModelAndView("formulario-genero");
 		model.addObject("genero", new Genero());
 		
 		return model;
@@ -47,15 +46,15 @@ public class GeneroController {
 	
 	@SuppressWarnings("finally")
 	@RequestMapping(path="/salvar", method = RequestMethod.POST)
-	public ModelAndView salvaGenero(@RequestParam String nomeGenero) {
+	public ModelAndView salvaGenero(Genero genero) {
 		ModelAndView model = new ModelAndView("genero");
 		
 		try {
-			if (this.validaGenero(nomeGenero)) { // adiciona um genero novo
-				Genero genero = new Genero();
-				genero.setNome(nomeGenero);
+			if (this.validaGenero(genero.getNome())) { // adiciona um genero novo
 				
 				generoService.salvarGenero(genero);
+				
+				model.addObject("generoRetorno", genero);
 				
 		 	}
 		} catch (Exception e) { 	// caso de erro 
@@ -101,7 +100,6 @@ public class GeneroController {
 		try {
 			Genero genero = new Genero();
 			if (validaIdGenero(id) && existsByIdGenero(id)) { 
-				
 				genero = generoService.buscarGenero(id);
 				generoService.excluirGenero(genero);
 		 	}
@@ -119,30 +117,25 @@ public class GeneroController {
 		return generoService.getAllGenero();
 	}
 
-	public boolean atualizaGenero(Genero genero) {
+	//o metodo utilizado para atualizar será o salvar, visto que o spring boot ja atualiza automaticamente o objeto passado.
+	//este método só redireciona para a digitação dos novos campos do model
+	@SuppressWarnings("finally")
+	@RequestMapping("/atualizar/{id}")
+	public ModelAndView atualizaGenero(@PathVariable int id) {
+		ModelAndView model = new ModelAndView("formulario-genero");
 		try {
-			if (existsByIdGenero(genero.getId()) && 
-					validaGenero(genero.getNome()) &&
-					validaIdGenero(genero.getId())) {
-				generoService.atualizaGenero(genero);
-				return true;
+			if (existsByIdGenero(id)) {
+				Genero genero = generoService.buscarGenero(id);
+				
+				model.addObject("genero", genero);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			return model;
 		}
-		return false;
+		
 	}
-	
-//	@RequestMapping("/atualizar/{id}")
-//	public ModelAndView atualizarPessoa(@PathVariable Long id) {
-//		ModelAndView model = new ModelAndView("formulario");
-//		
-//		Pessoa pessoa = pessoaService.buscarPorId(id);
-//		
-//		model.addObject("pessoa",pessoa);
-//		
-//		return model;
-//	}
 	
 	public boolean validaGenero(String nome) throws Exception {
 		
@@ -173,22 +166,5 @@ public class GeneroController {
 	public boolean existsByIdGenero(int id) {
 		return generoService.buscaGenero(id);
 	}
-	
-//	@RequestMapping("/excluir/{id}")
-//	public ModelAndView excluirPessoa(@PathVariable Long id) {
-//		Pessoa pessoa = pessoaService.buscarPorId(id);
-//		ModelAndView mv = new ModelAndView("pagina-listagem");
-//		mv.addObject("pessoa", pessoa);
-//		return mv;
-//		
-//	}
-//	
-//<tr th:object="${pessoa}">
-//      <td th:text="${pessoa.id}">    </td>
-//      <td th:text="${pessoa.nome}">  </td>
-//      <td th:text="${pessoa.time}">  </td>
-//      <td> <a th:href="@{/pessoa/atualizar/{id}(id = ${pessoa.id})}"> <button type="button" class="btn btn-primary">Atualizar</button> </a> </td>
-//      <td> <a class="btn btn-danger" th:href="@{/pessoa/excluir/{id}(id = ${pessoa.id})}">  Excluir </a>
-//    </tr>
 	
 }

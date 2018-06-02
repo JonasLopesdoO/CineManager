@@ -240,7 +240,10 @@ public class FilmeControllerTest {
 				+ "Definitely, Maybe, The Proposal e Buried, bem como Wade Wilson/Deadpool "
 				+ "interpretando o papel do mercenário tagarela.";
 		Ator ator = new Ator();
-		ator = atorController.salvaAtor(nomeAtor, sobre);
+		ator.setNome(nomeAtor);
+		ator.setSobre(sobre);
+		
+		ator = (Ator) atorController.salvaAtor(ator).getModel().get("atorRetorno");
 		
 		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), ator.getId()));
 		
@@ -261,7 +264,10 @@ public class FilmeControllerTest {
 				+ "Definitely, Maybe, The Proposal e Buried, bem como Wade Wilson/Deadpool "
 				+ "interpretando o papel do mercenário tagarela.";
 		Ator ator = new Ator();
-		ator = atorController.salvaAtor(nomeAtor, sobre);
+		ator.setNome(nomeAtor);
+		ator.setSobre(sobre);
+		
+		ator = (Ator) atorController.salvaAtor(ator).getModel().get("atorRetorno");
 		
 		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), ator.getId()));
 		assertFalse(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), ator.getId()));
@@ -283,7 +289,10 @@ public class FilmeControllerTest {
 				+ "Definitely, Maybe, The Proposal e Buried, bem como Wade Wilson/Deadpool "
 				+ "interpretando o papel do mercenário tagarela.";
 		Ator ator = new Ator();
-		ator = atorController.salvaAtor(nomeAtor, sobre);
+		ator.setNome(nomeAtor);
+		ator.setSobre(sobre);
+		
+		ator = (Ator) atorController.salvaAtor(ator).getModel().get("atorRetorno");
 		
 		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), ator.getId()));
 		filmeController.desvinculaAtorDoFilme(filmeBuscado.getId(), ator.getId());
@@ -305,7 +314,10 @@ public class FilmeControllerTest {
 				+ "Definitely, Maybe, The Proposal e Buried, bem como Wade Wilson/Deadpool "
 				+ "interpretando o papel do mercenário tagarela.";
 		Ator ator = new Ator();
-		ator = atorController.salvaAtor(nomeAtor, sobre);
+		ator.setNome(nomeAtor);
+		ator.setSobre(sobre);
+		
+		ator = (Ator) atorController.salvaAtor(ator).getModel().get("atorRetorno");
 		
 		assertFalse(filmeController.desvinculaAtorDoFilme(filmeBuscado.getId(), ator.getId()));
 		
@@ -413,7 +425,8 @@ public class FilmeControllerTest {
 		String nomeGen = "Fantasia";
 		
 		Genero genero = new Genero();
-		genero = (Genero) generoController.salvaGenero(nomeGen).getModel().get("generoRetorno");
+		genero.setNome(nomeGen);
+		genero = (Genero) generoController.salvaGenero(genero).getModel().get("generoRetorno");
 		
 		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), genero.getId()));
 		
@@ -431,7 +444,9 @@ public class FilmeControllerTest {
 		String nomeGen = "Fantasia";
 		
 		Genero genero = new Genero();
-		genero = (Genero) generoController.salvaGenero(nomeGen).getModel().get("generoRetorno");
+		genero.setNome(nomeGen);
+		
+		genero = (Genero) generoController.salvaGenero(genero).getModel().get("generoRetorno");
 		
 		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), genero.getId()));
 		filmeController.desvinculaGeneroDoFilme(filmeBuscado.getId(), genero.getId());
