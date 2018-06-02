@@ -54,7 +54,7 @@ public class DiretorController {
 		try {
 			if (this.validaDiretor(diretor.getNome(), diretor.getSobre())) {
 				diretorService.salvarDiretor(diretor);
-				model.addObject("diretorrRetorno", diretor);
+				model.addObject("diretorRetorno", diretor);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

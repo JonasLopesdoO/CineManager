@@ -20,6 +20,10 @@ public class SalaService {
 	public Sala buscarSala(Integer id) {
 		return salaRepositorio.getOne(id);
 	}
+	
+	public boolean buscaSala(Integer id) {
+		return salaRepositorio.existsById(id);
+	}
 
 	public void excluirSala(Sala sala) {
 		salaRepositorio.delete(sala);

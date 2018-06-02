@@ -25,7 +25,13 @@ public class Sala {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "cinema_id")
 	private Cinema cinema;
-		
+	
+	public Sala(String nome, TipoSala tipo, int capacidade) {
+		this.nome = nome;
+		this.tipo = tipo;
+		this.capacidade = capacidade;
+	}
+	
 	public Sala() {
 		
 	}

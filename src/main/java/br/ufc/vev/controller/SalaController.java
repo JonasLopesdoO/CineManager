@@ -4,28 +4,63 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import br.ufc.vev.bean.Diretor;
+import br.ufc.vev.bean.Sala;
+import br.ufc.vev.bean.Sala;
 import br.ufc.vev.bean.Sala;
 import br.ufc.vev.service.SalaService;
 
 @Controller
+@RequestMapping(path = "/sala")
 public class SalaController {
 	
 	@Autowired
-	private SalaService service;
-
-	public Sala salvaSala(String nome, int capacidade) {
+	private SalaService salaService;
+	
+	@RequestMapping(path = "/")
+	public ModelAndView index() {
+		ModelAndView model = new ModelAndView("sala");
 		try {
-			if (this.validaSala(nome, capacidade)) {
-				Sala sala = new Sala();
-				sala.setNome(nome);
-				sala.setCapacidade(capacidade);
-				return service.salvarSala(sala);
-		 	}
+			List<Sala> salas = getAllSala();
+
+			model.addObject("salas", salas);
+			return model;
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return model;
+	}
+
+	@RequestMapping("/formulario")
+	public ModelAndView formularioGenero() {
+		ModelAndView model = new ModelAndView("formulario-sala");
+		model.addObject("sala", new Sala());
+
+		return model;
+	}
+
+	@SuppressWarnings("finally")
+	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
+	public ModelAndView salvaSala(Sala sala) {
+		ModelAndView model = new ModelAndView("sala");
+
+		try {
+			if (this.validaSala(sala.getNome(), sala.getCapacidade())) {
+				salaService.salvarSala(sala);
+				
+				model.addObject("salaRetorno", sala);
+		 	}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			return index();
+		}
 	}
 	
 	public boolean validaSala(String nome, int capacidade) throws Exception {
@@ -49,45 +84,76 @@ public class SalaController {
 		return true;
 	}
 
-	public Sala buscaSala(int id) {
+	@SuppressWarnings("finally")
+	@RequestMapping("/buscar/{id}")
+	public ModelAndView buscaSala(@PathVariable Integer id) {
+		ModelAndView model = new ModelAndView("sala");
 		try {
-			if (validaIdSala(id)) {
-				return service.buscarSala(id);
+			if (this.validaIdSala(id)) {
+				if (existsByIdSala(id)) {
+					Sala sala = new Sala();
+
+					sala = salaService.buscarSala(id);
+
+					model.addObject("salaRetorno", sala);
+				} else {
+					// mensagem de erro "id nao existente no banco"
+				}
+			} else {
+				// msg de id invalido
 			}
-		} catch (Exception e) {
+		} catch (Exception e) { // caso de erro
 			e.printStackTrace();
+		} finally { // sempre será execultado
+			return index();
 		}
-		return null;
 	}
 
-	public boolean excluiSala(int id) {
+	@SuppressWarnings("finally")
+	@RequestMapping("/excluir/{id}")
+	public ModelAndView excluiSala(@PathVariable("id") Integer id) {
+		ModelAndView model = new ModelAndView("sala");
+		
 		try {
-			if (validaIdSala(id)) {
-				service.excluirSala(service.buscarSala(id));
-				return true;
+			Sala sala = new Sala();
+			if (validaIdSala(id) && existsByIdSala(id)) {
+				sala = salaService.buscarSala(id);
+				salaService.excluirSala(sala);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			return index();
 		}
-		return false;
 	}
 
 	public List<Sala> getAllSala() {		
-		return service.getAllSala();
+		return salaService.getAllSala();
 	}
 
-	public boolean atualizaSala(Sala sala) {
-		try {
-			if (buscaSala(sala.getId()) != null && 
-					validaSala(sala.getNome(), sala.getCapacidade()) &&
-					validaIdSala(sala.getId())) {
-				service.atualizaSala(sala);
-				return true;
+	// o metodo utilizado para atualizar será o salvar, visto que o spring boot ja
+		// atualiza automaticamente o objeto passado.
+		// este método só redireciona para a digitação dos novos campos do model
+		@SuppressWarnings("finally")
+		@RequestMapping("/atualizar/{id}")
+		public ModelAndView atualizaSala(@PathVariable("id") Integer id) {
+			ModelAndView model = new ModelAndView("formulario-sala");
+
+			try {
+				if (existsByIdSala(id)) {
+					Sala sala = salaService.buscarSala(id);
+
+					model.addObject("sala", sala);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				return model;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		return false;
-	}
 
+	public boolean existsByIdSala(int id) {
+		return salaService.buscaSala(id);
+	}
+	
 }
