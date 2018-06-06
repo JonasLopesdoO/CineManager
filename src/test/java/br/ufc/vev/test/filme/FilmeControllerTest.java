@@ -323,134 +323,134 @@ public class FilmeControllerTest {
 		
 	}
 	
-	@Test
-	public void vinculaDiretorAoFilmeControllerTest() {
-		String nome = "DeadPool";
-		String sinopse = "Filme Top";
-		int duracao = 90;
-		
-		Filme filmeBuscado = new Filme();
-		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
-		
-		String nomeDir = "Tim Miller";
-		String sobre = "diretor de cinema e especialista em efeitos especiais americano."
-				+ " Tornou-se conhecido por dirigir o filme Deadpool, de 2016, sendo "
-				+ "também cofundador e diretor criativo da Blur Studio, uma empresa "
-				+ "especializada em efeitos especiais.";
-		
-		Diretor diretor = new Diretor();
-		diretor = diretorController.salvaDiretor(nomeDir, sobre);
-		
-		assertTrue(filmeController.vinculaDiretorAoFilme(filmeBuscado.getId(), diretor.getId()));
-		
-	}
-	
-	@Test
-	public void vinculaDiretorJaVinculadoAoFilmeControllerTest() {
-		String nome = "DeadPool";
-		String sinopse = "Filme Top";
-		int duracao = 90;
-		
-		Filme filmeBuscado = new Filme();
-		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
-		
-		String nomeDir = "Tim Miller";
-		String sobre = "diretor de cinema e especialista em efeitos especiais americano."
-				+ " Tornou-se conhecido por dirigir o filme Deadpool, de 2016, sendo "
-				+ "também cofundador e diretor criativo da Blur Studio, uma empresa "
-				+ "especializada em efeitos especiais.";
-		
-		Diretor diretor = new Diretor();
-		diretor = diretorController.salvaDiretor(nomeDir, sobre);
-		
-		assertTrue(filmeController.vinculaDiretorAoFilme(filmeBuscado.getId(), diretor.getId()));
-		assertFalse(filmeController.vinculaDiretorAoFilme(filmeBuscado.getId(), diretor.getId()));
-		
-	}
-	
-	@Test
-	public void desvinculaDiretorVinculadoAoFilmeControllerTest() {
-		String nome = "DeadPool";
-		String sinopse = "Filme Top";
-		int duracao = 90;
-		
-		Filme filmeBuscado = new Filme();
-		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
-		
-		String nomeDir = "Tim Miller";
-		String sobre = "diretor de cinema e especialista em efeitos especiais americano."
-				+ " Tornou-se conhecido por dirigir o filme Deadpool, de 2016, sendo "
-				+ "também cofundador e diretor criativo da Blur Studio, uma empresa "
-				+ "especializada em efeitos especiais.";
-		
-		Diretor diretor = new Diretor();
-		diretor = diretorController.salvaDiretor(nomeDir, sobre);
-		
-		assertTrue(filmeController.vinculaDiretorAoFilme(filmeBuscado.getId(), diretor.getId()));
-		filmeController.desvinculaDiretorDoFilme(filmeBuscado.getId(), diretor.getId());
-		assertFalse(filmeController.diretorPertenceAoFilme(filmeBuscado.getId(), diretor.getId()));
-	}
-	
-	@Test
-	public void desvinculaDiretorNaoVinculadoAoFilmeControllerTest() {
-		String nome = "DeadPool";
-		String sinopse = "Filme Top";
-		int duracao = 90;
-		
-		Filme filmeBuscado = new Filme();
-		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
-		
-		String nomeDir = "Tim Miller";
-		String sobre = "diretor de cinema e especialista em efeitos especiais americano."
-				+ " Tornou-se conhecido por dirigir o filme Deadpool, de 2016, sendo "
-				+ "também cofundador e diretor criativo da Blur Studio, uma empresa "
-				+ "especializada em efeitos especiais.";
-		
-		Diretor diretor = new Diretor();
-		diretor = diretorController.salvaDiretor(nomeDir, sobre);
-		
-		assertFalse(filmeController.desvinculaDiretorDoFilme(filmeBuscado.getId(), diretor.getId()));
-		
-	}
-	
-	@Test
-	public void vinculaGeneroAoFilmeControllerTest() {
-		String nome = "DeadPool";
-		String sinopse = "Filme Top";
-		int duracao = 90;
-		
-		Filme filmeBuscado = new Filme();
-		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
-		
-		String nomeGen = "Fantasia";
-		
-		Genero genero = new Genero();
-		genero.setNome(nomeGen);
-		genero = (Genero) generoController.salvaGenero(genero).getModel().get("generoRetorno");
-		
-		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), genero.getId()));
-		
-	}
-	
-	@Test
-	public void desvinculaGeneroDeFilmeControllerTest() {
-		String nome = "DeadPool";
-		String sinopse = "Filme Top";
-		int duracao = 90;
-		
-		Filme filmeBuscado = new Filme();
-		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
-		
-		String nomeGen = "Fantasia";
-		
-		Genero genero = new Genero();
-		genero.setNome(nomeGen);
-		
-		genero = (Genero) generoController.salvaGenero(genero).getModel().get("generoRetorno");
-		
-		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), genero.getId()));
-		filmeController.desvinculaGeneroDoFilme(filmeBuscado.getId(), genero.getId());
-		assertFalse(filmeController.generoPertenceAoFilme(filmeBuscado.getId(), genero.getId()));
-	}
+//	@Test
+//	public void vinculaDiretorAoFilmeControllerTest() {
+//		String nome = "DeadPool";
+//		String sinopse = "Filme Top";
+//		int duracao = 90;
+//		
+//		Filme filmeBuscado = new Filme();
+//		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
+//		
+//		String nomeDir = "Tim Miller";
+//		String sobre = "diretor de cinema e especialista em efeitos especiais americano."
+//				+ " Tornou-se conhecido por dirigir o filme Deadpool, de 2016, sendo "
+//				+ "também cofundador e diretor criativo da Blur Studio, uma empresa "
+//				+ "especializada em efeitos especiais.";
+//		
+//		Diretor diretor = new Diretor();
+//		diretor = diretorController.salvaDiretor(nomeDir, sobre);
+//		
+//		assertTrue(filmeController.vinculaDiretorAoFilme(filmeBuscado.getId(), diretor.getId()));
+//		
+//	}
+//	
+//	@Test
+//	public void vinculaDiretorJaVinculadoAoFilmeControllerTest() {
+//		String nome = "DeadPool";
+//		String sinopse = "Filme Top";
+//		int duracao = 90;
+//		
+//		Filme filmeBuscado = new Filme();
+//		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
+//		
+//		String nomeDir = "Tim Miller";
+//		String sobre = "diretor de cinema e especialista em efeitos especiais americano."
+//				+ " Tornou-se conhecido por dirigir o filme Deadpool, de 2016, sendo "
+//				+ "também cofundador e diretor criativo da Blur Studio, uma empresa "
+//				+ "especializada em efeitos especiais.";
+//		
+//		Diretor diretor = new Diretor();
+//		diretor = diretorController.salvaDiretor(nomeDir, sobre);
+//		
+//		assertTrue(filmeController.vinculaDiretorAoFilme(filmeBuscado.getId(), diretor.getId()));
+//		assertFalse(filmeController.vinculaDiretorAoFilme(filmeBuscado.getId(), diretor.getId()));
+//		
+//	}
+//	
+//	@Test
+//	public void desvinculaDiretorVinculadoAoFilmeControllerTest() {
+//		String nome = "DeadPool";
+//		String sinopse = "Filme Top";
+//		int duracao = 90;
+//		
+//		Filme filmeBuscado = new Filme();
+//		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
+//		
+//		String nomeDir = "Tim Miller";
+//		String sobre = "diretor de cinema e especialista em efeitos especiais americano."
+//				+ " Tornou-se conhecido por dirigir o filme Deadpool, de 2016, sendo "
+//				+ "também cofundador e diretor criativo da Blur Studio, uma empresa "
+//				+ "especializada em efeitos especiais.";
+//		
+//		Diretor diretor = new Diretor();
+//		diretor = diretorController.salvaDiretor(nomeDir, sobre);
+//		
+//		assertTrue(filmeController.vinculaDiretorAoFilme(filmeBuscado.getId(), diretor.getId()));
+//		filmeController.desvinculaDiretorDoFilme(filmeBuscado.getId(), diretor.getId());
+//		assertFalse(filmeController.diretorPertenceAoFilme(filmeBuscado.getId(), diretor.getId()));
+//	}
+//	
+//	@Test
+//	public void desvinculaDiretorNaoVinculadoAoFilmeControllerTest() {
+//		String nome = "DeadPool";
+//		String sinopse = "Filme Top";
+//		int duracao = 90;
+//		
+//		Filme filmeBuscado = new Filme();
+//		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
+//		
+//		String nomeDir = "Tim Miller";
+//		String sobre = "diretor de cinema e especialista em efeitos especiais americano."
+//				+ " Tornou-se conhecido por dirigir o filme Deadpool, de 2016, sendo "
+//				+ "também cofundador e diretor criativo da Blur Studio, uma empresa "
+//				+ "especializada em efeitos especiais.";
+//		
+//		Diretor diretor = new Diretor();
+//		diretor = diretorController.salvaDiretor(nomeDir, sobre);
+//		
+//		assertFalse(filmeController.desvinculaDiretorDoFilme(filmeBuscado.getId(), diretor.getId()));
+//		
+//	}
+//	
+//	@Test
+//	public void vinculaGeneroAoFilmeControllerTest() {
+//		String nome = "DeadPool";
+//		String sinopse = "Filme Top";
+//		int duracao = 90;
+//		
+//		Filme filmeBuscado = new Filme();
+//		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
+//		
+//		String nomeGen = "Fantasia";
+//		
+//		Genero genero = new Genero();
+//		genero.setNome(nomeGen);
+//		genero = (Genero) generoController.salvaGenero(genero).getModel().get("generoRetorno");
+//		
+//		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), genero.getId()));
+//		
+//	}
+//	
+//	@Test
+//	public void desvinculaGeneroDeFilmeControllerTest() {
+//		String nome = "DeadPool";
+//		String sinopse = "Filme Top";
+//		int duracao = 90;
+//		
+//		Filme filmeBuscado = new Filme();
+//		filmeBuscado = filmeController.salvaFilme(nome, sinopse, duracao);
+//		
+//		String nomeGen = "Fantasia";
+//		
+//		Genero genero = new Genero();
+//		genero.setNome(nomeGen);
+//		
+//		genero = (Genero) generoController.salvaGenero(genero).getModel().get("generoRetorno");
+//		
+//		assertTrue(filmeController.vinculaAtorAoFilme(filmeBuscado.getId(), genero.getId()));
+//		filmeController.desvinculaGeneroDoFilme(filmeBuscado.getId(), genero.getId());
+//		assertFalse(filmeController.generoPertenceAoFilme(filmeBuscado.getId(), genero.getId()));
+//	}
 	
 }

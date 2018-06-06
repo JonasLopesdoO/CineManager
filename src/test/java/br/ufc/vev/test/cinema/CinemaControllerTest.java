@@ -270,85 +270,85 @@ public class CinemaControllerTest {
 		assertTrue(controller.getAllCinema().size() >= 1);
 	}
 	
-	@Test
-	public void vinculaSalaAoCinemaControllerTest() {
-		String cidade = "Quixada";
-		String endereco = "Rua A, Planalto Universitario";
-		String nome = "Cine o bom vizinho";	
-			
-		int idCine = controller.salvaCinema(nome, cidade, endereco).getId();
-		
-		String nomeSala = "Sala A1";
-		int capacidade = 150;
-		
-		Integer idSala = controllerSala.salvaSala(nomeSala, capacidade).getId();
-
-		assertTrue(controller.vinculaSalaAoCinema(idCine, idSala));
-		
-	}
-	
-	@Test
-	public void vinculaSalaAoCinemaComIdSalaNegativoControllerTest() {
-		String cidade = "Quixada";
-		String endereco = "Rua A, Planalto Universitario";
-		String nome = "Cine o bom vizinho";	
-			
-		int idCine = controller.salvaCinema(nome, cidade, endereco).getId();
-		
-		assertFalse("Erro ID não pode ser negativo", controller.vinculaSalaAoCinema(idCine, -1));
-		
-	}
-	
-	@Test
-	public void vinculaSalaAoCinemaComIdSalaZeroControllerTest() {
-		String cidade = "Quixada";
-		String endereco = "Rua A, Planalto Universitario";
-		String nome = "Cine o bom vizinho";	
-			
-		int idCine = controller.salvaCinema(nome, cidade, endereco).getId();
-		
-		assertFalse("Erro ID deve ser maior que zero", controller.vinculaSalaAoCinema(idCine, 0));
-		
-	}
-	
-	@Test
-	public void vinculaSalaAoCinemaComIdCinemaNegativoControllerTest() {
-		
-		String nomeSala = "Sala A1";
-		int capacidade = 150;
-		
-		Integer idSala = controllerSala.salvaSala(nomeSala, capacidade).getId();
-
-		assertFalse("Erro ID não pode ser negativo", controller.vinculaSalaAoCinema( -1, idSala));
-		
-	}
-	
-	@Test
-	public void vinculaSalaAoCinemaComIdCinemaZeroControllerTest() {
-		
-		String nomeSala = "Sala A1";
-		int capacidade = 150;
-		
-		Integer idSala = controllerSala.salvaSala(nomeSala, capacidade).getId();
-
-		assertFalse("Erro ID deve ser maior que zero" , controller.vinculaSalaAoCinema( 0 , idSala));
-	}
-	
-	@Test
-	public void desvinculaSalaDoCinemaControllerTest() {
-		String cidade = "Quixada";
-		String endereco = "Rua A, Planalto Universitario";
-		String nome = "Cine o bom vizinho";	
-			
-		int idCine = controller.salvaCinema(nome, cidade, endereco).getId();
-		
-		String nomeSala = "Sala A1";
-		int capacidade = 150;
-		
-		Integer idSala = controllerSala.salvaSala(nomeSala, capacidade).getId();
-
-		assertTrue(controller.vinculaSalaAoCinema(idCine, idSala));
-		controller.desvinculaSalaAoCinema(idCine, idSala);
-	}
+//	@Test
+//	public void vinculaSalaAoCinemaControllerTest() {
+//		String cidade = "Quixada";
+//		String endereco = "Rua A, Planalto Universitario";
+//		String nome = "Cine o bom vizinho";	
+//			
+//		int idCine = controller.salvaCinema(nome, cidade, endereco).getId();
+//		
+//		String nomeSala = "Sala A1";
+//		int capacidade = 150;
+//		
+//		Integer idSala = controllerSala.salvaSala(nomeSala, capacidade).getId();
+//
+//		assertTrue(controller.vinculaSalaAoCinema(idCine, idSala));
+//		
+//	}
+//	
+//	@Test
+//	public void vinculaSalaAoCinemaComIdSalaNegativoControllerTest() {
+//		String cidade = "Quixada";
+//		String endereco = "Rua A, Planalto Universitario";
+//		String nome = "Cine o bom vizinho";	
+//			
+//		int idCine = controller.salvaCinema(nome, cidade, endereco).getId();
+//		
+//		assertFalse("Erro ID não pode ser negativo", controller.vinculaSalaAoCinema(idCine, -1));
+//		
+//	}
+//	
+//	@Test
+//	public void vinculaSalaAoCinemaComIdSalaZeroControllerTest() {
+//		String cidade = "Quixada";
+//		String endereco = "Rua A, Planalto Universitario";
+//		String nome = "Cine o bom vizinho";	
+//			
+//		int idCine = controller.salvaCinema(nome, cidade, endereco).getId();
+//		
+//		assertFalse("Erro ID deve ser maior que zero", controller.vinculaSalaAoCinema(idCine, 0));
+//		
+//	}
+//	
+//	@Test
+//	public void vinculaSalaAoCinemaComIdCinemaNegativoControllerTest() {
+//		
+//		String nomeSala = "Sala A1";
+//		int capacidade = 150;
+//		
+//		Integer idSala = controllerSala.salvaSala(nomeSala, capacidade).getId();
+//
+//		assertFalse("Erro ID não pode ser negativo", controller.vinculaSalaAoCinema( -1, idSala));
+//		
+//	}
+//	
+//	@Test
+//	public void vinculaSalaAoCinemaComIdCinemaZeroControllerTest() {
+//		
+//		String nomeSala = "Sala A1";
+//		int capacidade = 150;
+//		
+//		Integer idSala = controllerSala.salvaSala(nomeSala, capacidade).getId();
+//
+//		assertFalse("Erro ID deve ser maior que zero" , controller.vinculaSalaAoCinema( 0 , idSala));
+//	}
+//	
+//	@Test
+//	public void desvinculaSalaDoCinemaControllerTest() {
+//		String cidade = "Quixada";
+//		String endereco = "Rua A, Planalto Universitario";
+//		String nome = "Cine o bom vizinho";	
+//			
+//		int idCine = controller.salvaCinema(nome, cidade, endereco).getId();
+//		
+//		String nomeSala = "Sala A1";
+//		int capacidade = 150;
+//		
+//		Integer idSala = controllerSala.salvaSala(nomeSala, capacidade).getId();
+//
+//		assertTrue(controller.vinculaSalaAoCinema(idCine, idSala));
+//		controller.desvinculaSalaAoCinema(idCine, idSala);
+//	}
 	
 }

@@ -24,29 +24,29 @@ public class SessaoRepositoryTest {
 	@Autowired
 	private SalaController salaController;
 	
-	@Test
-	public void salvarSessao() {
-		
-		LocalTime horario = LocalTime.parse("20:30");
-		LocalDate dataInicio = LocalDate.parse("2018-05-22");
-		LocalDate dataFim = LocalDate.parse("2018-05-30");
-		
-		String nomeFilme = "DeadPool";
-		String sinopse = "Filme Top";
-		int duracao = 90;
-		
-		String nomeSala = "Sala A1";
-		int capacidade = 150;
-		
-		Filme filme = new Filme();
-		filme = filmeController.salvaFilme(nomeFilme, sinopse, duracao);
-		
-		Sala sala = new Sala();
-		sala = salaController.salvaSala(nomeSala, capacidade);
-		
-		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
-		
-		assertNotNull(sessaoRepositorio.save(sessao));
-		
-	}
+//	@Test
+//	public void salvarSessao() {
+//		
+//		LocalTime horario = LocalTime.parse("20:30");
+//		LocalDate dataInicio = LocalDate.parse("2018-05-22");
+//		LocalDate dataFim = LocalDate.parse("2018-05-30");
+//		
+//		String nomeFilme = "DeadPool";
+//		String sinopse = "Filme Top";
+//		int duracao = 90;
+//		
+//		String nomeSala = "Sala A1";
+//		int capacidade = 150;
+//		
+//		Filme filme = new Filme();
+//		filme = filmeController.salvaFilme(nomeFilme, sinopse, duracao);
+//		
+//		Sala sala = new Sala();
+//		sala = salaController.salvaSala(nomeSala, capacidade);
+//		
+//		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
+//		
+//		assertNotNull(sessaoRepositorio.save(sessao));
+//		
+//	}
 }
