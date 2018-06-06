@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<org.eclipse.epf.uma:ArtifactDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1" xmi:id="-icCoteQDs_J6Q4G-oeVjJA" name="requisitos_documentados_na_plataforma_trello,_A4KqoFi1EeiKvbCRoPhrSQ" guid="-icCoteQDs_J6Q4G-oeVjJA" changeDate="2018-05-16T00:03:11.721-0300">
-  <mainDescription>&lt;p>&#xD;
-    Por este meio desta plataforma todos os requisitos serao elicitados,catalogados e clasificados&amp;nbsp;pela equipe.&#xD;
-&lt;/p></mainDescription>
-  <purpose>Documentar os requisitos propostos</purpose>
-</org.eclipse.epf.uma:ArtifactDescription>

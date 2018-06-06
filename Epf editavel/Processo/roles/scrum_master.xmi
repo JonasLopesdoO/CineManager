@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<org.eclipse.epf.uma:RoleDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1" xmi:id="-S6BCDublev2hy51EfCY4dg" name="new_role,_AegAsFilEeiKvbCRoPhrSQ" guid="-S6BCDublev2hy51EfCY4dg" changeDate="2018-05-15T22:06:41.030-0300">
-  <mainDescription>O Scrum Master é responsável por garantir que o Scrum seja entendido e aplicado. O Scrum&lt;br />&#xD;
-Master faz isso para garantir que o Time Scrum adere à teoria, práticas e regras do Scrum. O&lt;br />&#xD;
-Scrum Master é um servo-líder para o Time Scrum.&lt;br />&#xD;
-O Scrum Master ajuda aqueles que estão fora do Time Scrum a entender quais as suas&lt;br />&#xD;
-interações com o Time Scrum são úteis e quais não são. O Scrum Master ajuda todos a&lt;br />&#xD;
-mudarem estas interações para maximizar o valor criado pelo Time Scrum.</mainDescription>
-</org.eclipse.epf.uma:RoleDescription>

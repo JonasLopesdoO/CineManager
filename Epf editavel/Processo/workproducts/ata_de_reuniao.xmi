@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<org.eclipse.epf.uma:ArtifactDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1" xmi:id="-gDDMAQON0lU6YGKP0FEFug" name="new_artifact,_CNXEUFinEeiKvbCRoPhrSQ" guid="-gDDMAQON0lU6YGKP0FEFug" changeDate="2018-05-15T22:18:52.730-0300">
-  <mainDescription>&lt;p>&#xD;
-    Ata de reunião assianada pelos membros do time,inclusive o PO(Product Owner).&#xD;
-&lt;/p></mainDescription>
-  <purpose>&lt;span&#xD;
-style='FONT-SIZE: 11pt; FONT-FAMILY: &quot;Calibri&quot;,sans-serif; LINE-HEIGHT: 107%; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: &quot;Times New Roman&quot;; mso-bidi-theme-font: minor-bidi; mso-ansi-language: PT-BR; mso-fareast-language: EN-US; mso-bidi-language: AR-SA'>&#xD;
-Para comprovar um comprometimento formal da equipe técnica com os requisitos propostos.&lt;/span></purpose>
-</org.eclipse.epf.uma:ArtifactDescription>

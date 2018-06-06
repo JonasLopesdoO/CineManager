@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<org.eclipse.epf.uma:ArtifactDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1" xmi:id="-IqWrjQ4_Z5C7pXmsWdtDwQ" name="new_artifact,_AB4ucFirEeiKvbCRoPhrSQ" guid="-IqWrjQ4_Z5C7pXmsWdtDwQ" changeDate="2018-05-15T23:06:04.755-0300">
-  <mainDescription>Documento elaborado pelo time de desenvolvimento para classificar os requisitos como implementados ou nao.</mainDescription>
-  <purpose>Feito para acompanhar o andamento da implementaçao dos requisitos.</purpose>
-</org.eclipse.epf.uma:ArtifactDescription>

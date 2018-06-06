@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<org.eclipse.epf.uma:TaskDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1" xmi:id="-M61_EUvIIGfLvVkdgfrVxA" name=",_AxdYYGH6Eei3PpZ6HUEEZA" guid="-M61_EUvIIGfLvVkdgfrVxA" changeDate="2018-06-02T01:54:51.758-0300">
-  <mainDescription>Entrevista gravada(caso perimitido) e documentada para a realização da eliticitação dos requisitos</mainDescription>
-  <sections xmi:id="_qGfKcGYZEeiHy-_kpfbOqQ" name="New Step" guid="_qGfKcGYZEeiHy-_kpfbOqQ"/>
-  <purpose>Garantir que os requisitos estejam claramente definidos a partir do&amp;nbsp;levantamento dos requisitos realizado junto aos&#xD;
-fornecedores de requisitos.</purpose>
-</org.eclipse.epf.uma:TaskDescription>
