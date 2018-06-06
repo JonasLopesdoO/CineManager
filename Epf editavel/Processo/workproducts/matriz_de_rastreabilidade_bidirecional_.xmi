@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.eclipse.epf.uma:ArtifactDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1" xmi:id="-AkhvASnJhHHQHXKx23024Q" name="new_artifact,_-n9RoFirEeiKvbCRoPhrSQ" guid="-AkhvASnJhHHQHXKx23024Q" changeDate="2018-05-15T23:21:40.710-0300">
+  <mainDescription>&lt;span&#xD;
+style='FONT-SIZE: 14px; FONT-FAMILY: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial'>&#xD;
+A&amp;nbsp;matriz de rastreabilidade dos requisitos associa os requisitos às suas origens e os rastreia durante todo o ciclo de&#xD;
+vida do projeto.&lt;/span></mainDescription>
+  <purpose>&lt;span&#xD;
+style='FONT-SIZE: 14px; FONT-FAMILY: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial'>&#xD;
+Seu uso&amp;nbsp;ajuda a garantir que cada requisito adiciona valor de negócio através da sua ligação aos objetivos de negócio&#xD;
+e aos objetivos do projeto, além de fornecer um meio de rastreamento do início ao fim do ciclo de vida do projeto, ajudando&#xD;
+a garantir que os requisitos aprovados na documentação sejam entregues no final do projeto.&lt;span>&amp;nbsp;&lt;/span>&lt;/span></purpose>
+</org.eclipse.epf.uma:ArtifactDescription>

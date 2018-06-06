@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.eclipse.epf.uma:ArtifactDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1" xmi:id="-u4X1ChdRA3OiX_yBcnVY0Q" name="new_artifact,_PC9AQFizEeiKvbCRoPhrSQ" guid="-u4X1ChdRA3OiX_yBcnVY0Q" changeDate="2018-05-15T23:46:08.225-0300">
+  <mainDescription>A entrevista e registrada (principalmente por meio de gravacao) para que a equipe possa detectar algum requisito que nao&#xD;
+foi elicitado pela equipe durante a entrevista realizada.</mainDescription>
+  <purpose>Elicitar requisitos.</purpose>
+</org.eclipse.epf.uma:ArtifactDescription>

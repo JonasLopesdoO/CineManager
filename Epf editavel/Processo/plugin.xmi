@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:org.eclipse.epf.uma.resourcemanager="http:///org/eclipse/epf/uma/resourcemanager.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1">
+  <org.eclipse.epf.uma.resourcemanager:ResourceManager xmi:id="_H2qzAFijEeiKvbCRoPhrSQ" guid="_H2qzAFijEeiKvbCRoPhrSQ">
+    <subManagers xmi:id="_IfvYoFi4EeipPrTYh35ZJw" href="uma://_IZFXAFi4EeipPrTYh35ZJw#_IfvYoFi4EeipPrTYh35ZJw"/>
+    <resourceDescriptors xmi:id="_AelgQFilEeiKvbCRoPhrSQ" id="--IfoZM--Awo3lZ6nJEje_Q" uri="roles/product_owner.xmi"/>
+    <resourceDescriptors xmi:id="_fodiUFilEeiKvbCRoPhrSQ" id="-S6BCDublev2hy51EfCY4dg" uri="roles/scrum_master.xmi"/>
+    <resourceDescriptors xmi:id="_foohcFilEeiKvbCRoPhrSQ" id="-z_kNAS2bCe40Ymn1FgTOzg" uri="roles/time_de_desenvolvimento.xmi"/>
+    <resourceDescriptors xmi:id="_5SEu4FinEeiKvbCRoPhrSQ" id="-gDDMAQON0lU6YGKP0FEFug" uri="workproducts/ata_de_reuniao.xmi"/>
+    <resourceDescriptors xmi:id="_e8tIMFioEeiKvbCRoPhrSQ" id="-zqG_Qt4wV2b0xQb_JaX4TA" uri="tasks/realizar_reuniao_de_planejamento_da_sprint.xmi"/>
+    <resourceDescriptors xmi:id="_Kf7skFipEeiKvbCRoPhrSQ" id="-R-U4kaCMOfiV8TvvPenNxQ" uri="tasks/planning_poker.xmi"/>
+    <resourceDescriptors xmi:id="_ACBRUFirEeiKvbCRoPhrSQ" id="-rlFhIEmOuK1OTs3uysouJA" uri="workproducts/documento_de_analise_do_planning_poker.xmi"/>
+    <resourceDescriptors xmi:id="_Xvao0FitEeiKvbCRoPhrSQ" id="-UeFbapwdmY7gj3DarFP94w" uri="tasks/realizar_revisao_da_sprint.xmi"/>
+    <resourceDescriptors xmi:id="_XvikoFitEeiKvbCRoPhrSQ" id="-YZ98O6Yg2v1yCEhhnSw4MQ" uri="workproducts/product_backlog_atualizado.xmi"/>
+    <resourceDescriptors xmi:id="_bBrjcFiwEeiKvbCRoPhrSQ" id="-IqWrjQ4_Z5C7pXmsWdtDwQ" uri="workproducts/checklist_dos_requisitos.xmi"/>
+    <resourceDescriptors xmi:id="_bByRIFiwEeiKvbCRoPhrSQ" id="-AkhvASnJhHHQHXKx23024Q" uri="workproducts/matriz_de_rastreabilidade_bidirecional_.xmi"/>
+    <resourceDescriptors xmi:id="_GJwc4FixEeiKvbCRoPhrSQ" id="-E5kfA8Rj2Duki8UQ0-6t_A" uri="tasks/realizar_checklist_dos_requisitos.xmi"/>
+    <resourceDescriptors xmi:id="_IbNssFiyEeiKvbCRoPhrSQ" id="-ETxQiQxIRmSjXdqBvJ6JFg" uri="workproducts/checklist_dos_requisitos_verificado._1.xmi"/>
+    <resourceDescriptors xmi:id="_jcDnYFizEeiKvbCRoPhrSQ" id="-u4X1ChdRA3OiX_yBcnVY0Q" uri="workproducts/entrevista_documentada.xmi"/>
+    <resourceDescriptors xmi:id="_A4QKMFi1EeiKvbCRoPhrSQ" id="-V2aWa3AohGnS6OYsti-Vhw" uri="tasks/realizar_documentacao_dos_requistos_pela_ferramenta_trello.xmi"/>
+    <resourceDescriptors xmi:id="_s7ENkFi1EeiKvbCRoPhrSQ" id="-icCoteQDs_J6Q4G-oeVjJA" uri="workproducts/requisitos_documentados_na_plataforma_trello.xmi"/>
+    <resourceDescriptors xmi:id="_IeyWYFi4EeipPrTYh35ZJw" id="_IZFXAFi4EeipPrTYh35ZJw" uri="deliveryprocesses/Desenvolvimento%20Desktop/model.xmi"/>
+    <resourceDescriptors xmi:id="_tudOQGIJEei3PpZ6HUEEZA" id="-M61_EUvIIGfLvVkdgfrVxA" uri="tasks/realizar_entrevista.xmi"/>
+    <resourceDescriptors xmi:id="_lx4dgGYgEeiHy-_kpfbOqQ" id="-qqsNikkufXolZBvlY7MnmQ" uri="tasks/registro_da_planilla_de_rastreabilidade._1.xmi"/>
+  </org.eclipse.epf.uma.resourcemanager:ResourceManager>
+  <org.eclipse.epf.uma:MethodPlugin xmi:id="_H2GyUFijEeiKvbCRoPhrSQ" name="Processo" guid="_H2GyUFijEeiKvbCRoPhrSQ" changeDate="2018-05-16T01:39:05.224-0300">
+    <methodElementProperty xmi:id="_H2w5oFijEeiKvbCRoPhrSQ" name="plugin_synFree" value="true"/>
+    <methodElementProperty xmi:id="_EG_1wFjDEei_laTJMdyKgA" name="me_edited" value="true"/>
+    <methodPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_H2HZYFijEeiKvbCRoPhrSQ" name="Content" guid="_H2HZYFijEeiKvbCRoPhrSQ">
+      <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_H2HZYVijEeiKvbCRoPhrSQ" name="Categories" guid="_H2HZYVijEeiKvbCRoPhrSQ">
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_H2HZYlijEeiKvbCRoPhrSQ" name="Domains" guid="_H2HZYlijEeiKvbCRoPhrSQ"/>
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_H2HZY1ijEeiKvbCRoPhrSQ" name="Disciplines" guid="_H2HZY1ijEeiKvbCRoPhrSQ"/>
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_H2HZZFijEeiKvbCRoPhrSQ" name="RoleSets" guid="_H2HZZFijEeiKvbCRoPhrSQ"/>
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_H2HZZVijEeiKvbCRoPhrSQ" name="WP Types" guid="_H2HZZVijEeiKvbCRoPhrSQ"/>
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_H2HZZlijEeiKvbCRoPhrSQ" name="Tools" guid="_H2HZZlijEeiKvbCRoPhrSQ"/>
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_H2HZZ1ijEeiKvbCRoPhrSQ" name="StandardCategories" guid="_H2HZZ1ijEeiKvbCRoPhrSQ"/>
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_H2HZaFijEeiKvbCRoPhrSQ" name="CustomCategories" guid="_H2HZaFijEeiKvbCRoPhrSQ">
+          <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_H2HZaVijEeiKvbCRoPhrSQ" name="Hidden" guid="_H2HZaVijEeiKvbCRoPhrSQ">
+            <contentElements xsi:type="org.eclipse.epf.uma:CustomCategory" xmi:id="_H2HZalijEeiKvbCRoPhrSQ" name="Custom Categories" guid="_H2HZalijEeiKvbCRoPhrSQ"/>
+          </childPackages>
+        </childPackages>
+      </childPackages>
+      <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_H2HZa1ijEeiKvbCRoPhrSQ" name="CoreContent" guid="_H2HZa1ijEeiKvbCRoPhrSQ">
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_U4xXYFijEeiKvbCRoPhrSQ" name="processo1" guid="_U4xXYFijEeiKvbCRoPhrSQ" presentationName="Processo1">
+          <methodElementProperty xmi:id="_U4ylgFijEeiKvbCRoPhrSQ" name="pkg_loadCheck" value="true"/>
+          <methodElementProperty xmi:id="_Yi_a0FitEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+          <contentElements xsi:type="org.eclipse.epf.uma:Role" xmi:id="_bUzxQFikEeiKvbCRoPhrSQ" name="product_owner" guid="_bUzxQFikEeiKvbCRoPhrSQ" presentationName="Product owner">
+            <methodElementProperty xmi:id="_XvW-cFitEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="--IfoZM--Awo3lZ6nJEje_Q" href="uma://--IfoZM--Awo3lZ6nJEje_Q#--IfoZM--Awo3lZ6nJEje_Q"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Role" xmi:id="_AegAsFilEeiKvbCRoPhrSQ" name="scrum_master" guid="_AegAsFilEeiKvbCRoPhrSQ" presentationName="Scrum Master">
+            <methodElementProperty xmi:id="_YjUK8FitEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-S6BCDublev2hy51EfCY4dg" href="uma://-S6BCDublev2hy51EfCY4dg#-S6BCDublev2hy51EfCY4dg"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Role" xmi:id="_KOJ84FilEeiKvbCRoPhrSQ" name="time_de_desenvolvimento" guid="_KOJ84FilEeiKvbCRoPhrSQ" presentationName="Time de Desenvolvimento">
+            <methodElementProperty xmi:id="_YjnF4FitEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-z_kNAS2bCe40Ymn1FgTOzg" href="uma://-z_kNAS2bCe40Ymn1FgTOzg#-z_kNAS2bCe40Ymn1FgTOzg"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Artifact" xmi:id="_CNXEUFinEeiKvbCRoPhrSQ" name="ata_de_reuniao" guid="_CNXEUFinEeiKvbCRoPhrSQ" presentationName="Ata de reuniao">
+            <methodElementProperty xmi:id="_YkxjgFitEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-gDDMAQON0lU6YGKP0FEFug" href="uma://-gDDMAQON0lU6YGKP0FEFug#-gDDMAQON0lU6YGKP0FEFug"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Task" xmi:id="_5RMlIFinEeiKvbCRoPhrSQ" name="realizar_reuniao_de_planejamento_da_sprint" guid="_5RMlIFinEeiKvbCRoPhrSQ" presentationName="Realizar reuniao de planejamento da sprint" performedBy="_bUzxQFikEeiKvbCRoPhrSQ _KOJ84FilEeiKvbCRoPhrSQ" output="_CNXEUFinEeiKvbCRoPhrSQ">
+            <methodElementProperty xmi:id="_Ylmp8FitEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-zqG_Qt4wV2b0xQb_JaX4TA" href="uma://-zqG_Qt4wV2b0xQb_JaX4TA#-zqG_Qt4wV2b0xQb_JaX4TA"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Task" xmi:id="_e8E2EFioEeiKvbCRoPhrSQ" name="planning_poker" guid="_e8E2EFioEeiKvbCRoPhrSQ" presentationName="Planning Poker" performedBy="_bUzxQFikEeiKvbCRoPhrSQ _AegAsFilEeiKvbCRoPhrSQ _KOJ84FilEeiKvbCRoPhrSQ" output="_KfzwwFipEeiKvbCRoPhrSQ">
+            <methodElementProperty xmi:id="_YmEkAFitEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-R-U4kaCMOfiV8TvvPenNxQ" href="uma://-R-U4kaCMOfiV8TvvPenNxQ#-R-U4kaCMOfiV8TvvPenNxQ"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Artifact" xmi:id="_KfzwwFipEeiKvbCRoPhrSQ" name="documento_de_analise_do_planning_poker" guid="_KfzwwFipEeiKvbCRoPhrSQ" presentationName="Documento de analise do planning poker" shapeicon="workproducts/resources/p+p.png">
+            <methodElementProperty xmi:id="_Ym6RgFitEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-rlFhIEmOuK1OTs3uysouJA" href="uma://-rlFhIEmOuK1OTs3uysouJA#-rlFhIEmOuK1OTs3uysouJA"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Artifact" xmi:id="_AB4ucFirEeiKvbCRoPhrSQ" name="checklist_dos_requisitos" guid="_AB4ucFirEeiKvbCRoPhrSQ" presentationName="Checklist dos requisitos" shapeicon="workproducts/resources/doc.png">
+            <methodElementProperty xmi:id="_YnECgFitEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-IqWrjQ4_Z5C7pXmsWdtDwQ" href="uma://-IqWrjQ4_Z5C7pXmsWdtDwQ#-IqWrjQ4_Z5C7pXmsWdtDwQ"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Artifact" xmi:id="_-n9RoFirEeiKvbCRoPhrSQ" name="matriz_de_rastreabilidade_bidirecional_" guid="_-n9RoFirEeiKvbCRoPhrSQ" presentationName="Matriz de rastreabilidade bidirecional " shapeicon="workproducts/resources/Sem+título.png">
+            <methodElementProperty xmi:id="_YnNzgFitEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-AkhvASnJhHHQHXKx23024Q" href="uma://-AkhvASnJhHHQHXKx23024Q#-AkhvASnJhHHQHXKx23024Q"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Task" xmi:id="_pafY4FisEeiKvbCRoPhrSQ" name="realizar_revisao_da_sprint" guid="_pafY4FisEeiKvbCRoPhrSQ" presentationName="Realizar revisao da Sprint" performedBy="_bUzxQFikEeiKvbCRoPhrSQ _KOJ84FilEeiKvbCRoPhrSQ" output="_tj1M0FisEeiKvbCRoPhrSQ">
+            <methodElementProperty xmi:id="_Yn0QcFitEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-UeFbapwdmY7gj3DarFP94w" href="uma://-UeFbapwdmY7gj3DarFP94w#-UeFbapwdmY7gj3DarFP94w"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Artifact" xmi:id="_tj1M0FisEeiKvbCRoPhrSQ" name="product_backlog_atualizado" guid="_tj1M0FisEeiKvbCRoPhrSQ" presentationName="Product Backlog atualizado">
+            <methodElementProperty xmi:id="_YoK1wFitEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-YZ98O6Yg2v1yCEhhnSw4MQ" href="uma://-YZ98O6Yg2v1yCEhhnSw4MQ#-YZ98O6Yg2v1yCEhhnSw4MQ"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Task" xmi:id="_u52AsFiwEeiKvbCRoPhrSQ" name="realizar_checklist_dos_requisitos" guid="_u52AsFiwEeiKvbCRoPhrSQ" presentationName="Realizar checklist dos requisitos" performedBy="_KOJ84FilEeiKvbCRoPhrSQ" mandatoryInput="_AB4ucFirEeiKvbCRoPhrSQ" output="_IgMIwFixEeiKvbCRoPhrSQ">
+            <methodElementProperty xmi:id="_GJsygFixEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-E5kfA8Rj2Duki8UQ0-6t_A" href="uma://-E5kfA8Rj2Duki8UQ0-6t_A#-E5kfA8Rj2Duki8UQ0-6t_A"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Artifact" xmi:id="_IgMIwFixEeiKvbCRoPhrSQ" name="checklist_dos_requisitos_verificado._1" guid="_IgMIwFixEeiKvbCRoPhrSQ" presentationName="Checklist dos requisitos verificado." shapeicon="workproducts/resources/DOC3.png">
+            <methodElementProperty xmi:id="_IbI0MFiyEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-ETxQiQxIRmSjXdqBvJ6JFg" href="uma://-ETxQiQxIRmSjXdqBvJ6JFg#-ETxQiQxIRmSjXdqBvJ6JFg"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Artifact" xmi:id="_PC9AQFizEeiKvbCRoPhrSQ" name="entrevista_documentada" guid="_PC9AQFizEeiKvbCRoPhrSQ" presentationName="Entrevista documentada">
+            <methodElementProperty xmi:id="_jb7rkFizEeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-u4X1ChdRA3OiX_yBcnVY0Q" href="uma://-u4X1ChdRA3OiX_yBcnVY0Q#-u4X1ChdRA3OiX_yBcnVY0Q"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Task" xmi:id="_kboYkFi0EeiKvbCRoPhrSQ" name="realizar_documentacao_dos_requistos_pela_ferramenta_trello" guid="_kboYkFi0EeiKvbCRoPhrSQ" presentationName="Realizar documentacao dos requistos pela ferramenta trello" performedBy="_AegAsFilEeiKvbCRoPhrSQ _bUzxQFikEeiKvbCRoPhrSQ _KOJ84FilEeiKvbCRoPhrSQ" output="_A4KqoFi1EeiKvbCRoPhrSQ">
+            <methodElementProperty xmi:id="_s6840Fi1EeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-V2aWa3AohGnS6OYsti-Vhw" href="uma://-V2aWa3AohGnS6OYsti-Vhw#-V2aWa3AohGnS6OYsti-Vhw"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Artifact" xmi:id="_A4KqoFi1EeiKvbCRoPhrSQ" name="requisitos_documentados_na_plataforma_trello" guid="_A4KqoFi1EeiKvbCRoPhrSQ" presentationName="Requisitos documentados na plataforma trello">
+            <methodElementProperty xmi:id="_s7ymUFi1EeiKvbCRoPhrSQ" name="me_edited" value="true"/>
+            <presentation xmi:id="-icCoteQDs_J6Q4G-oeVjJA" href="uma://-icCoteQDs_J6Q4G-oeVjJA#-icCoteQDs_J6Q4G-oeVjJA"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Task" xmi:id="_AxdYYGH6Eei3PpZ6HUEEZA" name="realizar_entrevista" guid="_AxdYYGH6Eei3PpZ6HUEEZA" presentationName="Realizar entrevista" briefDescription="A terafa se basea em uma entrevista elaborada pelo time de desenvolvimento e feita entre o time de desenvolvimento e o PO." performedBy="_KOJ84FilEeiKvbCRoPhrSQ _bUzxQFikEeiKvbCRoPhrSQ" output="_PC9AQFizEeiKvbCRoPhrSQ">
+            <methodElementProperty xmi:id="_tuZj4GIJEei3PpZ6HUEEZA" name="me_edited" value="true"/>
+            <presentation xmi:id="-M61_EUvIIGfLvVkdgfrVxA" href="uma://-M61_EUvIIGfLvVkdgfrVxA#-M61_EUvIIGfLvVkdgfrVxA"/>
+          </contentElements>
+          <contentElements xsi:type="org.eclipse.epf.uma:Task" xmi:id="_1G7B4GIPEei3PpZ6HUEEZA" name="registro_da_planilla_de_rastreabilidade._1" guid="_1G7B4GIPEei3PpZ6HUEEZA" presentationName="Registro da planilla de rastreabilidade." output="_-n9RoFirEeiKvbCRoPhrSQ">
+            <methodElementProperty xmi:id="_WwGo4GIZEei3PpZ6HUEEZA" name="me_edited" value="true"/>
+            <presentation xmi:id="-qqsNikkufXolZBvlY7MnmQ" href="uma://-qqsNikkufXolZBvlY7MnmQ#-qqsNikkufXolZBvlY7MnmQ"/>
+          </contentElements>
+        </childPackages>
+      </childPackages>
+      <childPackages xsi:type="org.eclipse.epf.uma:ProcessPackage" xmi:id="_H2HZbFijEeiKvbCRoPhrSQ" name="CapabilityPatterns" guid="_H2HZbFijEeiKvbCRoPhrSQ"/>
+    </methodPackages>
+    <methodPackages xsi:type="org.eclipse.epf.uma:ProcessPackage" xmi:id="_H2HZbVijEeiKvbCRoPhrSQ" name="DeliveryProcesses" guid="_H2HZbVijEeiKvbCRoPhrSQ">
+      <childPackages xsi:type="org.eclipse.epf.uma:ProcessComponent" xmi:id="_IZFXAFi4EeipPrTYh35ZJw" href="uma://_IZFXAFi4EeipPrTYh35ZJw#_IZFXAFi4EeipPrTYh35ZJw"/>
+    </methodPackages>
+    <methodPackages xsi:type="org.eclipse.epf.uma:ProcessPackage" xmi:id="_H2HZblijEeiKvbCRoPhrSQ" name="ProcessContributions" guid="_H2HZblijEeiKvbCRoPhrSQ"/>
+  </org.eclipse.epf.uma:MethodPlugin>
+</xmi:XMI>

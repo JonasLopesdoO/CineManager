@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1">
+  <org.eclipse.epf.uma:DeliveryProcessDescription xmi:id="--_dOzI7lrnapEBDpWWY4Tw" name="Desenvolvimento Desktop,_IZFXAVi4EeipPrTYh35ZJw" guid="--_dOzI7lrnapEBDpWWY4Tw"/>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-CA7ILE5Tw3S36o9AVscWGA" name="realizar_reuniao_de_planejamento_da_sprint,_XimT0Fi4EeipPrTYh35ZJw" guid="-CA7ILE5Tw3S36o9AVscWGA">
+    <refinedDescription>O trabalho a ser realizado na Sprint é planejado na reunião de planejamento da Sprint. Este plano é criado com o trabalho&#xD;
+colaborativo de todo o Time Scrum</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-B4DD6uJkby1TYgJP1IpV0Q" name="product_owner,_Xim64Fi4EeipPrTYh35ZJw" guid="-B4DD6uJkby1TYgJP1IpV0Q">
+    <refinedDescription>O Product Owner, ou dono do produto, é o responsável por maximizar o valor do produto e do trabalho do Time de&#xD;
+Desenvolvimento. Como isso é feito pode variar amplamente através das organizações, Times Scrum e indivíduos.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="--7EZWDTFpgvoNKRpxnpGlQ" name="time_de_desenvolvimento,_Xim64li4EeipPrTYh35ZJw" guid="--7EZWDTFpgvoNKRpxnpGlQ">
+    <refinedDescription>O Time de Desenvolvimento consiste de profissionais que realizam o trabalho de entregar uma versão usável que&#xD;
+potencialmente incrementa o produto “Pronto” ao final de cada Sprint. Somente integrantes do Time de Desenvolvimento criam&#xD;
+incrementos. Os Times de Desenvolvimento são estruturados e autorizados pela organização para organizar e gerenciar seu&#xD;
+próprio trabalho. A sinergia resultante aperfeiçoa a eficiência e a eficácia do Time de Desenvolvimento como um todo.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-P18idQ_Q7kk9EetqGLpi8w" name="ata_de_reuniao,_Xinh8Fi4EeipPrTYh35ZJw" guid="-P18idQ_Q7kk9EetqGLpi8w">
+    <refinedDescription>&lt;p>&#xD;
+    Ata de reunião assianada pelos membros do time,inclusive o PO(Product Owner).&#xD;
+&lt;/p></refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-330nDfxfea7A5rSj6ZbwwQ" name="realizar_documentacao_dos_requistos_pela_ferramenta_trello,__4dkUFi4EeipPrTYh35ZJw" guid="-330nDfxfea7A5rSj6ZbwwQ">
+    <refinedDescription>O time scrum documenta todos os requistos e os classifica pela platafoma trello, para uma maior facilidade de acesso de&#xD;
+todo o time.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-eCcuQ0m2w0Ilhaww2BJ1jQ" name="scrum_master,__4dkUVi4EeipPrTYh35ZJw" guid="-eCcuQ0m2w0Ilhaww2BJ1jQ">
+    <refinedDescription>O Scrum Master é responsável por garantir que o Scrum seja entendido e aplicado. O Scrum&lt;br />&#xD;
+Master faz isso para garantir que o Time Scrum adere à teoria, práticas e regras do Scrum. O&lt;br />&#xD;
+Scrum Master é um servo-líder para o Time Scrum.&lt;br />&#xD;
+O Scrum Master ajuda aqueles que estão fora do Time Scrum a entender quais as suas&lt;br />&#xD;
+interações com o Time Scrum são úteis e quais não são. O Scrum Master ajuda todos a&lt;br />&#xD;
+mudarem estas interações para maximizar o valor criado pelo Time Scrum.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-xAM7xZcREHT7zQhqwjFpZw" name="product_owner,__4dkU1i4EeipPrTYh35ZJw" guid="-xAM7xZcREHT7zQhqwjFpZw">
+    <refinedDescription>O Product Owner, ou dono do produto, é o responsável por maximizar o valor do produto e do trabalho do Time de&#xD;
+Desenvolvimento. Como isso é feito pode variar amplamente através das organizações, Times Scrum e indivíduos.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-K9AkP-dmMUt_zBXb3WFl3g" name="time_de_desenvolvimento,__4dkVVi4EeipPrTYh35ZJw" guid="-K9AkP-dmMUt_zBXb3WFl3g">
+    <refinedDescription>O Time de Desenvolvimento consiste de profissionais que realizam o trabalho de entregar uma versão usável que&#xD;
+potencialmente incrementa o produto “Pronto” ao final de cada Sprint. Somente integrantes do Time de Desenvolvimento criam&#xD;
+incrementos. Os Times de Desenvolvimento são estruturados e autorizados pela organização para organizar e gerenciar seu&#xD;
+próprio trabalho. A sinergia resultante aperfeiçoa a eficiência e a eficácia do Time de Desenvolvimento como um todo.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-l4m_mxV9SI9wTZbi0TdLOw" name="requisitos_documentados_na_plataforma_trello,__4eLYFi4EeipPrTYh35ZJw" guid="-l4m_mxV9SI9wTZbi0TdLOw">
+    <refinedDescription>&lt;p>&#xD;
+    Por este meio desta plataforma todos os requisitos serao elicitados,catalogados e clasificados&amp;nbsp;pela equipe.&#xD;
+&lt;/p></refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-8wiI6UbNa9CvHb2hDUxa-w" name="realizar_checklist_dos_requisitos,_AdKz4Fi5EeipPrTYh35ZJw" guid="-8wiI6UbNa9CvHb2hDUxa-w">
+    <refinedDescription>O time de desenvolvimento verifica o nivel de implementacao dos requisitos.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-7msUpgiGyUDrXAHtF6F7yA" name="checklist_dos_requisitos,_AdKz4Vi5EeipPrTYh35ZJw" guid="-7msUpgiGyUDrXAHtF6F7yA">
+    <refinedDescription>Documento elaborado pelo time de desenvolvimento para classificar os requisitos como implementados ou nao.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-zU7DAuW2zn6DVTpHZ4StCg" name="checklist_dos_requisitos_verificado._1,_AdKz41i5EeipPrTYh35ZJw" guid="-zU7DAuW2zn6DVTpHZ4StCg">
+    <refinedDescription>Documento com as informações checadas sobre o andamento da implementacao dos requisitos e neste mesmo documento podera ser&#xD;
+incluido novos requisitos a serem implementados.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-kfpiGQylYUrQ90l-0rvFuQ" name="planning_poker,_M0h_4Fi-EeipPrTYh35ZJw" guid="-kfpiGQylYUrQ90l-0rvFuQ">
+    <refinedDescription>&lt;span&#xD;
+style=&quot;FONT-SIZE: 16px; FONT-FAMILY: sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(29,32,33); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial&quot;>&#xD;
+O Planning Poker consiste-se em obter a estimativa por meio de um jogo de cartas, deve permitir que todos os membros da&#xD;
+equipe de desenvolvimento participem colocando a sua visão de complexidade, levando em consideração o fator tempo e esforço&#xD;
+para pontuar um cartão e após juntos chegar a um denominador comum na equipe através de consenso.&lt;/span></refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-eIVabkga6OHDgO6rtcb8mw" name="product_owner,_M0im8Fi-EeipPrTYh35ZJw" guid="-eIVabkga6OHDgO6rtcb8mw">
+    <refinedDescription>O Product Owner, ou dono do produto, é o responsável por maximizar o valor do produto e do trabalho do Time de&#xD;
+Desenvolvimento. Como isso é feito pode variar amplamente através das organizações, Times Scrum e indivíduos.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-5axCmIbVVKs-M3vRYyGF1g" name="scrum_master,_M0im8li-EeipPrTYh35ZJw" guid="-5axCmIbVVKs-M3vRYyGF1g">
+    <refinedDescription>O Scrum Master é responsável por garantir que o Scrum seja entendido e aplicado. O Scrum&lt;br />&#xD;
+Master faz isso para garantir que o Time Scrum adere à teoria, práticas e regras do Scrum. O&lt;br />&#xD;
+Scrum Master é um servo-líder para o Time Scrum.&lt;br />&#xD;
+O Scrum Master ajuda aqueles que estão fora do Time Scrum a entender quais as suas&lt;br />&#xD;
+interações com o Time Scrum são úteis e quais não são. O Scrum Master ajuda todos a&lt;br />&#xD;
+mudarem estas interações para maximizar o valor criado pelo Time Scrum.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-K3YQJmcLXeBvvMpwNd3-mQ" name="time_de_desenvolvimento,_M0im9Fi-EeipPrTYh35ZJw" guid="-K3YQJmcLXeBvvMpwNd3-mQ">
+    <refinedDescription>O Time de Desenvolvimento consiste de profissionais que realizam o trabalho de entregar uma versão usável que&#xD;
+potencialmente incrementa o produto “Pronto” ao final de cada Sprint. Somente integrantes do Time de Desenvolvimento criam&#xD;
+incrementos. Os Times de Desenvolvimento são estruturados e autorizados pela organização para organizar e gerenciar seu&#xD;
+próprio trabalho. A sinergia resultante aperfeiçoa a eficiência e a eficácia do Time de Desenvolvimento como um todo.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-8GQLu96huDkewk16rQXTpg" name="realizar_revisao_da_sprint,_Q6CcsFi-EeipPrTYh35ZJw" guid="-8GQLu96huDkewk16rQXTpg">
+    <refinedDescription>A Revisão da Sprint é executada no final da Sprint para inspecionar o incremento e adaptar o Backlog do Produto se&#xD;
+necessário. Durante a reunião de Revisão da Sprint o Time Scrum e as partes interessadas colaboram sobre o que foi feito na&#xD;
+Sprint. Com base nisso e em qualquer mudança no Backlog do Produto durante a Sprint, os participantes colaboram nas&#xD;
+próximas coisas que podem ser feitas para otimizar valor. Esta é uma reunião informal, não uma reunião de status, e a&#xD;
+apresentação do incremento destina-se a motivar e obter comentários e promover a colaboração.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-nOhvbDyOLD2-JfKnPxpYdg" name="product_owner,_Q6DDwFi-EeipPrTYh35ZJw" guid="-nOhvbDyOLD2-JfKnPxpYdg">
+    <refinedDescription>O Product Owner, ou dono do produto, é o responsável por maximizar o valor do produto e do trabalho do Time de&#xD;
+Desenvolvimento. Como isso é feito pode variar amplamente através das organizações, Times Scrum e indivíduos.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-Sl6yJkwENyGWySMUuxBJSw" name="time_de_desenvolvimento,_Q6ER4Fi-EeipPrTYh35ZJw" guid="-Sl6yJkwENyGWySMUuxBJSw">
+    <refinedDescription>O Time de Desenvolvimento consiste de profissionais que realizam o trabalho de entregar uma versão usável que&#xD;
+potencialmente incrementa o produto “Pronto” ao final de cada Sprint. Somente integrantes do Time de Desenvolvimento criam&#xD;
+incrementos. Os Times de Desenvolvimento são estruturados e autorizados pela organização para organizar e gerenciar seu&#xD;
+próprio trabalho. A sinergia resultante aperfeiçoa a eficiência e a eficácia do Time de Desenvolvimento como um todo.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-qijF-fgk_OsRyyN1ajz6gQ" name="product_backlog_atualizado,_Q6GuIFi-EeipPrTYh35ZJw" guid="-qijF-fgk_OsRyyN1ajz6gQ">
+    <refinedDescription>&lt;p>&#xD;
+    &lt;font size=&quot;3&quot; face=&quot;Calibri&quot;>O resultado da Reunião de Revisão da Sprint é um Backlog do Produto revisado que define o&#xD;
+    provável Backlog do Produto para a próxima Sprint. O Backlog do Produto pode também ser ajustado completamente para&#xD;
+    atender novas oportunidades&lt;/font>&#xD;
+&lt;/p></refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-7JbfPy3LP3xUb_TROv6eOQ" name="realizar_reuniao_de_planejamento_da_sprint,_UeaiYFi-EeipPrTYh35ZJw" guid="-7JbfPy3LP3xUb_TROv6eOQ">
+    <refinedDescription>O trabalho a ser realizado na Sprint é planejado na reunião de planejamento da Sprint. Este plano é criado com o trabalho&#xD;
+colaborativo de todo o Time Scrum</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="--eKkweQcum5XPtOUqT18kg" name="ata_de_reuniao,_UebJcFi-EeipPrTYh35ZJw" guid="--eKkweQcum5XPtOUqT18kg">
+    <refinedDescription>&lt;p>&#xD;
+    Ata de reunião assianada pelos membros do time,inclusive o PO(Product Owner).&#xD;
+&lt;/p></refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-a_ZEnW5I7NLK1BRc1UrIdQ" name="realizar_entrevista,_85XBQGIAEei3PpZ6HUEEZA" guid="-a_ZEnW5I7NLK1BRc1UrIdQ">
+    <refinedDescription>Entrevista gravada(caso perimitido) e documentada para a realização da eliticitação dos requisitos</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-QPbnkLFMG2PEtGVdDlvaZw" name="time_de_desenvolvimento,_89WwcGIAEei3PpZ6HUEEZA" guid="-QPbnkLFMG2PEtGVdDlvaZw">
+    <refinedDescription>O Time de Desenvolvimento consiste de profissionais que realizam o trabalho de entregar uma versão usável que&#xD;
+potencialmente incrementa o produto “Pronto” ao final de cada Sprint. Somente integrantes do Time de Desenvolvimento criam&#xD;
+incrementos. Os Times de Desenvolvimento são estruturados e autorizados pela organização para organizar e gerenciar seu&#xD;
+próprio trabalho. A sinergia resultante aperfeiçoa a eficiência e a eficácia do Time de Desenvolvimento como um todo.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-Dwfh99i9HiluoSIkb5HICQ" name="product_owner,_89WwcmIAEei3PpZ6HUEEZA" guid="-Dwfh99i9HiluoSIkb5HICQ">
+    <refinedDescription>O Product Owner, ou dono do produto, é o responsável por maximizar o valor do produto e do trabalho do Time de&#xD;
+Desenvolvimento. Como isso é feito pode variar amplamente através das organizações, Times Scrum e indivíduos.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-lgR7HLPwSM4DB1G3cgdYGQ" name="entrevista_documentada,_89esQGIAEei3PpZ6HUEEZA" guid="-lgR7HLPwSM4DB1G3cgdYGQ">
+    <refinedDescription>A entrevista e registrada (principalmente por meio de gravacao) para que a equipe possa detectar algum requisito que nao&#xD;
+foi elicitado pela equipe durante a entrevista realizada.</refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-0icZHA5WietEnFBelQ6IWg" name="registro_da_planilla_de_rastreabilidade._1,_V_ZmwGYhEeiHy-_kpfbOqQ" guid="-0icZHA5WietEnFBelQ6IWg">
+    <refinedDescription>&lt;P class=MsoNormal style=&quot;MARGIN: 0cm 0cm 8pt&quot;>&lt;FONT size=3 face=Calibri>Matriz com todos os artefatos do projeto com a condição de que se a modificação de um artefato A afeta um artefato B na matriz estará marcado com&amp;nbsp;um X (Xis) na interseção dos dois artefatos. Logo a se o artefato A for modificado o artefato B também deverá ser modificado para se adaptar as alterações que foram feitas no artefato A. Esta matriz auxilia no gerenciamento de mudanças do projeto.&lt;/FONT>&lt;?xml:namespace prefix = &quot;o&quot; ns = &quot;urn:schemas-microsoft-com:office:office&quot; />&lt;o:p>&lt;/o:p>&lt;/P></refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+  <org.eclipse.epf.uma:DescriptorDescription xmi:id="-dSP-dI7LgLaATjos57TDVQ" name="matriz_de_rastreabilidade_bidirecional_,_qB8nsWYkEeiHy-_kpfbOqQ" guid="-dSP-dI7LgLaATjos57TDVQ">
+    <refinedDescription>&lt;span&#xD;
+style='FONT-SIZE: 14px; FONT-FAMILY: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial'>&#xD;
+A&amp;nbsp;matriz de rastreabilidade dos requisitos associa os requisitos às suas origens e os rastreia durante todo o ciclo de&#xD;
+vida do projeto.&lt;/span></refinedDescription>
+  </org.eclipse.epf.uma:DescriptorDescription>
+</xmi:XMI>

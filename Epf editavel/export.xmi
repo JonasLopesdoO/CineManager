@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI epf:version="1.5.1" xmi:version="2.0" xmlns:epf="http://www.eclipse.org/epf" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:org.eclipse.epf.uma.resourcemanager="http:///org/eclipse/epf/uma/resourcemanager.ecore" xmlns:xmi="http://www.omg.org/XMI">
+<org.eclipse.epf.uma.resourcemanager:ResourceManager guid="_MwwBAFYqEeiqq9auJ1k7sw" xmi:id="_MwwBAFYqEeiqq9auJ1k7sw">
+<subManagers href="uma://_H2GyUFijEeiKvbCRoPhrSQ#_H2qzAFijEeiKvbCRoPhrSQ" xmi:id="_H2qzAFijEeiKvbCRoPhrSQ">
+</subManagers>
+<resourceDescriptors id="_MwuL0FYqEeiqq9auJ1k7sw" uri="" xmi:id="_Mwx2MFYqEeiqq9auJ1k7sw">
+</resourceDescriptors>
+<resourceDescriptors id="_H2GyUFijEeiKvbCRoPhrSQ" uri="Processo/plugin.xmi" xmi:id="_H2qzAVijEeiKvbCRoPhrSQ">
+</resourceDescriptors>
+</org.eclipse.epf.uma.resourcemanager:ResourceManager>
+<org.eclipse.epf.uma:MethodLibrary guid="_MwuL0FYqEeiqq9auJ1k7sw" name="Library1" xmi:id="_MwuL0FYqEeiqq9auJ1k7sw">
+<methodElementProperty name="library_synFree" value="true" xmi:id="_MziPQFYqEeiqq9auJ1k7sw">
+</methodElementProperty>
+<methodPlugins href="uma://_H2GyUFijEeiKvbCRoPhrSQ#_H2GyUFijEeiKvbCRoPhrSQ" xmi:id="_H2GyUFijEeiKvbCRoPhrSQ">
+</methodPlugins>
+<methodElementProperty value="0">
+</methodElementProperty>
+<methodElementProperty value="_Rlka4FYqEeiqq9auJ1k7sw">
+</methodElementProperty>
+<methodElementProperty value="Fazer">
+</methodElementProperty>
+<methodElementProperty value="_H2GyUFijEeiKvbCRoPhrSQ">
+</methodElementProperty>
+<methodElementProperty value="Processo">
+</methodElementProperty>
+</org.eclipse.epf.uma:MethodLibrary>
+</xmi:XMI>

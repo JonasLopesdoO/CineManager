@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.eclipse.epf.uma:RoleDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1" xmi:id="-z_kNAS2bCe40Ymn1FgTOzg" name="new_role,_KOJ84FilEeiKvbCRoPhrSQ" guid="-z_kNAS2bCe40Ymn1FgTOzg" changeDate="2018-05-15T22:05:33.163-0300">
+  <mainDescription>O Time de Desenvolvimento consiste de profissionais que realizam o trabalho de entregar uma versão usável que&#xD;
+potencialmente incrementa o produto “Pronto” ao final de cada Sprint. Somente integrantes do Time de Desenvolvimento criam&#xD;
+incrementos. Os Times de Desenvolvimento são estruturados e autorizados pela organização para organizar e gerenciar seu&#xD;
+próprio trabalho. A sinergia resultante aperfeiçoa a eficiência e a eficácia do Time de Desenvolvimento como um todo.</mainDescription>
+</org.eclipse.epf.uma:RoleDescription>

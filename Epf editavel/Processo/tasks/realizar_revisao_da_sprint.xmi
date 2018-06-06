@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.eclipse.epf.uma:TaskDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1" xmi:id="-UeFbapwdmY7gj3DarFP94w" name=",_pafY4FisEeiKvbCRoPhrSQ" guid="-UeFbapwdmY7gj3DarFP94w" changeDate="2018-05-15T23:02:36.651-0300">
+  <mainDescription>A Revisão da Sprint é executada no final da Sprint para inspecionar o incremento e adaptar o Backlog do Produto se&#xD;
+necessário. Durante a reunião de Revisão da Sprint o Time Scrum e as partes interessadas colaboram sobre o que foi feito na&#xD;
+Sprint. Com base nisso e em qualquer mudança no Backlog do Produto durante a Sprint, os participantes colaboram nas&#xD;
+próximas coisas que podem ser feitas para otimizar valor. Esta é uma reunião informal, não uma reunião de status, e a&#xD;
+apresentação do incremento destina-se a motivar e obter comentários e promover a colaboração.</mainDescription>
+</org.eclipse.epf.uma:TaskDescription>

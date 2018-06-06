@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.eclipse.epf.uma:ArtifactDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1" xmi:id="-ETxQiQxIRmSjXdqBvJ6JFg" name="new_artifact,_IgMIwFixEeiKvbCRoPhrSQ" guid="-ETxQiQxIRmSjXdqBvJ6JFg" changeDate="2018-06-02T01:24:02.827-0300">
+  <mainDescription>Documento com as informações checadas sobre o andamento da implementacao dos requisitos e neste mesmo documento podera ser&#xD;
+incluido novos requisitos a serem implementados.</mainDescription>
+  <purpose>&lt;p>&#xD;
+    Feito para atualizar o time de desenvolvimento sobre novos requisitos que surgem durante o periodo de desenvolvimento.&#xD;
+&lt;/p></purpose>
+</org.eclipse.epf.uma:ArtifactDescription>
