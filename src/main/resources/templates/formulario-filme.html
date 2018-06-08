@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Formulario</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+
+</head>
+<body>
+
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Cinema WEB</h1>
+			<h3 style="color: darkgreen">Sala - PÁGINA PARA A ATUALIAÇÃO DAS
+				SALAS DO CINEMA</h3>
+		</div>
+	</div>
+
+	<form method="POST" action="/sala/salvar" th:object="${sala}"
+		class="col-lg-6">
+		<input type="hidden" th:field="*{id}">
+
+		<div class="form-group">
+			<label class="h1" for="sala">Nome Sala</label> <input type="text"
+				class="form-control" id="nome"  th:field="*{nome}"
+				placeholder="Digite o novo nome">
+		</div>
+
+		<div class="form-group input-group mb-3">
+			<div class="input-group-prepend">
+				<label class="input-group-text" for="inputGroupSelect01">Tipos
+					de Sala</label>
+			</div>
+			<select class="custom-select" id="inputGroupSelect01"  th:field="*{tipo}">
+				<option disabled="disabled" value="" selected="selected">Escolha o
+					tipo</option>
+				<option value="D2">2D</option>
+				<option value="D3">3D</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label class="h1" for="sala">Capacidade</label> <input type="number"
+				class="form-control" id="capacidade"  th:field="*{capacidade}"
+				placeholder="Digite a nova capacidade">
+		</div>
+
+		<button type="submit" class="btn btn-lg btn-primary">Enviar</button>
+	</form>
+
+
+	<script src="/js/bootstrap.min.js">
+		
+	</script>
+</body>
+</html>

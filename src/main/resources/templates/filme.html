@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<meta charset="utf-8">
+
+<title>Sala</title>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Cinema WEB</h1>
+			<h3 style="color: darkgreen">Salas - PÁGINA PARA O GERENCIAMENTO
+				DAS SALAS DO CINEMA</h3>
+		</div>
+	</div>
+
+	<br>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row  col-lg-12">
+
+			<fieldset>
+				<legend>MENU</legend>
+
+				<div class="form-group col-md-4">
+					<form class="col-sm-12 col-lg-12">
+						<fieldset>
+							<div class="container ">
+								<div class="row center col-lg-12">
+									<a href="/" class="btn btn-success btn-lg col-lg-4">HOME</a>
+								</div>
+								<label>Clique no botão para retornar ao MENU principal.</label>
+							</div>
+						</fieldset>
+						<!-- col-sm-12 -->
+					</form>
+				</div>
+			</fieldset>
+
+			<!-- col-sm-12 -->
+			<hr></hr>
+		</div>
+		<!-- row -->
+
+		<div class="row">
+			<form action="/sala/salvar" th:object="${sala}" method="POST"
+				class="col-sm-12 col-lg-12">
+				<br> <br> <br> <br> <br> <br>
+				<div class="row">
+
+					<fieldset>
+
+						<legend>Preencha os dados pedidos</legend>
+						<div class="form-group col-md-4">
+							<label for="sala">Nome da Sala</label> <input type="text"
+								placeholder="Nome da sala" class="form-control" id="nome"
+								name="nome" autofocus />
+						</div>
+
+						<div class="form-group col-md-2">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="inputGroupSelect01">Tipos de Sala</label>
+								</div>
+								<select class="custom-select" id="inputGroupSelect01" name="tipo">
+									<option disabled="disabled" selected="selected">Escolha o tipo</option>
+									<option value="D2">2D</option>
+									<option value="D3">3D</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group col-md-4">
+							<label for="sala">Capacidade</label> <input type="number"
+								placeholder="Digite a capacidade" class="form-control"
+								id="capacidade" name="capacidade" />
+						</div>
+
+						<div class="form-group col-md-4">
+							<button type="submit" name="action"
+								class="btn btn-success btn-lg btn-block">Adicionar Sala</button>
+						</div>
+					</fieldset>
+					<!-- col-sm-12 -->
+				</div>
+				<!-- row -->
+			</form>
+		</div>
+		<!-- row SALVAR SESSOES-->
+		<hr>
+		<div class="row">
+			<div id="tabela">
+				<h3>Salas cadastradas</h3>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nome</th>
+							<th>Tipo</th>
+							<th>Capacidade</th>
+							<th>Atualizar</th>
+							<th>Excluir</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="sala : ${salas}">
+							<td th:text="${sala.id}"></td>
+							<td th:text="${sala.nome}"></td>
+							<td th:text="${sala.tipo}"></td>
+							<td th:text="${sala.capacidade}"></td>
+							<td><a class="btn btn-primary"
+								th:href="@{/sala/atualizar/{id}(id = ${sala.id})}">Atualizar
+							</a></td>
+							<td><a class="btn btn-sm  btn-danger"
+								th:href="@{/sala/excluir/{id}(id=${sala.id})}">X</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- row -->
+
+	</div>
+	<!-- container MOSTRAR SESSOES-->
+</body>
+</html>

@@ -19,7 +19,7 @@ import br.ufc.vev.repositorio.FilmeRepositorio;
 @Rollback(false)
 public class FilmeService {
 	@Autowired
-	FilmeRepositorio repositorio;
+	FilmeRepositorio filmeRepositorio;
 	@Autowired
 	AtorService atorService;
 	@Autowired
@@ -28,37 +28,37 @@ public class FilmeService {
 	GeneroService generoService;
 	
 	public Filme salvarFilme(Filme filme) {
-		return repositorio.save(filme);
+		return filmeRepositorio.save(filme);
 	}
 
 	public Filme buscarFilme(Integer id) {
-		return repositorio.getOne(id);
+		return filmeRepositorio.getOne(id);
 	}
 
 	public void excluirFilme(Filme filme) {
-		repositorio.delete(filme);
+		filmeRepositorio.delete(filme);
 	}
 
 	public Filme atualizaFilme(Filme filme) {
-		return repositorio.save(filme);
+		return filmeRepositorio.save(filme);
 		
 	}
 
 	public List<Filme> getAllFilme() {
-		return repositorio.findAll();
+		return filmeRepositorio.findAll();
 	}
 	
 	public boolean existsById(int id) {
-		return repositorio.existsById(id);
+		return filmeRepositorio.existsById(id);
 	}
 	
 	public void vinculaAtorAoFilme(int idFilme, int idAtor) {
-		Filme filme = repositorio.getOne(idFilme);
+		Filme filme = filmeRepositorio.getOne(idFilme);
 		Ator ator = atorService.buscarAtor(idAtor);
 		
 		filme.getAtores().add(ator);
 		ator.getFilmes().add(filme);
-		repositorio.save(filme);
+		filmeRepositorio.save(filme);
 		atorService.salvarAtor(ator);		
 	}
 	
@@ -68,17 +68,17 @@ public class FilmeService {
 		
 		filme.getAtores().remove(ator);
 		ator.getFilmes().remove(filme);
-		repositorio.save(filme);
+		filmeRepositorio.save(filme);
 		atorService.salvarAtor(ator);
 	}
 	
 	public void vinculaDiretorAoFilme(int idFilme, int idDir) {
-		Filme filme = repositorio.getOne(idFilme);
+		Filme filme = filmeRepositorio.getOne(idFilme);
 		Diretor diretor = diretorService.buscarDiretor(idDir);
 				
 		filme.getDiretores().add(diretor);
 		diretor.getFilmes().add(filme);
-		repositorio.save(filme);
+		filmeRepositorio.save(filme);
 		diretorService.salvarDiretor(diretor);		
 	}
 	
@@ -88,17 +88,17 @@ public class FilmeService {
 					
 		filme.getDiretores().remove(diretor);
 		diretor.getFilmes().remove(filme);	
-		repositorio.save(filme);
+		filmeRepositorio.save(filme);
 		diretorService.salvarDiretor(diretor);
 	}
 	
 	public void vinculaGeneroAoFilme(int idFilme, int idGenero) {
-		Filme filme = repositorio.getOne(idFilme);
+		Filme filme = filmeRepositorio.getOne(idFilme);
 		Genero genero = generoService.buscarGenero(idGenero);
 		
 		filme.getGeneros().add(genero);
 		genero.getFilmes().add(filme);
-		repositorio.save(filme);
+		filmeRepositorio.save(filme);
 		generoService.salvarGenero(genero);	
 	}
 	
@@ -108,7 +108,7 @@ public class FilmeService {
 					
 		filme.getGeneros().remove(genero);
 		genero.getFilmes().remove(filme);		
-		repositorio.save(filme);
+		filmeRepositorio.save(filme);
 		generoService.salvarGenero(genero); 
 	}
 }
