@@ -27,7 +27,7 @@
 
 		<div class="form-group">
 			<label class="h1" for="sala">Nome Sala</label> <input type="text"
-				class="form-control" id="nome" name="nome"
+				class="form-control" id="nome"  th:field="*{nome}"
 				placeholder="Digite o novo nome">
 		</div>
 
@@ -36,8 +36,8 @@
 				<label class="input-group-text" for="inputGroupSelect01">Tipos
 					de Sala</label>
 			</div>
-			<select class="custom-select" id="inputGroupSelect01" name="tipo">
-				<option disabled="disabled" selected="selected">Escolha o
+			<select class="custom-select" id="inputGroupSelect01"  th:field="*{tipo}">
+				<option disabled="disabled" value="" selected="selected">Escolha o
 					tipo</option>
 				<option value="D2">2D</option>
 				<option value="D3">3D</option>
@@ -46,7 +46,7 @@
 
 		<div class="form-group">
 			<label class="h1" for="sala">Capacidade</label> <input type="number"
-				class="form-control" id="capacidade" name="capacidade"
+				class="form-control" id="capacidade"  th:field="*{capacidade}"
 				placeholder="Digite a nova capacidade">
 		</div>
 

@@ -24,14 +24,14 @@
 <form method="POST" action="/ator/salvar" th:object="${ator}" class="col-lg-6">
 <input type="hidden" th:field="*{id}">
 
-  <div class="form-group">
-    <label class="h1" for="ator">Nome</label>
-    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o novo nome">
+   <div class="form-group">
+    <label class="h1" for="diretor">Nome</label>
+    <input type="text" class="form-control" id="nome"  th:field="*{nome}"placeholder="Digite o novo nome">
   </div>
   
   <div class="form-group">
-    <label class="h1" for="ator">Sobre</label>
-    <input type="text" class="form-control" id="sobre" name="sobre" placeholder="Digite o novo sobre">
+    <label class="h1" for="diretor">Sobre</label>
+    <input type="text" class="form-control" id="sobre"  th:field="*{sobre}" placeholder="Digite o novo sobre">
   </div>
   
   <button type="submit" class="btn btn-lg btn-primary">Enviar</button>
