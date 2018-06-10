@@ -216,7 +216,7 @@ public class FilmeController {
 
 	  ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
 	  
-	  if (existsByIdFilme(idFilme) && generoController.existsByIdGenero(idGenero) && generoPertenceAoFilme(idFilme, idGenero) == true){
+	  if (existsByIdFilme(idFilme) && generoController.existsByIdGenero(idGenero) && generoPertenceAoFilme(idFilme, idGenero) != true){
 		  filmeService.vinculaGeneroAoFilme(idFilme, idGenero);
 	  }
 	  
@@ -289,11 +289,11 @@ public class FilmeController {
 		return false;
 	}
 	
-	public boolean generoPertenceAoFilme(int idFilme, int idGen) {
-		if (existsByIdFilme(idFilme) && generoController.existsByIdGenero(idGen)) {
+	public boolean generoPertenceAoFilme(int idFilme, int idGenero) {
+		if (existsByIdFilme(idFilme) && generoController.existsByIdGenero(idGenero)) {
 			Filme filme = filmeService.buscarFilme(idFilme);
 			for (Genero genero : filme.getGeneros()) {
-				if (genero.getId() == idGen) {
+				if (genero.getId() == idGenero) {
 					return true;
 				}
 			}
