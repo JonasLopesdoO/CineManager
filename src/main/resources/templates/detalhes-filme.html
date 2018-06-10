@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<meta charset="utf-8">
+
+<title>Filme</title>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Cinema WEB</h1>
+			<h3 style="color: darkgreen">Filmes - PÁGINA PARA O
+				GERENCIAMENTO DAS FILMES DO CINEMA</h3>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="row  col-lg-12">
+			<fieldset>
+				<legend>MENU</legend>
+
+				<div class="form-group col-md-4">
+					<form class="col-sm-12 col-lg-12">
+						<fieldset>
+							<div class="container ">
+								<div class="row center col-lg-12">
+									<a href="/" class="btn btn-success btn-lg col-lg-4">HOME</a>
+								</div>
+								<label>Clique no botão para retornar ao MENU principal.</label>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<div style="left: 10px;" class="form-group col-md-4">
+					<form class="col-sm-12 col-lg-12">
+						<fieldset>
+							<div class="container ">
+								<div class="row center col-lg-12">
+									<a href="/filme/" class="btn btn-success btn-lg col-lg-4">FILME</a>
+								</div>
+								<label>Clique no botão para retornar ao MENU filme.</label>
+							</div>
+						</fieldset>
+						<!-- col-sm-12 -->
+					</form>
+				</div>
+			</fieldset>
+
+			<!-- col-sm-12 -->
+			<hr></hr>
+		</div>
+		<!-- row -->
+	</div>
+
+	<br>
+	<br>
+	<br>
+
+	<div class="container">
+		<div class="row valign-wrapper">
+			<div class="col-lg-6">
+				<h3>
+					Detalhes de <span th:text="${filme.nome}"></span>
+				</h3>
+			</div>
+
+		</div>
+		<!-- row valign-wrapper -->
+
+		<div class="row">
+			<form th:action="@{${'/filme/'+filme.id+'/adicionarAtor'}}"
+				method="POST">
+				<div class="col-lg-8">
+					<label>Escolha um ator</label> <select class="browser-default"
+						id="atorID" name="idAtor">
+						<option value="" disabled="disabled" selected="selected">Escolha
+							um ator</option>
+						<option th:each="ator : ${atores}" th:value="${ator.id}"
+							th:text="${ator.nome}"></option>
+					</select>
+				</div>
+				<!-- col lg 8 -->
+
+				<div class="form-group col-md-4">
+					<button type="submit" name="action"
+						class="btn btn-success btn-lg btn-block">Adicionar ator
+						ao Filme</button>
+				</div>
+			</form>
+		</div>
+		<!-- row -->
+		<div class="row">
+			<div id="tabela">
+				<hr>
+				<h3>Atores do Filme</h3>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nome</th>
+							<th>Sobre</th>
+							<th>Excluir do Filme</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="ator : ${filme.atores}">
+							<td th:text="${ator.id}"></td>
+							<td th:text="${ator.nome}"></td>
+							<td th:text="${ator.sobre}"></td>
+							<td><a class="btn btn-sm btn-danger"
+								th:href="@{${'/filme/'+filme.id+'/removerAtor/'+ator.id}}">X</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- row -->
+
+		<div class="row">
+			<form th:action="@{${'/filme/'+filme.id+'/adicionarDiretor'}}"
+				method="POST">
+				<div class="col-lg-8">
+					<label>Escolha um diretor</label> <select class="browser-default"
+						id="DiretorID" name="idDiretor">
+						<option value="" disabled="disabled" selected="selected">Escolha
+							um diretor</option>
+						<option th:each="diretor : ${diretores}" th:value="${diretor.id}"
+							th:text="${diretor.nome}"></option>
+					</select>
+				</div>
+				<!-- col lg 8 -->
+
+				<div class="form-group col-md-4">
+					<button type="submit" name="action"
+						class="btn btn-success btn-lg btn-block">Adicionar
+						diretor ao Filme</button>
+				</div>
+			</form>
+		</div>
+		<!-- row -->
+		<div class="row">
+			<div id="tabela">
+				<hr>
+				<h3>Diretores do Filme</h3>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nome</th>
+							<th>Sobre</th>
+							<th>Excluir do Filme</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="diretor : ${filme.diretores}">
+							<td th:text="${diretor.id}"></td>
+							<td th:text="${diretor.nome}"></td>
+							<td th:text="${diretor.sobre}"></td>
+							<td><a class="btn btn-sm btn-danger"
+								th:href="@{${'/filme/'+filme.id+'/removerDiretor/'+diretor.id}}">X</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- row -->
+		
+		<div class="row">
+			<form th:action="@{${'/filme/'+filme.id+'/adicionarGenero'}}"
+				method="POST">
+				<div class="col-lg-8">
+					<label>Escolha um Gênero</label> <select class="browser-default"
+						id="GeneroID" name="idGenero">
+						<option value="" disabled="disabled" selected="selected">Escolha
+							um genero</option>
+						<option th:each="genero : ${generos}" th:value="${genero.id}"
+							th:text="${genero.nome}"></option>
+					</select>
+				</div>
+				<!-- col lg 8 -->
+
+				<div class="form-group col-md-4">
+					<button type="submit" name="action"
+						class="btn btn-success btn-lg btn-block">Adicionar
+						Genero ao Filme</button>
+				</div>
+			</form>
+		</div>
+		<!-- row -->
+		<div class="row">
+			<div id="tabela">
+				<hr>
+				<h3>Generos do Filme</h3>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nome</th>
+							<th>Sobre</th>
+							<th>Excluir do Filme</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="genero : ${filme.generos}">
+							<td th:text="${genero.id}"></td>
+							<td th:text="${genero.nome}"></td>
+							<td th:text="${genero.sobre}"></td>
+							<td><a class="btn btn-sm btn-danger"
+								th:href="@{${'/filme/'+filme.id+'/removerGenero/'+genero.id}}">X</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- row -->
+	</div>
+</body>
+</html>

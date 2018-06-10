@@ -51,7 +51,6 @@ public class Filme {
 		
 	}
 	
-	
 	public Filme(String nome, String sinopse, int duracao){
 		this.setNome(nome);
 		this.setSinopse(sinopse);

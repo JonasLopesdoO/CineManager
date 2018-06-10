@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.ufc.vev.bean.Diretor;
-import br.ufc.vev.bean.Sala;
-import br.ufc.vev.bean.Sala;
 import br.ufc.vev.bean.Sala;
 import br.ufc.vev.service.SalaService;
 

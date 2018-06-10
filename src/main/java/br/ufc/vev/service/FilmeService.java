@@ -56,38 +56,39 @@ public class FilmeService {
 		Filme filme = filmeRepositorio.getOne(idFilme);
 		Ator ator = atorService.buscarAtor(idAtor);
 		
-		filme.getAtores().add(ator);
-		ator.getFilmes().add(filme);
+		ator.addFilme(filme);
+		
 		filmeRepositorio.save(filme);
-		atorService.salvarAtor(ator);		
+		atorService.salvarAtor(ator);
+				
 	}
 	
 	public void desvinculaAtorDoFilme(int idFilme, int idAtor) {
 		Filme filme = buscarFilme(idFilme);
 		Ator ator = atorService.buscarAtor(idAtor);
 		
-		filme.getAtores().remove(ator);
-		ator.getFilmes().remove(filme);
+		ator.removerFilme(filme);
+		
 		filmeRepositorio.save(filme);
 		atorService.salvarAtor(ator);
 	}
 	
-	public void vinculaDiretorAoFilme(int idFilme, int idDir) {
+	public void vinculaDiretorAoFilme(int idFilme, int idDiretor) {
 		Filme filme = filmeRepositorio.getOne(idFilme);
-		Diretor diretor = diretorService.buscarDiretor(idDir);
+		Diretor diretor = diretorService.buscarDiretor(idDiretor);
 				
-		filme.getDiretores().add(diretor);
-		diretor.getFilmes().add(filme);
+		diretor.addFilme(filme);
+		
 		filmeRepositorio.save(filme);
 		diretorService.salvarDiretor(diretor);		
 	}
 	
-	public void desvinculaDiretorDoFilme(int idFilme, int idDir) {
+	public void desvinculaDiretorDoFilme(int idFilme, int idDiretor) {
 		Filme filme = buscarFilme(idFilme);
-		Diretor diretor = diretorService.buscarDiretor(idDir);
+		Diretor diretor = diretorService.buscarDiretor(idDiretor);
 					
-		filme.getDiretores().remove(diretor);
-		diretor.getFilmes().remove(filme);	
+		diretor.removerFilme(filme);
+		
 		filmeRepositorio.save(filme);
 		diretorService.salvarDiretor(diretor);
 	}
@@ -96,19 +97,19 @@ public class FilmeService {
 		Filme filme = filmeRepositorio.getOne(idFilme);
 		Genero genero = generoService.buscarGenero(idGenero);
 		
-		filme.getGeneros().add(genero);
-		genero.getFilmes().add(filme);
+		genero.addFilme(filme);
+		
 		filmeRepositorio.save(filme);
 		generoService.salvarGenero(genero);	
 	}
 	
-	public void desvinculaGeneroDoFilme(int idFilme, int idGen) {
+	public void desvinculaGeneroDoFilme(int idFilme, int idGenero) {
 		Filme filme = buscarFilme(idFilme);
-		Genero genero = generoService.buscarGenero(idGen);
+		Genero genero = generoService.buscarGenero(idGenero);
 					
-		filme.getGeneros().remove(genero);
-		genero.getFilmes().remove(filme);		
+		genero.removerFilme(filme);
+		
 		filmeRepositorio.save(filme);
-		generoService.salvarGenero(genero); 
+		generoService.salvarGenero(genero);
 	}
 }
