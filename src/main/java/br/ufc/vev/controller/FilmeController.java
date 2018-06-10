@@ -145,7 +145,7 @@ public class FilmeController {
 	@SuppressWarnings("finally")
 	@RequestMapping("/atualizar/{id}")
 	public ModelAndView atualizaFilme(@PathVariable("id") Integer id) {
-		ModelAndView model = new ModelAndView("formulario-sala");
+		ModelAndView model = new ModelAndView("formulario-filme");
 
 		try {
 			if (existsByIdFilme(id)) {
