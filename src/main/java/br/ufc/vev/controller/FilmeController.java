@@ -119,9 +119,7 @@ public class FilmeController {
 
 	@SuppressWarnings("finally")
 	@RequestMapping("/excluir/{id}")
-	public ModelAndView excluiFilme(@PathVariable("id") Integer id) {
-		ModelAndView model = new ModelAndView("filme");
-		
+	public ModelAndView excluiFilme(@PathVariable("id") Integer id) {		
 		try {
 			Filme filme = new Filme();
 			if (validaId(id) && existsByIdFilme(id)) {
