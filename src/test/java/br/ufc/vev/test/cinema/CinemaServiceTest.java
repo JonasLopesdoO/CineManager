@@ -20,7 +20,7 @@ import br.ufc.vev.service.SalaService;
 public class CinemaServiceTest {
 	
 	@Autowired
-	private CinemaService service;
+	private CinemaService cinemaService;
 	@Autowired
 	private SalaService salaService;
 	
@@ -31,7 +31,7 @@ public class CinemaServiceTest {
 		cinema.setEndereco("Rua A, Planalto Universitario");
 		cinema.setNome("Cine o bom vizinho");		
 		
-		assertNotNull(service.adicionaCinema(cinema));
+		assertNotNull(cinemaService.salvarCinema(cinema));
 	}
 	
 	@Test 
@@ -43,9 +43,9 @@ public class CinemaServiceTest {
 		
 		Cinema cinemaBuscado = new Cinema();
 		
-		cinemaBuscado = service.adicionaCinema(cinema);
+		cinemaBuscado = cinemaService.salvarCinema(cinema);
 		
-		assertNotNull(service.buscaCinema(cinemaBuscado.getId()));
+		assertNotNull(cinemaService.buscaCinema(cinemaBuscado.getId()));
 	}
 	
 	@Test
@@ -56,13 +56,13 @@ public class CinemaServiceTest {
 		cinema.setNome("Cine o bom vizinho");
 		
 		Cinema cinemaUp = new Cinema();
-		cinemaUp = service.adicionaCinema(cinema);
+		cinemaUp = cinemaService.salvarCinema(cinema);
 		
 		cinemaUp.setCidade("Quixadá");
 		cinemaUp.setEndereco("Rua José de Queiroz Pessoa, 2500 - Planalto Universitário");
 		cinemaUp.setNome("Cine Bom Vizinho");
 		
-		assertThat(service.atualizaCinema(cinemaUp));
+		assertThat(cinemaService.atualizaCinema(cinemaUp));
 	}
 	
 	@Test
@@ -73,10 +73,10 @@ public class CinemaServiceTest {
 		cinema.setNome("Cine in Jucás");
 		
 		Cinema cinemaDel = new Cinema();
-		cinemaDel = service.adicionaCinema(cinema);
-		service.excluiCinema(cinemaDel);
+		cinemaDel = cinemaService.salvarCinema(cinema);
+		cinemaService.excluiCinema(cinemaDel);
 		
-		assertNotNull(service.buscaCinema(cinemaDel.getId()));
+		assertNotNull(cinemaService.buscaCinema(cinemaDel.getId()));
 	}
 	
 	@Test 
@@ -86,9 +86,9 @@ public class CinemaServiceTest {
 		cinema.setEndereco("Travessa João Cavalcante, 2400 - Centro");
 		cinema.setNome("Cine in Jucás");
 		
-		service.adicionaCinema(cinema);
+		cinemaService.salvarCinema(cinema);
 		
-		assertTrue(service.getAllCinema().size() >= 1);
+		assertTrue(cinemaService.getAllCinema().size() >= 1);
 	}
 	
 	@Test
@@ -98,7 +98,7 @@ public class CinemaServiceTest {
 		cinema.setEndereco("Travessa João Cavalcante, 2400 - Centro");
 		cinema.setNome("Cine in Jucás");
 		
-		Integer idCine = service.adicionaCinema(cinema).getId();
+		Integer idCine = cinemaService.salvarCinema(cinema).getId();
 		
 		String nome = "Sala A1";
 		int capacidade = 150;
@@ -109,7 +109,7 @@ public class CinemaServiceTest {
 		
 		Integer idSala = salaService.salvarSala(sala).getId();
 
-		assertTrue(service.vinculaSalaAoCinema(idCine, idSala));
+		assertTrue(cinemaService.vinculaSalaAoCinema(idCine, idSala));
 		
 	}
 	
@@ -120,7 +120,7 @@ public class CinemaServiceTest {
 		cinema.setEndereco("Travessa João Cavalcante, 2400 - Centro");
 		cinema.setNome("Cine in Jucás");
 		
-		Integer idCine = service.adicionaCinema(cinema).getId();
+		Integer idCine = cinemaService.salvarCinema(cinema).getId();
 		
 		String nome = "Sala A1";
 		int capacidade = 150;
@@ -131,7 +131,7 @@ public class CinemaServiceTest {
 		
 		Integer idSala = salaService.salvarSala(sala).getId();
 
-		service.vinculaSalaAoCinema(idCine, idSala);
-		service.desvinculaSalaDoCinema(idCine, idSala);
+		cinemaService.vinculaSalaAoCinema(idCine, idSala);
+		cinemaService.desvinculaSalaDoCinema(idCine, idSala);
 	}
 }

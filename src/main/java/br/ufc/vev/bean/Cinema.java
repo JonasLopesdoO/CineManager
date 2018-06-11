@@ -23,6 +23,12 @@ public class Cinema {
 	@OneToMany(fetch=FetchType.LAZY)
 	private List<Sala> salas;
 	
+	public Cinema(String nome, String endereco, String cidade) {
+		this.nome = nome;
+		this.endereco = endereco;
+		this.cidade = cidade;
+	}
+	
 	public Cinema() { } 
 
 	public Integer getId() {

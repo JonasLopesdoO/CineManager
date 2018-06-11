@@ -1,23 +1,16 @@
 package br.ufc.vev.test.filme;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
-import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.ufc.vev.bean.Ator;
-import br.ufc.vev.bean.Diretor;
 import br.ufc.vev.bean.Filme;
-import br.ufc.vev.bean.Genero;
 import br.ufc.vev.controller.AtorController;
 import br.ufc.vev.controller.DiretorController;
 import br.ufc.vev.controller.FilmeController;
