@@ -40,7 +40,7 @@ public class DiretorController {
 	}
 
 	@RequestMapping("/formulario")
-	public ModelAndView formularioGenero() {
+	public ModelAndView formularioDiretor() {
 		ModelAndView model = new ModelAndView("formulario-diretor");
 		model.addObject("diretor", new Diretor());
 

@@ -61,4 +61,15 @@ public class Cinema {
 		this.salas = salas;
 	}
 	
+	public boolean addSala(Sala sala) {
+		sala.setCinema(this);
+		return this.salas.add(sala); 
+	}
+	
+	public boolean removeSala(Sala sala) {
+		sala.setCinema(null);
+		return this.salas.remove(sala); 
+	}
+	
+	
 }

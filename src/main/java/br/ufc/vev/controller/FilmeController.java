@@ -66,7 +66,7 @@ public class FilmeController {
 	}
 
 	@RequestMapping("/formulario")
-	public ModelAndView formularioGenero() {
+	public ModelAndView formularioFilme() {
 		ModelAndView model = new ModelAndView("formulario-filme");
 		model.addObject("filme", new Filme());
 
@@ -89,7 +89,6 @@ public class FilmeController {
 		}finally {
 			return index();
 		}
-		
 	}
 	
 	@SuppressWarnings("finally")

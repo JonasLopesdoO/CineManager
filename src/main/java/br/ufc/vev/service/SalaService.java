@@ -37,6 +37,10 @@ public class SalaService {
 	public List<Sala> getAllSala() {
 		return salaRepositorio.findAll();
 	}
+
+//	public List<Sala> getAllSalasVazias() {
+//		return salaRepositorio.buscarSalaVazia();
+//	}
 	
 	
 	

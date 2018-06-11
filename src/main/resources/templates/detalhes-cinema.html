@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<meta charset="utf-8">
+
+<title>Cinema</title>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Cinema WEB</h1>
+			<h3 style="color: darkgreen">Cinema - PÁGINA PARA O
+				GERENCIAMENTO DO CINEMA</h3>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="row  col-lg-12">
+			<fieldset>
+				<legend>MENU</legend>
+
+				<div class="form-group col-md-4">
+					<form class="col-sm-12 col-lg-12">
+						<fieldset>
+							<div class="container ">
+								<div class="row center col-lg-12">
+									<a href="/" class="btn btn-success btn-lg col-lg-4">HOME</a>
+								</div>
+								<label>Clique no botão para retornar ao MENU principal.</label>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<div style="left: 10px;" class="form-group col-md-4">
+					<form class="col-sm-12 col-lg-12">
+						<fieldset>
+							<div class="container ">
+								<div class="row center col-lg-12">
+									<a href="/cinema/" class="btn btn-success btn-lg col-lg-4">CINEMA</a>
+								</div>
+								<label>Clique no botão para retornar ao MENU cinema.</label>
+							</div>
+						</fieldset>
+						<!-- col-sm-12 -->
+					</form>
+				</div>
+			</fieldset>
+
+			<!-- col-sm-12 -->
+			<hr></hr>
+		</div>
+		<!-- row -->
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row valign-wrapper">
+			<div class="col-lg-6">
+				<h3>
+					Detalhes de <span th:text="${cinema.nome}"></span>
+					<hr>
+				</h3>
+				<br> <br>
+
+			</div>
+
+		</div>
+		<!-- row valign-wrapper -->
+
+		<div class="container" style="background-color: #F5F5F5; padding-left:30px;">
+			<div class="row">
+				<h3>Salas do Cinema</h3>
+				<br>
+				<form th:action="@{${'/cinema/'+cinema.id+'/adicionarSala'}}"
+					method="POST">
+					<div class="col-lg-8">
+						<label>Escolha uma sala</label> <select class="browser-default"
+							id="salaID" name="idSala">
+							<option value="" disabled="disabled" selected="selected">Escolha
+								uma sala</option>
+							<option th:each="sala : ${salas}" th:value="${sala.id}"
+								th:text="${sala.nome}"></option>
+						</select>
+					</div>
+					<!-- col lg 8 -->
+
+					<div class="form-group col-md-4">
+						<button type="submit" name="action"
+							class="btn btn-success btn-lg btn-block">Adicionar sala
+							ao Cinema</button>
+					</div>
+				</form>
+			</div>
+			<!-- row -->
+			<div class="row">
+				<div id="tabela">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nome</th>
+								<th>Tipo</th>
+								<th>Capacidade</th>
+								<th>Excluir do Cinema</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr th:each="sala : ${cinema.salas}">
+								<td th:text="${sala.id}"></td>
+								<td th:text="${sala.nome}"></td>
+								<td th:text="${sala.tipo}"></td>
+								<td th:text="${sala.capacidade}"></td>
+								<td><a class="btn btn-sm btn-danger"
+									th:href="@{${'/cinema/'+cinema.id+'/removerSala/'+sala.id}}">X</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- row -->
+		</div>
+		<br>
+		<br>
+	</div>
+</body>
+</html>

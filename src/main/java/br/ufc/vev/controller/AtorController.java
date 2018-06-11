@@ -36,7 +36,7 @@ public class AtorController {
 	}
 	
 	@RequestMapping("/formulario")
-	public ModelAndView formularioGenero() {
+	public ModelAndView formularioAtor() {
 		ModelAndView model = new ModelAndView("formulario-ator");
 		model.addObject("ator", new Ator());
 		

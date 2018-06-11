@@ -127,6 +127,10 @@ public class SalaController {
 	public List<Sala> getAllSala() {		
 		return salaService.getAllSala();
 	}
+	
+//	public List<Sala> getAllSalasVazias() {		
+//		return salaService.getAllSalasVazias();
+//	}
 
 	// o metodo utilizado para atualizar será o salvar, visto que o spring boot ja
 		// atualiza automaticamente o objeto passado.
@@ -152,5 +156,7 @@ public class SalaController {
 	public boolean existsByIdSala(int id) {
 		return salaService.buscaSala(id);
 	}
+
+	
 	
 }

@@ -17,56 +17,59 @@ import br.ufc.vev.repositorio.CinemaRepositorio;
 @Rollback(false)
 public class CinemaService {
 	@Autowired
-	CinemaRepositorio repositorio;
+	CinemaRepositorio cinemaRepositorio;
 
 	@Autowired
 	SalaService salaService;
 	
-	public Cinema adicionaCinema(Cinema cinema) {
-		return repositorio.save(cinema);
+	public Cinema salvarCinema(Cinema cinema) {
+		return cinemaRepositorio.save(cinema);
 	}
 
 	public Cinema buscaCinema(int id) {
-		return repositorio.getOne(id);
+		return cinemaRepositorio.getOne(id);
 	}
 
 	public void excluiCinema(Cinema cinema) {
-		repositorio.delete(cinema);
+		cinemaRepositorio.delete(cinema);
 	}
 
 	public Cinema atualizaCinema(Cinema cinema) {
-		return repositorio.save(cinema);
+		return cinemaRepositorio.save(cinema);
 	}
 
 	public List<Cinema> getAllCinema() {
-		return repositorio.findAll();
+		return cinemaRepositorio.findAll();
+	}
+	
+	public boolean existsById(int id) {
+		return cinemaRepositorio.existsById(id);
 	}
 
-	public boolean vinculaSalaAoCinema(int idCine, int idSala) {
+	public boolean vinculaSalaAoCinema(int idCinema, int idSala) {
 		
 		Sala sala = salaService.buscarSala(idSala);
-		Cinema cinema = repositorio.getOne(idCine);
+		Cinema cinema = cinemaRepositorio.getOne(idCinema);
 		
-		if (sala.equals(null) || cinema.equals(null)) {
+		if (sala.equals(null) || cinema.equals(null) || sala.getCinema() != null) {
 			return false;
 		} else {
-			cinema.getSalas().add(sala);
-			sala.setCinema(cinema);
-			repositorio.save(cinema);
+			cinema.addSala(sala);
+			
+			cinemaRepositorio.save(cinema);
 			salaService.salvarSala(sala);
 			return true;
 		}
 	}
 	
-	public void desvinculaSalaDoCinema(int idCine, int idSala) {
+	public void desvinculaSalaDoCinema(int idCinema, int idSala) {
 		Sala sala = salaService.buscarSala(idSala);
-		Cinema cinema = repositorio.getOne(idCine);
+		Cinema cinema = cinemaRepositorio.getOne(idCinema);
 		
-		if (!sala.equals(null) || !cinema.equals(null)) {
-			cinema.getSalas().remove(sala);
-			sala.setCinema(null);
+		if (!sala.equals(null) && !cinema.equals(null)) {
+			cinema.removeSala(sala);
 			
-			repositorio.save(cinema);
+			cinemaRepositorio.save(cinema);
 			salaService.salvarSala(sala);
 		} 
 	}

@@ -10,14 +10,14 @@
 
 <meta charset="utf-8">
 
-<title>Filme</title>
+<title>Cinema</title>
 </head>
 <body>
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Cinema WEB</h1>
-			<h3 style="color: darkgreen">Filmes - PÁGINA PARA O
-				GERENCIAMENTO DOS FILMES DO CINEMA</h3>
+			<h3 style="color: darkgreen">Cinemas - PÁGINA PARA O
+				GERENCIAMENTO DAS CINEMAS DO CINEMA</h3>
 		</div>
 	</div>
 
@@ -51,7 +51,7 @@
 		<!-- row -->
 
 		<div class="row">
-			<form action="/filme/salvar" th:object="${filme}" method="POST"
+			<form action="/cinema/salvar" th:object="${cinema}" method="POST"
 				class="col-sm-12 col-lg-12">
 				<br> <br> <br> <br> <br> <br>
 				<div class="row">
@@ -60,29 +60,26 @@
 
 						<legend>Preencha os dados pedidos</legend>
 						<div class="form-group col-md-4">
-							<label for="filme">Nome do Filme</label> <input type="text"
-								placeholder="Nome do filme" class="form-control" id="nome"
+							<label for="cinema">Nome do Cinema</label> <input type="text"
+								placeholder="Nome do cinema" class="form-control" id="nome"
 								name="nome" autofocus />
 						</div>
 
 						<div class="form-group col-md-4">
-							<label for="filme">Sinopse do Filme</label>
-							<textarea class="form-control" name="sinopse" rows="4" cols="50"
-								autofocus>
-							
-							</textarea>
+							<label for="cinema">Endereço do Cinema</label>
+							<textarea class="form-control" name="endereco" rows="4" cols="50"></textarea>
 						</div>
-
+						
 						<div class="form-group col-md-4">
-							<label for="filme">Duração do Filme</label> <input type="number"
-								placeholder="Duração do filme" class="form-control" id="duracao"
-								name="duracao"  />
+							<label for="cinema">Cidade do Cinema</label> <input type="text"
+								placeholder="Cidade do cinema" class="form-control" id="cidade"
+								name="cidade"/>
 						</div>
 
 						<div class="form-group col-md-4">
 							<button type="submit" name="action"
 								class="btn btn-success btn-lg btn-block">Adicionar
-								Filme</button>
+								Cinema</button>
 						</div>
 					</fieldset>
 					<!-- col-sm-12 -->
@@ -94,14 +91,14 @@
 		<hr>
 		<div class="row">
 			<div id="tabela">
-				<h3>Filmes cadastrados</h3>
+				<h3>Cinemas cadastrados</h3>
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>ID</th>
 							<th>Nome</th>
-							<th>Sinopse</th>
-							<th>Duracao</th>
+							<th>Endereco</th>
+							<th>Cidade</th>
 							<th>Detalhes</th>
 							<th>Atualizar</th>
 							<th>Excluir</th>
@@ -109,18 +106,18 @@
 					</thead>
 
 					<tbody>
-						<tr th:each="filme : ${filmes}">
-							<td th:text="${filme.id}"></td>
-							<td th:text="${filme.nome}"></td>
-							<td th:text="${filme.sinopse}"></td>
-							<td th:text="${filme.duracao}"></td>
+						<tr th:each="cinema : ${cinemas}">
+							<td th:text="${cinema.id}"></td>
+							<td th:text="${cinema.nome}"></td>
+							<td th:text="${cinema.endereco}"></td>
+							<td th:text="${cinema.cidade}"></td>
 							<td><a class="btn btn-success" role="button"
-								th:href="@{${'/filme/'+filme.id}}">Ver detalhes</a></td>
+								th:href="@{${'/cinema/'+cinema.id}}">Ver detalhes</a></td>
 							<td><a class="btn btn-primary"
-								th:href="@{/filme/atualizar/{id}(id = ${filme.id})}">Atualizar
+								th:href="@{/cinema/atualizar/{id}(id = ${cinema.id})}">Atualizar
 							</a></td>
 							<td><a class="btn btn-sm  btn-danger"
-								th:href="@{/filme/excluir/{id}(id = ${filme.id})}">X</a></td>
+								th:href="@{/cinema/excluir/{id}(id = ${cinema.id})}">X</a></td>
 						</tr>
 					</tbody>
 				</table>

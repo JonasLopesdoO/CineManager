@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Formulario</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+
+</head>
+<body>
+
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Cinema WEB</h1>
+			<h3 style="color: darkgreen">Cinema - PÁGINA PARA A ATUALIAÇÃO
+				DO CINEMA</h3>
+		</div>
+	</div>
+
+	<form method="POST" action="/cinema/salvar" th:object="${cinema}"
+		class="col-lg-6">
+		<input type="hidden" th:field="*{id}">
+
+		<div class="form-group">
+			<label class="h1" for="cinema">Nome Cinema</label> <input type="text"
+				class="form-control" id="nome" th:field="*{nome}"
+				placeholder="Digite o novo nome" autofocus>
+		</div>
+
+		<div class="form-group">
+			<label class="h1" for="cinema">Endereço do Cinema</label> <input
+				type="text" class="form-control" id="endereco" th:field="*{endereco}"
+				placeholder="Digite o novo endereço">
+		</div>
+		
+		<div class="form-group">
+			<label class="h1" for="cinema">Cidade do Cinema</label> <input type="text"
+				class="form-control" id="cidade" th:field="*{cidade}"
+				placeholder="Digite a nova cidade">
+		</div>
+
+		<button type="submit" class="btn btn-lg btn-primary">Enviar</button>
+	</form>
+
+
+	<script src="/js/bootstrap.min.js">
+		
+	</script>
+</body>
+</html>
