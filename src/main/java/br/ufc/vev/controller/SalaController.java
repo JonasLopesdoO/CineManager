@@ -109,8 +109,6 @@ public class SalaController {
 	@SuppressWarnings("finally")
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiSala(@PathVariable("id") Integer id) {
-		ModelAndView model = new ModelAndView("sala");
-		
 		try {
 			Sala sala = new Sala();
 			if (validaIdSala(id) && existsByIdSala(id)) {

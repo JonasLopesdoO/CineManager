@@ -109,9 +109,7 @@ public class AtorController {
 
 	@SuppressWarnings("finally")
 	@RequestMapping("/excluir/{id}")
-	public ModelAndView excluiAtor(@PathVariable("id") Integer id) {
-		ModelAndView model = new ModelAndView("ator");
-		
+	public ModelAndView excluiAtor(@PathVariable("id") Integer id) {		
 		try {
 			Ator ator = new Ator();
 			if (validaId(id) && existsByIdAtor(id)) {

@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufc.vev.bean.Diretor;
-import br.ufc.vev.bean.Diretor;
-import br.ufc.vev.bean.Diretor;
-import br.ufc.vev.bean.Diretor;
-import br.ufc.vev.bean.Diretor;
 //import br.ufc.vev.bean.Filme;
 import br.ufc.vev.service.DiretorService;
 //import br.ufc.vev.service.FilmeService;
@@ -114,8 +110,6 @@ public class DiretorController {
 	@SuppressWarnings("finally")
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiDiretor(@PathVariable("id") Integer id) {
-		ModelAndView model = new ModelAndView("diretor");
-
 		try {
 			Diretor diretor = new Diretor();
 			if (validaId(id) && existsByIdDiretor(id)) {
