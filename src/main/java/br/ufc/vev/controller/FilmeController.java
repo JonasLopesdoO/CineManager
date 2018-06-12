@@ -163,7 +163,7 @@ public class FilmeController {
 
 	  ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
 	  
-	  if (existsByIdFilme(idFilme) && atorController.existsByIdAtor(idAtor) && atorPertenceAoFilme(idFilme, idAtor) != true) {
+	  if (existsByIdFilme(idFilme) && atorController.existsByIdAtor(idAtor) && atorPertenceAoFilme(idFilme, idAtor) == false) {
 		  filmeService.vinculaAtorAoFilme(idFilme, idAtor);
 	  }
 	  

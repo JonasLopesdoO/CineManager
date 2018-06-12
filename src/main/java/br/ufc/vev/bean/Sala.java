@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,10 +22,13 @@ public class Sala {
 	private TipoSala tipo;
 	private int capacidade;
 	
-	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "cinema_id")
 	private Cinema cinema;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sessao_id", nullable = false)
+	private Sessao sessao;
 	
 	public Sala(String nome, TipoSala tipo, int capacidade) {
 		this.nome = nome;
@@ -37,6 +41,10 @@ public class Sala {
 	}
 	
 	public Integer getId() {
+		return id;
+	}
+	
+	public Integer setId() {
 		return id;
 	}
 
@@ -72,4 +80,11 @@ public class Sala {
 		this.cinema = cinema;
 	}
 	
+	public Sessao getSessao() {
+		return sessao;
+	}
+	
+	public void setSessao(Sessao sessao) {
+		this.sessao = sessao;
+	}
 }

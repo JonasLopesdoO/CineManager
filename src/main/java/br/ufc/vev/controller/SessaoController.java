@@ -4,52 +4,203 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.ufc.vev.bean.Filme;
-import br.ufc.vev.bean.Sala;
 import br.ufc.vev.bean.Sessao;
-import br.ufc.vev.service.FilmeService;
-import br.ufc.vev.service.SalaService;
+import br.ufc.vev.bean.Filme;
+import br.ufc.vev.bean.Sessao;
+import br.ufc.vev.bean.Sala;
 import br.ufc.vev.service.SessaoService;
 
 @Controller
-@RequestMapping(path= "/sessao/")
+@Transactional
+@Rollback(false)
+@RequestMapping(path= "/sessao")
 public class SessaoController {
 		
 	@Autowired
 	SessaoService sessaoService;
 	@Autowired
-	FilmeService filmeService;
+	FilmeController filmeController;
 	@Autowired
-	SalaService salaService;
+	SalaController salaController;
 	
+	
+	@SuppressWarnings("finally")
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
-// 	todasAsSessoes
 		ModelAndView model = new ModelAndView("sessao");
-		List<Sessao> sessoes = sessaoService.getTodasSessoes();
-		
-		model.addObject("sessao", sessoes);
-		
-		return model;
+		try {
+			List<Sessao> sessoes = getAllSessao();
+
+			model.addObject("sessoes", sessoes);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			return model;
+		}
 	}
 	
 	@RequestMapping(path="/{id}")
 	public ModelAndView detalhesSessao(@PathVariable("id") Integer id){
-	//+ getSessaoPorIdI(id : int) : Sessao		
 	  ModelAndView model = new ModelAndView("detalhes-sessao");
 	  Sessao sessao = sessaoService.getSessaoPorId(id);
 			
+	  model.addObject("filmes", filmeController.getAllFilme());
+	  model.addObject("salas", salaController.getAllSala());
 	  model.addObject("sessao", sessao);
 			
 	  return model;
+	}
+	
+	@RequestMapping("/formulario")
+	public ModelAndView formularioSessao() {
+		ModelAndView model = new ModelAndView("formulario-sessao");
+		model.addObject("sessao", new Sessao());
+	
+		return model;
+	}
+
+	@SuppressWarnings("finally")
+	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
+	public ModelAndView salvaSessao(Sessao sessao) {
+		ModelAndView model = new ModelAndView("sessao");
+
+		try {
+			if (this.validaSessao(sessao.getHorario(), sessao.getDataInicio(), sessao.getDataFim())) {
+				sessaoService.salvarSessao(sessao);
+
+				model.addObject("sessaoRetorno", sessao);
+		 	}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			return index();
+		}
+	}
+	
+	// o metodo utilizado para atualizar será o salvar, visto que o spring boot ja
+	// atualiza automaticamente o objeto passado.
+	// este método só redireciona para a digitação dos novos campos do model
+	@SuppressWarnings("finally")
+	@RequestMapping("/atualizar/{id}")
+	public ModelAndView atualizaSessao(@PathVariable("id") Integer id) {
+		ModelAndView model = new ModelAndView("formulario-sessao");
+
+		try {
+			if (existsByIdSessao(id)) {
+				Sessao sessao = sessaoService.buscarSessao(id);
+
+				model.addObject("sessao", sessao);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			return model;
+		}
+	}
+
+	@SuppressWarnings("finally")
+	@RequestMapping("/excluir/{id}")
+	public ModelAndView excluiSessao(@PathVariable("id") Integer id) {		
+		try {
+			Sessao sessao = new Sessao();
+			if (validaId(id) && existsByIdSessao(id)) {
+				sessao = sessaoService.buscarSessao(id);
+				sessaoService.excluirSessao(sessao);;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			return index();
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	@RequestMapping("/buscar/{id}")
+	public ModelAndView buscaFilme(@PathVariable Integer id) {
+		ModelAndView model = new ModelAndView("sessao");
+		try {
+			if (this.validaId(id)) {
+				if (existsByIdSessao(id)) {
+					Sessao sessao = new Sessao();
+
+					sessao = sessaoService.buscarSessao(id);
+
+					model.addObject("sessaoRetorno", sessao);
+				} else {
+					// mensagem de erro "id nao existente no banco"
+				}
+			} else {
+				// msg de id invalido
+			}
+		} catch (Exception e) { // caso de erro
+			e.printStackTrace();
+		} finally { // sempre será execultado
+			return index();
+		}
+	}
+	
+	@RequestMapping(path="/{idSessao}/adicionarFilme", method=RequestMethod.POST)
+	public ModelAndView vincularFilmeASessao(@PathVariable("idSessao") Integer idSessao, 
+											@RequestParam Integer idFilme){
+
+	  ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
+	  
+	  if (existsByIdSessao(idSessao) && filmeController.existsByIdFilme(idFilme) && filmePertenceASessao(idSessao, idFilme) == false) {
+		  sessaoService.vinculaFilmeASessao(idSessao, idFilme);
+	  }
+	  
+	  return model;
+	}
+	
+	@RequestMapping(path="/{idSessao}/removerFilme/{idFilme}")
+	public ModelAndView desvinculaFilmeDaSessao(@PathVariable("idSessao") Integer idSessao,
+												@PathVariable("idFilme") Integer idFilme) {
+		
+		ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
+		
+		if (filmePertenceASessao(idSessao, idFilme)) {
+			sessaoService.desvinculaFilmeDaSessao(idSessao, idFilme);
+		}
+		
+		return model;
+	}
+	
+	@RequestMapping(path="/{idSessao}/adicionarSala", method=RequestMethod.POST)
+	public ModelAndView vincularSalaASessao(@PathVariable("idSessao") Integer idSessao, 
+											@RequestParam Integer idSala){
+
+	  ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
+	  
+	  if (existsByIdSessao(idSessao) && salaController.existsByIdSala(idSala) && salaPertenceASessao(idSessao, idSala) == false) {
+		  sessaoService.vinculaSalaASessao(idSessao, idSala);
+	  }
+	  
+	  return model;
+	}
+	
+	@RequestMapping(path="/{idSessao}/removerSala/{idSala}")
+	public ModelAndView desvinculaSalaDaSessao(@PathVariable("idSessao") Integer idSessao,
+												@PathVariable("idSala") Integer idSala) {
+		
+		ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
+		
+		if (salaPertenceASessao(idSessao, idSala)) {
+			sessaoService.desvinculaSalaDaSessao(idSessao, idSala);
+		}
+		
+		return model;
 	}
 	
 	@RequestMapping(path = "/porData", method = RequestMethod.GET)
@@ -102,86 +253,62 @@ public class SessaoController {
 		return model;
 	}
 	
-	@RequestMapping(path="/adicionar", method = RequestMethod.POST)
-	public ModelAndView addSessao(@RequestParam Filme filme,@RequestParam Sala sala, 
-								@RequestParam LocalTime horario, @RequestParam 
-								LocalDate dataInicio, @RequestParam LocalDate dataFim) {
-//	+ addSessao(sessao : Sessao) : Sessao
-		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
-		
-		try {
-			if (this.validaSessao(sessao)) {
-				Sessao sessaoRetorno = sessaoService.salvarSessao(sessao);
-				
-				ModelAndView model = new ModelAndView("sessao");
-				model.addObject("sessao", sessaoRetorno);
-				
-				return model;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return null;
+	
+	
+	public List<Sessao> getAllSessao() {		
+		return sessaoService.getAllSessao();
 	}
 	
-	@RequestMapping(path="/atualizar", method = RequestMethod.POST)
-	public ModelAndView atualizarSessao(@RequestParam Integer idSessao, @RequestParam Filme filme,@RequestParam Sala sala, 
-			@RequestParam LocalTime horario, @RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFim){
-//	+ atualizarSessao(sessao : Sessao) : Sessao
-		
-		Sessao sessao = new Sessao(filme, sala, horario, dataInicio, dataFim);
-		
-				sessao.setId(idSessao);
-				sessaoService.atualizarSessao(sessao);
-		
-			ModelAndView model = new ModelAndView("sessao");
-			model.addObject("sessao", sessao);
-			return model;
-				
-	}
-	
-	@RequestMapping(path="/excluir", method = RequestMethod.POST)
-	public ModelAndView excluirSessao(@RequestParam Integer idSessao) {
-//	+ removerSessao(id : int) : Sessao
-		
-		if (sessaoService.getSessaoPorId(idSessao) != null) {
-			Sessao sessao = sessaoService.deletarSessao(idSessao);
-			ModelAndView model = new ModelAndView("sessao");
-			model.addObject("sessao", sessao);
-			return model;
+	private boolean validaSessao(LocalTime horario, LocalDate dataInicio, LocalDate dataFim) throws Exception {
+		if (horario.equals("")) {
+			throw new Exception("Nome não pode ser vazio");
+		} else if (horario.equals(null)) {
+			throw new Exception("Nome não pode ser nulo");
+		} else if (dataInicio.equals("")) {
+			throw new Exception("Data Inicial não pode ser vazia");
+		} else if (dataInicio.equals(null)) {
+			throw new Exception("Data Inicial não pode ser nula");
+		} else if (dataFim.equals("")) {
+			throw new Exception("Data Inicial não pode ser vazia");
+		} else if (dataFim.equals(null)) {
+			throw new Exception("Data Inicial não pode ser nula");
 		}
-		return null;
-	}
-	
-	@RequestMapping(path="/busca", method = RequestMethod.POST)
-	public ModelAndView buscaSessao(@RequestParam Integer idSessao) {
-//	+ removerSessao(id : int) : Sessao
-		
-		if (sessaoService.getSessaoPorId(idSessao) != null) {
-			Sessao sessao = sessaoService.getSessaoPorId(idSessao);
-			
-			ModelAndView model = new ModelAndView("sessao");
-			model.addObject("sessao", sessao);
-			return model;
-		}
-		return null;
-	}
-	
-	public boolean validaSessao(Sessao sessao) throws Exception {
-		
-		if (sessao.getHorario() == null) {
-			throw new Exception();
-		} else if (sessao.getDataInicio() == null) {
-			throw new Exception();
-		} else if (sessao.getDataFim() == null) {
-			throw new Exception();
-		} else if (sessao.getFilme() == null) {
-			throw new Exception();
-		} else if (sessao.getSala() == null) {
-			throw new Exception();
-		}
-			
 		return true;
 	}
+	
+	public boolean validaId(int id) throws Exception {
+		if (id == 0) {
+			throw new Exception("Erro ID deve ser maior que zero");
+		} else if (id < 0) {
+			throw new Exception("Erro ID não pode ser negativo");
+		}
+		return true;
+	}
+	
+	public boolean filmePertenceASessao(int idSessao, int idFilme) {
+		if (existsByIdSessao(idSessao) && filmeController.existsByIdFilme(idFilme)) {
+			Sessao sessao = sessaoService.buscarSessao(idSessao);
+			
+			if(sessao.getFilme().getId() == idFilme) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean salaPertenceASessao(int idSessao, int idSala) {
+		if (existsByIdSessao(idSessao) && salaController.existsByIdSala(idSala)) {
+			Sessao sessao = sessaoService.buscarSessao(idSessao);
+			
+			if(sessao.getSala().getId() == idSala) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean existsByIdSessao(int id) {
+		return sessaoService.existsById(id);
+	}
+
 }

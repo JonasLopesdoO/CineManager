@@ -5,12 +5,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -25,6 +27,10 @@ public class Filme {
 	private String nome;
 	private String sinopse;
 	private int duracao;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sessao_id", nullable = false)
+	private Sessao sessao;
 	
 	@ManyToMany
 	(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -47,9 +53,7 @@ public class Filme {
 			   inverseJoinColumns = @JoinColumn(name = "genero_id", referencedColumnName = "id"))
 	private List<Genero> generos;
 	
-	public Filme() {
-		
-	}
+
 	
 	public Filme(String nome, String sinopse, int duracao){
 		this.setNome(nome);
@@ -60,6 +64,10 @@ public class Filme {
 		this.generos = new ArrayList<>();
 	}
 
+	public Filme() {
+		
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -114,6 +122,14 @@ public class Filme {
 
 	public void setGeneros(List<Genero> generos) {
 		this.generos = generos;
+	}
+	
+	public Sessao getSessao() {
+		return sessao;
+	}
+	
+	public void setSessao(Sessao sessao) {
+		this.sessao = sessao;
 	}
 	
 	@Override

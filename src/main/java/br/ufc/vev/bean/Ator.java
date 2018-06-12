@@ -29,9 +29,7 @@ public class Ator{
 		this.filmes = new ArrayList<>();
 	}
 	
-	public Ator() {
-		
-	}
+	public Ator() {	}
 		
 	public Integer getId() {
 		return id;

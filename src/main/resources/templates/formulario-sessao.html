@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Formulario</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+</head>
+<body>
+
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Cinema WEB</h1>
+			<h3 style="color: darkgreen">Sessão - PÁGINA PARA A ATUALIAÇÃO
+				DAS SESSOESS DO CINEMA</h3>
+		</div>
+	</div>
+
+	<form method="POST" action="/sessao/salvar" th:object="${sessao}"
+		class="col-lg-6">
+		<input type="hidden" th:field="*{id}">
+
+		<div class="form-group col-md-4">
+			<label for="sessao">Horário da Sessao</label> <input type="text"
+				placeholder="Horario da sessao" class="form-control" id="horario"
+				th:field="*{nome}" autofocus />
+		</div>
+
+		<div class="form-group col-md-4">
+			<label for="sessao">Data de início da Sessao</label> <input
+				type="text" placeholder="Data início da sessao" class="form-control"
+				id="horario" th:field="*{dataInicio}"/>
+		</div>
+
+		<div class="form-group col-md-4">
+			<label for="sessao">Data de fim da Sessao</label> <input type="text"
+				placeholder="Data fim da sessao" class="form-control" id="horario"
+				th:field="*{dataFim}"  />
+		</div>
+
+		<button type="submit" class="btn btn-lg btn-primary">Enviar</button>
+	</form>
+
+	<script src="/js/bootstrap.min.js">
+		
+	</script>
+</body>
+</html>

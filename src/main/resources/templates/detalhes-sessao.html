@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<meta charset="utf-8">
+
+<title>Sessao</title>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Cinema WEB</h1>
+			<h3 style="color: darkgreen">Sessoes - PÁGINA PARA O
+				GERENCIAMENTO DAS SESSOES DO CINEMA</h3>
+		</div>
+	</div>
+
+	<br>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row valign-wrapper">
+			<div class="col-lg-6">
+				<h3>
+					Detalhes da Sessão></span>
+					<hr>
+				</h3>
+				<br> <br>
+			</div>
+
+		</div>
+		<!-- row valign-wrapper -->
+
+		<br>
+		<br>
+		<div class="container" style="background-color: #F5F5F5; padding-left:30px;">
+			<div class="row">
+				<h3>Filme da Sessao</h3>
+				<br>
+				<form th:action="@{${'/sessao/'+sessao.id+'/adicionarFilme'}}"
+					method="POST">
+					<div class="col-lg-8">
+						<label>Escolha um Filme</label> <select class="browser-default"
+							id="FilmeID" name="idFilme">
+							<option value="" disabled="disabled" selected="selected">Escolha
+								um Filme</option>
+							<option th:each="filme : ${filmes}" th:value="${filme.id}"
+								th:text="${filme.nome}"></option>
+						</select>
+					</div>
+					<!-- col lg 8 -->
+
+					<div class="form-group col-md-4">
+						<button type="submit" name="action"
+							class="btn btn-success btn-lg btn-block">Adicionar
+							Filme a Sessao</button>
+					</div>
+				</form>
+			</div>
+			<!-- row -->
+			<div class="row">
+				<div id="tabela">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nome</th>
+								<th>Excluir da Sessao</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr th:each="filme : ${sessao.filmes}">
+								<td th:text="${filme.id}"></td>
+								<td th:text="${filme.nome}"></td>
+								<td><a class="btn btn-sm btn-danger"
+									th:href="@{${'/sessao/'+sessao.id+'/removerFilme/'+filme.id}}">X</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- row -->
+		</div>
+		
+		<div class="container" style="background-color: #F5F5F5; padding-left:30px;">
+			<div class="row">
+				<h3>Sala da Sessao</h3>
+				<br>
+				<form th:action="@{${'/sessao/'+sessao.id+'/adicionarSala'}}"
+					method="POST">
+					<div class="col-lg-8">
+						<label>Escolha uma Sala</label> <select class="browser-default"
+							id="SalaID" name="idSala">
+							<option value="" disabled="disabled" selected="selected">Escolha
+								uma Sala</option>
+							<option th:each="sala: ${salas}" th:value="${sala.id}"
+								th:text="${sala.nome}"></option>
+						</select>
+					</div>
+					<!-- col lg 8 -->
+
+					<div class="form-group col-md-4">
+						<button type="submit" name="action"
+							class="btn btn-success btn-lg btn-block">Adicionar
+							Sala a Sessao</button>
+					</div>
+				</form>
+			</div>
+			<!-- row -->
+			<div class="row">
+				<div id="tabela">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nome</th>
+								<th>Excluir da Sessao</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr th:each="sala : ${sessao.salas}">
+								<td th:text="${sala.id}"></td>
+								<td th:text="${sala.nome}"></td>
+								<td><a class="btn btn-sm btn-danger"
+									th:href="@{${'/sessao/'+sessao.id+'/removerSala/'+sala.id}}">X</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- row -->
+		</div>f
+	</div>
+</body>
+</html>

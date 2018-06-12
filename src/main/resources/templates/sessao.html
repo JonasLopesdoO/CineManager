@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<meta charset="utf-8">
+
+<title>Sessao</title>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Cinema WEB</h1>
+			<h3 style="color: darkgreen">Sessões - PÁGINA PARA O
+				GERENCIAMENTO DOS SESSÕES DO CINEMA</h3>
+		</div>
+	</div>
+
+	<br>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row  col-lg-12">
+
+			<fieldset>
+				<legend>MENU</legend>
+
+				<div class="form-group col-md-4">
+					<form class="col-sm-12 col-lg-12">
+						<fieldset>
+							<div class="container ">
+								<div class="row center col-lg-12">
+									<a href="/" class="btn btn-success btn-lg col-lg-4">HOME</a>
+								</div>
+								<label>Clique no botão para retornar ao MENU principal.</label>
+							</div>
+						</fieldset>
+						<!-- col-sm-12 -->
+					</form>
+				</div>
+			</fieldset>
+
+			<!-- col-sm-12 -->
+			<hr></hr>
+		</div>
+		<!-- row -->
+
+		<div class="row">
+			<form action="/sessao/salvar" th:object="${sessao}" method="POST"
+				class="col-sm-12 col-lg-12">
+				<br> <br> <br> <br> <br> <br>
+				<fieldset>
+					<legend>Preencha os dados pedidos</legend>
+					<div class="form-group col-md-4">
+						<label for="sessao">Horário da Sessao</label> <input type="text"
+							placeholder="Horario da sessao" class="form-control" id="horario"
+							name="horario" autofocus />
+					</div>
+
+					<div class="form-group col-md-4">
+						<label for="sessao">Data de início da Sessao</label> <input
+							type="text" placeholder="Data início da sessao"
+							class="form-control" id="horario" name="dataInicio" autofocus />
+					</div>
+
+					<div class="form-group col-md-4">
+						<label for="sessao">Data de fim da Sessao</label> <input
+							type="text" placeholder="Data fim da sessao" class="form-control"
+							id="horario" name="dataFim" autofocus />
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<!-- row -->
+
+		<div class="form-group col-md-4">
+			<button type="submit" name="action"
+				class="btn btn-success btn-lg btn-block">Adicionar Sessão</button>
+		</div>
+		<!-- col-sm-12 -->
+	</div>
+	<!-- row -->
+	<hr>
+	<div class="row">
+		<div id="tabela">
+			<h3>Sessoes cadastrados</h3>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Horario</th>
+						<th>Data de Início</th>
+						<th>Data de Fim</th>
+						<th>Filme</th>
+						<th>Sala</th>
+						<th>Detalhes</th>
+						<th>Atualizar</th>
+						<th>Excluir</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="sessao : ${sessoes}">
+						<td th:text="${sessao.id}"></td>
+						<td th:text="${sessao.horario}"></td>
+						<td th:text="${sessao.dataInicio}"></td>
+						<td th:text="${sessao.dataFim}"></td>
+						<td th:text="${sessao.filme.nome}"></td>
+						<td th:text="${sessao.sala.nome}"></td>
+						<td><a class="btn btn-success" role="button"
+							th:href="@{${'/sessao/'+sessao.id}}">Ver detalhes</a></td>
+						<td><a class="btn btn-primary"
+							th:href="@{/sessao/atualizar/{id}(id = ${sessao.id})}">Atualizar
+						</a></td>
+						<td><a class="btn btn-sm  btn-danger"
+							th:href="@{/sessao/excluir/{id}(id = ${sessao.id})}">X</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- row -->
+
+	</div>
+	<!-- container MOSTRAR SESSOES-->
+</body>
+</html>

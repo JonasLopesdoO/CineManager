@@ -60,7 +60,7 @@ public class CinemaController {
 	@RequestMapping("/formulario")
 	public ModelAndView formularioCinema() {
 		ModelAndView model = new ModelAndView("formulario-cinema");
-		model.addObject("filme", new Cinema());
+		model.addObject("cinema", new Cinema());
 
 		return model;
 	}
@@ -68,7 +68,7 @@ public class CinemaController {
 	@SuppressWarnings("finally")
 	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaCinema(Cinema cinema) {
-		ModelAndView model = new ModelAndView("filme");
+		ModelAndView model = new ModelAndView("cinema");
 
 		try {
 			if (this.validaCinema(cinema.getNome(), cinema.getEndereco(), cinema.getEndereco())) {
@@ -139,7 +139,7 @@ public class CinemaController {
 				// este método só redireciona para a digitação dos novos campos do model
 	@SuppressWarnings("finally")
 	@RequestMapping("/atualizar/{id}")
-	public ModelAndView atualizaFilme(@PathVariable("id") Integer id) {
+	public ModelAndView atualizaCinema(@PathVariable("id") Integer id) {
 		ModelAndView model = new ModelAndView("formulario-cinema");
 
 		try {

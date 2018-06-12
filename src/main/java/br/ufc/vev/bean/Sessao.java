@@ -3,7 +3,9 @@ package br.ufc.vev.bean;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,13 +30,23 @@ public class Sessao {
 	@NotNull
 	private LocalTime horario;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "sessao")
 	private Filme filme;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "sessao")
 	private Sala sala;
 	
-	public Sessao(Filme filme, Sala sala, LocalTime horario, LocalDate inicio, LocalDate fim) {
+	public Sessao(LocalTime horario, LocalDate inicio, LocalDate fim) {
+		this.setHorario(horario);
+		this.setDataInicio(inicio);
+		this.setDataFim(fim);
+	}
+	
+	public Sessao(LocalTime horario, LocalDate inicio, LocalDate fim, Filme filme, Sala sala) {
 		this.setFilme(filme);
 		this.setSala(sala);
 		this.setHorario(horario);
