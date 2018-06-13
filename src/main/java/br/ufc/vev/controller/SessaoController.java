@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufc.vev.bean.Sessao;
-import br.ufc.vev.bean.Filme;
-import br.ufc.vev.bean.Sessao;
-import br.ufc.vev.bean.Sala;
 import br.ufc.vev.service.SessaoService;
 
 @Controller
@@ -80,7 +77,7 @@ public class SessaoController {
 			if (this.validaSessao(sessao.getHorario(), sessao.getDataInicio(), sessao.getDataFim())) {
 				sessaoService.salvarSessao(sessao);
 
-				model.addObject("sessaoRetorno", sessao);
+				model.addObject("sessao", sessao);
 		 	}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -260,16 +257,10 @@ public class SessaoController {
 	}
 	
 	private boolean validaSessao(LocalTime horario, LocalDate dataInicio, LocalDate dataFim) throws Exception {
-		if (horario.equals("")) {
-			throw new Exception("Nome não pode ser vazio");
-		} else if (horario.equals(null)) {
+		if (horario.equals(null)) {
 			throw new Exception("Nome não pode ser nulo");
-		} else if (dataInicio.equals("")) {
-			throw new Exception("Data Inicial não pode ser vazia");
 		} else if (dataInicio.equals(null)) {
 			throw new Exception("Data Inicial não pode ser nula");
-		} else if (dataFim.equals("")) {
-			throw new Exception("Data Inicial não pode ser vazia");
 		} else if (dataFim.equals(null)) {
 			throw new Exception("Data Inicial não pode ser nula");
 		}

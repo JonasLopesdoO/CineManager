@@ -27,7 +27,6 @@ public class Sala {
 	private Cinema cinema;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sessao_id", nullable = false)
 	private Sessao sessao;
 	
 	public Sala(String nome, TipoSala tipo, int capacidade) {
@@ -44,8 +43,8 @@ public class Sala {
 		return id;
 	}
 	
-	public Integer setId() {
-		return id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {

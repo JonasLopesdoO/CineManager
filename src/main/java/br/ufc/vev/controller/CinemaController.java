@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufc.vev.bean.Cinema;
-import br.ufc.vev.bean.Cinema;
 import br.ufc.vev.bean.Sala;
 import br.ufc.vev.service.CinemaService;
 
@@ -114,9 +113,7 @@ public class CinemaController {
 
 	@SuppressWarnings("finally")
 	@RequestMapping("/excluir/{id}")
-	public ModelAndView excluiCinema(@PathVariable("id") Integer id) {
-		ModelAndView model = new ModelAndView("cinema");
-		
+	public ModelAndView excluiCinema(@PathVariable("id") Integer id) {		
 		try {
 			Cinema cinema = new Cinema();
 			if (validaId(id) && existsByIdCinema(id)) {

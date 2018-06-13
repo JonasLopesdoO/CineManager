@@ -10,12 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.test.annotation.Rollback;
 
-import br.ufc.vev.bean.Sessao;
-import br.ufc.vev.bean.Ator;
 import br.ufc.vev.bean.Filme;
-import br.ufc.vev.bean.Sala;
-import br.ufc.vev.bean.Sessao;
 import br.ufc.vev.bean.Genero;
+import br.ufc.vev.bean.Sala;
 import br.ufc.vev.bean.Sessao;
 import br.ufc.vev.repositorio.SessaoRepositorio;
 

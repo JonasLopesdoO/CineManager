@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http//thymeleaf.org"
+	  xmlns:layout="http//www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -73,15 +74,16 @@
 							type="text" placeholder="Data fim da sessao" class="form-control"
 							id="horario" name="dataFim" autofocus />
 					</div>
+					<div class="form-group col-md-4">
+						<button type="submit" name="action"
+								class="btn btn-success btn-lg btn-block">Adicionar Sessão</button>
+					</div>
 				</fieldset>
 			</form>
 		</div>
 		<!-- row -->
 
-		<div class="form-group col-md-4">
-			<button type="submit" name="action"
-				class="btn btn-success btn-lg btn-block">Adicionar Sessão</button>
-		</div>
+		
 		<!-- col-sm-12 -->
 	</div>
 	<!-- row -->
@@ -126,7 +128,6 @@
 	</div>
 	<!-- row -->
 
-	</div>
 	<!-- container MOSTRAR SESSOES-->
 </body>
 </html>

@@ -29,7 +29,6 @@ public class Filme {
 	private int duracao;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sessao_id", nullable = false)
 	private Sessao sessao;
 	
 	@ManyToMany
