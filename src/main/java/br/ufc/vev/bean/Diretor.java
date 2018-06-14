@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "diretor")
-public class Diretor{
+public class Diretor extends Pessoa{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
