@@ -241,9 +241,8 @@ public class SessaoController {
 	@RequestMapping(path = "/porCidade", method = RequestMethod.POST)
 	public ModelAndView verTodasPorCidade(@RequestParam String cidade) {
 		ModelAndView model = new ModelAndView("sessao-busca");
-		Cinema cinema = cinemaController.buscaCinemaPorCidade(cidade);
-		if (cinema != null) {
-			List<Sessao> sessoes = sessaoService.getSessaoPorCidade(cinema);
+		if (cidade != null) {
+			List<Sessao> sessoes = sessaoService.getSessaoPorCidade(cidade);
 			model.addObject("sessoes", sessoes);
 		}
 		

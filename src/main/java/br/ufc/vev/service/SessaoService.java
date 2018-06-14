@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.test.annotation.Rollback;
 
-import br.ufc.vev.bean.Cinema;
 import br.ufc.vev.bean.Filme;
 import br.ufc.vev.bean.Genero;
 import br.ufc.vev.bean.Sala;
@@ -64,7 +63,7 @@ public class SessaoService {
 		List<Sessao> sessoes = new ArrayList<Sessao>();
 		for (Sessao sessao : getAllSessao()) {
 			if (sessao.getSala() != null && sessao.getSala().getCinema() != null
-					&& sessao.getSala().getCinema().getCidade() == cidade) {
+					&& sessao.getSala().getCinema().getCidade().equals(cidade)) {
 				sessoes.add(sessao);
 			}
 		}
