@@ -38,6 +38,10 @@ public class GeneroService {
 	public Genero atualizaGenero(Genero genero) {
 		return generoRepositorio.save(genero);
 	}
+	
+	public Genero buscaPorNome(String nome) {
+		return generoRepositorio.findByNome(nome);
+	}
 
 	public List<Genero> getAllGenero() {
 		return generoRepositorio.findAll();

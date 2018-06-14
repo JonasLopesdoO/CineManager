@@ -79,14 +79,18 @@ public class SessaoService {
 		return sessoes;
 	}
 
-	public List<Sessao> getSessaoPorGenero(String genero) {
+	public List<Sessao> getSessaoPorGenero(Genero genero) {
 		List<Sessao> sessoes = new ArrayList<Sessao>();
-		for (Sessao sessao : getAllSessao()) {
-			for (Genero g : sessao.getFilme().getGeneros()) {
-				if (g.getNome().equals(genero)) {
-					sessoes.add(sessao);
+		for (Sessao sessao : this.getAllSessao()) {
+			if (sessao.getFilme() != null && sessao.getFilme().getGeneros() != null) {
+				for (Genero gen : sessao.getFilme().getGeneros()) {
+					if (gen == genero) {
+						sessoes.add(sessao);
+						break;
+					}
 				}
 			}
+			
 		}
 		return sessoes;
 	}

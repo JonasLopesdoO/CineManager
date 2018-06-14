@@ -137,6 +137,10 @@ public class GeneroController {
 		
 	}
 	
+	public Genero buscaPorNome(String nome) {
+		return generoService.buscaPorNome(nome);
+	}
+	
 	public boolean validaGenero(String nome) throws Exception {
 		
 		if (nome.equals("")) {
