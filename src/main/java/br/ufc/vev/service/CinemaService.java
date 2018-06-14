@@ -72,5 +72,5 @@ public class CinemaService {
 			cinemaRepositorio.save(cinema);
 			salaService.salvarSala(sala);
 		} 
-	}
+	}	
 }

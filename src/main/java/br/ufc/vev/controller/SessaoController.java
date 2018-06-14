@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.ufc.vev.bean.Cinema;
 import br.ufc.vev.bean.Filme;
 import br.ufc.vev.bean.Genero;
 import br.ufc.vev.bean.Sessao;
@@ -35,6 +36,8 @@ public class SessaoController {
 	SalaController salaController;
 	@Autowired
 	GeneroController generoController;
+	@Autowired
+	CinemaController cinemaController;
 	
 	@SuppressWarnings("finally")
 	@RequestMapping(path = "/")
@@ -237,12 +240,12 @@ public class SessaoController {
 	
 	@RequestMapping(path = "/porCidade", method = RequestMethod.POST)
 	public ModelAndView verTodasPorCidade(@RequestParam String cidade) {
-// 	todasAsSessoesPorData
 		ModelAndView model = new ModelAndView("sessao-busca");
-		
-		List<Sessao> sessoes = sessaoService.getSessaoPorCidade(cidade);
-		
-		model.addObject("sessoes", sessoes);
+		Cinema cinema = cinemaController.buscaCinemaPorCidade(cidade);
+		if (cinema != null) {
+			List<Sessao> sessoes = sessaoService.getSessaoPorCidade(cinema);
+			model.addObject("sessoes", sessoes);
+		}
 		
 		return model;
 	}
@@ -267,9 +270,6 @@ public class SessaoController {
 			List<Sessao> sessoes = sessaoService.getSessaoPorGenero(generoB);
 			model.addObject("sessoes", sessoes);
 		}
-				
-		
-		
 		return model;
 	}
 	
