@@ -99,44 +99,76 @@ public class SessaoService {
 		return sessaoRepositorio.getOne(id);
 	}
 
-	public void vinculaFilmeASessao(Integer idSessao, Integer idFilme) {
-		Sessao sessao = sessaoRepositorio.getOne(idSessao);
+	public boolean vinculaFilmeASessao(Integer idSessao, Integer idFilme) {
 		Filme filme = filmeService.buscarFilme(idFilme);
+		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		
-		sessao.setFilme(filme);
+		if(filme.equals(null) || sessao.equals(null) || sessao.getFilme() != null) {
+			return false;
+		}else{
+			sessao.setFilme(filme);
+			filme.getSessoes().add(sessao);
 			
-		sessaoRepositorio.save(sessao);
-		filmeService.salvarFilme(filme);
+			sessaoRepositorio.save(sessao);
+			filmeService.salvarFilme(filme);
+			
+			return true;
+		}
+			
 	}
 
 	public void desvinculaFilmeDaSessao(Integer idSessao, Integer idFilme) {
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		Filme filme = filmeService.buscarFilme(idFilme);
-			
-		sessao.setFilme(null);
 		
-		sessaoRepositorio.save(sessao);
-		filmeService.salvarFilme(filme);		
+		if (!filme.equals(null) && !sessao.equals(null)) {
+			sessao.setFilme(null);
+			filme.getSessoes().remove(sessao);
+			
+			sessaoRepositorio.save(sessao);
+			filmeService.salvarFilme(filme);
+		}
+	}
+	public void desvinculaFilmeDaSessao(int idSessao, int idFilme) {
+		Filme filme = filmeService.buscarFilme(idFilme);
+		Sessao sessao = sessaoRepositorio.getOne(idSessao);
+		
+		if (!filme.equals(null) && !sessao.equals(null)) {
+			filme.removeSessao(sessao);
+			
+			sessaoRepositorio.save(sessao);
+			filmeService.salvarFilme(filme);
+		} 
 	}
 	
-	public void vinculaSalaASessao(Integer idSessao, Integer idSala) {
-		Sessao sessao = sessaoRepositorio.getOne(idSessao);
+	public boolean vinculaSalaASessao(Integer idSessao, Integer idSala) {
 		Sala sala = salaService.buscarSala(idSala);
+		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		
-		sessao.setSala(sala);
+		if(sala.equals(null) || sessao.equals(null) || sessao.getSala() != null) {
+			return false;
+		}else{
+			sessao.setSala(sala);
+			sala.getSessoes().add(sessao);
+				
+			sessaoRepositorio.save(sessao);
+			salaService.salvarSala(sala);
 			
-		sessaoRepositorio.save(sessao);
-		salaService.salvarSala(sala);
+			return true;
+		}
 	}
 
 	public void desvinculaSalaDaSessao(Integer idSessao, Integer idSala) {
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		Sala sala = salaService.buscarSala(idSala);
 			
-		sessao.setSala(null);
+		if (!sala.equals(null) && !sessao.equals(null)) {
+			sala.removeSessao(sessao);
+			
+			sessaoRepositorio.save(sessao);
+			salaService.salvarSala(sala);
+		} 
 		
-		sessaoRepositorio.save(sessao);
-		salaService.salvarSala(sala);		
 	}
 	
 }

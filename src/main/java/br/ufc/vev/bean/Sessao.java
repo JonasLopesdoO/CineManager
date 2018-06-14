@@ -3,15 +3,17 @@ package br.ufc.vev.bean;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -23,21 +25,19 @@ public class Sessao {
 	private Integer id;
 	
 	@NotNull
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dataInicio;
 	@NotNull
 	private LocalDate dataFim;
 	@NotNull
 	private LocalTime horario;
 	
-	@OneToOne(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL,
-            mappedBy = "sessao")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "filme_id")
 	private Filme filme;
 	
-	@OneToOne(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL,
-            mappedBy = "sessao")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "sala_id")
 	private Sala sala;
 	
 	public Sessao(LocalTime horario, LocalDate inicio, LocalDate fim) {
@@ -105,6 +105,8 @@ public class Sessao {
 	public void setSala(Sala sala) {
 		this.sala = sala;
 	}
+	
+	
 	
 	@Override
 	public boolean equals(Object obj) {

@@ -1,5 +1,7 @@
 package br.ufc.vev.bean;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,8 +28,8 @@ public class Sala {
 	@JoinColumn(name = "cinema_id")
 	private Cinema cinema;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	private Sessao sessao;
+	@OneToMany(fetch=FetchType.LAZY)
+	private List<Sessao> sessoes;
 	
 	public Sala(String nome, TipoSala tipo, int capacidade) {
 		this.nome = nome;
@@ -79,11 +81,16 @@ public class Sala {
 		this.cinema = cinema;
 	}
 	
-	public Sessao getSessao() {
-		return sessao;
+	public List<Sessao> getSessoes() {
+		return sessoes;
 	}
 	
-	public void setSessao(Sessao sessao) {
-		this.sessao = sessao;
+	public void setSessoes(List<Sessao> sessoes) {
+		this.sessoes = sessoes;
+	}
+	
+	public boolean removeSessao(Sessao sessao) {
+		sessao.setSala(null);
+		return this.sessoes.remove(sessao);
 	}
 }

@@ -35,6 +35,10 @@ public class Cinema {
 		return id;
 	}
 	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 	public String getCidade() {
 		return cidade;
 	}

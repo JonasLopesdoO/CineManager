@@ -2,13 +2,14 @@ package br.ufc.vev.controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.annotation.Rollback;
+//import org.springframework.test.annotation.Rollback;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +21,7 @@ import br.ufc.vev.service.SessaoService;
 
 @Controller
 @Transactional
-@Rollback(false)
+//@Rollback(false)
 @RequestMapping(path= "/sessao")
 public class SessaoController {
 		
@@ -70,9 +71,23 @@ public class SessaoController {
 
 	@SuppressWarnings("finally")
 	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
-	public ModelAndView salvaSessao(Sessao sessao) {
+	public ModelAndView salvaSessao(@RequestParam String horario, @RequestParam String dataInicio, @RequestParam String dataFim) {
 		ModelAndView model = new ModelAndView("sessao");
 
+		Sessao sessao = new Sessao();
+
+		LocalTime horarioConvert;
+		horarioConvert = LocalTime.parse(horario);
+		
+		LocalDate dataInicioConvert, dataFimConvert;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		dataInicioConvert = LocalDate.parse(dataInicio, formatter);
+		dataFimConvert = LocalDate.parse(dataFim, formatter);
+		
+		sessao.setHorario(horarioConvert);
+		sessao.setDataInicio(dataInicioConvert);
+		sessao.setDataFim(dataFimConvert);
+		
 		try {
 			if (this.validaSessao(sessao.getHorario(), sessao.getDataInicio(), sessao.getDataFim())) {
 				sessaoService.salvarSessao(sessao);
@@ -125,7 +140,7 @@ public class SessaoController {
 	
 	@SuppressWarnings("finally")
 	@RequestMapping("/buscar/{id}")
-	public ModelAndView buscaFilme(@PathVariable Integer id) {
+	public ModelAndView buscaSessao(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView("sessao");
 		try {
 			if (this.validaId(id)) {
@@ -154,7 +169,7 @@ public class SessaoController {
 
 	  ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
 	  
-	  if (existsByIdSessao(idSessao) && filmeController.existsByIdFilme(idFilme) && filmePertenceASessao(idSessao, idFilme) == false) {
+	  if (sessaoPossuiFilme(idSessao, idFilme) == false) {
 		  sessaoService.vinculaFilmeASessao(idSessao, idFilme);
 	  }
 	  
@@ -167,7 +182,7 @@ public class SessaoController {
 		
 		ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
 		
-		if (filmePertenceASessao(idSessao, idFilme)) {
+		if (sessaoPossuiFilme(idSessao, idFilme)) {
 			sessaoService.desvinculaFilmeDaSessao(idSessao, idFilme);
 		}
 		
@@ -180,7 +195,7 @@ public class SessaoController {
 
 	  ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
 	  
-	  if (existsByIdSessao(idSessao) && salaController.existsByIdSala(idSala) && salaPertenceASessao(idSessao, idSala) == false) {
+	  if (sessaoPossuiSala(idSessao, idSala) == false) {
 		  sessaoService.vinculaSalaASessao(idSessao, idSala);
 	  }
 	  
@@ -193,7 +208,7 @@ public class SessaoController {
 		
 		ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
 		
-		if (salaPertenceASessao(idSessao, idSala)) {
+		if (sessaoPossuiSala(idSessao, idSala)) {
 			sessaoService.desvinculaSalaDaSessao(idSessao, idSala);
 		}
 		
@@ -209,7 +224,7 @@ public class SessaoController {
 		
 		List<Sessao> sessoes = sessaoService.getSessaoPorData(dataInicial, dataFinal);
 		
-		model.addObject("sessao", sessoes);
+		model.addObject("sessoes", sessoes);
 		
 		return model;
 	}
@@ -221,7 +236,7 @@ public class SessaoController {
 		
 		List<Sessao> sessoes = sessaoService.getSessaoPorCidade(cidade);
 		
-		model.addObject("sessao", sessoes);
+		model.addObject("sessoes", sessoes);
 		
 		return model;
 	}
@@ -233,7 +248,7 @@ public class SessaoController {
 		
 		List<Sessao> sessoes = sessaoService.getSessaoPorFilme(filme);
 		
-		model.addObject("sessao", sessoes);
+		model.addObject("sessoes", sessoes);
 		
 		return model;
 	}
@@ -276,26 +291,27 @@ public class SessaoController {
 		return true;
 	}
 	
-	public boolean filmePertenceASessao(int idSessao, int idFilme) {
+	public boolean sessaoPossuiFilme(int idSessao, int idFilme) {
+		
 		if (existsByIdSessao(idSessao) && filmeController.existsByIdFilme(idFilme)) {
 			Sessao sessao = sessaoService.buscarSessao(idSessao);
 			
-			if(sessao.getFilme().getId() == idFilme) {
-				return true;
+			if(sessao.getFilme() == null) {
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 	
-	public boolean salaPertenceASessao(int idSessao, int idSala) {
+	public boolean sessaoPossuiSala(int idSessao, int idSala) {
 		if (existsByIdSessao(idSessao) && salaController.existsByIdSala(idSala)) {
 			Sessao sessao = sessaoService.buscarSessao(idSessao);
 			
-			if(sessao.getSala().getId() == idSala) {
-				return true;
+			if(sessao.getSala() == null) {
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 	
 	public boolean existsByIdSessao(int id) {

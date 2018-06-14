@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http//thymeleaf.org"
+	  xmlns:layout="http//www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -20,6 +21,44 @@
 				GERENCIAMENTO DAS SESSOES DO CINEMA</h3>
 		</div>
 	</div>
+	<div class="container">
+
+		<div class="row  col-lg-12">
+			<fieldset>
+				<legend>MENU</legend>
+
+				<div class="form-group col-md-4">
+					<form class="col-sm-12 col-lg-12">
+						<fieldset>
+							<div class="container ">
+								<div class="row center col-lg-12">
+									<a href="/" class="btn btn-success btn-lg col-lg-4">HOME</a>
+								</div>
+								<label>Clique no botão para retornar ao MENU principal.</label>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<div style="left: 10px;" class="form-group col-md-4">
+					<form class="col-sm-12 col-lg-12">
+						<fieldset>
+							<div class="container ">
+								<div class="row center col-lg-12">
+									<a href="/cinema/" class="btn btn-success btn-lg col-lg-4">CINEMA</a>
+								</div>
+								<label>Clique no botão para retornar ao MENU cinema.</label>
+							</div>
+						</fieldset>
+						<!-- col-sm-12 -->
+					</form>
+				</div>
+			</fieldset>
+
+			<!-- col-sm-12 -->
+			<hr></hr>
+		</div>
+		<!-- row -->
+	</div>
 
 	<br>
 	<br>
@@ -28,8 +67,8 @@
 		<div class="row valign-wrapper">
 			<div class="col-lg-6">
 				<h3>
-					Detalhes da Sessão></span>
-					<hr>
+					<span>Detalhes da Sessão</span>
+					
 				</h3>
 				<br> <br>
 			</div>
@@ -76,7 +115,7 @@
 						</thead>
 
 						<tbody>
-							<tr th:each="filme : ${sessao.filmes}">
+							<tr th:each="filme : ${sessao.filme}">
 								<td th:text="${filme.id}"></td>
 								<td th:text="${filme.nome}"></td>
 								<td><a class="btn btn-sm btn-danger"
@@ -126,7 +165,7 @@
 						</thead>
 
 						<tbody>
-							<tr th:each="sala : ${sessao.salas}">
+							<tr th:each="sala : ${sessao.sala}">
 								<td th:text="${sala.id}"></td>
 								<td th:text="${sala.nome}"></td>
 								<td><a class="btn btn-sm btn-danger"

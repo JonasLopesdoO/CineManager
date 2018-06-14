@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http//thymeleaf.org"
-	  xmlns:layout="http//www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http//www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -52,7 +52,7 @@
 		<!-- row -->
 
 		<div class="row">
-			<form action="/sessao/salvar" th:object="${sessao}" method="POST"
+			<form action="/sessao/salvar" method="POST"
 				class="col-sm-12 col-lg-12">
 				<br> <br> <br> <br> <br> <br>
 				<fieldset>
@@ -66,67 +66,66 @@
 					<div class="form-group col-md-4">
 						<label for="sessao">Data de início da Sessao</label> <input
 							type="text" placeholder="Data início da sessao"
-							class="form-control" id="horario" name="dataInicio" autofocus />
+							class="form-control" id="dataIni" name="dataInicio" autofocus />
 					</div>
 
 					<div class="form-group col-md-4">
 						<label for="sessao">Data de fim da Sessao</label> <input
 							type="text" placeholder="Data fim da sessao" class="form-control"
-							id="horario" name="dataFim" autofocus />
+							id="dataFim" name="dataFim" autofocus />
 					</div>
 					<div class="form-group col-md-4">
 						<button type="submit" name="action"
-								class="btn btn-success btn-lg btn-block">Adicionar Sessão</button>
+							class="btn btn-success btn-lg btn-block">Adicionar
+							Sessão</button>
 					</div>
 				</fieldset>
 			</form>
 		</div>
 		<!-- row -->
+		<br><br>
+		<div class="row">
+			<div id="tabela">
 
-		
+				<h3>Filmes cadastrados</h3>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nome</th>
+							<th>Sinopse</th>
+							<th>Duracao</th>
+							<th>Detalhes</th>
+							<th>Atualizar</th>
+							<th>Excluir</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="sessao : ${sessoes}">
+							<td th:text="${sessao.id}"></td>
+							<td th:text="${sessao.horario}"></td>
+							<td th:text="${sessao.dataInicio}"></td>
+							<td th:text="${sessao.dataFim}"></td>
+							<td><a class="btn btn-success" role="button"
+								th:href="@{${'/sessao/'+sessao.id}}">Ver detalhes</a></td>
+							<td><a class="btn btn-primary"
+								th:href="@{/sessao/atualizar/{id}(id = ${sessao.id})}">Atualizar
+							</a></td>
+							<td><a class="btn btn-sm  btn-danger"
+								th:href="@{/sessao/excluir/{id}(id = ${sessao.id})}">X</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- row -->
+
 		<!-- col-sm-12 -->
 	</div>
-	<!-- row -->
+	<!-- container -->
 	<hr>
-	<div class="row">
-		<div id="tabela">
-			<h3>Sessoes cadastrados</h3>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Horario</th>
-						<th>Data de Início</th>
-						<th>Data de Fim</th>
-						<th>Filme</th>
-						<th>Sala</th>
-						<th>Detalhes</th>
-						<th>Atualizar</th>
-						<th>Excluir</th>
-					</tr>
-				</thead>
 
-				<tbody>
-					<tr th:each="sessao : ${sessoes}">
-						<td th:text="${sessao.id}"></td>
-						<td th:text="${sessao.horario}"></td>
-						<td th:text="${sessao.dataInicio}"></td>
-						<td th:text="${sessao.dataFim}"></td>
-						<td th:text="${sessao.filme.nome}"></td>
-						<td th:text="${sessao.sala.nome}"></td>
-						<td><a class="btn btn-success" role="button"
-							th:href="@{${'/sessao/'+sessao.id}}">Ver detalhes</a></td>
-						<td><a class="btn btn-primary"
-							th:href="@{/sessao/atualizar/{id}(id = ${sessao.id})}">Atualizar
-						</a></td>
-						<td><a class="btn btn-sm  btn-danger"
-							th:href="@{/sessao/excluir/{id}(id = ${sessao.id})}">X</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<!-- row -->
 
 	<!-- container MOSTRAR SESSOES-->
 </body>
