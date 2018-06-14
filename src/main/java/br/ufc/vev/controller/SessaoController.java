@@ -243,11 +243,11 @@ public class SessaoController {
 	}
 	
 	@RequestMapping(path = "/porFilme", method = RequestMethod.POST)
-	public ModelAndView verTodasPorFilme(@RequestParam String nomeFilme) {
+	public ModelAndView verTodasPorFilme(@RequestParam String filme) {
 		ModelAndView model = new ModelAndView("sessao-filmes");
-		Filme filme = filmeController.buscarPorNome(nomeFilme);
-		if (filme != null) {
-			List<Sessao> sessoes = sessaoService.getSessaoPorFilme(nomeFilme);
+		Filme filmeB = filmeController.buscarPorNome(filme);
+		if (filmeB != null) {
+			List<Sessao> sessoes = sessaoService.getSessaoPorFilme(filmeB);
 			model.addObject("sessoes", sessoes);
 		}
 		
