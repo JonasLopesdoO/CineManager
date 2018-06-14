@@ -120,6 +120,42 @@
 			</div>
 		</div>
 		<!-- row -->
+		
+		<div class="row">
+			<div id="tabela">
+
+				<h3>Buscar Sessões</h3>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Buscar por Gênero</th>
+							<th>Buscar por Filme</th>
+							<th>Buscar por Data</th>
+							<th>Buscar por Cidade</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							 <td><a class="btn btn-primary"
+								th:href="@{/sessao/porGenero/}">Buscar GÊNERO
+							</a></td>
+							<td><a class="btn btn-primary"
+								th:href="@{/sessao/porCidade/}">Buscar CIDADE
+							</a></td>
+							<td><a class="btn btn-primary"
+								th:href="@{/sessao/porData/}">Buscar DATA
+							</a></td>
+							<td><a class="btn btn-primary"
+								th:href="@{/sessao/porFilme/}">Buscar FILME
+							</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- row -->
 
 		<!-- col-sm-12 -->
 	</div>
