@@ -98,8 +98,10 @@ public class AtorRepositoryTest {
 		atorAtualizado = atorRepositorio.save(ator);
 		atorAtualizado.setNome(nomeNovo);
 		atorAtualizado.setSobre(sobreNovo);
-		
+
+	
 		Ator atorAtualizadoRecebido = new Ator();
+		atorAtualizadoRecebido = atorRepositorio.save(atorAtualizado);
 		atorAtualizadoRecebido = atorRepositorio.getOne(atorAtualizado.getId());
 		
 		assertEquals(atorAtualizado.getId(), atorAtualizadoRecebido.getId());

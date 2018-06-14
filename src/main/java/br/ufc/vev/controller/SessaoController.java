@@ -219,7 +219,7 @@ public class SessaoController {
 	@RequestMapping(path = "/porData", method = RequestMethod.POST)
 	public ModelAndView verTodasPorData(@RequestParam String dataInicio, @RequestParam String dataFim) {
 // 	todasAsSessoesPorData
-		ModelAndView model = new ModelAndView("sessao");
+		ModelAndView model = new ModelAndView("sessao-busca");
 		LocalDate dataInicial = LocalDate.parse(dataInicio);
 		LocalDate dataFinal = LocalDate.parse(dataFim);
 		
@@ -233,7 +233,7 @@ public class SessaoController {
 	@RequestMapping(path = "/porCidade", method = RequestMethod.POST)
 	public ModelAndView verTodasPorCidade(@RequestParam String cidade) {
 // 	todasAsSessoesPorData
-		ModelAndView model = new ModelAndView("sessao");
+		ModelAndView model = new ModelAndView("sessao-busca");
 		
 		List<Sessao> sessoes = sessaoService.getSessaoPorCidade(cidade);
 		
@@ -244,7 +244,7 @@ public class SessaoController {
 	
 	@RequestMapping(path = "/porFilme", method = RequestMethod.POST)
 	public ModelAndView verTodasPorFilme(@RequestParam String filme) {
-		ModelAndView model = new ModelAndView("sessao-filmes");
+		ModelAndView model = new ModelAndView("sessao-busca");
 		Filme filmeB = filmeController.buscarPorNome(filme);
 		if (filmeB != null) {
 			List<Sessao> sessoes = sessaoService.getSessaoPorFilme(filmeB);
@@ -257,7 +257,7 @@ public class SessaoController {
 	@RequestMapping(path = "/porGenero", method = RequestMethod.POST)
 	public ModelAndView verTodasPorGenero(@RequestParam String genero) {
 // 	todasAsSessoesPorData
-		ModelAndView model = new ModelAndView("sessao-generos");
+		ModelAndView model = new ModelAndView("sessao-busca");
 		
 		List<Sessao> sessoes = sessaoService.getSessaoPorGenero(genero);
 		
