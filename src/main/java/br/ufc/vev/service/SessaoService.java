@@ -52,7 +52,7 @@ public class SessaoService {
 	public List<Sessao> getSessaoPorData(LocalDate dataInicial, LocalDate dataFinal) {
 		List<Sessao> sessoes = new ArrayList<Sessao>();
 		for (Sessao sessao : getAllSessao()) {
-			if (sessao.getDataInicio().isBefore(dataInicial) && sessao.getDataFim().isAfter(dataFinal)) {
+			if (sessao.getDataInicio().isAfter(dataInicial) && sessao.getDataFim().isBefore(dataFinal)) {
 				sessoes.add(sessao);
 			}
 		}

@@ -222,10 +222,13 @@ public class SessaoController {
 	public ModelAndView verTodasPorData(@RequestParam String dataInicio, @RequestParam String dataFim) {
 // 	todasAsSessoesPorData
 		ModelAndView model = new ModelAndView("sessao-busca");
-		LocalDate dataInicial = LocalDate.parse(dataInicio);
-		LocalDate dataFinal = LocalDate.parse(dataFim);
 		
-		List<Sessao> sessoes = sessaoService.getSessaoPorData(dataInicial, dataFinal);
+		LocalDate dataInicioConvert, dataFimConvert;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		dataInicioConvert = LocalDate.parse(dataInicio, formatter);
+		dataFimConvert = LocalDate.parse(dataFim, formatter);
+		
+		List<Sessao> sessoes = sessaoService.getSessaoPorData(dataInicioConvert, dataFimConvert);
 		
 		model.addObject("sessoes", sessoes);
 		
