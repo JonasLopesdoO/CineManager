@@ -297,4 +297,8 @@ public class FilmeController {
 		}
 		return false;
 	}
+	
+	public Filme buscarPorNome(String nome) {
+		return filmeService.bucarPorNome(nome);
+	}
 }

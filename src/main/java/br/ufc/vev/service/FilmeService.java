@@ -27,6 +27,10 @@ public class FilmeService {
 	@Autowired
 	GeneroService generoService;
 	
+	public Filme bucarPorNome(String nome) {
+		return filmeRepositorio.findByNome(nome);
+	}
+	
 	public Filme salvarFilme(Filme filme) {
 		return filmeRepositorio.save(filme);
 	}

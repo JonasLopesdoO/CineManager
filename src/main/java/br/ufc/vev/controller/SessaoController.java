@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.ufc.vev.bean.Filme;
 import br.ufc.vev.bean.Sessao;
 import br.ufc.vev.service.SessaoService;
 
@@ -242,13 +243,13 @@ public class SessaoController {
 	}
 	
 	@RequestMapping(path = "/porFilme", method = RequestMethod.POST)
-	public ModelAndView verTodasPorFilme(@RequestParam String filme) {
-// 	todasAsSessoesPorData
-		ModelAndView model = new ModelAndView("sessao");
-		
-		List<Sessao> sessoes = sessaoService.getSessaoPorFilme(filme);
-		
-		model.addObject("sessoes", sessoes);
+	public ModelAndView verTodasPorFilme(@RequestParam String nomeFilme) {
+		ModelAndView model = new ModelAndView("sessao-filmes");
+		Filme filme = filmeController.buscarPorNome(nomeFilme);
+		if (filme != null) {
+			List<Sessao> sessoes = sessaoService.getSessaoPorFilme(nomeFilme);
+			model.addObject("sessoes", sessoes);
+		}
 		
 		return model;
 	}

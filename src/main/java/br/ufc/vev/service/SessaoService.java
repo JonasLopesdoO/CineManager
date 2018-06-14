@@ -69,10 +69,10 @@ public class SessaoService {
 		return sessoes;
 	}
 
-	public List<Sessao> getSessaoPorFilme(String filme) {
+	public List<Sessao> getSessaoPorFilme(Filme filme) {
 		List<Sessao> sessoes = new ArrayList<Sessao>();
 		for (Sessao sessao : getAllSessao()) {
-			if (sessao.getFilme().getNome().equals(filme)) {
+			if (sessao.getFilme().equals(filme)) {
 				sessoes.add(sessao);
 			}
 		}
