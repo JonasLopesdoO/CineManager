@@ -27,19 +27,19 @@
 
 		<div class="form-group col-md-4">
 			<label for="sessao">Horário da Sessao</label> <input type="text"
-				placeholder="Horario da sessao" class="form-control" id="horario"
-				th:field="*{nome}" autofocus />
+				onkeypress="mascara(this, '##:##'); return Numero(event);" placeholder="Horário da sessao ex: 10:30" maxlength="5" class="form-control" id="horario"
+				th:field="*{horario}" autofocus />
 		</div>
 
 		<div class="form-group col-md-4">
 			<label for="sessao">Data de início da Sessao</label> <input
-				type="text" placeholder="Data início da sessao" class="form-control"
-				id="horario" th:field="*{dataInicio}"/>
+				type="text" onkeypress="mascara(this, '##-##-####'); return Numero(event);" placeholder="Data inicial ex: 10-05-2018" maxlength="10" class="form-control"
+				id="dataInicio" th:field="*{dataInicio}"/>
 		</div>
 
 		<div class="form-group col-md-4">
 			<label for="sessao">Data de fim da Sessao</label> <input type="text"
-				placeholder="Data fim da sessao" class="form-control" id="horario"
+				onkeypress="mascara(this, '##-##-####'); return Numero(event);" placeholder="Data final ex: 10-05-2018" maxlength="10" class="form-control" id="horario"
 				th:field="*{dataFim}"  />
 		</div>
 

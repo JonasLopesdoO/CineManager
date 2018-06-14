@@ -59,19 +59,19 @@
 					<legend>Preencha os dados pedidos</legend>
 					<div class="form-group col-md-4">
 						<label for="sessao">Horário da Sessao</label> <input type="text"
-							placeholder="Horario da sessao" class="form-control" id="horario"
+							onkeypress="mascara(this, '##:##'); return Numero(event);" placeholder="Horário da sessao ex: 10:30" maxlength="5" class="form-control" id="horario"
 							name="horario" autofocus />
 					</div>
 
 					<div class="form-group col-md-4">
-						<label for="sessao">Data de início da Sessao</label> <input
-							type="text" placeholder="Data início da sessao"
+						<label for="sessao">Data de início da Sessao</label>
+						 <input	type="text" onkeypress="mascara(this, '##-##-####'); return Numero(event);" placeholder="Data início da sessao ex: 22-22-2022" maxlength="10"
 							class="form-control" id="dataIni" name="dataInicio" autofocus />
 					</div>
 
 					<div class="form-group col-md-4">
 						<label for="sessao">Data de fim da Sessao</label> <input
-							type="text" placeholder="Data fim da sessao" class="form-control"
+							type="text" onkeypress="mascara(this, '##-##-####'); return Numero(event);" placeholder="Data final da sessao ex: 22-22-2022" maxlength="10" class="form-control"
 							id="dataFim" name="dataFim" autofocus />
 					</div>
 					<div class="form-group col-md-4">
@@ -153,10 +153,9 @@
 							<td><form action="/sessao/porData" method="POST"
 									class="col-sm-12 col-lg-12">
 									<label for="sessao">Buscar por Data</label> <input
-										type="text" class="form-control" id="dataInicio" name="dataInicio" placeholder="data inicial"
+										type="text" class="form-control" id="dataInicio" name="dataInicio" onkeypress="mascara(this, '##-##-####'); return Numero(event);" placeholder="Data final ex: 10-205-2018" maxlength="10"
 										autofocus />
-										<input
-										type="text" class="form-control" id="dataFim" name="dataFim" placeholder="data final"
+										<input type="text" class="form-control" id="dataFim" name="dataFim" onkeypress="mascara(this, '##-##-####'); return Numero(event);" placeholder="Data final ex: 10-205-2018" maxlength="10"
 										/>
 
 									<button type="submit" name="action"
@@ -200,8 +199,41 @@
 	</div>
 	<!-- container -->
 	<hr>
-
-
 	<!-- container MOSTRAR SESSOES-->
+	
+<script language="JavaScript">
+
+	function mascara(t, mask){
+		 var i = t.value.length;
+		 var saida = mask.substring(1,0);
+		 var texto = mask.substring(i)
+		 
+
+		 if (texto.substring(0,1) != saida){
+		 	t.value += texto.substring(0,1);
+		 }
+	}
+
+	function Numero(e){
+		navegador = /msie/i.test(navigator.userAgent);
+		if(navegador){
+			var tecla = event.keyCode;
+		}else{
+			var tecla = e.which;
+		}
+
+		if(tecla > 47 && tecla < 58){
+			return true;
+		}else{
+			if(tecla != 8){
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+
+
+ </script>	
 </body>
 </html>
