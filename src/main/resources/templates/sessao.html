@@ -83,7 +83,7 @@
 			</form>
 		</div>
 		<!-- row -->
-		<br><br>
+		<br> <br>
 		<div class="row">
 			<div id="tabela">
 
@@ -120,7 +120,7 @@
 			</div>
 		</div>
 		<!-- row -->
-		
+
 		<div class="row">
 			<div id="tabela">
 
@@ -137,19 +137,58 @@
 
 					<tbody>
 						<tr>
-							 <td><a class="btn btn-primary"
-								th:href="@{/sessao/porGenero/}">Buscar GÊNERO
-							</a></td>
-							<td><a class="btn btn-primary"
-								th:href="@{/sessao/porCidade/}">Buscar CIDADE
-							</a></td>
-							<td><a class="btn btn-primary"
-								th:href="@{/sessao/porData/}">Buscar DATA
-							</a></td>
-							<td><a class="btn btn-primary"
-								th:href="@{/sessao/porFilme/}">Buscar FILME
-							</a></td>
-							
+							<td>
+								<form action="/sessao/porGenero" method="POST"
+									class="col-sm-12 col-lg-12">
+									<label for="sessao">Buscar por Gênero</label> <input
+										type="text" class="form-control" id="genero" name="genero"
+										autofocus />
+
+									<button type="submit" name="action"
+										class="btn btn-success btn-lg btn-block">Buscar
+										Gênero</button>
+								</form>
+
+							</td>
+							<td><form action="/sessao/porData" method="POST"
+									class="col-sm-12 col-lg-12">
+									<label for="sessao">Buscar por Data</label> <input
+										type="text" class="form-control" id="genero" name="dataInicio"
+										autofocus />
+										<input
+										type="text" class="form-control" id="genero" name="dataFim"
+										autofocus />
+
+									<button type="submit" name="action"
+										class="btn btn-success btn-lg btn-block">Buscar
+										Data</button>
+								</form></td>
+							<td>
+
+								<form action="/sessao/porCidade" method="POST"
+									class="col-sm-12 col-lg-12">
+									<label for="sessao">Buscar por Cidade</label> <input
+										type="text" class="form-control" id="cidade" name="cidade"
+										autofocus />
+
+									<button type="submit" name="action"
+										class="btn btn-success btn-lg btn-block">Buscar
+										Cidade</button>
+								</form>
+							</td>
+							<td>
+								<form action="/sessao/porFilme" method="POST"
+									class="col-sm-12 col-lg-12">
+									<label for="sessao">Buscar por Filme</label> <input
+										type="text" class="form-control" id="filme" name="filme"
+										autofocus />
+
+									<button type="submit" name="action"
+										class="btn btn-success btn-lg btn-block">Buscar
+										Filme</button>
+								</form>
+							</td>
+
 						</tr>
 					</tbody>
 				</table>

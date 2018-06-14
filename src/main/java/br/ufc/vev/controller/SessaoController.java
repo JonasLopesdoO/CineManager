@@ -256,15 +256,14 @@ public class SessaoController {
 	@RequestMapping(path = "/porGenero", method = RequestMethod.GET)
 	public ModelAndView verTodasPorGenero(@RequestParam String genero) {
 // 	todasAsSessoesPorData
-		ModelAndView model = new ModelAndView("sessao");
+		ModelAndView model = new ModelAndView("sessao-genero");
 		
 		List<Sessao> sessoes = sessaoService.getSessaoPorGenero(genero);
 		
-		model.addObject("sessao", sessoes);
+		model.addObject("sessoes", sessoes);
 		
 		return model;
 	}
-	
 	
 	
 	public List<Sessao> getAllSessao() {		
