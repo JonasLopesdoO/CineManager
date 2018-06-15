@@ -79,23 +79,22 @@ public class SessaoController {
 	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaSessao(@RequestParam String horario, @RequestParam String dataInicio, @RequestParam String dataFim) {
 		ModelAndView model = new ModelAndView("sessao");
-
-		Sessao sessao = new Sessao();
-
-		LocalTime horarioConvert;
-		horarioConvert = LocalTime.parse(horario);
-		
-		LocalDate dataInicioConvert, dataFimConvert;
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		dataInicioConvert = LocalDate.parse(dataInicio, formatter);
-		dataFimConvert = LocalDate.parse(dataFim, formatter);
-		
-		sessao.setHorario(horarioConvert);
-		sessao.setDataInicio(dataInicioConvert);
-		sessao.setDataFim(dataFimConvert);
-		
 		try {
-			if (this.validaSessao(sessao.getHorario(), sessao.getDataInicio(), sessao.getDataFim())) {
+			Sessao sessao = new Sessao();
+			if (this.validaSessao(horario, dataInicio, dataFim)) {
+	
+			LocalTime horarioConvert;
+			horarioConvert = LocalTime.parse(horario);
+			
+			LocalDate dataInicioConvert, dataFimConvert;
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+			dataInicioConvert = LocalDate.parse(dataInicio, formatter);
+			dataFimConvert = LocalDate.parse(dataFim, formatter);
+			
+			sessao.setHorario(horarioConvert);
+			sessao.setDataInicio(dataInicioConvert);
+			sessao.setDataFim(dataFimConvert);
+		
 				sessaoService.salvarSessao(sessao);
 
 				model.addObject("sessao", sessao);
@@ -279,11 +278,28 @@ public class SessaoController {
 	
 	private boolean validaSessao(LocalTime horario, LocalDate dataInicio, LocalDate dataFim) throws Exception {
 		if (horario.equals(null)) {
-			throw new Exception("Nome não pode ser nulo");
+			throw new Exception("horario não pode ser nulo");
 		} else if (dataInicio.equals(null)) {
 			throw new Exception("Data Inicial não pode ser nula");
 		} else if (dataFim.equals(null)) {
 			throw new Exception("Data Inicial não pode ser nula");
+		}
+		return true;
+	}
+	
+	private boolean validaSessao(String horario, String dataInicio, String dataFim) throws Exception {
+		if (horario.equals(null)) {
+			throw new Exception("horario não pode ser nulo");
+		}else if(horario.equals("")) {
+			throw new Exception("horario não pode ser vazia");	
+		} else if (dataInicio.equals(null)) {
+			throw new Exception("Data Inicial não pode ser nula");
+		}else if(dataInicio.equals("")) {
+			throw new Exception("Data Inicial não pode ser vazia");
+		} else if (dataFim.equals(null)) {
+			throw new Exception("Data FInal não pode ser nula");
+		}else if(dataFim.equals("")) {
+			throw new Exception("Data FInal não pode ser vazia");
 		}
 		return true;
 	}
