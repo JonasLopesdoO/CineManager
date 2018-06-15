@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.ufc.vev.bean.Cinema;
 import br.ufc.vev.bean.Filme;
 import br.ufc.vev.bean.Genero;
 import br.ufc.vev.bean.Sessao;

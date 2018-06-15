@@ -131,9 +131,9 @@
 					<thead>
 						<tr>
 							<th>Buscar por Gênero</th>
-							<th>Buscar por Filme</th>
 							<th>Buscar por Data</th>
 							<th>Buscar por Cidade</th>
+							<th>Buscar por Filme</th>
 						</tr>
 					</thead>
 
@@ -142,7 +142,7 @@
 							<td>
 								<form action="/sessao/porGenero" method="POST"
 									class="col-sm-12 col-lg-12">
-									<label for="sessao">Buscar por Gênero</label> <input
+									<input
 										type="text" class="form-control" id="genero" name="genero"
 										autofocus />
 
@@ -154,7 +154,7 @@
 							</td>
 							<td><form action="/sessao/porData" method="POST"
 									class="col-sm-12 col-lg-12">
-									<label for="sessao">Buscar por Data</label> <input
+									<input
 										type="text" class="form-control" id="dataInicio" name="dataInicio" onkeypress="mascara(this, '##-##-####'); return Numero(event);" placeholder="Data final ex: 10-205-2018" maxlength="10"
 										autofocus />
 										<input type="text" class="form-control" id="dataFim" name="dataFim" onkeypress="mascara(this, '##-##-####'); return Numero(event);" placeholder="Data final ex: 10-205-2018" maxlength="10"
@@ -168,7 +168,7 @@
 
 								<form action="/sessao/porCidade" method="POST"
 									class="col-sm-12 col-lg-12">
-									<label for="sessao">Buscar por Cidade</label> <input
+									<input
 										type="text" class="form-control" id="cidade" name="cidade"
 										autofocus />
 
@@ -180,7 +180,7 @@
 							<td>
 								<form action="/sessao/porFilme" method="POST"
 									class="col-sm-12 col-lg-12">
-									<label for="sessao">Buscar por Filme</label> <input
+									<input
 										type="text" class="form-control" id="filme" name="filme"
 										autofocus />
 
