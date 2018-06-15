@@ -7,7 +7,8 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.8/jquery.mask.js"></script>
 <meta charset="utf-8">
 
 <title>Filme</title>
@@ -67,9 +68,7 @@
 
 						<div class="form-group col-md-4">
 							<label for="filme">Sinopse do Filme</label>
-							<textarea class="form-control" name="sinopse" rows="4" cols="50"
-								autofocus>
-							
+							<textarea class="form-control" name="sinopse" rows="4" cols="50">
 							</textarea>
 						</div>
 
@@ -130,5 +129,12 @@
 
 	</div>
 	<!-- container MOSTRAR SESSOES-->
+	
+	<script language="JavaScript">
+	$("#nome").keyup(function() {
+		var valor = $("#nome").val().replace(/[^a-zA-Z 0-9]/g, '');
+		$("#nome").val(valor);
+	});
+ </script>	
 </body>
 </html>
