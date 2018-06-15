@@ -136,7 +136,7 @@
 		$("#cidade").val(valor);
 	});
 	$("#nome").keyup(function() {
-		var valor = $("#nome").val().replace(/[^a-zA-Z ]+/g,'');
+		var valor = $("#nome").val().replace(/[^a-zA-Z 0-9]/g, '');
 		$("#nome").val(valor);
 	});
  </script>	
