@@ -1,4 +1,4 @@
-# TrabalhoDeVeV com Manutenção e Qualidade na disciplina de Qualidade de software.
+# TrabalhoDeVeV com Manutenção da qualidade na disciplina de Qualidade de software.
 Sistema para gerenciamento de Sessões de um cinema.
 Bem como criação, remoção e atualização de salas, diretores, atores, filmes, gêneros e demais componentes de um Cinema.
 
