@@ -5,3 +5,5 @@ Bem como criação, remoção e atualização de salas, diretores, atores, filme
 As tecnologias usadas foram SpringBoot utilizando o padrão arquitetural MVC - Model View Controller. 
 Como persistência, utilizamos Hibernate e Postgresql
 O Sistema foi desenevolvido para a plataforma Web, podendo ser adequado para outra plataforma devido a facilidade do MVC.
+
+test conection linux mint from maike
