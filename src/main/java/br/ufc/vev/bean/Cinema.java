@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Cinema {
@@ -16,8 +18,11 @@ public class Cinema {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotNull @NotEmpty
 	private String cidade;
+	@NotNull @NotEmpty
 	private String endereco;
+	@NotNull @NotEmpty
 	private String nome;
 	
 	@OneToMany(fetch=FetchType.LAZY)

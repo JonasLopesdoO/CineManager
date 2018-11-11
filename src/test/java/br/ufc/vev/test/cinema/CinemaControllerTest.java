@@ -42,7 +42,7 @@ public class CinemaControllerTest {
 		String nome = null;		
 		
 		Cinema cinema = new Cinema(nome, endereco, cidade);
-		assertNull("Nome não pode ser nulo", controller.salvaCinema(cinema));
+		assertNull(controller.salvaCinema(cinema));
 	}
 	
 	@Test

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.test.annotation.Rollback;
 
@@ -48,29 +49,41 @@ public class CinemaService {
 
 	public boolean vinculaSalaAoCinema(int idCinema, int idSala) {
 		
-		Sala sala = salaService.buscarSala(idSala);
-		Cinema cinema = cinemaRepositorio.getOne(idCinema);
-		
-		if (sala.equals(null) || cinema.equals(null) || sala.getCinema() != null) {
-			return false;
-		} else {
-			cinema.addSala(sala);
+		if (existsById(idCinema) && salaService.buscaSala(idSala)) {
 			
+			Sala sala = salaService.buscarSala(idSala);
+			Cinema cinema = cinemaRepositorio.getOne(idCinema);
+			
+			try {
+				cinema.addSala(sala);
+				
+				cinemaRepositorio.save(cinema);
+				salaService.salvarSala(sala);
+				return true;
+			} catch (DataIntegrityViolationException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return false;
+		
+	}
+	
+	public boolean desvinculaSalaDoCinema(int idCinema, int idSala) {
+		
+		
+		if (existsById(idCinema) && salaService.buscaSala(idSala)) {
+			Sala sala = salaService.buscarSala(idSala);
+			Cinema cinema = cinemaRepositorio.getOne(idCinema);
+			
+			cinema.removeSala(sala);
+					
 			cinemaRepositorio.save(cinema);
 			salaService.salvarSala(sala);
 			return true;
-		}
-	}
-	
-	public void desvinculaSalaDoCinema(int idCinema, int idSala) {
-		Sala sala = salaService.buscarSala(idSala);
-		Cinema cinema = cinemaRepositorio.getOne(idCinema);
-		
-		if (!sala.equals(null) && !cinema.equals(null)) {
-			cinema.removeSala(sala);
 			
-			cinemaRepositorio.save(cinema);
-			salaService.salvarSala(sala);
-		} 
+		}
+		return false;
 	}	
 }

@@ -24,7 +24,7 @@ public class SalaService {
 	public boolean buscaSala(Integer id) {
 		return salaRepositorio.existsById(id);
 	}
-
+	
 	public void excluirSala(Sala sala) {
 		salaRepositorio.delete(sala);
 	}

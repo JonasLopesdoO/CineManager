@@ -64,22 +64,14 @@ public class CinemaController {
 		return model;
 	}
 
-	@SuppressWarnings("finally")
 	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaCinema(Cinema cinema) {
+		
 		ModelAndView model = new ModelAndView("cinema");
-
-		try {
-			if (this.validaCinema(cinema.getNome(), cinema.getEndereco(), cinema.getEndereco())) {
-				cinemaService.salvarCinema(cinema);
-
-				model.addObject("cinemaRetorno", cinema);
-		 	}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			return index();
-		}
+		cinemaService.salvarCinema(cinema);
+		model.addObject("cinemaRetorno", cinema);
+		return index();
+		
 	}
 	
 	@SuppressWarnings("finally")
@@ -88,7 +80,7 @@ public class CinemaController {
 		ModelAndView model = new ModelAndView("cinema");
 		try {
 			if (this.validaId(id)) {
-				if (existsByIdCinema(id)) {
+				if (cinemaService.existsById(id)) {
 					Cinema cinema = new Cinema();
 
 					cinema = cinemaService.buscaCinema(id);
@@ -196,24 +188,6 @@ public class CinemaController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public boolean validaCinema(String nome, String cidade, String endereco) throws Exception {
-		
-		if (nome.equals("")) {
-			throw new Exception("Nome não pode ser vazio");
-		} else if (nome.equals(null)) {
-			throw new Exception("Nome não pode ser nulo");
-		} else if (endereco.equals("")) {
-			throw new Exception("Endereco não pode ser vazio");
-		} else if (endereco.equals(null)) {
-			throw new Exception("Endereco não pode ser nulo");
-		} else if (cidade.equals("")) {
-			throw new Exception("Cidade não pode ser vazio");
-		} else if (cidade.equals(null)) {
-			throw new Exception("Cidade não pode ser nulo");
-		}
-		return true;
 	}
 	
 	public boolean validaId(int id) throws Exception {
