@@ -61,7 +61,7 @@ public class CinemaService {
 				salaService.salvarSala(sala);
 				return true;
 			} catch (DataIntegrityViolationException e) {
-				e.printStackTrace();
+				return false;
 			}
 			
 		}

@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.ufc.vev.bean.Cinema;
@@ -311,7 +310,7 @@ public class CinemaServiceTest {
 		
 	}
 	
-	@Test(expected = DataIntegrityViolationException.class)
+	@Test
 	public void vinculaSalaJaVinculadaAoCinemaServiceTest() {
 		Cinema cinema = new Cinema();
 		cinema.setCidade("Jucás");

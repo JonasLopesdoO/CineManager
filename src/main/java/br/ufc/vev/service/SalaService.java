@@ -2,6 +2,8 @@ package br.ufc.vev.service;
 
 import java.util.List;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,11 @@ public class SalaService {
 	SalaRepositorio salaRepositorio;
 
 	public Sala salvarSala(Sala sala) {
-		return salaRepositorio.save(sala);
+		try {
+			return salaRepositorio.save(sala);
+		} catch (ConstraintViolationException e) {
+			return null;
+		}
 	}
 
 	public Sala buscarSala(Integer id) {
@@ -37,12 +43,5 @@ public class SalaService {
 	public List<Sala> getAllSala() {
 		return salaRepositorio.findAll();
 	}
-
-//	public List<Sala> getAllSalasVazias() {
-//		return salaRepositorio.buscarSalaVazia();
-//	}
-	
-	
-	
 	
 }

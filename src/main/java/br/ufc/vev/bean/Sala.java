@@ -2,6 +2,7 @@ package br.ufc.vev.bean;
 
 import java.util.List;
 
+import javax.annotation.Nonnegative;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "sala")
@@ -19,9 +22,10 @@ public class Sala {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	
+	@NotEmpty @NotNull
 	private String nome;
 	private TipoSala tipo;
+	@Nonnegative
 	private int capacidade;
 	
 	@ManyToOne(fetch=FetchType.EAGER)

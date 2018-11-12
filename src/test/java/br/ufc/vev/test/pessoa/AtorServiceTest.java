@@ -77,6 +77,24 @@ public class AtorServiceTest {
 		assertNotNull(atorService.buscarAtor(idAtor));
 	}
 	
+	@Test 
+	public void existAtorServiceTest() {
+		String nome = "Peeter clarck";
+		String sobre = "Este é um ator muito bom!";
+		
+		Ator ator = new Ator();
+		ator.setNome(nome);
+		ator.setSobre(sobre);
+		
+		Ator atorRecebido = new Ator();
+		
+		atorRecebido = atorService.salvarAtor(ator);
+		
+		int idAtor = atorRecebido.getId();
+		
+		assertTrue(atorService.buscaAtor(idAtor));
+	}
+	
 	@Test
 	public void updateAtorRepository() {
 		//ator atual

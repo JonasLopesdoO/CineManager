@@ -70,27 +70,37 @@ public class GeneroServiceTest {
 		assertNotNull(generoService.buscarGenero(idGenero));
 	}
 	
-	@Test
-	public void updateGeneroRepository() {
-		//genero atual
-		String nome = "Terror";
+	@Test 
+	public void buscaGeneroRepository() {
+		String nome = "Drama";
 		
 		Genero genero = new Genero();
 		genero.setNome(nome);
 		
-//		genero atualizado
+		Genero generoRecebido = new Genero();
+		
+		generoRecebido = generoService.salvarGenero(genero);
+		
+		int idGenero = generoRecebido.getId();
+		
+		assertTrue(generoService.buscaGenero(idGenero));
+	}
+	
+	@Test
+	public void updateGeneroRepository() {
+		String nome = "Terror";
+		Genero genero = new Genero();
+		genero.setNome(nome);
+		
+		Genero novoGenero = generoService.salvarGenero(genero);
+		
 		String nomeNovo = "Suspense";
+		novoGenero.setNome(nomeNovo);
 		
-		Genero generoAtualizado = new Genero();
+		Genero novoGen = new Genero();
+		novoGen = generoService.atualizaGenero(novoGenero);
 		
-		generoAtualizado = generoService.salvarGenero(genero);
-		generoAtualizado.setNome(nomeNovo);
-		
-		Genero generoAtualizadoRecebido = new Genero();
-		generoAtualizadoRecebido = generoService.buscarGenero(generoAtualizado.getId());
-		
-		assertEquals(generoAtualizado.getId(), generoAtualizadoRecebido.getId());
-		assertEquals(generoAtualizado.getNome(), generoAtualizadoRecebido.getNome());
+		assertEquals(novoGenero, novoGen);
 	}
 	
 	@Test
@@ -130,9 +140,7 @@ public class GeneroServiceTest {
 		
 		filmeResponse = filmeService.salvarFilme(filme);
 		generoResponse = generoService.salvarGenero(genero);
-		
-//		generoRepositorio.deleteFilmegeneroes(generoResponse.getId(),filmeResponse.getId());
-		
+				
 		assertNotNull(filmeResponse);		
 		assertNotNull(generoResponse);
 	}

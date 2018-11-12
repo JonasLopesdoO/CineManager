@@ -2,6 +2,7 @@ package br.ufc.vev.test.sala;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -35,6 +36,31 @@ public class SalaServiceTest {
 	}
 	
 	@Test
+	public void adicionarSalaComNomeNuloServiceTest() {
+		String nome = null;
+		int capacidade = 150;
+		
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
+		
+		assertNull(service.salvarSala(sala));
+		
+	}
+	
+	@Test
+	public void adicionarSalaComNomeVazioServiceTest() {
+		String nome = "";
+		int capacidade = 150;
+		
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
+		
+		assertNull(service.salvarSala(sala));
+	}
+	
+	@Test
 	public void buscaSalaServiceTest() {
 		String nome = "Sala A1";
 		int capacidade = 150;
@@ -47,6 +73,21 @@ public class SalaServiceTest {
 		salaRecebida = service.salvarSala(sala);
 	
 		assertNotNull(service.buscarSala(salaRecebida.getId()));
+	}
+	
+	@Test
+	public void buscarSalaServiceTest() {
+		String nome = "Sala A1";
+		int capacidade = 150;
+		
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
+		
+		Sala salaRecebida = new Sala(); 
+		salaRecebida = service.salvarSala(sala);
+	
+		assertTrue(service.buscaSala(salaRecebida.getId()));
 	}
 	
 	@Test
