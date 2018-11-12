@@ -57,7 +57,7 @@ public class SessaoController {
 	@RequestMapping(path="/{id}")
 	public ModelAndView detalhesSessao(@PathVariable("id") Integer id){
 	  ModelAndView model = new ModelAndView("detalhes-sessao");
-	  Sessao sessao = sessaoService.getSessaoPorId(id);
+	  Sessao sessao = sessaoService.buscarSessao(id);
 			
 	  model.addObject("filmes", filmeController.getAllFilme());
 	  model.addObject("salas", salaController.getAllSala());

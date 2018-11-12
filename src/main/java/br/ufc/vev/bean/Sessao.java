@@ -41,9 +41,7 @@ public class Sessao {
 	private Sala sala;
 	
 	public Sessao(LocalTime horario, LocalDate inicio, LocalDate fim) {
-		this.setHorario(horario);
-		this.setDataInicio(inicio);
-		this.setDataFim(fim);
+		this(horario, inicio, fim, null, null);
 	}
 	
 	public Sessao(LocalTime horario, LocalDate inicio, LocalDate fim, Filme filme, Sala sala) {

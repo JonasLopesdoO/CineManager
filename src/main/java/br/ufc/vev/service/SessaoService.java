@@ -27,6 +27,8 @@ public class SessaoService {
 	FilmeService filmeService;
 	@Autowired
 	SalaService salaService;
+	@Autowired
+	CinemaService cinemaService;
 	
 	public Sessao salvarSessao(Sessao sessao) {
 			return sessaoRepositorio.save(sessao);
@@ -36,10 +38,15 @@ public class SessaoService {
 		sessaoRepositorio.save(sessao);
 		return sessao;
 	}
-
-	public Sessao getSessaoPorId(Integer idSessao) {
-		return sessaoRepositorio.getOne(idSessao);
+	
+	public boolean existsById(int id) {
+		return sessaoRepositorio.existsById(id);
 	}
+
+	public Sessao buscarSessao(Integer id) {
+		return sessaoRepositorio.getOne(id);
+	}
+	
 	
 	public List<Sessao> getAllSessao() {
 		return sessaoRepositorio.findAll();
@@ -61,6 +68,7 @@ public class SessaoService {
 
 	public List<Sessao> getSessaoPorCidade(String cidade) {
 		List<Sessao> sessoes = new ArrayList<Sessao>();
+		
 		for (Sessao sessao : getAllSessao()) {
 			if (sessao.getSala() != null && sessao.getSala().getCinema() != null
 					&& sessao.getSala().getCinema().getCidade().equals(cidade)) {
@@ -71,17 +79,12 @@ public class SessaoService {
 	}
 
 	public List<Sessao> getSessaoPorFilme(Filme filme) {
-		List<Sessao> sessoes = new ArrayList<Sessao>();
-		for (Sessao sessao : this.getAllSessao()) {
-				if (sessao.getFilme() == filme) {
-					sessoes.add(sessao);
-				}
-		}
-		return sessoes;
+		return filme.getSessoes();
 	}
 
 	public List<Sessao> getSessaoPorGenero(Genero genero) {
 		List<Sessao> sessoes = new ArrayList<Sessao>();
+		
 		for (Sessao sessao : this.getAllSessao()) {
 			if (sessao.getFilme() != null && sessao.getFilme().getGeneros() != null) {
 				for (Genero gen : sessao.getFilme().getGeneros()) {
@@ -96,15 +99,9 @@ public class SessaoService {
 		return sessoes;
 	}
 
-	public boolean existsById(int id) {
-		return sessaoRepositorio.existsById(id);
-	}
+	
 
-	public Sessao buscarSessao(Integer id) {
-		return sessaoRepositorio.getOne(id);
-	}
-
-	public boolean vinculaFilmeASessao(Integer idSessao, Integer idFilme) {
+	public boolean vinculaFilmeASessao(int idSessao, int idFilme) {
 		Filme filme = filmeService.buscarFilme(idFilme);
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		
@@ -122,23 +119,12 @@ public class SessaoService {
 			
 	}
 
-	public void desvinculaFilmeDaSessao(Integer idSessao, Integer idFilme) {
-		Sessao sessao = sessaoRepositorio.getOne(idSessao);
-		Filme filme = filmeService.buscarFilme(idFilme);
-		
-		if (!filme.equals(null) && !sessao.equals(null)) {
-			sessao.setFilme(null);
-			filme.getSessoes().remove(sessao);
-			
-			sessaoRepositorio.save(sessao);
-			filmeService.salvarFilme(filme);
-		}
-	}
 	public void desvinculaFilmeDaSessao(int idSessao, int idFilme) {
 		Filme filme = filmeService.buscarFilme(idFilme);
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		
 		if (!filme.equals(null) && !sessao.equals(null)) {
+			sessao.setFilme(null);
 			filme.removeSessao(sessao);
 			
 			sessaoRepositorio.save(sessao);
@@ -146,7 +132,7 @@ public class SessaoService {
 		} 
 	}
 	
-	public boolean vinculaSalaASessao(Integer idSessao, Integer idSala) {
+	public boolean vinculaSalaASessao(int idSessao, int idSala) {
 		Sala sala = salaService.buscarSala(idSala);
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		
@@ -163,7 +149,7 @@ public class SessaoService {
 		}
 	}
 
-	public void desvinculaSalaDaSessao(Integer idSessao, Integer idSala) {
+	public void desvinculaSalaDaSessao(int idSessao, int idSala) {
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		Sala sala = salaService.buscarSala(idSala);
 			

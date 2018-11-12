@@ -46,6 +46,7 @@ public class CinemaService {
 	public boolean existsById(int id) {
 		return cinemaRepositorio.existsById(id);
 	}
+	
 
 	public boolean vinculaSalaAoCinema(int idCinema, int idSala) {
 		
