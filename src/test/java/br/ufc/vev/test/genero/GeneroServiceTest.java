@@ -29,7 +29,7 @@ public class GeneroServiceTest {
 	FilmeService filmeService;
 	
 	@Test 
-	public void salvarGeneroRepositoryTest() {
+	public void salvarGeneroServiceTest() {
 		String nome = "Romance";
 		
 		Genero genero = new Genero();
@@ -41,7 +41,7 @@ public class GeneroServiceTest {
 	}
 	
 	@Test
-	public void excluirGeneroRepositoryTest() {
+	public void excluirGeneroServiceTest() {
 		String nome = "Ação";
 		
 		Genero genero = new Genero();
@@ -55,7 +55,7 @@ public class GeneroServiceTest {
 	}
 	
 	@Test 
-	public void buscarGeneroRepository() {
+	public void buscarGeneroServiceTest() {
 		String nome = "Drama";
 		
 		Genero genero = new Genero();
@@ -71,7 +71,7 @@ public class GeneroServiceTest {
 	}
 	
 	@Test 
-	public void buscaGeneroRepository() {
+	public void buscaGeneroServiceTest() {
 		String nome = "Drama";
 		
 		Genero genero = new Genero();
@@ -87,7 +87,7 @@ public class GeneroServiceTest {
 	}
 	
 	@Test
-	public void updateGeneroRepository() {
+	public void updateGeneroServiceTest() {
 		String nome = "Terror";
 		Genero genero = new Genero();
 		genero.setNome(nome);
@@ -104,7 +104,7 @@ public class GeneroServiceTest {
 	}
 	
 	@Test
-	public void buscaTodosGeneroRepository() {
+	public void buscaTodosGeneroServiceTest() {
 		String nome = "Terror";
 		
 		Genero genero = new Genero();
@@ -116,7 +116,7 @@ public class GeneroServiceTest {
 	}
 	
 	@Test
-	public void addGeneroFilme() {
+	public void addGeneroFilmeServiceTest() {
 		Genero genero = new Genero("Comedia");
 		Filme filme = new Filme("FIlmeGeneeeerooooooo", "sinopse teste", 100);
 		
@@ -127,7 +127,7 @@ public class GeneroServiceTest {
 	}
 	
 	@Test
-	public void removerGeneroFilme() {//voltar depois para ver
+	public void removerGeneroFilmeServiceTest() {//voltar depois para ver
 		Genero genero = new Genero();
 		Filme filme = new Filme();
 		genero = generoService.buscarGenero(11);

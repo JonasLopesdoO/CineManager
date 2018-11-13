@@ -1,6 +1,5 @@
 package br.ufc.vev.test.sessao;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -93,7 +92,7 @@ public class SessaoServiceTest {
 	
 	@Test 
 	public void getAllSessao() {
-		assertThat(sessaoService.getAllSessao());
+		sessaoService.getAllSessao();
 	}
 	
 	@Test
@@ -114,14 +113,14 @@ public class SessaoServiceTest {
 		LocalDate inicio = LocalDate.of(2018, 11, 9);
 		LocalDate fim = LocalDate.of(2018, 11, 21);
 		
-		assertThat(sessaoService.getSessaoPorData(inicio, fim));
+		sessaoService.getSessaoPorData(inicio, fim);
 	}
 	
 	@Test
 	public void getSessaoPorCidade() {
 		String cidade = "Quixadá";
 		
-		assertThat(sessaoService.getSessaoPorCidade(cidade));
+		sessaoService.getSessaoPorCidade(cidade);
 	}
 	
 	@Test
@@ -131,7 +130,7 @@ public class SessaoServiceTest {
 		genero.setNome("Ação");
 		Genero generoBuscado = generoService.salvarGenero(genero);
 		
-		assertThat(sessaoService.getSessaoPorGenero(generoBuscado));
+		sessaoService.getSessaoPorGenero(generoBuscado);
 	}
 	
 	@Test
@@ -143,7 +142,7 @@ public class SessaoServiceTest {
 		
 		Filme filmeBuscado = filmeSevice.salvarFilme(Filme);
 		
-		assertThat(sessaoService.getSessaoPorFilme(filmeBuscado));
+		sessaoService.getSessaoPorFilme(filmeBuscado);
 	}
 	
 	@Test
@@ -163,7 +162,7 @@ public class SessaoServiceTest {
 		Filme filmeBuscado = filmeSevice.salvarFilme(Filme);
 		
 		assertTrue(sessaoService.vinculaFilmeASessao(sessaoBuscada.getId(), filmeBuscado.getId()));
-		assertThat(sessaoService.getSessaoPorFilme(filmeBuscado));
+		sessaoService.getSessaoPorFilme(filmeBuscado);
 	}
 	
 	@Test

@@ -43,43 +43,13 @@ public class DiretorController {
 		return model;
 	}
 
-	@SuppressWarnings("finally")
 	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaDiretor(Diretor diretor) {
 		ModelAndView model = new ModelAndView("diretor");
-		try {
-			if (this.validaDiretor(diretor.getNome(), diretor.getSobre())) {
-				diretorService.salvarDiretor(diretor);
-				model.addObject("diretorRetorno", diretor);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			return index();
-		}
-	}
-
-	public boolean validaDiretor(String nome, String sobre) throws Exception {
-
-		if (nome.equals("")) {
-			throw new Exception("Nome não pode ser vazio");
-		} else if (nome.equals(null)) {
-			throw new Exception("Nome não pode ser nulo");
-		} else if (sobre.equals(null)) {
-			throw new Exception("Sobre não pode ser nulo");
-		} else if (sobre.equals("")) {
-			throw new Exception("Sobre não pode ser vazio");
-		}
-		return true;
-	}
-
-	public boolean validaId(int id) throws Exception {
-		if (id == 0) {
-			throw new Exception("Erro ID deve ser maior que zero");
-		} else if (id < 0) {
-			throw new Exception("Erro ID não pode ser negativo");
-		}
-		return true;
+		diretorService.salvarDiretor(diretor);
+		model.addObject("diretorRetorno", diretor);
+		return index();
+		
 	}
 
 	@SuppressWarnings("finally")
@@ -87,19 +57,11 @@ public class DiretorController {
 	public ModelAndView buscaDiretor(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView("diretor");
 		try {
-			if (this.validaId(id)) {
-				if (existsByIdDiretor(id)) {
-					Diretor diretor = new Diretor();
-
-					diretor = diretorService.buscarDiretor(id);
-
-					model.addObject("diretorRetorno", diretor);
-				} else {
-					// mensagem de erro "id nao existente no banco"
-				}
-			} else {
-				// msg de id invalido
-			}
+			if (existsByIdDiretor(id)) {
+				Diretor diretor = new Diretor();
+				diretor = diretorService.buscarDiretor(id);
+				model.addObject("diretorRetorno", diretor);
+			} 
 		} catch (Exception e) { // caso de erro
 			e.printStackTrace();
 		} finally { // sempre será execultado
@@ -112,7 +74,7 @@ public class DiretorController {
 	public ModelAndView excluiDiretor(@PathVariable("id") Integer id) {
 		try {
 			Diretor diretor = new Diretor();
-			if (validaId(id) && existsByIdDiretor(id)) {
+			if (existsByIdDiretor(id)) {
 				diretor = diretorService.buscarDiretor(id);
 				diretorService.excluirDiretor(diretor);
 			}
@@ -138,7 +100,6 @@ public class DiretorController {
 		try {
 			if (existsByIdDiretor(id)) {
 				Diretor diretor = diretorService.buscarDiretor(id);
-
 				model.addObject("diretor", diretor);
 			}
 		} catch (Exception e) {

@@ -43,63 +43,24 @@ public class AtorController {
 		return model;
 	}
 
-	@SuppressWarnings("finally")
 	@RequestMapping(path="/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaAtor(Ator ator) {
 		ModelAndView model = new ModelAndView("ator");
-		try {
-			if (this.validaAtor(ator.getNome(), ator.getSobre())) {
-				atorService.salvarAtor(ator);
-				model.addObject("atorRetorno", ator);
-		 	}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			return index();
-		}
+		atorService.salvarAtor(ator);
+		model.addObject("atorRetorno", ator);
+		return index();
 	}
 	
-	public boolean validaAtor(String nome, String sobre) throws Exception {
-		
-		if (nome.equals("")) {
-			throw new Exception("Nome não pode ser vazio");
-		} else if (nome.equals(null)) {
-			throw new Exception("Nome não pode ser nulo");
-		} else if (sobre.equals(null)) {
-			throw new Exception("Sobre não pode ser nulo");
-		} else if (sobre.equals("")) {
-			throw new Exception("Sobre não pode ser vazio");
-		}
-		return true;
-	}
-	
-	public boolean validaId(int id) throws Exception {
-		if (id == 0) {
-			throw new Exception("Erro ID deve ser maior que zero");
-		} else if (id < 0) {
-			throw new Exception("Erro ID não pode ser negativo");
-		}
-		return true;
-	}
-
 	@SuppressWarnings("finally")
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaAtor(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView("ator");
-		try {
-			if(this.validaId(id)) {
-				if(existsByIdAtor(id)) {
-					Ator ator = new Ator();
-					
-					ator = atorService.buscarAtor(id);
-					
-					model.addObject("atorRetorno", ator);
-				}else {
-					//mensagem de erro "id nao existente no banco"
-				}
-		 	}else {
-		 		//msg de id invalido
-		 	}
+		try {	
+			if(existsByIdAtor(id)) {
+				Ator ator = new Ator();			
+				ator = atorService.buscarAtor(id);			
+				model.addObject("atorRetorno", ator);
+			}
 		} catch (Exception e) { 	// caso de erro 
 			e.printStackTrace();
 		} finally { // sempre será execultado
@@ -112,7 +73,7 @@ public class AtorController {
 	public ModelAndView excluiAtor(@PathVariable("id") Integer id) {		
 		try {
 			Ator ator = new Ator();
-			if (validaId(id) && existsByIdAtor(id)) {
+			if (existsByIdAtor(id)) {
 				ator = atorService.buscarAtor(id);
 				atorService.excluirAtor(ator);
 			}

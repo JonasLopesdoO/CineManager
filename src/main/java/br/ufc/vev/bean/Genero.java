@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "genero")
@@ -22,6 +24,7 @@ public class Genero {
 	
 	@Column(nullable = false, length = 20)
 	@NotBlank(message = "Nome é uma informação obrigatória.")
+	@NotNull @NotEmpty
 	private String nome;
 	
 	@ManyToMany(mappedBy = "generos")

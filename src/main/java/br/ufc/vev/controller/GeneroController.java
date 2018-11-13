@@ -44,26 +44,15 @@ public class GeneroController {
 		return model;
 	}
 	
-	@SuppressWarnings("finally")
 	@RequestMapping(path="/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaGenero(Genero genero) {
 		ModelAndView model = new ModelAndView("genero");
+		generoService.salvarGenero(genero);	
+		model.addObject("generoRetorno", genero);
+		List<Genero> generos = generoService.getAllGenero();
+		model.addObject("generos", generos);
+		return model;
 		
-		try {
-			if (this.validaGenero(genero.getNome())) { // adiciona um genero novo
-				
-				generoService.salvarGenero(genero);
-				
-				model.addObject("generoRetorno", genero);
-				
-		 	}
-		} catch (Exception e) { 	// caso de erro 
-			e.printStackTrace();
-		} finally { // sempre será execultado
-			List<Genero> generos = generoService.getAllGenero();
-			model.addObject("generos", generos);
-			return model;
-		}
 	}
 
 	@SuppressWarnings("finally")
@@ -71,19 +60,11 @@ public class GeneroController {
 	public ModelAndView buscaGenero(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView("genero");
 		try {
-			if(this.validaIdGenero(id)) {
-				if(existsByIdGenero(id)) {
-					Genero genero = new Genero();
-					
-					genero = generoService.buscarGenero(id);
-					
-					model.addObject("generoRetorno", genero);
-				}else {
-					//mensagem de erro "id nao existente no banco"
-				}
-		 	}else {
-		 		//msg de id invalido
-		 	}
+			if(existsByIdGenero(id)) {
+				Genero genero = new Genero();	
+				genero = generoService.buscarGenero(id);
+				model.addObject("generoRetorno", genero);
+			}	
 		} catch (Exception e) { 	// caso de erro 
 			e.printStackTrace();
 		} finally { // sempre será execultado
@@ -99,7 +80,7 @@ public class GeneroController {
 		ModelAndView model = new ModelAndView("genero");
 		try {
 			Genero genero = new Genero();
-			if (validaIdGenero(id) && existsByIdGenero(id)) { 
+			if (existsByIdGenero(id)) { 
 				genero = generoService.buscarGenero(id);
 				generoService.excluirGenero(genero);
 		 	}
@@ -139,32 +120,6 @@ public class GeneroController {
 	
 	public Genero buscaPorNome(String nome) {
 		return generoService.buscaPorNome(nome);
-	}
-	
-	public boolean validaGenero(String nome) throws Exception {
-		
-		if (nome.equals("")) {
-			throw new Exception("Nome não pode ser vazio");
-		} else if (nome.equals(null)) {
-			throw new Exception("Nome não pode ser nulo");
-		} 
-		for (Genero genero : getAllGenero()) {
-			// Verifica se existe um genero de mesmo nome no banco de dados
-			if (genero.getNome().equals(nome)) {
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
-	public boolean validaIdGenero(int id) throws Exception {
-		if (id == 0) {
-			throw new Exception("Erro, ID deve ser maior que zero");
-		} else if (id < 0) {
-			throw new Exception("Erro, ID não pode ser negativo");
-		} 
-		return true;
 	}
 	
 	public boolean existsByIdGenero(int id) {

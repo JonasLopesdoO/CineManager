@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "diretor")
@@ -17,8 +19,9 @@ public class Diretor extends Pessoa{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	
+	@NotNull @NotEmpty
 	private String nome;
+	@NotNull @NotEmpty
 	private String sobre;
 	
 	@ManyToMany(mappedBy = "diretores")
