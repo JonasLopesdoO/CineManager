@@ -17,7 +17,10 @@ import br.ufc.vev.bean.Ator;
 import br.ufc.vev.bean.Diretor;
 import br.ufc.vev.bean.Filme;
 import br.ufc.vev.bean.Genero;
+import br.ufc.vev.service.AtorService;
+import br.ufc.vev.service.DiretorService;
 import br.ufc.vev.service.FilmeService;
+import br.ufc.vev.service.GeneroService;
 
 @Controller
 @Transactional
@@ -28,11 +31,11 @@ public class FilmeController {
 	@Autowired
 	FilmeService filmeService;
 	@Autowired
-	AtorController atorController;
+	AtorService atorService;
 	@Autowired
-	DiretorController diretorController;
+	DiretorService diretorService;
 	@Autowired
-	GeneroController generoController;
+	GeneroService generoService;
 	
 	@SuppressWarnings("finally")
 	@RequestMapping(path = "/")
@@ -40,10 +43,7 @@ public class FilmeController {
 		ModelAndView model = new ModelAndView("filme");
 		try {
 			List<Filme> filmes = getAllFilme();
-
 			model.addObject("filmes", filmes);
-		
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -57,9 +57,9 @@ public class FilmeController {
 	  ModelAndView model = new ModelAndView("detalhes-filme");
 	  Filme filme = filmeService.buscarFilme(id);
 
-	  model.addObject("atores", atorController.getAllAtor());
-	  model.addObject("diretores", diretorController.getAllDiretores());
-	  model.addObject("generos", generoController.getAllGenero());
+	  model.addObject("atores", atorService.getAllAtor());
+	  model.addObject("diretores", diretorService.getAllDiretor());
+	  model.addObject("generos", generoService.getAllGenero());
 	  model.addObject("filme", filme);
 			
 	  return model;
@@ -73,22 +73,13 @@ public class FilmeController {
 		return model;
 	}
 
-	@SuppressWarnings("finally")
 	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaFilme(Filme filme) {
 		ModelAndView model = new ModelAndView("filme");
+		filmeService.salvarFilme(filme);
+		model.addObject("filmeRetorno", filme);
+		return index();
 
-		try {
-			if (this.validaFilme(filme.getNome(), filme.getSinopse(), filme.getDuracao())) {
-				filmeService.salvarFilme(filme);
-
-				model.addObject("filmeRetorno", filme);
-		 	}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			return index();
-		}
 	}
 	
 	@SuppressWarnings("finally")
@@ -96,19 +87,11 @@ public class FilmeController {
 	public ModelAndView buscaFilme(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView("filme");
 		try {
-			if (this.validaId(id)) {
-				if (existsByIdFilme(id)) {
-					Filme filme = new Filme();
-
-					filme = filmeService.buscarFilme(id);
-
-					model.addObject("filmeRetorno", filme);
-				} else {
-					// mensagem de erro "id nao existente no banco"
-				}
-			} else {
-				// msg de id invalido
-			}
+			if (existsByIdFilme(id)) {
+				Filme filme = new Filme();
+				filme = filmeService.buscarFilme(id);
+				model.addObject("filmeRetorno", filme);
+			} 
 		} catch (Exception e) { // caso de erro
 			e.printStackTrace();
 		} finally { // sempre será execultado
@@ -121,7 +104,7 @@ public class FilmeController {
 	public ModelAndView excluiFilme(@PathVariable("id") Integer id) {		
 		try {
 			Filme filme = new Filme();
-			if (validaId(id) && existsByIdFilme(id)) {
+			if (existsByIdFilme(id)) {
 				filme = filmeService.buscarFilme(id);
 				filmeService.excluirFilme(filme);
 			}
@@ -163,7 +146,8 @@ public class FilmeController {
 
 	  ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
 	  
-	  if (existsByIdFilme(idFilme) && atorController.existsByIdAtor(idAtor) && atorPertenceAoFilme(idFilme, idAtor) == false) {
+	  if (existsByIdFilme(idFilme) && atorService.buscaAtor(idAtor) 
+			  			&& atorPertenceAoFilme(idFilme, idAtor) != true) {
 		  filmeService.vinculaAtorAoFilme(idFilme, idAtor);
 	  }
 	  
@@ -171,7 +155,8 @@ public class FilmeController {
 	}
 	
 	@RequestMapping(path="/{idFilme}/removerAtor/{idAtor}")
-	public ModelAndView desvinculaAtorDoFilme(@PathVariable("idFilme") Integer idFilme, @PathVariable("idAtor") Integer idAtor) {
+	public ModelAndView desvinculaAtorDoFilme(@PathVariable("idFilme") Integer idFilme, 
+										@PathVariable("idAtor") Integer idAtor) {
 		
 		ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
 		
@@ -187,8 +172,8 @@ public class FilmeController {
 											@RequestParam Integer idDiretor ){
 
 	  ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
-	  
-	  if (existsByIdFilme(idFilme) && diretorController.existsByIdDiretor(idDiretor) && diretorPertenceAoFilme(idFilme, idDiretor) != true){
+	  if (existsByIdFilme(idFilme) && diretorService.buscaDiretor(idDiretor) 
+			  	&& diretorPertenceAoFilme(idFilme, idDiretor) != true){
 		  filmeService.vinculaDiretorAoFilme(idFilme, idDiretor);
 	  }
 	  
@@ -196,104 +181,64 @@ public class FilmeController {
 	}
 	
 	@RequestMapping(path="/{idFilme}/removerDiretor/{idDiretor}")
-	public ModelAndView desvinculaDiretorDoFilme(@PathVariable("idFilme") Integer idFilme, @PathVariable("idDiretor") Integer idDiretor) {
+	public ModelAndView desvinculaDiretorDoFilme(@PathVariable("idFilme") Integer idFilme, 
+											@PathVariable("idDiretor") Integer idDiretor) {
 		
 		ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
-		
 		if(diretorPertenceAoFilme(idFilme, idDiretor)) {
 			filmeService.desvinculaDiretorDoFilme(idFilme, idDiretor);
 		}
-		
 		return model;
 	}
 	
 	@RequestMapping(path="/{idFilme}/adicionarGenero", method=RequestMethod.POST)
 	public ModelAndView vincularGeneroAoFilme(@PathVariable("idFilme") Integer idFilme, 
-											@RequestParam Integer idGenero){
+												@RequestParam Integer idGenero){
 
-	  ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
-	  
-	  if (existsByIdFilme(idFilme) && generoController.existsByIdGenero(idGenero) && generoPertenceAoFilme(idFilme, idGenero) != true){
+		ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
+		if (existsByIdFilme(idFilme) && generoService.buscaGenero(idGenero) 
+					&& generoPertenceAoFilme(idFilme, idGenero) != true){
 		  filmeService.vinculaGeneroAoFilme(idFilme, idGenero);
-	  }
-	  
-	  return model;
+		}
+		  
+		return model;
 	}
 	
 	@RequestMapping(path="/{idFilme}/removerGenero/{idGenero}")
-	public ModelAndView desvinculaGeneroDoFilme(@PathVariable("idFilme") Integer idFilme, @PathVariable("idGenero") Integer idGenero) {
-		
+	public ModelAndView desvinculaGeneroDoFilme(
+					@PathVariable("idFilme") Integer idFilme, 
+						@PathVariable("idGenero") Integer idGenero) {
 		ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
-		
 		if(generoPertenceAoFilme(idFilme, idGenero)) {
 			filmeService.desvinculaGeneroDoFilme(idFilme, idGenero);;
 		}
-		
 		return model;
 	}
 
-	private boolean validaFilme(String nome, String sinopse, int duracao) throws Exception {
-		if (nome.equals("")) {
-			throw new Exception("Nome não pode ser vazio");
-		} else if (nome.equals(null)) {
-			throw new Exception("Nome não pode ser nulo");
-		} else if (duracao < 0) {
-			throw new Exception("Duração não pode ser negativa");
-		} else if (duracao == 0) {
-			throw new Exception("duração não pode ser zero");
-		} else if (sinopse.equals("")) {
-			throw new Exception("Cidade não pode ser vazio");
-		} else if (sinopse.equals(null)) {
-			throw new Exception("Cidade não pode ser nulo");
-		}
-		return true;
-	}
-
-	public boolean validaId(int id) throws Exception {
-		if (id == 0) {
-			throw new Exception("Erro ID deve ser maior que zero");
-		} else if (id < 0) {
-			throw new Exception("Erro ID não pode ser negativo");
-		}
-		return true;
-	}
-	
 	public boolean existsByIdFilme(int id) {
 		return filmeService.existsById(id);
 	}
 	
 	public boolean atorPertenceAoFilme(int idFilme, int idAtor) {
-		if (existsByIdFilme(idFilme) && atorController.existsByIdAtor(idAtor)) {
-			Filme filme = filmeService.buscarFilme(idFilme);
-			for (Ator ator : filme.getAtores()) {
-				if (ator.getId() == idAtor) {
-					return true;
-				}
-			}
-		}
-		return false;
+	
+		Filme filme = filmeService.buscarFilme(idFilme);
+		Ator ator = atorService.buscarAtor(idAtor);
+		return filme.getAtores().contains(ator);
+		
 	}
 	
 	public boolean diretorPertenceAoFilme(int idFilme, int idDiretor) {
-		if (existsByIdFilme(idFilme) && diretorController.existsByIdDiretor(idDiretor)) {
-			Filme filme = filmeService.buscarFilme(idFilme);
-			for (Diretor diretor : filme.getDiretores()) {
-				if (diretor.getId() == idDiretor) {
-					return true;
-				}
-			}
-		}
-		return false;
+		Filme filme = filmeService.buscarFilme(idFilme);
+		Diretor diretor = diretorService.buscarDiretor(idDiretor);
+		return filme.getDiretores().contains(diretor);
+		
 	}
 	
 	public boolean generoPertenceAoFilme(int idFilme, int idGenero) {
-		if (existsByIdFilme(idFilme) && generoController.existsByIdGenero(idGenero)) {
+		if (existsByIdFilme(idFilme) && generoService.buscaGenero(idGenero)) {
 			Filme filme = filmeService.buscarFilme(idFilme);
-			for (Genero genero : filme.getGeneros()) {
-				if (genero.getId() == idGenero) {
-					return true;
-				}
-			}
+			Genero genero = generoService.buscarGenero(idGenero);
+			return filme.getGeneros().contains(genero);
 		}
 		return false;
 	}

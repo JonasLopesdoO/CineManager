@@ -144,7 +144,7 @@ public class DiretorServiceTest {
 		Diretor diretor = new Diretor("diretoootesteeeeeeeeeeeeeeee", "Sobre teste");
 		Filme filme = new Filme("filmetesteeeeeeeeeeeeediretooooor", "sinopse teste", 180);
 		
-		diretor.addFilme(filme);
+		diretor.getFilmes().add(filme);
 		Filme filmeRecebido = filmeService.salvarFilme(filme);
 
 		assertNotNull(filmeRecebido);		
@@ -157,7 +157,7 @@ public class DiretorServiceTest {
 		diretor = diretorService.buscarDiretor(16);
 		filme = filmeService.buscarFilme(11);
 		
-		diretor.removerFilme(filme);
+		diretor.getFilmes().add(filme);
 		
 		Filme filmeResponse = new Filme();
 		Diretor atorResponse = new Diretor();

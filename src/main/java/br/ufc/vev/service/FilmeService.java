@@ -60,7 +60,8 @@ public class FilmeService {
 		Filme filme = filmeRepositorio.getOne(idFilme);
 		Ator ator = atorService.buscarAtor(idAtor);
 		
-		ator.addFilme(filme);
+		filme.getAtores().add(ator);
+		ator.getFilmes().add(filme);
 		
 		filmeRepositorio.save(filme);
 		atorService.salvarAtor(ator);
@@ -71,7 +72,8 @@ public class FilmeService {
 		Filme filme = buscarFilme(idFilme);
 		Ator ator = atorService.buscarAtor(idAtor);
 		
-		ator.removerFilme(filme);
+		filme.getAtores().remove(ator);
+		ator.getFilmes().remove(filme);
 		
 		filmeRepositorio.save(filme);
 		atorService.salvarAtor(ator);
@@ -80,8 +82,9 @@ public class FilmeService {
 	public void vinculaDiretorAoFilme(int idFilme, int idDiretor) {
 		Filme filme = filmeRepositorio.getOne(idFilme);
 		Diretor diretor = diretorService.buscarDiretor(idDiretor);
-				
-		diretor.addFilme(filme);
+		
+		filme.getDiretores().add(diretor);
+		diretor.getFilmes().add(filme);
 		
 		filmeRepositorio.save(filme);
 		diretorService.salvarDiretor(diretor);		
@@ -91,7 +94,8 @@ public class FilmeService {
 		Filme filme = buscarFilme(idFilme);
 		Diretor diretor = diretorService.buscarDiretor(idDiretor);
 					
-		diretor.removerFilme(filme);
+		filme.getDiretores().remove(diretor);
+		diretor.getFilmes().remove(filme);
 		
 		filmeRepositorio.save(filme);
 		diretorService.salvarDiretor(diretor);
@@ -101,7 +105,9 @@ public class FilmeService {
 		Filme filme = filmeRepositorio.getOne(idFilme);
 		Genero genero = generoService.buscarGenero(idGenero);
 		
-		genero.addFilme(filme);
+		filme.getGeneros().add(genero);
+		genero.getFilmes().add(filme);
+		
 		
 		filmeRepositorio.save(filme);
 		generoService.salvarGenero(genero);	
@@ -110,8 +116,9 @@ public class FilmeService {
 	public void desvinculaGeneroDoFilme(int idFilme, int idGenero) {
 		Filme filme = buscarFilme(idFilme);
 		Genero genero = generoService.buscarGenero(idGenero);
-					
-		genero.removerFilme(filme);
+		
+		filme.getGeneros().remove(genero);
+		genero.getFilmes().remove(filme);
 		
 		filmeRepositorio.save(filme);
 		generoService.salvarGenero(genero);

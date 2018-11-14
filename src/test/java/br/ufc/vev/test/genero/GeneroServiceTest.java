@@ -120,7 +120,7 @@ public class GeneroServiceTest {
 		Genero genero = new Genero("Comedia");
 		Filme filme = new Filme("FIlmeGeneeeerooooooo", "sinopse teste", 100);
 		
-		genero.addFilme(filme);
+		genero.getFilmes().add(filme);
 		Filme filmeRecebido = filmeService.salvarFilme(filme);
 
 		assertNotNull(filmeRecebido);		
@@ -133,7 +133,7 @@ public class GeneroServiceTest {
 		genero = generoService.buscarGenero(11);
 		filme = filmeService.buscarFilme(15);
 		
-		genero.removerFilme(filme);
+		genero.getFilmes().remove(filme);
 		
 		Filme filmeResponse = new Filme();
 		Genero generoResponse = new Genero();

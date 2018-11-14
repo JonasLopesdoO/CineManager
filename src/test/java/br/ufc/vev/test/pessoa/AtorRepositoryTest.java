@@ -129,32 +129,12 @@ public class AtorRepositoryTest {
 		Ator ator = new Ator("atortesteeeeeeeeeeeeeeee", "Sobre teste");
 		Filme filme = new Filme("filmetesteeeeeeeeeeeee", "sinopse teste", 180);
 		
-		ator.addFilme(filme);
+		ator.getFilmes().add(filme);
 		Filme filmeRecebido = filmeRepositorio.save(filme);
 
 		assertNotNull(filmeRecebido);		
 	}
 	
-	@Test
-	public void removerAtorFilme() {//voltar depois para ver
-		Ator ator = new Ator();
-		Filme filme = new Filme();
-		ator = atorRepositorio.getOne(11);
-		filme = filmeRepositorio.getOne(7);
-		
-		ator.removerFilme(filme);
-		
-		Filme filmeResponse = new Filme();
-		Ator atorResponse = new Ator();
-		
-		filmeResponse = filmeRepositorio.save(filme);
-		atorResponse = atorRepositorio.save(ator);
-		
-//		atorRepositorio.deleteFilmeAtores(atorResponse.getId(),filmeResponse.getId());
-		
-		assertNotNull(filmeResponse);		
-		assertNotNull(atorResponse);
-	}
 }
 
 	

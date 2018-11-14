@@ -28,8 +28,8 @@ public class Ator extends Pessoa{
 	private List<Filme> filmes;
 	
 	public Ator(String nome, String sobre) {
-		this.setNome(nome);
-		this.setSobre(sobre);
+		this.nome = nome;
+		this.sobre = sobre;
 		this.filmes = new ArrayList<>();
 	}
 	
@@ -58,16 +58,6 @@ public class Ator extends Pessoa{
 		return filmes;
 	}
 	
-	public boolean addFilme(Filme filme) {
-		this.filmes.add(filme);
-		return filme.getAtores().add(this);
-	}
-	
-	public boolean removerFilme(Filme filme) {
-		this.filmes.remove(filme);
-		return filme.getAtores().remove(this);
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) return true;

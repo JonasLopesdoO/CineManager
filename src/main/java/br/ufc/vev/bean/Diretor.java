@@ -28,8 +28,8 @@ public class Diretor extends Pessoa{
 	List<Filme> filmes;
 	
 	public Diretor(String nome, String sobre) {
-		this.setNome(nome);
-		this.setSobre(sobre);
+		this.nome = nome;
+		this.sobre = sobre;
 		this.filmes = new ArrayList<>();
 	}
 	
@@ -58,17 +58,6 @@ public class Diretor extends Pessoa{
 
 	public List<Filme> getFilmes(){
 		return filmes;
-	}
-	
-
-	public boolean addFilme(Filme filme) {
-		this.filmes.add(filme);
-		return filme.getDiretores().add(this);
-	}
-	
-	public boolean removerFilme(Filme filme) {
-		this.filmes.remove(filme);
-		return filme.getDiretores().remove(this);
 	}
 	
 	@Override

@@ -113,7 +113,7 @@ public class GeneroRepositorioTest {
 		Genero genero = new Genero("Comedia");
 		Filme filme = new Filme("FIlmeGeneeeerooooooo", "sinopse teste", 100);
 		
-		genero.addFilme(filme);
+		genero.getFilmes().add(filme);
 		Filme filmeRecebido = filmeRepositorio.save(filme);
 
 		assertNotNull(filmeRecebido);		
@@ -126,7 +126,7 @@ public class GeneroRepositorioTest {
 		genero = generoRepositorio.getOne(11);
 		filme = filmeRepositorio.getOne(15);
 		
-		genero.removerFilme(filme);
+		genero.getFilmes().remove(filme);
 		
 		Filme filmeResponse = new Filme();
 		Genero generoResponse = new Genero();

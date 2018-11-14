@@ -128,31 +128,11 @@ public class DiretorRepositoryTest {
 		Diretor diretor = new Diretor("J K Rowling",  "Diretora mito legends!");
 		Filme filme = new Filme("FIlme testaaaandoo", "sinopse testandooooo", 200);
 		
-		diretor.addFilme(filme);
+		diretor.getFilmes().add(filme);
 		Filme filmeRecebido = filmeRepositorio.save(filme);
 		
 		assertNotNull(filmeRecebido);
 		
 	}
-	
-	
-	
-	@Test
-	public void removerDiretorFilme() {//voltar depois para ver
-		Diretor diretor = new Diretor();
-		Filme filme = new Filme();
-		diretor = diretorRepositorio.getOne(1);
-		filme = filmeRepositorio.getOne(8);
-		
-		diretor.removerFilme(filme);
-		
-		Filme filmeResponse = new Filme();
-		Diretor diretorResponse = new Diretor();
-		
-		filmeResponse = filmeRepositorio.save(filme);
-		diretorResponse = diretorRepositorio.save(diretor);
-		
-		assertNotNull(filmeResponse);		
-		assertNotNull(diretorResponse);
-	}
+
 }

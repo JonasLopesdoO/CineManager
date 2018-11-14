@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -23,8 +25,9 @@ public class Filme {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	
+	@NotNull @NotEmpty
 	private String nome;
+	@NotNull @NotEmpty
 	private String sinopse;
 	private int duracao;
 	
@@ -56,9 +59,9 @@ public class Filme {
 
 	
 	public Filme(String nome, String sinopse, int duracao){
-		this.setNome(nome);
-		this.setSinopse(sinopse);
-		this.setDuracao(duracao);
+		this.nome = nome;
+		this.sinopse = sinopse;
+		this.duracao = duracao;
 		this.atores = new ArrayList<>();
 		this.diretores = new ArrayList<>();
 		this.generos = new ArrayList<>();

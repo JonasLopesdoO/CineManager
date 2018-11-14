@@ -31,7 +31,7 @@ public class Genero {
 	private List<Filme> filmes;
 	
 	public Genero(String nome) {
-		this.setNome(nome);
+		this.nome = nome;
 		this.filmes = new ArrayList<>();
 	}
 	
@@ -57,16 +57,6 @@ public class Genero {
 	
 	public List<Filme> getFilmes() {
 		return filmes;
-	}
-	
-	public boolean addFilme(Filme filme) {
-		this.filmes.add(filme);
-		return filme.getGeneros().add(this);
-	}
-	
-	public boolean removerFilme(Filme filme) {
-		this.filmes.remove(filme);
-		return filme.getGeneros().remove(this);
 	}
 	
 	@Override

@@ -143,7 +143,7 @@ public class AtorServiceTest {
 		Ator ator = new Ator("atortesteeeeeeeeeeeeeeee", "Sobre teste");
 		Filme filme = new Filme("filmetesteeeeeeeeeeeee", "sinopse teste", 180);
 		
-		ator.addFilme(filme);
+		ator.getFilmes().add(filme);
 		Filme filmeRecebido = filmeService.salvarFilme(filme);
 
 		assertNotNull(filmeRecebido);		
@@ -156,7 +156,7 @@ public class AtorServiceTest {
 		ator = atorService.buscarAtor(20);
 		filme = filmeService.buscarFilme(9);
 		
-		ator.removerFilme(filme);
+		ator.getFilmes().remove(filme);
 		
 		Filme filmeResponse = new Filme();
 		Ator atorResponse = new Ator();
