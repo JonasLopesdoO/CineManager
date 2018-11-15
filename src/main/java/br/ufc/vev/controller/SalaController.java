@@ -24,10 +24,7 @@ public class SalaController {
 		ModelAndView model = new ModelAndView("sala");
 		try {
 			List<Sala> salas = getAllSala();
-
 			model.addObject("salas", salas);
-			return model;
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -38,67 +35,28 @@ public class SalaController {
 	public ModelAndView formularioGenero() {
 		ModelAndView model = new ModelAndView("formulario-sala");
 		model.addObject("sala", new Sala());
-
 		return model;
 	}
 
-	@SuppressWarnings("finally")
 	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaSala(Sala sala) {
 		ModelAndView model = new ModelAndView("sala");
-
-		try {
-			if (this.validaSala(sala.getNome(), sala.getCapacidade())) {
-				salaService.salvarSala(sala);
-				
-				model.addObject("salaRetorno", sala);
-		 	}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			return index();
-		}
-	}
-	
-	public boolean validaSala(String nome, int capacidade) throws Exception {
+		salaService.salvarSala(sala);
+		model.addObject("salaRetorno", sala);
+		return index();
 		
-		if (nome.equals("")) {
-			throw new Exception("Nome não pode ser vazio");
-		} else if (nome.equals(null)) {
-			throw new Exception("Nome não pode ser nulo");
-		} else if (capacidade <= 0) {
-			throw new Exception("Quantidades de lugares não pode ser menor ou igual a zero");
-		}	 
-		return true;
 	}
 	
-	public boolean validaIdSala(int id) throws Exception {
-		if (id == 0) {
-			throw new Exception("Erro ID deve ser maior que zero");
-		} else if (id < 0) {
-			throw new Exception("Erro ID não pode ser negativo");
-		}
-		return true;
-	}
-
 	@SuppressWarnings("finally")
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaSala(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView("sala");
 		try {
-			if (this.validaIdSala(id)) {
-				if (existsByIdSala(id)) {
-					Sala sala = new Sala();
-
-					sala = salaService.buscarSala(id);
-
-					model.addObject("salaRetorno", sala);
-				} else {
-					// mensagem de erro "id nao existente no banco"
-				}
-			} else {
-				// msg de id invalido
-			}
+			if (existsByIdSala(id)) {
+				Sala sala = new Sala();
+				sala = salaService.buscarSala(id);
+				model.addObject("salaRetorno", sala);
+			} 
 		} catch (Exception e) { // caso de erro
 			e.printStackTrace();
 		} finally { // sempre será execultado
@@ -111,7 +69,7 @@ public class SalaController {
 	public ModelAndView excluiSala(@PathVariable("id") Integer id) {
 		try {
 			Sala sala = new Sala();
-			if (validaIdSala(id) && existsByIdSala(id)) {
+			if (existsByIdSala(id)) {
 				sala = salaService.buscarSala(id);
 				salaService.excluirSala(sala);
 			}
@@ -126,10 +84,6 @@ public class SalaController {
 		return salaService.getAllSala();
 	}
 	
-//	public List<Sala> getAllSalasVazias() {		
-//		return salaService.getAllSalasVazias();
-//	}
-
 	// o metodo utilizado para atualizar será o salvar, visto que o spring boot ja
 		// atualiza automaticamente o objeto passado.
 		// este método só redireciona para a digitação dos novos campos do model

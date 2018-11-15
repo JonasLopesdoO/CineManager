@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.ufc.vev.bean.Cinema;
 import br.ufc.vev.bean.Sala;
 import br.ufc.vev.service.CinemaService;
+import br.ufc.vev.service.SalaService;
 
 @Controller
 @Transactional
@@ -26,7 +27,7 @@ public class CinemaController {
 	@Autowired
 	private CinemaService cinemaService;
 	@Autowired
-	private SalaController salaController;
+	private SalaService salaService;
 	
 	@SuppressWarnings("finally")
 	@RequestMapping(path = "/")
@@ -50,7 +51,7 @@ public class CinemaController {
 	  ModelAndView model = new ModelAndView("detalhes-cinema");
 	  Cinema cinema = cinemaService.buscaCinema(id);
 
-	  model.addObject("salas", salaController.getAllSala());
+	  model.addObject("salas", salaService.getAllSala());
 	  model.addObject("cinema", cinema);
 			
 	  return model;
@@ -73,30 +74,17 @@ public class CinemaController {
 		return index();
 		
 	}
-	
-	@SuppressWarnings("finally")
+
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaCinema(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView("cinema");
-		try {
-			if (this.validaId(id)) {
-				if (cinemaService.existsById(id)) {
-					Cinema cinema = new Cinema();
-
-					cinema = cinemaService.buscaCinema(id);
-
-					model.addObject("cinemaRetorno", cinema);
-				} else {
-					// mensagem de erro "id nao existente no banco"
-				}
-			} else {
-				// msg de id invalido
+			if (cinemaService.existsById(id)) { 
+				Cinema cinema = new Cinema();
+				cinema = cinemaService.buscaCinema(id);
+				model.addObject("cinemaRetorno", cinema);
 			}
-		} catch (Exception e) { // caso de erro
-			e.printStackTrace();
-		} finally { // sempre será execultado
-			return index();
-		}
+		return index();
+		
 	}
 	
 	public boolean existsByIdCinema(int id) {
@@ -108,7 +96,7 @@ public class CinemaController {
 	public ModelAndView excluiCinema(@PathVariable("id") Integer id) {		
 		try {
 			Cinema cinema = new Cinema();
-			if (validaId(id) && existsByIdCinema(id)) {
+			if (existsByIdCinema(id)) {
 				cinema = cinemaService.buscaCinema(id);
 				cinemaService.excluiCinema(cinema);
 			}
@@ -134,7 +122,6 @@ public class CinemaController {
 		try {
 			if (existsByIdCinema(id)) {
 				Cinema cinema = cinemaService.buscaCinema(id);
-
 				model.addObject("cinema", cinema);
 			}
 		} catch (Exception e) {
@@ -149,10 +136,8 @@ public class CinemaController {
 											@RequestParam Integer idSala){
 
 	  ModelAndView model = new ModelAndView("redirect:/cinema/"+idCinema);
+	  cinemaService.vinculaSalaAoCinema(idCinema, idSala);
 	  
-	  if (existsByIdCinema(idCinema) && salaController.existsByIdSala(idSala) && salaPertenceAoCinema(idCinema, idSala) == false) {
-		  cinemaService.vinculaSalaAoCinema(idCinema, idSala);
-	  }
 	  
 	  return model;
 	}
@@ -169,48 +154,14 @@ public class CinemaController {
 		return model;
 	}
 	
-	public boolean vinculaSalaAoCinema(int idCine, int idSala) {
-		try {
-			if (validaId(idCine) && validaId(idSala)) {
-				return cinemaService.vinculaSalaAoCinema(idCine, idSala);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
-	public void desvinculaSalaAoCinema(int idCine, int idSala) {
-		try {
-			if (validaId(idCine) && validaId(idSala)) {
-				cinemaService.desvinculaSalaDoCinema(idCine, idSala);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public boolean validaId(int id) throws Exception {
-		if (id == 0) {
-			throw new Exception("Erro ID deve ser maior que zero");
-		} else if (id < 0) {
-			throw new Exception("Erro ID não pode ser negativo");
-		}
-		return true;
-	}
-	
 	public boolean salaPertenceAoCinema(int idCinema, int idSala) {
-		if (existsByIdCinema(idCinema) && salaController.existsByIdSala(idSala)) {
+		if (existsByIdCinema(idCinema) && salaService.buscaSala(idSala)) {
 			Cinema cinema = cinemaService.buscaCinema(idCinema);
-			for (Sala sala : cinema.getSalas()) {
-				if (sala.getId() == idSala) {
-					return true;
-				}
-			}
+			Sala sala = salaService.buscarSala(idSala);
+			return cinema.getSalas().contains(sala);
 		}
 		return false;
 	}
-	
-	
+		
 }
 
