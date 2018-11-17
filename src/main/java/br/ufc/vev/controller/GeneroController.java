@@ -1,6 +1,7 @@
 package br.ufc.vev.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ public class GeneroController {
 	
 	@Autowired
 	private GeneroService generoService;
+	private static final Logger logger = Logger.getLogger(String.valueOf(GeneroController.class));
 	
 	@RequestMapping(path="/")
 	public ModelAndView index() {
@@ -31,7 +33,7 @@ public class GeneroController {
 			return model;
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro: " + e.getMessage());
 		}
 		return model;
 	}
@@ -61,12 +63,12 @@ public class GeneroController {
 		ModelAndView model = new ModelAndView("genero");
 		try {
 			if(existsByIdGenero(id)) {
-				Genero genero = new Genero();	
+				Genero genero;
 				genero = generoService.buscarGenero(id);
 				model.addObject("generoRetorno", genero);
 			}	
 		} catch (Exception e) { 	// caso de erro 
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao buscar generos: " + e.getMessage());
 		} finally { // sempre será execultado
 			List<Genero> generos = generoService.getAllGenero();
 			model.addObject("generos", generos);
@@ -79,14 +81,14 @@ public class GeneroController {
 	public ModelAndView excluiGenero(@PathVariable("id") Integer id) {
 		ModelAndView model = new ModelAndView("genero");
 		try {
-			Genero genero = new Genero();
+			Genero genero;
 			if (existsByIdGenero(id)) { 
 				genero = generoService.buscarGenero(id);
 				generoService.excluirGenero(genero);
 		 	}
 			
 		} catch (Exception e) { 	// caso de erro 
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao excluir genero: " + e.getMessage());
 		} finally { // sempre será execultado
 			List<Genero> generos = generoService.getAllGenero();
 			model.addObject("generos", generos);
@@ -111,14 +113,14 @@ public class GeneroController {
 				model.addObject("genero", genero);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao atualizar genero: " + e.getMessage());
 		}finally {
 			return model;
 		}
 		
 	}
 	
-	public Genero buscaPorNome(String nome) {
+	protected Genero buscaPorNome(String nome) {
 		return generoService.buscaPorNome(nome);
 	}
 	

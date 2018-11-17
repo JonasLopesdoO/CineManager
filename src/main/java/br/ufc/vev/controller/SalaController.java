@@ -1,6 +1,7 @@
 package br.ufc.vev.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,10 @@ public class SalaController {
 	
 	@Autowired
 	private SalaService salaService;
-	
+
+	private static final Logger logger = Logger.getLogger(String.valueOf(SalaController.class));
+
+
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("sala");
@@ -29,7 +33,7 @@ public class SalaController {
 			return model;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro: " + e.getMessage());
 		}
 		return model;
 	}
@@ -54,13 +58,13 @@ public class SalaController {
 				model.addObject("salaRetorno", sala);
 		 	}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao salvar sala: " + e.getMessage());
 		}finally {
 			return index();
 		}
 	}
 	
-	public boolean validaSala(String nome, int capacidade) throws Exception {
+	private boolean validaSala(String nome, int capacidade) throws Exception {
 		
 		if (nome.equals("")) {
 			throw new Exception("Nome não pode ser vazio");
@@ -72,7 +76,7 @@ public class SalaController {
 		return true;
 	}
 	
-	public boolean validaIdSala(int id) throws Exception {
+	private boolean validaIdSala(int id) throws Exception {
 		if (id == 0) {
 			throw new Exception("Erro ID deve ser maior que zero");
 		} else if (id < 0) {
@@ -88,19 +92,19 @@ public class SalaController {
 		try {
 			if (this.validaIdSala(id)) {
 				if (existsByIdSala(id)) {
-					Sala sala = new Sala();
+					Sala sala;
 
 					sala = salaService.buscarSala(id);
 
 					model.addObject("salaRetorno", sala);
 				} else {
-					// mensagem de erro "id nao existente no banco"
+					logger.info("Sala não existente no banco.");
 				}
 			} else {
-				// msg de id invalido
+				logger.info("Id de sala inválido");
 			}
 		} catch (Exception e) { // caso de erro
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao buscar sala: " + e.getMessage());
 		} finally { // sempre será execultado
 			return index();
 		}
@@ -110,19 +114,19 @@ public class SalaController {
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiSala(@PathVariable("id") Integer id) {
 		try {
-			Sala sala = new Sala();
+			Sala sala;
 			if (validaIdSala(id) && existsByIdSala(id)) {
 				sala = salaService.buscarSala(id);
 				salaService.excluirSala(sala);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao excluir sala: " + e.getMessage());
 		}finally {
 			return index();
 		}
 	}
 
-	public List<Sala> getAllSala() {		
+	protected List<Sala> getAllSala() {
 		return salaService.getAllSala();
 	}
 	
@@ -145,13 +149,13 @@ public class SalaController {
 					model.addObject("sala", sala);
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.warning("Ocorreu um erro ao atualizar sala: " + e.getMessage());
 			} finally {
 				return model;
 			}
 		}
 
-	public boolean existsByIdSala(int id) {
+	protected boolean existsByIdSala(int id) {
 		return salaService.buscaSala(id);
 	}
 

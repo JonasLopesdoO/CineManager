@@ -1,6 +1,7 @@
 package br.ufc.vev.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class DiretorController {
 	@Autowired
 	private DiretorService diretorService;
 
+	private static final Logger logger = Logger.getLogger(String.valueOf(DiretorController.class));
+
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("diretor");
@@ -30,7 +33,7 @@ public class DiretorController {
 			return model;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro: " + e.getMessage());
 		}
 		return model;
 	}
@@ -58,12 +61,12 @@ public class DiretorController {
 		ModelAndView model = new ModelAndView("diretor");
 		try {
 			if (existsByIdDiretor(id)) {
-				Diretor diretor = new Diretor();
+				Diretor diretor;
 				diretor = diretorService.buscarDiretor(id);
 				model.addObject("diretorRetorno", diretor);
 			} 
 		} catch (Exception e) { // caso de erro
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao buscar diretor: " + e.getMessage());
 		} finally { // sempre será execultado
 			return index();
 		}
@@ -73,13 +76,13 @@ public class DiretorController {
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiDiretor(@PathVariable("id") Integer id) {
 		try {
-			Diretor diretor = new Diretor();
+			Diretor diretor;
 			if (existsByIdDiretor(id)) {
 				diretor = diretorService.buscarDiretor(id);
 				diretorService.excluirDiretor(diretor);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro a excluir diretor: " + e.getMessage());
 		} finally {
 			return index();
 		}
@@ -103,7 +106,7 @@ public class DiretorController {
 				model.addObject("diretor", diretor);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao atualizar diretor: " + e.getMessage());
 		} finally {
 			return model;
 		}

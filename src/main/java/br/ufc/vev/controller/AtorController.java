@@ -1,6 +1,7 @@
 package br.ufc.vev.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,8 @@ public class AtorController {
 	
 	@Autowired
 	private AtorService atorService;
-	
+	private static final Logger logger = Logger.getLogger(String.valueOf(AtorController.class));
+
 	@RequestMapping(path="/")
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("ator");
@@ -30,7 +32,7 @@ public class AtorController {
 			return model;
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro: " + e.getMessage());
 		}
 		return model;
 	}
@@ -57,12 +59,12 @@ public class AtorController {
 		ModelAndView model = new ModelAndView("ator");
 		try {	
 			if(existsByIdAtor(id)) {
-				Ator ator = new Ator();			
+				Ator ator;
 				ator = atorService.buscarAtor(id);			
 				model.addObject("atorRetorno", ator);
 			}
 		} catch (Exception e) { 	// caso de erro 
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao buscar atores: " + e.getMessage());
 		} finally { // sempre será execultado
 			return index();
 		}
@@ -72,13 +74,13 @@ public class AtorController {
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiAtor(@PathVariable("id") Integer id) {		
 		try {
-			Ator ator = new Ator();
+			Ator ator;
 			if (existsByIdAtor(id)) {
 				ator = atorService.buscarAtor(id);
 				atorService.excluirAtor(ator);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao excluir ator: " + e.getMessage());
 		}finally {
 			return index();
 		}
@@ -102,7 +104,7 @@ public class AtorController {
 				model.addObject("ator", ator);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao atualizar ator: " + e.getMessage());
 		}finally {
 			return model;
 		}

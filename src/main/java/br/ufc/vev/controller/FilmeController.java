@@ -1,6 +1,7 @@
 package br.ufc.vev.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.transaction.Transactional;
 
@@ -36,7 +37,10 @@ public class FilmeController {
 	DiretorService diretorService;
 	@Autowired
 	GeneroService generoService;
-	
+
+	private static final Logger logger = Logger.getLogger(String.valueOf(FilmeController.class));
+
+
 	@SuppressWarnings("finally")
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
@@ -45,7 +49,7 @@ public class FilmeController {
 			List<Filme> filmes = getAllFilme();
 			model.addObject("filmes", filmes);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro: " + e.getMessage());
 		}finally {
 			return model;
 		}
@@ -88,12 +92,12 @@ public class FilmeController {
 		ModelAndView model = new ModelAndView("filme");
 		try {
 			if (existsByIdFilme(id)) {
-				Filme filme = new Filme();
+				Filme filme;
 				filme = filmeService.buscarFilme(id);
 				model.addObject("filmeRetorno", filme);
 			} 
 		} catch (Exception e) { // caso de erro
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao buscar filme: " + e.getMessage());
 		} finally { // sempre será execultado
 			return index();
 		}
@@ -103,13 +107,13 @@ public class FilmeController {
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiFilme(@PathVariable("id") Integer id) {		
 		try {
-			Filme filme = new Filme();
+			Filme filme;
 			if (existsByIdFilme(id)) {
 				filme = filmeService.buscarFilme(id);
 				filmeService.excluirFilme(filme);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao excluir filme: " + e.getMessage());
 		}finally {
 			return index();
 		}
@@ -134,7 +138,7 @@ public class FilmeController {
 				model.addObject("filme", filme);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao atualizar filme: " + e.getMessage());
 		} finally {
 			return model;
 		}
@@ -146,8 +150,7 @@ public class FilmeController {
 
 	  ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
 	  
-	  if (existsByIdFilme(idFilme) && atorService.buscaAtor(idAtor) 
-			  			&& atorPertenceAoFilme(idFilme, idAtor) != true) {
+	  if (existsByIdFilme(idFilme) && atorService.buscaAtor(idAtor) && !atorPertenceAoFilme(idFilme, idAtor)) {
 		  filmeService.vinculaAtorAoFilme(idFilme, idAtor);
 	  }
 	  
@@ -172,8 +175,7 @@ public class FilmeController {
 											@RequestParam Integer idDiretor ){
 
 	  ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
-	  if (existsByIdFilme(idFilme) && diretorService.buscaDiretor(idDiretor) 
-			  	&& diretorPertenceAoFilme(idFilme, idDiretor) != true){
+	  if (existsByIdFilme(idFilme) && diretorService.buscaDiretor(idDiretor) && !diretorPertenceAoFilme(idFilme, idDiretor)){
 		  filmeService.vinculaDiretorAoFilme(idFilme, idDiretor);
 	  }
 	  
@@ -196,8 +198,7 @@ public class FilmeController {
 												@RequestParam Integer idGenero){
 
 		ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
-		if (existsByIdFilme(idFilme) && generoService.buscaGenero(idGenero) 
-					&& generoPertenceAoFilme(idFilme, idGenero) != true){
+		if (existsByIdFilme(idFilme) && generoService.buscaGenero(idGenero) && !generoPertenceAoFilme(idFilme, idGenero)){
 		  filmeService.vinculaGeneroAoFilme(idFilme, idGenero);
 		}
 		  
@@ -210,7 +211,7 @@ public class FilmeController {
 						@PathVariable("idGenero") Integer idGenero) {
 		ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
 		if(generoPertenceAoFilme(idFilme, idGenero)) {
-			filmeService.desvinculaGeneroDoFilme(idFilme, idGenero);;
+			filmeService.desvinculaGeneroDoFilme(idFilme, idGenero);
 		}
 		return model;
 	}

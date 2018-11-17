@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.transaction.Transactional;
 
@@ -37,7 +38,10 @@ public class SessaoController {
 	GeneroController generoController;
 	@Autowired
 	CinemaController cinemaController;
-	
+
+	private static final Logger logger = Logger.getLogger(String.valueOf(SessaoController.class));
+
+
 	@SuppressWarnings("finally")
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
@@ -48,7 +52,7 @@ public class SessaoController {
 			model.addObject("sessoes", sessoes);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro: " + e.getMessage());
 		}finally {
 			return model;
 		}
@@ -99,7 +103,7 @@ public class SessaoController {
 				model.addObject("sessao", sessao);
 		 	}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao salvar sessão: " + e.getMessage());
 		}finally {
 			return index();
 		}
@@ -120,7 +124,7 @@ public class SessaoController {
 				model.addObject("sessao", sessao);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao atualzar sessao: " + e.getMessage());
 		} finally {
 			return model;
 		}
@@ -130,13 +134,13 @@ public class SessaoController {
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiSessao(@PathVariable("id") Integer id) {		
 		try {
-			Sessao sessao = new Sessao();
+			Sessao sessao;
 			if (validaId(id) && existsByIdSessao(id)) {
 				sessao = sessaoService.buscarSessao(id);
-				sessaoService.excluirSessao(sessao);;
+				sessaoService.excluirSessao(sessao);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao excluir sessão: " + e.getMessage());
 		}finally {
 			return index();
 		}
@@ -149,19 +153,21 @@ public class SessaoController {
 		try {
 			if (this.validaId(id)) {
 				if (existsByIdSessao(id)) {
-					Sessao sessao = new Sessao();
+					Sessao sessao;
 
 					sessao = sessaoService.buscarSessao(id);
 
 					model.addObject("sessaoRetorno", sessao);
 				} else {
 					// mensagem de erro "id nao existente no banco"
+					logger.info("Id de sessao inexistenet no banco");
 				}
 			} else {
 				// msg de id invalido
+				logger.info("Id de sessão inválido");
 			}
 		} catch (Exception e) { // caso de erro
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao buscar sessão: " + e.getMessage());
 		} finally { // sempre será execultado
 			return index();
 		}
@@ -173,7 +179,7 @@ public class SessaoController {
 
 	  ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
 	  
-	  if (sessaoPossuiFilme(idSessao, idFilme) == false) {
+	  if (!sessaoPossuiFilme(idSessao, idFilme)) {
 		  sessaoService.vinculaFilmeASessao(idSessao, idFilme);
 	  }
 	  
@@ -199,7 +205,7 @@ public class SessaoController {
 
 	  ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
 	  
-	  if (sessaoPossuiSala(idSessao, idSala) == false) {
+	  if (!sessaoPossuiSala(idSessao, idSala)) {
 		  sessaoService.vinculaSalaASessao(idSessao, idSala);
 	  }
 	  
@@ -317,9 +323,7 @@ public class SessaoController {
 		if (existsByIdSessao(idSessao) && filmeController.existsByIdFilme(idFilme)) {
 			Sessao sessao = sessaoService.buscarSessao(idSessao);
 			
-			if(sessao.getFilme() == null) {
-				return false;
-			}
+			if(sessao.getFilme() == null) return false;
 		}
 		return true;
 	}
@@ -328,9 +332,7 @@ public class SessaoController {
 		if (existsByIdSessao(idSessao) && salaController.existsByIdSala(idSala)) {
 			Sessao sessao = sessaoService.buscarSessao(idSessao);
 			
-			if(sessao.getSala() == null) {
-				return false;
-			}
+			if(sessao.getSala() == null) return false;
 		}
 		return true;
 	}

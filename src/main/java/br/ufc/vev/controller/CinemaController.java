@@ -1,6 +1,7 @@
 package br.ufc.vev.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.transaction.Transactional;
 
@@ -27,7 +28,10 @@ public class CinemaController {
 	private CinemaService cinemaService;
 	@Autowired
 	private SalaController salaController;
-	
+
+	private static final Logger logger = Logger.getLogger(String.valueOf(CinemaController.class));
+
+
 	@SuppressWarnings("finally")
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
@@ -38,7 +42,7 @@ public class CinemaController {
 			model.addObject("cinemas", cinemas);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro: " + e.getMessage());
 		}finally {
 			return model;
 		}
@@ -81,19 +85,21 @@ public class CinemaController {
 		try {
 			if (this.validaId(id)) {
 				if (cinemaService.existsById(id)) {
-					Cinema cinema = new Cinema();
+					Cinema cinema;
 
 					cinema = cinemaService.buscaCinema(id);
 
 					model.addObject("cinemaRetorno", cinema);
 				} else {
 					// mensagem de erro "id nao existente no banco"
+					logger.info("Id do cinema não existe no banco de dados");
 				}
 			} else {
 				// msg de id invalido
+				logger.info("Id inválido");
 			}
 		} catch (Exception e) { // caso de erro
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao buscar cinema: " + e.getMessage());
 		} finally { // sempre será execultado
 			return index();
 		}
@@ -107,13 +113,13 @@ public class CinemaController {
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiCinema(@PathVariable("id") Integer id) {		
 		try {
-			Cinema cinema = new Cinema();
+			Cinema cinema;
 			if (validaId(id) && existsByIdCinema(id)) {
 				cinema = cinemaService.buscaCinema(id);
 				cinemaService.excluiCinema(cinema);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao excluir cinema: " + e.getMessage());
 		}finally {
 			return index();
 		}
@@ -138,7 +144,7 @@ public class CinemaController {
 				model.addObject("cinema", cinema);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao atualizar cinema: " + e.getMessage());
 		} finally {
 			return model;
 		}
@@ -150,7 +156,7 @@ public class CinemaController {
 
 	  ModelAndView model = new ModelAndView("redirect:/cinema/"+idCinema);
 	  
-	  if (existsByIdCinema(idCinema) && salaController.existsByIdSala(idSala) && salaPertenceAoCinema(idCinema, idSala) == false) {
+	  if (existsByIdCinema(idCinema) && salaController.existsByIdSala(idSala) && !salaPertenceAoCinema(idCinema, idSala)) {
 		  cinemaService.vinculaSalaAoCinema(idCinema, idSala);
 	  }
 	  
@@ -175,7 +181,7 @@ public class CinemaController {
 				return cinemaService.vinculaSalaAoCinema(idCine, idSala);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao vincular a sala no cinema: " + e.getMessage());
 		}
 		return false;
 	}
@@ -186,7 +192,7 @@ public class CinemaController {
 				cinemaService.desvinculaSalaDoCinema(idCine, idSala);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warning("Ocorreu um erro ao desvincular sala do cinema: " + e.getMessage());
 		}
 	}
 	
