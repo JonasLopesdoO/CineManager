@@ -74,7 +74,7 @@ public class SessaoController {
 	public ModelAndView formularioSessao() {
 		ModelAndView model = new ModelAndView("formulario-sessao");
 		model.addObject("sessao", new Sessao());
-	
+
 		return model;
 	}
 
@@ -85,19 +85,19 @@ public class SessaoController {
 		try {
 			Sessao sessao = new Sessao();
 			if (this.validaSessao(horario, dataInicio, dataFim)) {
-	
+
 			LocalTime horarioConvert;
 			horarioConvert = LocalTime.parse(horario);
-			
+
 			LocalDate dataInicioConvert, dataFimConvert;
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 			dataInicioConvert = LocalDate.parse(dataInicio, formatter);
 			dataFimConvert = LocalDate.parse(dataFim, formatter);
-			
+
 			sessao.setHorario(horarioConvert);
 			sessao.setDataInicio(dataInicioConvert);
 			sessao.setDataFim(dataFimConvert);
-		
+
 				sessaoService.salvarSessao(sessao);
 
 				model.addObject("sessao", sessao);
@@ -108,7 +108,7 @@ public class SessaoController {
 			return index();
 		}
 	}
-	
+
 	// o metodo utilizado para atualizar será o salvar, visto que o spring boot ja
 	// atualiza automaticamente o objeto passado.
 	// este método só redireciona para a digitação dos novos campos do model
@@ -132,7 +132,7 @@ public class SessaoController {
 
 	@SuppressWarnings("finally")
 	@RequestMapping("/excluir/{id}")
-	public ModelAndView excluiSessao(@PathVariable("id") Integer id) {		
+	public ModelAndView excluiSessao(@PathVariable("id") Integer id) {
 		try {
 			Sessao sessao;
 			if (validaId(id) && existsByIdSessao(id)) {
@@ -145,7 +145,7 @@ public class SessaoController {
 			return index();
 		}
 	}
-	
+
 	@SuppressWarnings("finally")
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaSessao(@PathVariable Integer id) {
@@ -172,76 +172,76 @@ public class SessaoController {
 			return index();
 		}
 	}
-	
+
 	@RequestMapping(path="/{idSessao}/adicionarFilme", method=RequestMethod.POST)
-	public ModelAndView vincularFilmeASessao(@PathVariable("idSessao") Integer idSessao, 
+	public ModelAndView vincularFilmeASessao(@PathVariable("idSessao") Integer idSessao,
 											@RequestParam Integer idFilme){
 
 	  ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
-	  
+
 	  if (!sessaoPossuiFilme(idSessao, idFilme)) {
 		  sessaoService.vinculaFilmeASessao(idSessao, idFilme);
 	  }
-	  
+
 	  return model;
 	}
-	
+
 	@RequestMapping(path="/{idSessao}/removerFilme/{idFilme}")
 	public ModelAndView desvinculaFilmeDaSessao(@PathVariable("idSessao") Integer idSessao,
 												@PathVariable("idFilme") Integer idFilme) {
-		
+
 		ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
-		
+
 		if (sessaoPossuiFilme(idSessao, idFilme)) {
 			sessaoService.desvinculaFilmeDaSessao(idSessao, idFilme);
 		}
-		
+
 		return model;
 	}
-	
+
 	@RequestMapping(path="/{idSessao}/adicionarSala", method=RequestMethod.POST)
-	public ModelAndView vincularSalaASessao(@PathVariable("idSessao") Integer idSessao, 
+	public ModelAndView vincularSalaASessao(@PathVariable("idSessao") Integer idSessao,
 											@RequestParam Integer idSala){
 
 	  ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
-	  
+
 	  if (!sessaoPossuiSala(idSessao, idSala)) {
 		  sessaoService.vinculaSalaASessao(idSessao, idSala);
 	  }
-	  
+
 	  return model;
 	}
-	
+
 	@RequestMapping(path="/{idSessao}/removerSala/{idSala}")
 	public ModelAndView desvinculaSalaDaSessao(@PathVariable("idSessao") Integer idSessao,
 												@PathVariable("idSala") Integer idSala) {
-		
+
 		ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
-		
+
 		if (sessaoPossuiSala(idSessao, idSala)) {
 			sessaoService.desvinculaSalaDaSessao(idSessao, idSala);
 		}
-		
+
 		return model;
 	}
-	
+
 	@RequestMapping(path = "/porData", method = RequestMethod.POST)
 	public ModelAndView verTodasPorData(@RequestParam String dataInicio, @RequestParam String dataFim) {
 // 	todasAsSessoesPorData
 		ModelAndView model = new ModelAndView("sessao-busca");
-		
+
 		LocalDate dataInicioConvert, dataFimConvert;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		dataInicioConvert = LocalDate.parse(dataInicio, formatter);
 		dataFimConvert = LocalDate.parse(dataFim, formatter);
-		
+
 		List<Sessao> sessoes = sessaoService.getSessaoPorData(dataInicioConvert, dataFimConvert);
-		
+
 		model.addObject("sessoes", sessoes);
-		
+
 		return model;
 	}
-	
+
 	@RequestMapping(path = "/porCidade", method = RequestMethod.POST)
 	public ModelAndView verTodasPorCidade(@RequestParam String cidade) {
 		ModelAndView model = new ModelAndView("sessao-busca");
@@ -249,10 +249,10 @@ public class SessaoController {
 			List<Sessao> sessoes = sessaoService.getSessaoPorCidade(cidade);
 			model.addObject("sessoes", sessoes);
 		}
-		
+
 		return model;
 	}
-	
+
 	@RequestMapping(path = "/porFilme", method = RequestMethod.POST)
 	public ModelAndView verTodasPorFilme(@RequestParam String filme) {
 		ModelAndView model = new ModelAndView("sessao-busca");
@@ -261,10 +261,10 @@ public class SessaoController {
 			List<Sessao> sessoes = sessaoService.getSessaoPorFilme(filmeB);
 			model.addObject("sessoes", sessoes);
 		}
-		
+
 		return model;
 	}
-	
+
 	@RequestMapping(path = "/porGenero", method = RequestMethod.POST)
 	public ModelAndView verTodasPorGenero(@RequestParam String genero) {
 		ModelAndView model = new ModelAndView("sessao-busca");
@@ -275,12 +275,12 @@ public class SessaoController {
 		}
 		return model;
 	}
-	
-	
-	public List<Sessao> getAllSessao() {		
+
+
+	public List<Sessao> getAllSessao() {
 		return sessaoService.getAllSessao();
 	}
-	
+
 	private boolean validaSessao(LocalTime horario, LocalDate dataInicio, LocalDate dataFim) throws Exception {
 		if (horario.equals(null)) {
 			throw new Exception("horario não pode ser nulo");
@@ -291,12 +291,12 @@ public class SessaoController {
 		}
 		return true;
 	}
-	
+
 	private boolean validaSessao(String horario, String dataInicio, String dataFim) throws Exception {
 		if (horario.equals(null)) {
 			throw new Exception("horario não pode ser nulo");
 		}else if(horario.equals("")) {
-			throw new Exception("horario não pode ser vazia");	
+			throw new Exception("horario não pode ser vazia");
 		} else if (dataInicio.equals(null)) {
 			throw new Exception("Data Inicial não pode ser nula");
 		}else if(dataInicio.equals("")) {
@@ -308,7 +308,7 @@ public class SessaoController {
 		}
 		return true;
 	}
-	
+
 	public boolean validaId(int id) throws Exception {
 		if (id == 0) {
 			throw new Exception("Erro ID deve ser maior que zero");

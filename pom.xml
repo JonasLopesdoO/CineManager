@@ -69,7 +69,11 @@
               <groupId>org.springframework.boot</groupId>
               <artifactId>spring-boot-starter-data-rest</artifactId>
           </dependency>
+<<<<<<< HEAD
 
+=======
+          
+>>>>>>> origin/master
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
