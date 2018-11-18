@@ -81,21 +81,18 @@ public class CinemaController {
 	public ModelAndView buscaCinema(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView(CINEMA);
 		try {
-			if (this.validaId(id)) {
-				if (cinemaService.existsById(id)) {
-					Cinema cinema;
+			
+			if (cinemaService.existsById(id)) {
+				Cinema cinema;
 
-					cinema = cinemaService.buscaCinema(id);
+				cinema = cinemaService.buscaCinema(id);
 
-					model.addObject("cinemaRetorno", cinema);
-				} else {
-					// mensagem de erro "id nao existente no banco"
-					logger.info("Id do cinema não existe no banco de dados");
-				}
+				model.addObject("cinemaRetorno", cinema);
 			} else {
-				// msg de id invalido
-				logger.info("Id inválido");
+				// mensagem de erro "id nao existente no banco"
+				logger.info("Id do cinema não existe no banco de dados");
 			}
+		
 		} catch (Exception e) { // caso de erro
 			logger.warning("Ocorreu um erro ao buscar cinema: " + e.getMessage());
 		} finally { // sempre será execultado
@@ -112,7 +109,7 @@ public class CinemaController {
 	public ModelAndView excluiCinema(@PathVariable("id") Integer id) {		
 		try {
 			Cinema cinema;
-			if (validaId(id) && existsByIdCinema(id)) {
+			if (existsByIdCinema(id)) {
 				cinema = cinemaService.buscaCinema(id);
 				cinemaService.excluiCinema(cinema);
 			}
@@ -174,33 +171,12 @@ public class CinemaController {
 	}
 	
 	public boolean vinculaSalaAoCinema(int idCine, int idSala) {
-		try {
-			if (validaId(idCine) && validaId(idSala)) {
-				return cinemaService.vinculaSalaAoCinema(idCine, idSala);
-			}
-		} catch (Exception e) {
-			logger.warning("Ocorreu um erro ao vincular a sala no cinema: " + e.getMessage());
-		}
-		return false;
+			return cinemaService.vinculaSalaAoCinema(idCine, idSala);	
+		
 	}
 	
-	public void desvinculaSalaAoCinema(int idCine, int idSala) {
-		try {
-			if (validaId(idCine) && validaId(idSala)) {
-				cinemaService.desvinculaSalaDoCinema(idCine, idSala);
-			}
-		} catch (Exception e) {
-			logger.warning("Ocorreu um erro ao desvincular sala do cinema: " + e.getMessage());
-		}
-	}
-	
-	public boolean validaId(int id) throws Exception {
-		if (id == 0) {
-			throw new IllegalArgumentException("Erro ID deve ser maior que zero");
-		} else if (id < 0) {
-			throw new IllegalArgumentException("Erro ID não pode ser negativo");
-		}
-		return true;
+	public void desvinculaSalaAoCinema(int idCine, int idSala) {			
+			cinemaService.desvinculaSalaDoCinema(idCine, idSala);
 	}
 	
 	public boolean salaPertenceAoCinema(int idCinema, int idSala) {

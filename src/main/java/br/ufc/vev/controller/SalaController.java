@@ -52,11 +52,10 @@ public class SalaController {
 		ModelAndView model = new ModelAndView("sala");
 
 		try {
-			if (this.validaSala(sala.getNome(), sala.getCapacidade())) {
-				salaService.salvarSala(sala);
-				
-				model.addObject("salaRetorno", sala);
-		 	}
+			
+			salaService.salvarSala(sala);
+			model.addObject("salaRetorno", sala);
+	 
 		} catch (Exception e) {
 			logger.warning("Ocorreu um erro ao salvar sala: " + e.getMessage());
 		}finally {
@@ -64,45 +63,23 @@ public class SalaController {
 		}
 	}
 	
-	private boolean validaSala(String nome, int capacidade) throws Exception {
-		
-		if (nome.equals("")) {
-			throw new Exception("Nome não pode ser vazio");
-		} else if (nome.equals(null)) {
-			throw new Exception("Nome não pode ser nulo");
-		} else if (capacidade <= 0) {
-			throw new Exception("Quantidades de lugares não pode ser menor ou igual a zero");
-		}	 
-		return true;
-	}
-	
-	private boolean validaIdSala(int id) throws Exception {
-		if (id == 0) {
-			throw new Exception("Erro ID deve ser maior que zero");
-		} else if (id < 0) {
-			throw new Exception("Erro ID não pode ser negativo");
-		}
-		return true;
-	}
 
 	@SuppressWarnings("finally")
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaSala(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView("sala");
 		try {
-			if (this.validaIdSala(id)) {
-				if (existsByIdSala(id)) {
-					Sala sala;
-
-					sala = salaService.buscarSala(id);
-
-					model.addObject("salaRetorno", sala);
-				} else {
-					logger.info("Sala não existente no banco.");
-				}
+			
+			if (existsByIdSala(id)) {
+				Sala sala;
+	
+				sala = salaService.buscarSala(id);
+	
+				model.addObject("salaRetorno", sala);
 			} else {
-				logger.info("Id de sala inválido");
+				logger.info("Sala não existente no banco.");
 			}
+			
 		} catch (Exception e) { // caso de erro
 			logger.warning("Ocorreu um erro ao buscar sala: " + e.getMessage());
 		} finally { // sempre será execultado
@@ -115,7 +92,7 @@ public class SalaController {
 	public ModelAndView excluiSala(@PathVariable("id") Integer id) {
 		try {
 			Sala sala;
-			if (validaIdSala(id) && existsByIdSala(id)) {
+			if (existsByIdSala(id)) {
 				sala = salaService.buscarSala(id);
 				salaService.excluirSala(sala);
 			}
@@ -130,10 +107,6 @@ public class SalaController {
 		return salaService.getAllSala();
 	}
 	
-//	public List<Sala> getAllSalasVazias() {		
-//		return salaService.getAllSalasVazias();
-//	}
-
 	// o metodo utilizado para atualizar será o salvar, visto que o spring boot ja
 		// atualiza automaticamente o objeto passado.
 		// este método só redireciona para a digitação dos novos campos do model
