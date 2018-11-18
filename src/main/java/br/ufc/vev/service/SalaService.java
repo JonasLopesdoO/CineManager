@@ -1,7 +1,9 @@
 package br.ufc.vev.service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,9 @@ import br.ufc.vev.repositorio.SalaRepositorio;
 public class SalaService {
 	@Autowired
 	SalaRepositorio salaRepositorio;
+	private static final Logger logger = Logger.getLogger(String.valueOf(SalaService.class));
 
+	
 	public Sala salvarSala(Sala sala) {
 		try {
 			return salaRepositorio.save(sala);
@@ -24,15 +28,20 @@ public class SalaService {
 	}
 
 	public Sala buscarSala(Integer id) {
-		return salaRepositorio.getOne(id);
-	}
-	
-	public boolean buscaSala(Integer id) {
-		return salaRepositorio.existsById(id);
+		try {
+			return salaRepositorio.getOne(id);
+		} catch (EntityNotFoundException  e) {
+			logger.warning("Sala não encontrada");
+		}
+		return null;
 	}
 	
 	public void excluirSala(Sala sala) {
-		salaRepositorio.delete(sala);
+		try {
+			salaRepositorio.delete(sala);
+		} catch (IllegalArgumentException e) {
+			logger.warning("Parametros incorretos");
+		}
 	}
 
 	public Sala atualizaSala(Sala sala) {

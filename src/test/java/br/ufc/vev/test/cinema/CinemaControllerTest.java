@@ -1,7 +1,6 @@
 package br.ufc.vev.test.cinema;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,22 +46,6 @@ public class CinemaControllerTest {
 		
 		Cinema cinema = new Cinema(nome, endereco, cidade);
 		assertNotNull(controller.salvaCinema(cinema));
-	}
-	
-	@Test 
-	public void buscaCinemaControllerTest() {
-		String cidade = "Quixada";
-		String endereco = "Rua A, Planalto Universitario";
-		String nome = "Cine o bom vizinho";	
-		
-		Cinema cinema = new Cinema(nome, endereco, cidade);
-		
-		Cinema cinemaBuscado = new Cinema();
-		cinemaBuscado = cinemaService.salvarCinema(cinema);
-		
-		assertNotNull(controller.buscaCinema(cinemaBuscado.getId()));
-		assertNotNull(controller.detalhesCinema(cinemaBuscado.getId()));
-		assertTrue(controller.existsByIdCinema(cinemaBuscado.getId()));
 	}
 			
 	@Test

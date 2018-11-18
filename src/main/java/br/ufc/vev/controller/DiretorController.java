@@ -24,7 +24,7 @@ public class DiretorController {
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("diretor");
 		List<Diretor> diretores = getAllDiretores();
-		if (!diretores.equals(null)) {
+		if (diretores != null) {
 			model.addObject("diretores", diretores);
 		}
 		return model;
@@ -51,7 +51,7 @@ public class DiretorController {
 		ModelAndView model = new ModelAndView("diretor");
 		Diretor diretor;
 		diretor = diretorService.buscarDiretor(id);
-		if (!diretor.equals(null)) {
+		if (diretor != null) {
 			model.addObject("diretorRetorno", diretor);
 		}
 		return index();
@@ -61,7 +61,7 @@ public class DiretorController {
 	public ModelAndView excluiDiretor(@PathVariable("id") Integer id) {
 		Diretor diretor;
 		diretor = diretorService.buscarDiretor(id);
-		if (!diretor.equals(null)) {
+		if (diretor != null) {
 			diretorService.excluirDiretor(diretor);
 		}
 		return index();
@@ -79,7 +79,7 @@ public class DiretorController {
 		ModelAndView model = new ModelAndView("formulario-diretor");
 		Diretor diretor;
 		diretor = diretorService.buscarDiretor(id);
-		if (!diretor.equals(null)) {
+		if (diretor != null) {
 			model.addObject("diretor", diretor);
 		}
 		return model;

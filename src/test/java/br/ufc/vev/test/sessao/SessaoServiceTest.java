@@ -161,7 +161,7 @@ public class SessaoServiceTest {
 		Sessao sessaoBuscada = sessaoService.salvarSessao(sessao);
 		Filme filmeBuscado = filmeSevice.salvarFilme(Filme);
 		
-		assertTrue(sessaoService.vinculaFilmeASessao(sessaoBuscada.getId(), filmeBuscado.getId()));
+		sessaoService.vinculaFilmeASessao(sessaoBuscada.getId(), filmeBuscado.getId());
 		sessaoService.getSessaoPorFilme(filmeBuscado);
 	}
 	
@@ -181,7 +181,7 @@ public class SessaoServiceTest {
 		Sessao sessaoBuscada = sessaoService.salvarSessao(sessao);
 		Filme filmeBuscado = filmeSevice.salvarFilme(Filme);
 		
-		assertTrue(sessaoService.vinculaFilmeASessao(sessaoBuscada.getId(), filmeBuscado.getId()));
+		sessaoService.vinculaFilmeASessao(sessaoBuscada.getId(), filmeBuscado.getId());
 		sessaoService.desvinculaFilmeDaSessao(sessaoBuscada.getId(), filmeBuscado.getId());
 	}
 	
@@ -204,7 +204,7 @@ public class SessaoServiceTest {
 		sessao = new Sessao(horario, inicio, fim);
 		Sessao sessaoBuscada = sessaoService.salvarSessao(sessao);
 		
-		assertTrue(sessaoService.vinculaSalaASessao(sessaoBuscada.getId(), salaRecebida.getId()));
+		sessaoService.vinculaSalaASessao(sessaoBuscada.getId(), salaRecebida.getId());
 	}
 	
 	@Test
@@ -226,7 +226,7 @@ public class SessaoServiceTest {
 		sessao = new Sessao(horario, inicio, fim);
 		Sessao sessaoBuscada = sessaoService.salvarSessao(sessao);
 		
-		assertTrue(sessaoService.vinculaSalaASessao(sessaoBuscada.getId(), salaRecebida.getId()));
+		sessaoService.vinculaSalaASessao(sessaoBuscada.getId(), salaRecebida.getId());
 		sessaoService.desvinculaSalaDaSessao(sessaoBuscada.getId(), salaRecebida.getId());
 	}
 	

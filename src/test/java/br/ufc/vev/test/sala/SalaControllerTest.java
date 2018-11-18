@@ -1,17 +1,16 @@
 package br.ufc.vev.test.sala;
 
-import br.ufc.vev.service.SalaService;
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import br.ufc.vev.bean.Sala;
 import br.ufc.vev.controller.SalaController;
+import br.ufc.vev.service.SalaService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -43,23 +42,6 @@ public class SalaControllerTest {
 		sala.setCapacidade(capacidade);
 
 		assertNotNull(controller.salvaSala(sala));
-	}
-
-	@Test
-	public void buscaSalaControllerTest() {
-		String nome = "Sala A1";
-		int capacidade = 150;
-
-		Sala sala = new Sala();
-		sala.setNome(nome);
-		sala.setCapacidade(capacidade);
-
-		Sala salaRecebida;
-		salaRecebida = service.salvarSala(sala);
-
-		assertNotNull(controller.buscaSala(salaRecebida.getId()));
-		assertTrue(controller.existsByIdSala(salaRecebida.getId()));
-
 	}
 
 	@Test

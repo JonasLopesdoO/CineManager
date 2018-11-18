@@ -68,98 +68,92 @@ public class FilmeService {
 	
 	public void vinculaAtorAoFilme(int idFilme, int idAtor) {
 		Filme filme = buscarFilme(idFilme);
-		if (!filme.equals(null)) {
+		if (filme != null) {
 			Ator ator = atorService.buscarAtor(idAtor);
-			if (!ator.equals(null)) {
-				if (!filme.getAtores().contains(ator)) {
-					filme.getAtores().add(ator);
-					ator.getFilmes().add(filme);
-					
-					filmeRepositorio.save(filme);
-					atorService.salvarAtor(ator);
-				}
+			if (ator != null && !filme.getAtores().contains(ator)) {
+				filme.getAtores().add(ator);
+				ator.getFilmes().add(filme);
+				
+				filmeRepositorio.save(filme);
+				atorService.salvarAtor(ator);
+			
 			}
 		}		
 	}
 	
 	public void desvinculaAtorDoFilme(int idFilme, int idAtor) {
 		Filme filme = buscarFilme(idFilme);
-		if (!filme.equals(null)) {
+		if (filme != null) {
 			Ator ator = atorService.buscarAtor(idAtor);
-			if (!ator.equals(null)) {
-				if (filme.getAtores().contains(ator)) {
-					filme.getAtores().remove(ator);
-					ator.getFilmes().remove(filme);
-					
-					filmeRepositorio.save(filme);
-					atorService.salvarAtor(ator);
-				}
+			if (ator != null && filme.getAtores().contains(ator)) {
+				filme.getAtores().remove(ator);
+				ator.getFilmes().remove(filme);
+				
+				filmeRepositorio.save(filme);
+				atorService.salvarAtor(ator);
+				
 			}
 		}
 	}
 	
 	public void vinculaDiretorAoFilme(int idFilme, int idDiretor) {
 		Filme filme = buscarFilme(idFilme);
-		if (!filme.equals(null)) {
+		if (filme != null) {
 			Diretor diretor = diretorService.buscarDiretor(idDiretor);
-			if (!diretor.equals(null)) {
-				if (!filme.getDiretores().contains(diretor)) {
-					filme.getDiretores().add(diretor);
-					diretor.getFilmes().add(filme);
-					
-					filmeRepositorio.save(filme);
-					diretorService.salvarDiretor(diretor);
-				}
+			if (diretor != null && !filme.getDiretores().contains(diretor)) {
+				filme.getDiretores().add(diretor);
+				diretor.getFilmes().add(filme);
+				
+				filmeRepositorio.save(filme);
+				diretorService.salvarDiretor(diretor);
+				
 			}
 		}
 	}
 	
 	public void desvinculaDiretorDoFilme(int idFilme, int idDiretor) {
 		Filme filme = buscarFilme(idFilme);
-		if (!filme.equals(null)) {
+		if (filme != null) {
 			Diretor diretor = diretorService.buscarDiretor(idDiretor);
-			if (!diretor.equals(null)) {
-				if (filme.getDiretores().contains(diretor)) {
-					filme.getDiretores().remove(diretor);
-					diretor.getFilmes().remove(filme);
-					
-					filmeRepositorio.save(filme);
-					diretorService.salvarDiretor(diretor);
-				}
+			if (diretor != null && filme.getDiretores().contains(diretor)) {
+				filme.getDiretores().remove(diretor);
+				diretor.getFilmes().remove(filme);
+				
+				filmeRepositorio.save(filme);
+				diretorService.salvarDiretor(diretor);
+				
 			}
 		}
 	}
 	
 	public void vinculaGeneroAoFilme(int idFilme, int idGenero) {
 		Filme filme = buscarFilme(idFilme);
-		if (!filme.equals(null)) {
+		if (filme != null) {
 			Genero genero = generoService.buscarGenero(idGenero);
-			if (!genero.equals(null)) {
-				if (!filme.getGeneros().contains(genero)) {
-					filme.getGeneros().add(genero);
-					genero.getFilmes().add(filme);
-					
-					
-					filmeRepositorio.save(filme);
-					generoService.salvarGenero(genero);	
-				}
+			if (genero != null && !filme.getGeneros().contains(genero)) {
+				filme.getGeneros().add(genero);
+				genero.getFilmes().add(filme);
+				
+				
+				filmeRepositorio.save(filme);
+				generoService.salvarGenero(genero);	
+				
 			}
 		}
 	}
 	
 	public void desvinculaGeneroDoFilme(int idFilme, int idGenero) {
 		Filme filme = buscarFilme(idFilme);
-		if (!filme.equals(null)) {
+		if (filme != null) {
 			Genero genero = generoService.buscarGenero(idGenero);
-			if (!genero.equals(null)) {
-				if (filme.getGeneros().contains(genero)) {
-					filme.getGeneros().remove(genero);
-					genero.getFilmes().remove(filme);
-					
-					
-					filmeRepositorio.save(filme);
-					generoService.salvarGenero(genero);	
-				}
+			if (genero != null && filme.getGeneros().contains(genero)) {
+				filme.getGeneros().remove(genero);
+				genero.getFilmes().remove(filme);
+				
+				
+				filmeRepositorio.save(filme);
+				generoService.salvarGenero(genero);	
+			
 			}
 		}
 	}

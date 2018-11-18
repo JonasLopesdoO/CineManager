@@ -59,7 +59,8 @@ public class SessaoService {
 	public List<Sessao> getSessaoPorData(LocalDate dataInicial, LocalDate dataFinal) {
 		List<Sessao> sessoes = new ArrayList<Sessao>();
 		for (Sessao sessao : getAllSessao()) {
-			if (sessao.getDataInicio().isAfter(dataInicial) && sessao.getDataFim().isBefore(dataFinal)) {
+			if (sessao.getDataInicio().isAfter(dataInicial) 
+					&& sessao.getDataFim().isBefore(dataFinal)) {
 				sessoes.add(sessao);
 			}
 		}
@@ -101,63 +102,57 @@ public class SessaoService {
 
 	
 
-	public boolean vinculaFilmeASessao(int idSessao, int idFilme) {
-		Filme filme = filmeService.buscarFilme(idFilme);
+	public void vinculaFilmeASessao(int idSessao, int idFilme) {
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
-		
-		if(filme == null || sessao == null || sessao.getFilme() != null) {
-			return false;
-		}else{
-			sessao.setFilme(filme);
-			filme.getSessoes().add(sessao);
-			
-			sessaoRepositorio.save(sessao);
-			filmeService.salvarFilme(filme);
-			
-			return true;
+		if (sessao != null) {
+			Filme filme = filmeService.buscarFilme(idFilme);
+			if (filme != null && !filme.getSessoes().contains(sessao)) {
+				sessao.setFilme(filme);
+				filme.getSessoes().add(sessao);
+				sessaoRepositorio.save(sessao);
+				filmeService.salvarFilme(filme);
+			}
 		}
-			
+				
 	}
 
 	public void desvinculaFilmeDaSessao(int idSessao, int idFilme) {
-		Filme filme = filmeService.buscarFilme(idFilme);
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
-		
-		if (!(filme == null) && !(sessao == 	null)) {
-			sessao.setFilme(null);
-			filme.removeSessao(sessao);
-			
-			sessaoRepositorio.save(sessao);
-			filmeService.salvarFilme(filme);
-		} 
+		if (sessao != null) {
+			Filme filme = filmeService.buscarFilme(idFilme);
+			if (filme != null && filme.getSessoes().contains(sessao)) {
+				sessao.setFilme(null);
+				filme.getSessoes().remove(sessao);
+				sessaoRepositorio.save(sessao);
+				filmeService.salvarFilme(filme);
+			}
+		}
 	}
 	
-	public boolean vinculaSalaASessao(int idSessao, int idSala) {
-		Sala sala = salaService.buscarSala(idSala);
+	public void vinculaSalaASessao(int idSessao, int idSala) {
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
-		
-		if(sala == null || sessao == null || sessao.getSala() != null) {
-			return false;
-		}else{
-			sessao.setSala(sala);
-			sala.getSessoes().add(sessao);
-				
-			sessaoRepositorio.save(sessao);
-			salaService.salvarSala(sala);
-			
-			return true;
+		if (sessao != null) {
+			Sala sala = salaService.buscarSala(idSala);
+			if (sala != null && !sala.getSessoes().contains(sessao)) {
+				sessao.setSala(sala);
+				sala.getSessoes().add(sessao);
+				sessaoRepositorio.save(sessao);
+				salaService.salvarSala(sala);
+			}
 		}
+		
 	}
 
 	public void desvinculaSalaDaSessao(int idSessao, int idSala) {
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
-		Sala sala = salaService.buscarSala(idSala);
-			
-		if (!(sala == null) && !(sessao == null)) {
-			sala.removeSessao(sessao);
-			
-			sessaoRepositorio.save(sessao);
-			salaService.salvarSala(sala);
+		if (sessao != null) {
+			Sala sala = salaService.buscarSala(idSala);
+			if (sala != null && sala.getSessoes().contains(sessao)) {
+				sessao.setSala(null);
+				sala.getSessoes().remove(sessao);
+				sessaoRepositorio.save(sessao);
+				salaService.salvarSala(sala);
+			}
 		} 
 		
 	}

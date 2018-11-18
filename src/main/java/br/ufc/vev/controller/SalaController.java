@@ -1,7 +1,6 @@
 package br.ufc.vev.controller;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,20 +19,12 @@ public class SalaController {
 	@Autowired
 	private SalaService salaService;
 
-	private static final Logger logger = Logger.getLogger(String.valueOf(SalaController.class));
-
-
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("sala");
-		try {
-			List<Sala> salas = getAllSala();
-
+		List<Sala> salas = getAllSala();
+		if (salas != null) {
 			model.addObject("salas", salas);
-			return model;
-
-		} catch (Exception e) {
-			logger.warning("Ocorreu um erro: " + e.getMessage());
 		}
 		return model;
 	}
@@ -42,96 +33,50 @@ public class SalaController {
 	public ModelAndView formularioGenero() {
 		ModelAndView model = new ModelAndView("formulario-sala");
 		model.addObject("sala", new Sala());
-
 		return model;
 	}
 
-	@SuppressWarnings("finally")
 	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaSala(Sala sala) {
 		ModelAndView model = new ModelAndView("sala");
-
-		try {
-			
-			salaService.salvarSala(sala);
-			model.addObject("salaRetorno", sala);
-	 
-		} catch (Exception e) {
-			logger.warning("Ocorreu um erro ao salvar sala: " + e.getMessage());
-		}finally {
-			return index();
-		}
+		salaService.salvarSala(sala);
+		model.addObject("salaRetorno", sala);
+		return index();
 	}
 	
-
-	@SuppressWarnings("finally")
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaSala(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView("sala");
-		try {
-			
-			if (existsByIdSala(id)) {
-				Sala sala;
-	
-				sala = salaService.buscarSala(id);
-	
-				model.addObject("salaRetorno", sala);
-			} else {
-				logger.info("Sala não existente no banco.");
-			}
-			
-		} catch (Exception e) { // caso de erro
-			logger.warning("Ocorreu um erro ao buscar sala: " + e.getMessage());
-		} finally { // sempre será execultado
-			return index();
-		}
+		Sala sala;	
+		sala = salaService.buscarSala(id);
+		if (sala != null) {
+			model.addObject("salaRetorno", sala);
+		}			
+		return index();
 	}
 
-	@SuppressWarnings("finally")
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiSala(@PathVariable("id") Integer id) {
-		try {
-			Sala sala;
-			if (existsByIdSala(id)) {
-				sala = salaService.buscarSala(id);
-				salaService.excluirSala(sala);
-			}
-		} catch (Exception e) {
-			logger.warning("Ocorreu um erro ao excluir sala: " + e.getMessage());
-		}finally {
-			return index();
+		Sala sala;
+		sala = salaService.buscarSala(id);
+		if (sala != null) {
+			salaService.excluirSala(sala);
 		}
+		return index();
 	}
 
 	public List<Sala> getAllSala() {
 		return salaService.getAllSala();
 	}
 	
-	// o metodo utilizado para atualizar será o salvar, visto que o spring boot ja
-		// atualiza automaticamente o objeto passado.
-		// este método só redireciona para a digitação dos novos campos do model
-		@SuppressWarnings("finally")
-		@RequestMapping("/atualizar/{id}")
-		public ModelAndView atualizaSala(@PathVariable("id") Integer id) {
-			ModelAndView model = new ModelAndView("formulario-sala");
-
-			try {
-				if (existsByIdSala(id)) {
-					Sala sala = salaService.buscarSala(id);
-
-					model.addObject("sala", sala);
-				}
-			} catch (Exception e) {
-				logger.warning("Ocorreu um erro ao atualizar sala: " + e.getMessage());
-			} finally {
-				return model;
-			}
+	@RequestMapping("/atualizar/{id}")
+	public ModelAndView atualizaSala(@PathVariable("id") Integer id) {
+		ModelAndView model = new ModelAndView("formulario-sala");
+		Sala sala = salaService.buscarSala(id);
+		if (sala != null) {
+			model.addObject("sala", sala);
 		}
-
-	public boolean existsByIdSala(int id) {
-		return salaService.buscaSala(id);
+		return model;	
 	}
-
-	
 	
 }

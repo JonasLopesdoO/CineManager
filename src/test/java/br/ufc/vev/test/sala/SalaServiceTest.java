@@ -76,21 +76,6 @@ public class SalaServiceTest {
 	}
 	
 	@Test
-	public void buscarSalaServiceTest() {
-		String nome = "Sala A1";
-		int capacidade = 150;
-		
-		Sala sala = new Sala();
-		sala.setNome(nome);
-		sala.setCapacidade(capacidade);
-		
-		Sala salaRecebida = new Sala(); 
-		salaRecebida = service.salvarSala(sala);
-	
-		assertTrue(service.buscaSala(salaRecebida.getId()));
-	}
-	
-	@Test
 	public void excluiSalaServiceTest() {
 		String nome = "Sala A1";
 		int capacidade = 150;

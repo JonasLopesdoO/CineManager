@@ -82,7 +82,6 @@ public class SessaoControllerTest {
 
         Sessao sessaoRetornada = sessaoService.salvarSessao(sessao);
         assertNotNull(sessaoController.buscaSessao(sessaoRetornada.getId()));
-        assertNotNull(sessaoController.existsByIdSessao(sessaoRetornada.getId()));
         assertNotNull(sessaoController.detalhesSessao(sessaoRetornada.getId()));
     }
 

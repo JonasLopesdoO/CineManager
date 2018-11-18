@@ -3,6 +3,7 @@ package br.ufc.vev.controller;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -41,32 +42,25 @@ public class SessaoController {
 
 	private static final Logger logger = Logger.getLogger(String.valueOf(SessaoController.class));
 
-
-	@SuppressWarnings("finally")
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("sessao");
-		try {
-			List<Sessao> sessoes = getAllSessao();
-
+		List<Sessao> sessoes = getAllSessao();
+		if (sessoes != null) {
 			model.addObject("sessoes", sessoes);
-
-		} catch (Exception e) {
-			logger.warning("Ocorreu um erro: " + e.getMessage());
-		}finally {
-			return model;
 		}
+		return model;
 	}
 	
 	@RequestMapping(path="/{id}")
 	public ModelAndView detalhesSessao(@PathVariable("id") Integer id){
 	  ModelAndView model = new ModelAndView("detalhes-sessao");
 	  Sessao sessao = sessaoService.buscarSessao(id);
-			
+	  if (sessao != null) {
+		  model.addObject("sessao", sessao);
+	  }
 	  model.addObject("filmes", filmeController.getAllFilme());
 	  model.addObject("salas", salaController.getAllSala());
-	  model.addObject("sessao", sessao);
-			
 	  return model;
 	}
 	
@@ -74,98 +68,68 @@ public class SessaoController {
 	public ModelAndView formularioSessao() {
 		ModelAndView model = new ModelAndView("formulario-sessao");
 		model.addObject("sessao", new Sessao());
-	
 		return model;
 	}
 
-	@SuppressWarnings("finally")
 	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaSessao(@RequestParam String horario, @RequestParam String dataInicio, @RequestParam String dataFim) {
 		ModelAndView model = new ModelAndView("sessao");
+
+		Sessao sessao = new Sessao();
+		LocalTime horarioConvert;
+		LocalDate dataInicioConvert, dataFimConvert;
 		try {
-			Sessao sessao = new Sessao();
-			LocalTime horarioConvert;
 			horarioConvert = LocalTime.parse(horario);
-			
-			LocalDate dataInicioConvert, dataFimConvert;
+			sessao.setHorario(horarioConvert);
+		} catch (DateTimeParseException e) {
+			logger.warning("Hora no formato invalido");
+		}
+		
+		try {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 			dataInicioConvert = LocalDate.parse(dataInicio, formatter);
 			dataFimConvert = LocalDate.parse(dataFim, formatter);
-			
-			sessao.setHorario(horarioConvert);
 			sessao.setDataInicio(dataInicioConvert);
 			sessao.setDataFim(dataFimConvert);
-		
-			sessaoService.salvarSessao(sessao);
-
-			model.addObject("sessao", sessao);
-	 	
-		} catch (Exception e) {
-			logger.warning("Ocorreu um erro ao salvar sessão: " + e.getMessage());
-		}finally {
-			return index();
+		} catch (IllegalArgumentException | DateTimeParseException e) {
+			logger.warning("Data no formato invalido");
 		}
+		
+		sessaoService.salvarSessao(sessao);
+		model.addObject("sessao", sessao);		
+		return index();
+		
 	}
 	
-	// o metodo utilizado para atualizar será o salvar, visto que o spring boot ja
-	// atualiza automaticamente o objeto passado.
-	// este método só redireciona para a digitação dos novos campos do model
-	@SuppressWarnings("finally")
 	@RequestMapping("/atualizar/{id}")
 	public ModelAndView atualizaSessao(@PathVariable("id") Integer id) {
 		ModelAndView model = new ModelAndView("formulario-sessao");
-
-		try {
-			if (existsByIdSessao(id)) {
-				Sessao sessao = sessaoService.buscarSessao(id);
-
-				model.addObject("sessao", sessao);
-			}
-		} catch (Exception e) {
-			logger.warning("Ocorreu um erro ao atualzar sessao: " + e.getMessage());
-		} finally {
-			return model;
-		}
+		Sessao sessao = sessaoService.buscarSessao(id);
+		if (sessao != null) {
+			model.addObject("sessao", sessao);
+		}		
+		return model;
 	}
 
-	@SuppressWarnings("finally")
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiSessao(@PathVariable("id") Integer id) {		
-		try {
-			Sessao sessao;
-			if (existsByIdSessao(id)) {
-				sessao = sessaoService.buscarSessao(id);
-				sessaoService.excluirSessao(sessao);
-			}
-		} catch (Exception e) {
-			logger.warning("Ocorreu um erro ao excluir sessão: " + e.getMessage());
-		}finally {
-			return index();
-		}
+		Sessao sessao;
+		sessao = sessaoService.buscarSessao(id);
+		if (sessao != null) {
+			sessaoService.excluirSessao(sessao);
+		}		
+		return index();
 	}
 	
-	@SuppressWarnings("finally")
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaSessao(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView("sessao");
-		try {
-			
-			if (existsByIdSessao(id)) {
-				Sessao sessao;
-
-				sessao = sessaoService.buscarSessao(id);
-
-				model.addObject("sessaoRetorno", sessao);
-			} else {
-				// mensagem de erro "id nao existente no banco"
-				logger.info("Id de sessao inexistenet no banco");
-			}
-		
-		} catch (Exception e) { // caso de erro
-			logger.warning("Ocorreu um erro ao buscar sessão: " + e.getMessage());
-		} finally { // sempre será execultado
-			return index();
+		Sessao sessao;
+		sessao = sessaoService.buscarSessao(id);
+		if (sessao != null) {
+			model.addObject("sessaoRetorno", sessao);
 		}
+		return index();
 	}
 	
 	@RequestMapping(path="/{idSessao}/adicionarFilme", method=RequestMethod.POST)
@@ -173,11 +137,7 @@ public class SessaoController {
 											@RequestParam Integer idFilme){
 
 	  ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
-	  
-	  if (!sessaoPossuiFilme(idSessao, idFilme)) {
-		  sessaoService.vinculaFilmeASessao(idSessao, idFilme);
-	  }
-	  
+	  sessaoService.vinculaFilmeASessao(idSessao, idFilme);
 	  return model;
 	}
 	
@@ -186,11 +146,7 @@ public class SessaoController {
 												@PathVariable("idFilme") Integer idFilme) {
 		
 		ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
-		
-		if (sessaoPossuiFilme(idSessao, idFilme)) {
-			sessaoService.desvinculaFilmeDaSessao(idSessao, idFilme);
-		}
-		
+		sessaoService.desvinculaFilmeDaSessao(idSessao, idFilme);
 		return model;
 	}
 	
@@ -199,11 +155,7 @@ public class SessaoController {
 											@RequestParam Integer idSala){
 
 	  ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
-	  
-	  if (!sessaoPossuiSala(idSessao, idSala)) {
-		  sessaoService.vinculaSalaASessao(idSessao, idSala);
-	  }
-	  
+	  sessaoService.vinculaSalaASessao(idSessao, idSala);
 	  return model;
 	}
 	
@@ -212,11 +164,7 @@ public class SessaoController {
 												@PathVariable("idSala") Integer idSala) {
 		
 		ModelAndView model = new ModelAndView("redirect:/sessao/"+idSessao);
-		
-		if (sessaoPossuiSala(idSessao, idSala)) {
-			sessaoService.desvinculaSalaDaSessao(idSessao, idSala);
-		}
-		
+		sessaoService.desvinculaSalaDaSessao(idSessao, idSala);
 		return model;
 	}
 	
@@ -226,34 +174,37 @@ public class SessaoController {
 		ModelAndView model = new ModelAndView("sessao-busca");
 		
 		LocalDate dataInicioConvert, dataFimConvert;
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		dataInicioConvert = LocalDate.parse(dataInicio, formatter);
-		dataFimConvert = LocalDate.parse(dataFim, formatter);
-		
-		List<Sessao> sessoes = sessaoService.getSessaoPorData(dataInicioConvert, dataFimConvert);
-		
-		model.addObject("sessoes", sessoes);
-		
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+			dataInicioConvert = LocalDate.parse(dataInicio, formatter);
+			dataFimConvert = LocalDate.parse(dataFim, formatter);
+			List<Sessao> sessoes = 
+					sessaoService.getSessaoPorData(dataInicioConvert, dataFimConvert);
+			if (sessoes != null) {
+				model.addObject("sessoes", sessoes);
+			}
+		} catch (IllegalArgumentException | DateTimeParseException e) {
+			logger.warning("Data no formato invalido");
+		}
 		return model;
 	}
 	
 	@RequestMapping(path = "/porCidade", method = RequestMethod.POST)
 	public ModelAndView verTodasPorCidade(@RequestParam String cidade) {
 		ModelAndView model = new ModelAndView("sessao-busca");
-		if (cidade != null) {
+		if (cidade != null && !cidade.equals("")) {
 			List<Sessao> sessoes = sessaoService.getSessaoPorCidade(cidade);
 			model.addObject("sessoes", sessoes);
 		}
-		
 		return model;
 	}
 	
 	@RequestMapping(path = "/porFilme", method = RequestMethod.POST)
-	public ModelAndView verTodasPorFilme(@RequestParam String filme) {
+	public ModelAndView verTodasPorFilme(@RequestParam String nome) {
 		ModelAndView model = new ModelAndView("sessao-busca");
-		Filme filmeB = filmeController.buscarPorNome(filme);
-		if (filmeB != null) {
-			List<Sessao> sessoes = sessaoService.getSessaoPorFilme(filmeB);
+		Filme filme = filmeController.buscarPorNome(nome);
+		if (filme != null) {
+			List<Sessao> sessoes = sessaoService.getSessaoPorFilme(filme);
 			model.addObject("sessoes", sessoes);
 		}
 		
@@ -261,11 +212,11 @@ public class SessaoController {
 	}
 	
 	@RequestMapping(path = "/porGenero", method = RequestMethod.POST)
-	public ModelAndView verTodasPorGenero(@RequestParam String genero) {
+	public ModelAndView verTodasPorGenero(@RequestParam String nome) {
 		ModelAndView model = new ModelAndView("sessao-busca");
-		Genero generoB = generoController.buscaPorNome(genero);
-		if (generoB != null) {
-			List<Sessao> sessoes = sessaoService.getSessaoPorGenero(generoB);
+		Genero genero = generoController.buscaPorNome(nome);
+		if (genero != null) {
+			List<Sessao> sessoes = sessaoService.getSessaoPorGenero(genero);
 			model.addObject("sessoes", sessoes);
 		}
 		return model;
@@ -276,27 +227,4 @@ public class SessaoController {
 		return sessaoService.getAllSessao();
 	}
 	
-	public boolean sessaoPossuiFilme(int idSessao, int idFilme) {
-		
-		if (existsByIdSessao(idSessao) && !filmeController.buscaFilme(idFilme).equals(null)) {
-			Sessao sessao = sessaoService.buscarSessao(idSessao);
-			
-			if(sessao.getFilme() == null) return false;
-		}
-		return true;
-	}
-	
-	public boolean sessaoPossuiSala(int idSessao, int idSala) {
-		if (existsByIdSessao(idSessao) && salaController.existsByIdSala(idSala)) {
-			Sessao sessao = sessaoService.buscarSessao(idSessao);
-			
-			if(sessao.getSala() == null) return false;
-		}
-		return true;
-	}
-	
-	public boolean existsByIdSessao(int id) {
-		return sessaoService.existsById(id);
-	}
-
 }

@@ -24,7 +24,7 @@ public class AtorController {
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("ator");
 		List<Ator> atores = getAllAtor();
-		if (!atores.equals(null)) {
+		if (atores != null) {
 			model.addObject("atores", atores);
 		}	
 		return model;
@@ -50,7 +50,7 @@ public class AtorController {
 		ModelAndView model = new ModelAndView("ator");
 		Ator ator;
 		ator = atorService.buscarAtor(id);	
-		if(!ator.equals(null)) {			
+		if(ator != null) {			
 			model.addObject("atorRetorno", ator);
 		}
 		return index();
@@ -61,7 +61,7 @@ public class AtorController {
 	public ModelAndView excluiAtor(@PathVariable("id") Integer id) {		
 		Ator ator;
 		ator = atorService.buscarAtor(id);
-		if (!ator.equals(null)) {
+		if (ator != null) {
 			atorService.excluirAtor(ator);
 		}
 		return index();
@@ -78,7 +78,7 @@ public class AtorController {
 		ModelAndView model = new ModelAndView("formulario-ator");		
 		Ator ator;
 		ator = atorService.buscarAtor(id);
-		if (ator.equals(null)) {
+		if (ator != null) {
 			model.addObject("ator", ator);
 		}								
 		return model;

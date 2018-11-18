@@ -24,7 +24,7 @@ public class GeneroController {
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("genero");
 		List<Genero> generos = getAllGenero();
-		if (!generos.equals(null)) {
+		if (generos != null) {
 			model.addObject("generos", generos);
 		}	
 		return model;
@@ -53,7 +53,7 @@ public class GeneroController {
 		ModelAndView model = new ModelAndView("genero");
 		Genero genero;
 		genero = generoService.buscarGenero(id);
-		if(!genero.equals(null))
+		if(genero != null)
 			model.addObject("generoRetorno", genero);
 		
 		List<Genero> generos = generoService.getAllGenero();
@@ -66,7 +66,7 @@ public class GeneroController {
 		ModelAndView model = new ModelAndView("genero");
 		Genero genero;
 		genero = generoService.buscarGenero(id);
-		if(!genero.equals(null))
+		if(genero != null)
 			generoService.excluirGenero(genero);
 		 		
 		List<Genero> generos = generoService.getAllGenero();
@@ -85,7 +85,7 @@ public class GeneroController {
 		ModelAndView model = new ModelAndView("formulario-genero");
 		Genero genero;
 		genero = generoService.buscarGenero(id);
-		if(!genero.equals(null))		
+		if(genero != null)		
 			model.addObject("genero", genero);
 		
 		return model;		

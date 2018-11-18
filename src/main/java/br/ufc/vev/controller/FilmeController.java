@@ -38,7 +38,7 @@ public class FilmeController {
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("filme");
 		List<Filme> filmes = getAllFilme();
-		if (!filmes.equals(null)) {
+		if (filmes != null) {
 			model.addObject("filmes", filmes);
 		}
 		return model;
@@ -75,7 +75,7 @@ public class FilmeController {
 		ModelAndView model = new ModelAndView("filme");
 		Filme filme;
 		filme = filmeService.buscarFilme(id);
-		if (!filme.equals(null)) {
+		if (filme != null) {
 			model.addObject("filmeRetorno", filme);
 		}
 		return index();
@@ -85,7 +85,7 @@ public class FilmeController {
 	public ModelAndView excluiFilme(@PathVariable("id") Integer id) {		
 		Filme filme;
 		filme = filmeService.buscarFilme(id);
-		if (!filme.equals(null)) {
+		if (filme != null) {
 			filmeService.excluirFilme(filme);
 		}			
 		return index();
@@ -102,7 +102,7 @@ public class FilmeController {
 	public ModelAndView atualizaFilme(@PathVariable("id") Integer id) {
 		ModelAndView model = new ModelAndView("formulario-filme");
 		Filme filme = filmeService.buscarFilme(id);
-		if (!filme.equals(null)) {
+		if (filme != null) {
 			model.addObject("filme", filme);
 		}	
 		return model;
