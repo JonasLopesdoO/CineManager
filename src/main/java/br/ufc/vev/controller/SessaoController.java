@@ -282,29 +282,29 @@ public class SessaoController {
 	}
 	
 	private boolean validaSessao(LocalTime horario, LocalDate dataInicio, LocalDate dataFim) throws Exception {
-		if (horario.equals(null)) {
+		if (horario == null) {
 			throw new Exception("horario não pode ser nulo");
-		} else if (dataInicio.equals(null)) {
+		} else if (dataInicio == null) {
 			throw new Exception("Data Inicial não pode ser nula");
-		} else if (dataFim.equals(null)) {
+		} else if (dataFim == null) {
 			throw new Exception("Data Inicial não pode ser nula");
 		}
 		return true;
 	}
 	
 	private boolean validaSessao(String horario, String dataInicio, String dataFim) throws Exception {
-		if (horario.equals(null)) {
+		if (horario == null) {
 			throw new Exception("horario não pode ser nulo");
 		}else if(horario.equals("")) {
 			throw new Exception("horario não pode ser vazia");	
-		} else if (dataInicio.equals(null)) {
+		} else if (dataInicio == null) {
 			throw new Exception("Data Inicial não pode ser nula");
 		}else if(dataInicio.equals("")) {
 			throw new Exception("Data Inicial não pode ser vazia");
-		} else if (dataFim.equals(null)) {
-			throw new Exception("Data FInal não pode ser nula");
+		} else if (dataFim == null) {
+			throw new Exception("Data Final não pode ser nula");
 		}else if(dataFim.equals("")) {
-			throw new Exception("Data FInal não pode ser vazia");
+			throw new Exception("Data Final não pode ser vazia");
 		}
 		return true;
 	}

@@ -105,7 +105,7 @@ public class SessaoService {
 		Filme filme = filmeService.buscarFilme(idFilme);
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		
-		if(filme.equals(null) || sessao.equals(null) || sessao.getFilme() != null) {
+		if(filme == null || sessao == null || sessao.getFilme() != null) {
 			return false;
 		}else{
 			sessao.setFilme(filme);
@@ -123,7 +123,7 @@ public class SessaoService {
 		Filme filme = filmeService.buscarFilme(idFilme);
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		
-		if (!filme.equals(null) && !sessao.equals(null)) {
+		if (!(filme == null) && !(sessao == 	null)) {
 			sessao.setFilme(null);
 			filme.removeSessao(sessao);
 			
@@ -136,7 +136,7 @@ public class SessaoService {
 		Sala sala = salaService.buscarSala(idSala);
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		
-		if(sala.equals(null) || sessao.equals(null) || sessao.getSala() != null) {
+		if(sala == null || sessao == null || sessao.getSala() != null) {
 			return false;
 		}else{
 			sessao.setSala(sala);
@@ -153,7 +153,7 @@ public class SessaoService {
 		Sessao sessao = sessaoRepositorio.getOne(idSessao);
 		Sala sala = salaService.buscarSala(idSala);
 			
-		if (!sala.equals(null) && !sessao.equals(null)) {
+		if (!(sala == null) && !(sessao == null)) {
 			sala.removeSessao(sessao);
 			
 			sessaoRepositorio.save(sessao);
