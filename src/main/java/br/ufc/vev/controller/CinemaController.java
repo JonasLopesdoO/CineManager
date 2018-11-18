@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.ufc.vev.bean.Cinema;
 import br.ufc.vev.bean.Sala;
 import br.ufc.vev.service.CinemaService;
-import br.ufc.vev.service.SalaService;
 
 @Controller
 @Transactional
@@ -28,16 +27,11 @@ public class CinemaController {
 	@Autowired
 	private CinemaService cinemaService;
 	@Autowired
-<<<<<<< HEAD
 	private SalaController salaController;
 
 	private static final Logger logger = Logger.getLogger(String.valueOf(CinemaController.class));
 
 
-=======
-	private SalaService salaService;
-	
->>>>>>> origin/master
 	@SuppressWarnings("finally")
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
@@ -60,7 +54,7 @@ public class CinemaController {
 	  ModelAndView model = new ModelAndView("detalhes-cinema");
 	  Cinema cinema = cinemaService.buscaCinema(id);
 
-	  model.addObject("salas", salaService.getAllSala());
+	  model.addObject("salas", salaController.getAllSala());
 	  model.addObject("cinema", cinema);
 			
 	  return model;
@@ -83,11 +77,11 @@ public class CinemaController {
 		return index();
 		
 	}
-
+	
+	@SuppressWarnings("finally")
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaCinema(@PathVariable Integer id) {
 		ModelAndView model = new ModelAndView("cinema");
-<<<<<<< HEAD
 		try {
 			if (this.validaId(id)) {
 				if (cinemaService.existsById(id)) {
@@ -109,15 +103,6 @@ public class CinemaController {
 		} finally { // sempre será execultado
 			return index();
 		}
-=======
-			if (cinemaService.existsById(id)) { 
-				Cinema cinema = new Cinema();
-				cinema = cinemaService.buscaCinema(id);
-				model.addObject("cinemaRetorno", cinema);
-			}
-		return index();
-		
->>>>>>> origin/master
 	}
 	
 	public boolean existsByIdCinema(int id) {
@@ -128,13 +113,8 @@ public class CinemaController {
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiCinema(@PathVariable("id") Integer id) {		
 		try {
-<<<<<<< HEAD
 			Cinema cinema;
 			if (validaId(id) && existsByIdCinema(id)) {
-=======
-			Cinema cinema = new Cinema();
-			if (existsByIdCinema(id)) {
->>>>>>> origin/master
 				cinema = cinemaService.buscaCinema(id);
 				cinemaService.excluiCinema(cinema);
 			}
@@ -160,6 +140,7 @@ public class CinemaController {
 		try {
 			if (existsByIdCinema(id)) {
 				Cinema cinema = cinemaService.buscaCinema(id);
+
 				model.addObject("cinema", cinema);
 			}
 		} catch (Exception e) {
@@ -174,14 +155,10 @@ public class CinemaController {
 											@RequestParam Integer idSala){
 
 	  ModelAndView model = new ModelAndView("redirect:/cinema/"+idCinema);
-	  cinemaService.vinculaSalaAoCinema(idCinema, idSala);
 	  
-<<<<<<< HEAD
 	  if (existsByIdCinema(idCinema) && salaController.existsByIdSala(idSala) && !salaPertenceAoCinema(idCinema, idSala)) {
 		  cinemaService.vinculaSalaAoCinema(idCinema, idSala);
 	  }
-=======
->>>>>>> origin/master
 	  
 	  return model;
 	}
@@ -198,7 +175,6 @@ public class CinemaController {
 		return model;
 	}
 	
-<<<<<<< HEAD
 	public boolean vinculaSalaAoCinema(int idCine, int idSala) {
 		try {
 			if (validaId(idCine) && validaId(idSala)) {
@@ -229,16 +205,18 @@ public class CinemaController {
 		return true;
 	}
 	
-=======
->>>>>>> origin/master
 	public boolean salaPertenceAoCinema(int idCinema, int idSala) {
-		if (existsByIdCinema(idCinema) && salaService.buscaSala(idSala)) {
+		if (existsByIdCinema(idCinema) && salaController.existsByIdSala(idSala)) {
 			Cinema cinema = cinemaService.buscaCinema(idCinema);
-			Sala sala = salaService.buscarSala(idSala);
-			return cinema.getSalas().contains(sala);
+			for (Sala sala : cinema.getSalas()) {
+				if (sala.getId() == idSala) {
+					return true;
+				}
+			}
 		}
 		return false;
 	}
-		
+	
+	
 }
 
