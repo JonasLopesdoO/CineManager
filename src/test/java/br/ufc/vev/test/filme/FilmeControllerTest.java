@@ -1,8 +1,6 @@
 package br.ufc.vev.test.filme;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -148,21 +146,6 @@ public class FilmeControllerTest {
 //	}
 	
 	@Test
-	public void existFilmeControllerTest() {
-		String nome = "DeadPool";
-		String sinopse = "Filme Top";
-		int duracao = 90;		
-		
-		Filme filmeBuscado = new Filme();
-		
-		Filme filme = new Filme(nome, sinopse, duracao);
-		
-		filmeBuscado = filmeService.salvarFilme(filme);
-		
-		assertTrue(filmeController.existsByIdFilme(filmeBuscado.getId()));
-	}
-	
-	@Test
 	public void atualizaFilmeControllerTest() {
 		Filme filme = new Filme("DeadPool", "Filme Top", 90);
 				
@@ -177,17 +160,6 @@ public class FilmeControllerTest {
 		assertNotNull(filmeController.atualizaFilme(filmeUp.getId()));
 	}
 	
-	@Test
-	public void excluiFilmeControllerTest() {
-		Filme filme = new Filme("DeadPool", "Filme Top", 90);
-		
-		Filme filmeBuscado = new Filme();
-		filmeBuscado = filmeService.salvarFilme(filme);
-		filmeController.excluiFilme(filmeBuscado.getId());
-		
-		assertFalse(filmeController.existsByIdFilme(filmeBuscado.getId()));
-	}
-//	
 //	@Test
 //	public void atualizaFilmeComNomeVazioControllerTest() {
 //		String nome = "DeadPool";

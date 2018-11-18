@@ -1,7 +1,9 @@
 package br.ufc.vev.service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +20,27 @@ public class DiretorService {
 
 	@Autowired
 	DiretorRepositorio diretorRepositorio;
-	
+	private static final Logger logger = Logger.getLogger(String.valueOf(AtorService.class));
+
 	public Diretor salvarDiretor(Diretor diretor) {
 		return diretorRepositorio.save(diretor);
 	}
 
 	public Diretor buscarDiretor(Integer id) {
-		return diretorRepositorio.getOne(id);
+		try {
+			return diretorRepositorio.getOne(id);
+		} catch (EntityNotFoundException  e) {
+			logger.warning("Diretor não encontrado");
+		}
+		return null;
 	}
 
 	public void excluirDiretor(Diretor diretor) {
-		diretorRepositorio.delete(diretor);
+		try {
+			diretorRepositorio.delete(diretor);
+		} catch (IllegalArgumentException e) {
+			logger.warning("Parametros incorretos");
+		}
 	}
 
 	public Diretor atualizaDiretor(Diretor diretor) {
@@ -40,7 +52,4 @@ public class DiretorService {
 		return diretorRepositorio.findAll();
 	}
 
-	public boolean buscaDiretor(int id) {
-		return diretorRepositorio.existsById(id);
-	}
 }

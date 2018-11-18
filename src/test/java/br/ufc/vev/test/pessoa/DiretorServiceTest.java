@@ -2,7 +2,6 @@ package br.ufc.vev.test.pessoa;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import javax.transaction.Transactional;
 
@@ -77,24 +76,6 @@ public class DiretorServiceTest {
 		int idDiretor = diretorRecebido.getId();
 		
 		assertNotNull(diretorService.buscarDiretor(idDiretor));
-	}
-	
-	@Test 
-	public void existDiretorServiceTest() {
-		String nome = "Peeter clarck";
-		String sobre = "Este é um diretor muito bom!";
-		
-		Diretor diretor = new Diretor();
-		diretor.setNome(nome);
-		diretor.setSobre(sobre);
-		
-		Diretor diretorRecebido = new Diretor();
-		
-		diretorRecebido = diretorService.salvarDiretor(diretor);
-		
-		int idDiretor = diretorRecebido.getId();
-		
-		assertTrue(diretorService.buscaDiretor(idDiretor));
 	}
 	
 	@Test

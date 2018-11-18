@@ -1,7 +1,6 @@
 package br.ufc.vev.test.genero;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import javax.transaction.Transactional;
 
@@ -78,22 +77,6 @@ public class GeneroControllerTest {
 		int idGenero = generoRecebido.getId();
 		
 		assertNotNull(generoController.buscaGenero(idGenero));
-	}
-	
-	@Test 
-	public void existByGeneroControllerTest() {
-		String nome = "Drama";
-		
-		Genero genero = new Genero();
-		genero.setNome(nome);
-		
-		Genero generoRecebido = new Genero();
-		
-		generoRecebido = generoService.salvarGenero(genero);
-		
-		int idGenero = generoRecebido.getId();
-		
-		assertTrue(generoController.existsByIdGenero(idGenero));
 	}
 	
 	@Test

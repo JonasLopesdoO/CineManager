@@ -1,7 +1,6 @@
 package br.ufc.vev.test.pessoa;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,23 +59,6 @@ public class DiretorControllerTest {
 		diretorRecebido = diretorService.salvarDiretor(diretor);
 		
 		assertNotNull(diretorController.buscaDiretor(diretorRecebido.getId()));
-	}
-	
-	@Test
-	public void existAtorControllerTest() {
-		String nome = "José Jucaaa";
-		String sobre = "Diretor Caba arretado";
-		
-		Diretor diretor = new Diretor();
-		
-		diretor.setNome(nome);
-		diretor.setSobre(sobre);
-		
-		Diretor diretorRecebido = new Diretor();
-		
-		diretorRecebido = diretorService.salvarDiretor(diretor);
-		
-		assertTrue(diretorController.existsByIdDiretor(diretorRecebido.getId()));
 	}
 	
 	@Test

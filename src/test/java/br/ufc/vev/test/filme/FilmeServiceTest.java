@@ -56,20 +56,6 @@ public class FilmeServiceTest {
 		assertNotNull(service.buscarFilme(FilmeBuscado.getId()));
 	}
 	
-	@Test 
-	public void buscaFilmePorIdServiceTest() {
-		Filme Filme = new Filme();
-		Filme.setNome("DeadPool");
-		Filme.setSinopse("Filme Top");;
-		Filme.setDuracao(90);		
-		
-		Filme FilmeBuscado = new Filme();
-		
-		FilmeBuscado = service.salvarFilme(Filme);
-		
-		assertTrue(service.existsById(FilmeBuscado.getId()));
-	}
-	
 	@Test
 	public void atualizaFilmeServiceTest() {
 		Filme Filme = new Filme();

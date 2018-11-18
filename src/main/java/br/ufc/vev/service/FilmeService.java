@@ -1,7 +1,9 @@
 package br.ufc.vev.service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class FilmeService {
 	@Autowired
 	GeneroService generoService;
 	
+	private static final Logger logger = Logger.getLogger(String.valueOf(FilmeService.class));
+
+	
 	public Filme bucarPorNome(String nome) {
 		return filmeRepositorio.findByNome(nome);
 	}
@@ -36,11 +41,20 @@ public class FilmeService {
 	}
 
 	public Filme buscarFilme(Integer id) {
-		return filmeRepositorio.getOne(id);
+		try {
+			return filmeRepositorio.getOne(id);
+		} catch (EntityNotFoundException  e) {
+			logger.warning("Filme não encontrado");
+		}
+		return null;
 	}
 
 	public void excluirFilme(Filme filme) {
-		filmeRepositorio.delete(filme);
+		try {
+			filmeRepositorio.delete(filme);
+		} catch (IllegalArgumentException e) {
+			logger.warning("Parametros incorretos");
+		}
 	}
 
 	public Filme atualizaFilme(Filme filme) {
@@ -52,75 +66,101 @@ public class FilmeService {
 		return filmeRepositorio.findAll();
 	}
 	
-	public boolean existsById(int id) {
-		return filmeRepositorio.existsById(id);
-	}
-	
 	public void vinculaAtorAoFilme(int idFilme, int idAtor) {
-		Filme filme = filmeRepositorio.getOne(idFilme);
-		Ator ator = atorService.buscarAtor(idAtor);
-		
-		filme.getAtores().add(ator);
-		ator.getFilmes().add(filme);
-		
-		filmeRepositorio.save(filme);
-		atorService.salvarAtor(ator);
-				
+		Filme filme = buscarFilme(idFilme);
+		if (!filme.equals(null)) {
+			Ator ator = atorService.buscarAtor(idAtor);
+			if (!ator.equals(null)) {
+				if (!filme.getAtores().contains(ator)) {
+					filme.getAtores().add(ator);
+					ator.getFilmes().add(filme);
+					
+					filmeRepositorio.save(filme);
+					atorService.salvarAtor(ator);
+				}
+			}
+		}		
 	}
 	
 	public void desvinculaAtorDoFilme(int idFilme, int idAtor) {
 		Filme filme = buscarFilme(idFilme);
-		Ator ator = atorService.buscarAtor(idAtor);
-		
-		filme.getAtores().remove(ator);
-		ator.getFilmes().remove(filme);
-		
-		filmeRepositorio.save(filme);
-		atorService.salvarAtor(ator);
+		if (!filme.equals(null)) {
+			Ator ator = atorService.buscarAtor(idAtor);
+			if (!ator.equals(null)) {
+				if (filme.getAtores().contains(ator)) {
+					filme.getAtores().remove(ator);
+					ator.getFilmes().remove(filme);
+					
+					filmeRepositorio.save(filme);
+					atorService.salvarAtor(ator);
+				}
+			}
+		}
 	}
 	
 	public void vinculaDiretorAoFilme(int idFilme, int idDiretor) {
-		Filme filme = filmeRepositorio.getOne(idFilme);
-		Diretor diretor = diretorService.buscarDiretor(idDiretor);
-		
-		filme.getDiretores().add(diretor);
-		diretor.getFilmes().add(filme);
-		
-		filmeRepositorio.save(filme);
-		diretorService.salvarDiretor(diretor);		
+		Filme filme = buscarFilme(idFilme);
+		if (!filme.equals(null)) {
+			Diretor diretor = diretorService.buscarDiretor(idDiretor);
+			if (!diretor.equals(null)) {
+				if (!filme.getDiretores().contains(diretor)) {
+					filme.getDiretores().add(diretor);
+					diretor.getFilmes().add(filme);
+					
+					filmeRepositorio.save(filme);
+					diretorService.salvarDiretor(diretor);
+				}
+			}
+		}
 	}
 	
 	public void desvinculaDiretorDoFilme(int idFilme, int idDiretor) {
 		Filme filme = buscarFilme(idFilme);
-		Diretor diretor = diretorService.buscarDiretor(idDiretor);
+		if (!filme.equals(null)) {
+			Diretor diretor = diretorService.buscarDiretor(idDiretor);
+			if (!diretor.equals(null)) {
+				if (filme.getDiretores().contains(diretor)) {
+					filme.getDiretores().remove(diretor);
+					diretor.getFilmes().remove(filme);
 					
-		filme.getDiretores().remove(diretor);
-		diretor.getFilmes().remove(filme);
-		
-		filmeRepositorio.save(filme);
-		diretorService.salvarDiretor(diretor);
+					filmeRepositorio.save(filme);
+					diretorService.salvarDiretor(diretor);
+				}
+			}
+		}
 	}
 	
 	public void vinculaGeneroAoFilme(int idFilme, int idGenero) {
-		Filme filme = filmeRepositorio.getOne(idFilme);
-		Genero genero = generoService.buscarGenero(idGenero);
-		
-		filme.getGeneros().add(genero);
-		genero.getFilmes().add(filme);
-		
-		
-		filmeRepositorio.save(filme);
-		generoService.salvarGenero(genero);	
+		Filme filme = buscarFilme(idFilme);
+		if (!filme.equals(null)) {
+			Genero genero = generoService.buscarGenero(idGenero);
+			if (!genero.equals(null)) {
+				if (!filme.getGeneros().contains(genero)) {
+					filme.getGeneros().add(genero);
+					genero.getFilmes().add(filme);
+					
+					
+					filmeRepositorio.save(filme);
+					generoService.salvarGenero(genero);	
+				}
+			}
+		}
 	}
 	
 	public void desvinculaGeneroDoFilme(int idFilme, int idGenero) {
 		Filme filme = buscarFilme(idFilme);
-		Genero genero = generoService.buscarGenero(idGenero);
-		
-		filme.getGeneros().remove(genero);
-		genero.getFilmes().remove(filme);
-		
-		filmeRepositorio.save(filme);
-		generoService.salvarGenero(genero);
+		if (!filme.equals(null)) {
+			Genero genero = generoService.buscarGenero(idGenero);
+			if (!genero.equals(null)) {
+				if (filme.getGeneros().contains(genero)) {
+					filme.getGeneros().remove(genero);
+					genero.getFilmes().remove(filme);
+					
+					
+					filmeRepositorio.save(filme);
+					generoService.salvarGenero(genero);	
+				}
+			}
+		}
 	}
 }

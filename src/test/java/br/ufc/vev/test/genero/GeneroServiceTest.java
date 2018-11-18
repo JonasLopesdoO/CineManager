@@ -70,22 +70,6 @@ public class GeneroServiceTest {
 		assertNotNull(generoService.buscarGenero(idGenero));
 	}
 	
-	@Test 
-	public void buscaGeneroServiceTest() {
-		String nome = "Drama";
-		
-		Genero genero = new Genero();
-		genero.setNome(nome);
-		
-		Genero generoRecebido = new Genero();
-		
-		generoRecebido = generoService.salvarGenero(genero);
-		
-		int idGenero = generoRecebido.getId();
-		
-		assertTrue(generoService.buscaGenero(idGenero));
-	}
-	
 	@Test
 	public void updateGeneroServiceTest() {
 		String nome = "Terror";

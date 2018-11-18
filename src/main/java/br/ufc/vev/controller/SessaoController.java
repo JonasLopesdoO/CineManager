@@ -278,7 +278,7 @@ public class SessaoController {
 	
 	public boolean sessaoPossuiFilme(int idSessao, int idFilme) {
 		
-		if (existsByIdSessao(idSessao) && filmeController.existsByIdFilme(idFilme)) {
+		if (existsByIdSessao(idSessao) && !filmeController.buscaFilme(idFilme).equals(null)) {
 			Sessao sessao = sessaoService.buscarSessao(idSessao);
 			
 			if(sessao.getFilme() == null) return false;

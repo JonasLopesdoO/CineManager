@@ -1,7 +1,6 @@
 package br.ufc.vev.test.pessoa;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,22 +59,6 @@ public class AtorControllerTest {
 		atorRecebido = atorService.salvarAtor(ator);
 		
 		assertNotNull(atorController.buscaAtor(atorRecebido.getId()));
-	}
-	
-	@Test
-	public void existAtorControllerTest() {
-		String nome = "Peeter clarck";
-		String sobre = "Este é um ator muito bom!";
-		
-		Ator ator = new Ator();
-		ator.setNome(nome);
-		ator.setSobre(sobre);
-		
-		Ator atorRecebido = new Ator();
-		
-		atorRecebido = atorService.salvarAtor(ator);
-		
-		assertTrue(atorController.existsByIdAtor(atorRecebido.getId()));
 	}
 	
 	@Test
