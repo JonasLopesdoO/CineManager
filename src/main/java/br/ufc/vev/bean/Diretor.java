@@ -19,9 +19,11 @@ public class Diretor extends Pessoa{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	@NotNull @NotEmpty
+	@NotNull
+	@NotEmpty
 	private String nome;
-	@NotNull @NotEmpty
+	@NotNull
+	@NotEmpty
 	private String sobre;
 	
 	@ManyToMany(mappedBy = "diretores")
@@ -37,21 +39,27 @@ public class Diretor extends Pessoa{
 		
 	}
 
+	@Override
 	public Integer getId() {
 		return id;
 	}
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	@Override
 	public String getNome() {
 		return nome;
 	}
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	@Override
 	public String getSobre() {
 		return sobre;
 	}
+	@Override
 	public void setSobre(String sobre) {
 		this.sobre = sobre;
 	}

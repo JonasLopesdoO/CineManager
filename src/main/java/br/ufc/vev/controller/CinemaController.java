@@ -8,10 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufc.vev.bean.Cinema;
@@ -29,13 +26,14 @@ public class CinemaController {
 	@Autowired
 	private SalaController salaController;
 
+	private static final String CINEMA = "cinema";
 	private static final Logger logger = Logger.getLogger(String.valueOf(CinemaController.class));
 
 
 	@SuppressWarnings("finally")
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
-		ModelAndView model = new ModelAndView("cinema");
+		ModelAndView model = new ModelAndView(CINEMA);
 		try {
 			List<Cinema> cinemas = getAllCinema();
 
@@ -55,7 +53,7 @@ public class CinemaController {
 	  Cinema cinema = cinemaService.buscaCinema(id);
 
 	  model.addObject("salas", salaController.getAllSala());
-	  model.addObject("cinema", cinema);
+	  model.addObject(CINEMA, cinema);
 			
 	  return model;
 	}
@@ -63,15 +61,15 @@ public class CinemaController {
 	@RequestMapping("/formulario")
 	public ModelAndView formularioCinema() {
 		ModelAndView model = new ModelAndView("formulario-cinema");
-		model.addObject("cinema", new Cinema());
+		model.addObject(CINEMA, new Cinema());
 
 		return model;
 	}
 
-	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
+	@PostMapping(path = "/salvar")
 	public ModelAndView salvaCinema(Cinema cinema) {
 		
-		ModelAndView model = new ModelAndView("cinema");
+		ModelAndView model = new ModelAndView(CINEMA);
 		cinemaService.salvarCinema(cinema);
 		model.addObject("cinemaRetorno", cinema);
 		return index();
@@ -81,7 +79,7 @@ public class CinemaController {
 	@SuppressWarnings("finally")
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaCinema(@PathVariable Integer id) {
-		ModelAndView model = new ModelAndView("cinema");
+		ModelAndView model = new ModelAndView(CINEMA);
 		try {
 			if (this.validaId(id)) {
 				if (cinemaService.existsById(id)) {
@@ -141,7 +139,7 @@ public class CinemaController {
 			if (existsByIdCinema(id)) {
 				Cinema cinema = cinemaService.buscaCinema(id);
 
-				model.addObject("cinema", cinema);
+				model.addObject(CINEMA, cinema);
 			}
 		} catch (Exception e) {
 			logger.warning("Ocorreu um erro ao atualizar cinema: " + e.getMessage());
@@ -150,7 +148,7 @@ public class CinemaController {
 		}
 	}
 	
-	@RequestMapping(path="/{idCinema}/adicionarSala", method=RequestMethod.POST)
+	@PostMapping(path="/{idCinema}/adicionarSala")
 	public ModelAndView vincularSalaAoCinema(@PathVariable("idCinema") Integer idCinema, 
 											@RequestParam Integer idSala){
 
@@ -198,9 +196,9 @@ public class CinemaController {
 	
 	public boolean validaId(int id) throws Exception {
 		if (id == 0) {
-			throw new Exception("Erro ID deve ser maior que zero");
+			throw new IllegalArgumentException("Erro ID deve ser maior que zero");
 		} else if (id < 0) {
-			throw new Exception("Erro ID não pode ser negativo");
+			throw new IllegalArgumentException("Erro ID não pode ser negativo");
 		}
 		return true;
 	}

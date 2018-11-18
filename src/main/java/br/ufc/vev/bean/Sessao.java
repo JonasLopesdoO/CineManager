@@ -114,12 +114,11 @@ public class Sessao {
 		if (obj == null || getClass() != obj.getClass()) {
 			return false;
 		}
-		
 		Sessao sessao = (Sessao) obj;
 		if (this.getId() == sessao.getId()) {
 			return true;
-		} else
-			return false;
+		}
+		return false;
 	}
 
 	@Override

@@ -34,22 +34,28 @@ public class Ator extends Pessoa{
 	}
 	
 	public Ator() {	}
-		
+
+	@Override
 	public Integer getId() {
 		return id;
 	}
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	@Override
 	public String getNome() {
 		return nome;
 	}
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	@Override
 	public String getSobre() {
 		return sobre;
 	}
+	@Override
 	public void setSobre(String sobre) {
 		this.sobre = sobre;
 	}
