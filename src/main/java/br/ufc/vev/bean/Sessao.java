@@ -104,23 +104,6 @@ public class Sessao {
 		this.sala = sala;
 	}
 	
-	
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null || getClass() != obj.getClass()) {
-			return false;
-		}
-		Sessao sessao = (Sessao) obj;
-		if (this.getId() == sessao.getId()) {
-			return true;
-		}
-		return false;
-	}
-
 	@Override
 	public String toString() {
 		return "Sessao [id=" + id + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", horario=" + horario

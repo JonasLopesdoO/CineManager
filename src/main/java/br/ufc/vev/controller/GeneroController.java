@@ -20,12 +20,15 @@ public class GeneroController {
 	@Autowired
 	private GeneroService generoService;
 	
+	private static final String GENERO = "genero";
+	private static final String GENEROS = "generos";
+	
 	@RequestMapping(path="/")
 	public ModelAndView index() {
-		ModelAndView model = new ModelAndView("genero");
+		ModelAndView model = new ModelAndView(GENERO);
 		List<Genero> generos = getAllGenero();
 		if (generos != null) {
-			model.addObject("generos", generos);
+			model.addObject(GENEROS, generos);
 		}	
 		return model;
 	}
@@ -33,44 +36,44 @@ public class GeneroController {
 	@RequestMapping("/formulario")
 	public ModelAndView formularioGenero() {
 		ModelAndView model = new ModelAndView("formulario-genero");
-		model.addObject("genero", new Genero());
+		model.addObject(GENERO, new Genero());
 		return model;
 	}
 	
 	@RequestMapping(path="/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaGenero(Genero genero) {
-		ModelAndView model = new ModelAndView("genero");
+		ModelAndView model = new ModelAndView(GENERO);
 		generoService.salvarGenero(genero);	
 		model.addObject("generoRetorno", genero);
 		List<Genero> generos = getAllGenero();
-		model.addObject("generos", generos);
+		model.addObject(GENEROS, generos);
 		return model;
 		
 	}
 
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaGenero(@PathVariable Integer id) {
-		ModelAndView model = new ModelAndView("genero");
+		ModelAndView model = new ModelAndView(GENERO);
 		Genero genero;
 		genero = generoService.buscarGenero(id);
 		if(genero != null)
 			model.addObject("generoRetorno", genero);
 		
 		List<Genero> generos = generoService.getAllGenero();
-		model.addObject("generos", generos);
+		model.addObject(GENEROS, generos);
 		return model;
 	}
 
 	@GetMapping("/excluir/{id}")
 	public ModelAndView excluiGenero(@PathVariable("id") Integer id) {
-		ModelAndView model = new ModelAndView("genero");
+		ModelAndView model = new ModelAndView(GENERO);
 		Genero genero;
 		genero = generoService.buscarGenero(id);
 		if(genero != null)
 			generoService.excluirGenero(genero);
 		 		
 		List<Genero> generos = generoService.getAllGenero();
-		model.addObject("generos", generos);
+		model.addObject(GENEROS, generos);
 		return model;
 	}
 
@@ -86,7 +89,7 @@ public class GeneroController {
 		Genero genero;
 		genero = generoService.buscarGenero(id);
 		if(genero != null)		
-			model.addObject("genero", genero);
+			model.addObject(GENERO, genero);
 		
 		return model;		
 	}

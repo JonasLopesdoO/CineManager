@@ -1,6 +1,5 @@
 package br.ufc.vev.test.sala;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -90,7 +89,7 @@ public class SalaServiceTest {
 		
 		service.excluirSala(salaRecebida);
 		
-		assertThat(service.buscarSala(salaRecebida.getId()));
+		service.buscarSala(salaRecebida.getId());
 
 	}
 	
@@ -115,7 +114,7 @@ public class SalaServiceTest {
 		
 		service.atualizaSala(salaAtualizada);
 		
-		assertThat(service.buscarSala(salaAtualizada.getId()));
+		service.buscarSala(salaAtualizada.getId());
 	}
 	
 	@Test

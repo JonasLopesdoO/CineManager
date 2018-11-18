@@ -3,6 +3,8 @@ package br.ufc.vev.bean;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @javax.persistence.MappedSuperclass
 public abstract class Pessoa {
@@ -10,20 +12,20 @@ public abstract class Pessoa {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	
+	@NotNull @NotEmpty
 	private String nome;
+	@NotNull @NotEmpty
 	private String sobre;
 	
 	public Pessoa(String nome, String sobre) {
-		this.setNome(nome);
-		this.setSobre(sobre);
+		this.nome = nome;
+		this.sobre = sobre;
 	}
 	
 	public Pessoa() {
 		
 	}
-
-
+	
 	public Integer getId() {
 		return id;
 	}

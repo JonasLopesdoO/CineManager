@@ -18,10 +18,12 @@ public class SalaController {
 	
 	@Autowired
 	private SalaService salaService;
+	
+	private static final String SALA = "sala";
 
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
-		ModelAndView model = new ModelAndView("sala");
+		ModelAndView model = new ModelAndView(SALA);
 		List<Sala> salas = getAllSala();
 		if (salas != null) {
 			model.addObject("salas", salas);
@@ -32,13 +34,13 @@ public class SalaController {
 	@RequestMapping("/formulario")
 	public ModelAndView formularioGenero() {
 		ModelAndView model = new ModelAndView("formulario-sala");
-		model.addObject("sala", new Sala());
+		model.addObject(SALA, new Sala());
 		return model;
 	}
 
 	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
 	public ModelAndView salvaSala(Sala sala) {
-		ModelAndView model = new ModelAndView("sala");
+		ModelAndView model = new ModelAndView(SALA);
 		salaService.salvarSala(sala);
 		model.addObject("salaRetorno", sala);
 		return index();
@@ -46,7 +48,7 @@ public class SalaController {
 	
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaSala(@PathVariable Integer id) {
-		ModelAndView model = new ModelAndView("sala");
+		ModelAndView model = new ModelAndView(SALA);
 		Sala sala;	
 		sala = salaService.buscarSala(id);
 		if (sala != null) {
@@ -74,7 +76,7 @@ public class SalaController {
 		ModelAndView model = new ModelAndView("formulario-sala");
 		Sala sala = salaService.buscarSala(id);
 		if (sala != null) {
-			model.addObject("sala", sala);
+			model.addObject(SALA, sala);
 		}
 		return model;	
 	}

@@ -1,6 +1,5 @@
 package br.ufc.vev.test.filme;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -71,7 +70,7 @@ public class FilmeServiceTest {
 		FilmeUp.setSinopse("Filme Top 2");;
 		FilmeUp.setDuracao(100);		
 		
-		assertThat(service.atualizaFilme(FilmeUp));
+		service.atualizaFilme(FilmeUp);
 	}
 	
 	@Test

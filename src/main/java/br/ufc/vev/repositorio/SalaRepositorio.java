@@ -10,7 +10,5 @@ import br.ufc.vev.bean.Sala;
 @Repository
 @Transactional
 public interface SalaRepositorio extends JpaRepository<Sala, Integer>{
-	
-//	@Query("from sala s where s.cinema_id is null")
-//	List<Sala> buscarSalaVazia();
+
 }

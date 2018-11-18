@@ -5,12 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufc.vev.bean.Diretor;
-//import br.ufc.vev.bean.Filme;
 import br.ufc.vev.service.DiretorService;
 
 
@@ -19,10 +18,12 @@ import br.ufc.vev.service.DiretorService;
 public class DiretorController {
 	@Autowired
 	private DiretorService diretorService;
+	
+	private static final String DIRETOR = "diretor";
 
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
-		ModelAndView model = new ModelAndView("diretor");
+		ModelAndView model = new ModelAndView(DIRETOR);
 		List<Diretor> diretores = getAllDiretores();
 		if (diretores != null) {
 			model.addObject("diretores", diretores);
@@ -33,13 +34,13 @@ public class DiretorController {
 	@RequestMapping("/formulario")
 	public ModelAndView formularioDiretor() {
 		ModelAndView model = new ModelAndView("formulario-diretor");
-		model.addObject("diretor", new Diretor());
+		model.addObject(DIRETOR, new Diretor());
 		return model;
 	}
 
-	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
+	@PostMapping(path = "/salvar")
 	public ModelAndView salvaDiretor(Diretor diretor) {
-		ModelAndView model = new ModelAndView("diretor");
+		ModelAndView model = new ModelAndView(DIRETOR);
 		diretorService.salvarDiretor(diretor);
 		model.addObject("diretorRetorno", diretor);
 		return index();
@@ -48,7 +49,7 @@ public class DiretorController {
 
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaDiretor(@PathVariable Integer id) {
-		ModelAndView model = new ModelAndView("diretor");
+		ModelAndView model = new ModelAndView(DIRETOR);
 		Diretor diretor;
 		diretor = diretorService.buscarDiretor(id);
 		if (diretor != null) {
@@ -80,7 +81,7 @@ public class DiretorController {
 		Diretor diretor;
 		diretor = diretorService.buscarDiretor(id);
 		if (diretor != null) {
-			model.addObject("diretor", diretor);
+			model.addObject(DIRETOR, diretor);
 		}
 		return model;
 	}

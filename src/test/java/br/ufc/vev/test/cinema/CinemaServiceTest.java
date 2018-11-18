@@ -1,6 +1,5 @@
 package br.ufc.vev.test.cinema;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -158,7 +157,7 @@ public class CinemaServiceTest {
 		cinemaUp.setEndereco("Rua José de Queiroz Pessoa, 2500 - Planalto Universitário");
 		cinemaUp.setNome("Cine Bom Vizinho");
 		
-		assertThat(cinemaService.atualizaCinema(cinemaUp));
+		cinemaService.atualizaCinema(cinemaUp);
 	}
 	
 	@Test(expected = org.springframework.transaction.TransactionSystemException.class)
@@ -304,9 +303,7 @@ public class CinemaServiceTest {
 		
 		Integer idSala = salaService.salvarSala(sala).getId();
 
-		cinemaService.vinculaSalaAoCinema(idCine, idSala);
-		//assertFalse(cinemaService.vinculaSalaAoCinema(idCine, idSala));
-		
+		cinemaService.vinculaSalaAoCinema(idCine, idSala);	
 	}
 	
 	
@@ -332,27 +329,5 @@ public class CinemaServiceTest {
 		cinemaService.vinculaSalaAoCinema(idCine, idSala);
 		cinemaService.desvinculaSalaDoCinema(idCine, idSala);
 	}
-	
-//	@Test(expected = NullPointerException.class)
-//	public void desvinculaSalaNaoVinculadaAoCinemaServiceTest() {
-//		Cinema cinema = new Cinema();
-//		cinema.setCidade("Jucás");
-//		cinema.setEndereco("Travessa João Cavalcante, 2400 - Centro");
-//		cinema.setNome("Cine in Jucás");
-//		
-//		Integer idCine = cinemaService.salvarCinema(cinema).getId();
-//		
-//		String nome = "Sala A1";
-//		int capacidade = 150;
-//		
-//		Sala sala = new Sala();
-//		sala.setNome(nome);
-//		sala.setCapacidade(capacidade);
-//		
-//		Integer idSala = salaService.salvarSala(sala).getId();
-//
-//		cinemaService.desvinculaSalaDoCinema(idCine, idSala);
-//	}
-	
 
 }

@@ -103,42 +103,12 @@ public class SessaoControllerTest {
         assertNotNull(sessaoController.excluiSessao(sessaoRetornada.getId()));
     }
 
-//	@Test
-//	public void getSessaoPorDataControllerTest() {
-//		String inicio = "9/11/2018";
-//		String fim = "21/11/2018";
-//		
-//		sessaoController.verTodasPorData(inicio, fim);
-//	}
-
     @Test
     public void getSessaoPorCidadeControllerTest() {
         String cidade = "Quixadá";
 
         sessaoController.verTodasPorCidade(cidade);
     }
-
-//	@Test
-//	public void getSessaoPorGeneroControllerTest() {
-//			
-//		Genero genero = new Genero();
-//		genero.setNome("Ação");
-//		generoService.salvarGenero(genero);
-//		
-//		sessaoController.verTodasPorGenero(genero.getNome());
-//	}
-//	
-//	@Test
-//	public void getSessaoPorFilmeControllerTest() {
-//		Filme filme = new Filme();
-//		filme.setNome("DeadPool");
-//		filme.setSinopse("Filme Top");;
-//		filme.setDuracao(90);		
-//		
-//		filmeSevice.salvarFilme(filme);
-//		
-//		sessaoController.verTodasPorFilme(filme.getNome());
-//	}
 
     @Test
     public void vinculaFilmeASessaoControllerTest() {

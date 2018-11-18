@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,10 +34,13 @@ public class FilmeController {
 	DiretorService diretorService;
 	@Autowired
 	GeneroService generoService;
+	
+	private static final String FILME = "filme";
+	private static final String REDIRECT = "redirect:/filme/";
 
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
-		ModelAndView model = new ModelAndView("filme");
+		ModelAndView model = new ModelAndView(FILME);
 		List<Filme> filmes = getAllFilme();
 		if (filmes != null) {
 			model.addObject("filmes", filmes);
@@ -51,20 +55,20 @@ public class FilmeController {
 	  model.addObject("atores", atorService.getAllAtor());
 	  model.addObject("diretores", diretorService.getAllDiretor());
 	  model.addObject("generos", generoService.getAllGenero());
-	  model.addObject("filme", filme);
+	  model.addObject(FILME, filme);
 	  return model;
 	}
 
 	@RequestMapping("/formulario")
 	public ModelAndView formularioFilme() {
 		ModelAndView model = new ModelAndView("formulario-filme");
-		model.addObject("filme", new Filme());
+		model.addObject(FILME, new Filme());
 		return model;
 	}
 
-	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
+	@PostMapping(path = "/salvar")
 	public ModelAndView salvaFilme(Filme filme) {
-		ModelAndView model = new ModelAndView("filme");
+		ModelAndView model = new ModelAndView(FILME);
 		filmeService.salvarFilme(filme);
 		model.addObject("filmeRetorno", filme);
 		return index();
@@ -72,7 +76,7 @@ public class FilmeController {
 	
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaFilme(@PathVariable Integer id) {
-		ModelAndView model = new ModelAndView("filme");
+		ModelAndView model = new ModelAndView(FILME);
 		Filme filme;
 		filme = filmeService.buscarFilme(id);
 		if (filme != null) {
@@ -103,7 +107,7 @@ public class FilmeController {
 		ModelAndView model = new ModelAndView("formulario-filme");
 		Filme filme = filmeService.buscarFilme(id);
 		if (filme != null) {
-			model.addObject("filme", filme);
+			model.addObject(FILME, filme);
 		}	
 		return model;
 	}
@@ -112,7 +116,7 @@ public class FilmeController {
 	public ModelAndView vincularAtorAoFilme(@PathVariable("idFilme") Integer idFilme, 
 											@RequestParam Integer idAtor ){
 		
-	  ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
+	  ModelAndView model = new ModelAndView(REDIRECT + idFilme);
 	  filmeService.vinculaAtorAoFilme(idFilme, idAtor);
 	  return model;
 	}
@@ -121,7 +125,7 @@ public class FilmeController {
 	public ModelAndView desvinculaAtorDoFilme(@PathVariable("idFilme") Integer idFilme, 
 										@PathVariable("idAtor") Integer idAtor) {
 		
-		ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
+		ModelAndView model = new ModelAndView(REDIRECT + idFilme);
 		filmeService.desvinculaAtorDoFilme(idFilme, idAtor);
 		return model;
 	}
@@ -130,7 +134,7 @@ public class FilmeController {
 	public ModelAndView vincularDiretorAoFilme(@PathVariable("idFilme") Integer idFilme, 
 											@RequestParam Integer idDiretor ){
 
-	  ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
+	  ModelAndView model = new ModelAndView(REDIRECT + idFilme);
 	  filmeService.vinculaDiretorAoFilme(idFilme, idDiretor);
 	  return model;
 	}
@@ -139,7 +143,7 @@ public class FilmeController {
 	public ModelAndView desvinculaDiretorDoFilme(@PathVariable("idFilme") Integer idFilme, 
 											@PathVariable("idDiretor") Integer idDiretor) {
 		
-		ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
+		ModelAndView model = new ModelAndView(REDIRECT + idFilme);
 		filmeService.desvinculaDiretorDoFilme(idFilme, idDiretor);
 		return model;
 	}
@@ -148,7 +152,7 @@ public class FilmeController {
 	public ModelAndView vincularGeneroAoFilme(@PathVariable("idFilme") Integer idFilme, 
 												@RequestParam Integer idGenero){
 
-		ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
+		ModelAndView model = new ModelAndView(REDIRECT + idFilme);
 		filmeService.vinculaGeneroAoFilme(idFilme, idGenero);
 		return model;
 	}
@@ -157,7 +161,7 @@ public class FilmeController {
 	public ModelAndView desvinculaGeneroDoFilme(
 					@PathVariable("idFilme") Integer idFilme, 
 						@PathVariable("idGenero") Integer idGenero) {
-		ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
+		ModelAndView model = new ModelAndView(REDIRECT + idFilme);
 		filmeService.desvinculaGeneroDoFilme(idFilme, idGenero);
 		return model;
 	}
