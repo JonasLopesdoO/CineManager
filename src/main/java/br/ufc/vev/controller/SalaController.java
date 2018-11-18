@@ -126,7 +126,7 @@ public class SalaController {
 		}
 	}
 
-	protected List<Sala> getAllSala() {
+	public List<Sala> getAllSala() {
 		return salaService.getAllSala();
 	}
 	
@@ -155,7 +155,7 @@ public class SalaController {
 			}
 		}
 
-	protected boolean existsByIdSala(int id) {
+	public boolean existsByIdSala(int id) {
 		return salaService.buscaSala(id);
 	}
 
