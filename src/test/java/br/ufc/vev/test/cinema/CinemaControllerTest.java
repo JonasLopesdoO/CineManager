@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import br.ufc.vev.bean.Sala;
+import br.ufc.vev.service.CinemaService;
+import br.ufc.vev.service.SalaService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,125 +21,183 @@ import br.ufc.vev.controller.SalaController;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CinemaControllerTest {
-	
+
 	@Autowired
 	CinemaController controller;
 	@Autowired
 	SalaController controllerSala;
-	
+	@Autowired
+	CinemaService cinemaService;
+	@Autowired
+	SalaService salaService;
+
 	@Test
 	public void salvaCinemaControllerTest() {
-		
+
 		String cidade = "Quixada";
 		String endereco = "Rua A, Planalto Universitario";
-		String nome = "Cine o bom vizinho";		
-		
+		String nome = "Cine o bom vizinho";
+
 		Cinema cinema = new Cinema(nome, endereco, cidade);
 		assertNotNull(controller.salvaCinema(cinema));
 	}
-	
+
 	@Test
 	public void salvaCinemaComNomeNuloControllerTest() {
 		String cidade = "Quixada";
 		String endereco = "Rua A, Planalto Universitario";
-		String nome = null;		
-		
+		String nome = null;
+
 		Cinema cinema = new Cinema(nome, endereco, cidade);
 		assertNull(controller.salvaCinema(cinema));
 	}
-	
+
 	@Test
 	public void salvaCinemaComNomeVazioControllerTest() {
 		String cidade = "Quixada";
 		String endereco = "Rua A, Planalto Universitario";
-		String nome = "";		
+		String nome = "";
 		Cinema cinema = new Cinema(nome, endereco, cidade);
 		assertNull("Nome não pode ser vazio", controller.salvaCinema(cinema));
 	}
-	
+
 	@Test
 	public void salvaCinemaComCidadeVazioControllerTest() {
 		String cidade = "";
 		String endereco = "Rua A, Planalto Universitario";
-		String nome = "Cine o bom vizinho";		
-		
+		String nome = "Cine o bom vizinho";
+
 		Cinema cinema = new Cinema(nome, endereco, cidade);
 		assertNull("Cidade não pode ser vazio", controller.salvaCinema(cinema));
 	}
-	
+
 	@Test
 	public void salvaCinemaComCidadeNuloControllerTest() {
 		String cidade = null;
 		String endereco = "Rua A, Planalto Universitario";
-		String nome = "Cine o bom vizinho";		
-		
+		String nome = "Cine o bom vizinho";
+
 		Cinema cinema = new Cinema(nome, endereco, cidade);
 		assertNull("Cidade não pode ser nulo", controller.salvaCinema(cinema));
 	}
-	
+
 	@Test
 	public void salvaCinemaComEnderecoNuloControllerTest() {
 		String cidade = "Quixada";
 		String endereco = null;
-		String nome = "Cine o bom vizinho";		
-		
+		String nome = "Cine o bom vizinho";
+
 		Cinema cinema = new Cinema(nome, endereco, cidade);
 		assertNull("Endereco não pode ser nulo", controller.salvaCinema(cinema));
 	}
-	
+
 	@Test
 	public void salvaCinemaComEnderecoVazioControllerTest() {
 		String cidade = "Quixada";
 		String endereco = "";
-		String nome = "Cine o bom vizinho";		
-		
+		String nome = "Cine o bom vizinho";
+
 		Cinema cinema = new Cinema(nome, endereco, cidade);
 		assertNull("Endereco não pode ser vazio", controller.salvaCinema(cinema));
 	}
-	
-	
-	@Test 
+
+
+	@Test
 	public void buscaCinemaControllerTest() {
 		String cidade = "Quixada";
 		String endereco = "Rua A, Planalto Universitario";
-		String nome = "Cine o bom vizinho";	
-		
+		String nome = "Cine o bom vizinho";
+
 		Cinema cinema = new Cinema(nome, endereco, cidade);
-		
+
 		Cinema cinemaBuscado = new Cinema();
 		cinemaBuscado = (Cinema) controller.salvaCinema(cinema).getModel().get("cinemaRetorno");
-		
+
 		assertNotNull(controller.buscaCinema(cinemaBuscado.getId()));
 	}
-	
-	@Test 
-	public void buscaCinemaComIdZeroControllerTest() {
-		assertNull("Erro ID deve ser maior que zero", controller.buscaCinema(0));
-	}
-	
-	@Test 
-	public void buscaCinemaComIdNegativoControllerTest() {
-		assertNull("Erro ID não pode ser negativo", controller.buscaCinema(-1));
-	}
-		
+
+//	@Test
+//	public void buscaCinemaComIdZeroControllerTest() {
+//		assertNull("Erro ID deve ser maior que zero", controller.buscaCinema(0));
+//	}
+//
+//	@Test
+//	public void buscaCinemaComIdNegativoControllerTest() {
+//		assertNull("Erro ID não pode ser negativo", controller.buscaCinema(-1));
+//	}
+
 	@Test
 	public void atualizaCinemaControllerTest() {
 		String cidade = "Quixada";
 		String endereco = "Rua A, Planalto Universitario";
-		String nome = "Cine o bom vizinho";	
+		String nome = "Cine o bom vizinho";
 		Cinema cinema = new Cinema(nome, endereco, cidade);
-		
-		Cinema cinemaUp = new Cinema();
-		
+
+		Cinema cinemaUp;
+
 		cinemaUp = (Cinema) controller.salvaCinema(cinema).getModel().get("cinemaRetorno");
-		
+
 		cinemaUp.setCidade("Quixadá");
 		cinemaUp.setEndereco("Rua José de Queiroz Pessoa, 2500 - Planalto Universitário");
 		cinemaUp.setNome("Cine Bom Vizinho");
-		
+
 		assertThat(controller.salvaCinema(cinemaUp));
 	}
-	
+
+	@Test
+	public void excluiCinemaControllerTest() {
+		Cinema cinema = new Cinema();
+		cinema.setCidade("Jucás");
+		cinema.setEndereco("Travessa João Cavalcante, 2400 - Centro");
+		cinema.setNome("Cine in Jucás");
+
+		Cinema cinemaDel = new Cinema();
+		cinemaDel = cinemaService.salvarCinema(cinema);
+		assertNotNull(controller.excluiCinema(cinemaDel.getId()));
+	}
+
+	@Test
+	public void vinculaSalaAoCinemaControllerTest() {
+		Cinema cinema = new Cinema();
+		cinema.setCidade("Jucás");
+		cinema.setEndereco("Travessa João Cavalcante, 2400 - Centro");
+		cinema.setNome("Cine in Jucás");
+
+		Integer idCine = cinemaService.salvarCinema(cinema).getId();
+
+		String nome = "Sala A1";
+		int capacidade = 150;
+
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
+
+		Integer idSala = salaService.salvarSala(sala).getId();
+
+		assertNotNull(controller.vincularSalaAoCinema(idCine, idSala));
+
+	}
+
+	@Test
+	public void desvinculaSalaDoCinemaControllerTest() {
+		Cinema cinema = new Cinema();
+		cinema.setCidade("Jucás");
+		cinema.setEndereco("Travessa João Cavalcante, 2400 - Centro");
+		cinema.setNome("Cine in Jucás");
+
+		Integer idCine = cinemaService.salvarCinema(cinema).getId();
+
+		String nome = "Sala A1";
+		int capacidade = 150;
+
+		Sala sala = new Sala();
+		sala.setNome(nome);
+		sala.setCapacidade(capacidade);
+
+		Integer idSala = salaService.salvarSala(sala).getId();
+
+		controller.vincularSalaAoCinema(idCine, idSala);
+
 //	@Test
 //	public void atualizaCinemaComNomeVazioControllerTest() {
 //		String cidade = "Quixada";
@@ -357,5 +418,6 @@ public class CinemaControllerTest {
 //		assertTrue(controller.vinculaSalaAoCinema(idCine, idSala));
 //		controller.desvinculaSalaAoCinema(idCine, idSala);
 //	}
-	
+
+	}
 }
