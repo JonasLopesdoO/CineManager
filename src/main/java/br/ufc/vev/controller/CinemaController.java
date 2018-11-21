@@ -26,15 +26,28 @@ public class CinemaController {
 	private CinemaService cinemaService;
 	@Autowired
 	private SalaController salaController;
+<<<<<<< HEAD
 
 	private static final String CINEMA = "cinema";
 	
+=======
+	
+	@SuppressWarnings("finally")
+>>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView(CINEMA);
 		List<Cinema> cinemas = getAllCinema();
 		if (cinemas != null) {
 			model.addObject("cinemas", cinemas);
+<<<<<<< HEAD
+=======
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			return model;
+>>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		}
 		return model;
 	}
@@ -67,21 +80,56 @@ public class CinemaController {
 	
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaCinema(@PathVariable Integer id) {
+<<<<<<< HEAD
 		ModelAndView model = new ModelAndView(CINEMA);
 		Cinema cinema;
 		cinema = cinemaService.buscaCinema(id);
 		if (cinema != null) {
 			model.addObject("cinemaRetorno", cinema);
+=======
+		ModelAndView model = new ModelAndView("cinema");
+		try {
+			if (this.validaId(id)) {
+				if (cinemaService.existsById(id)) {
+					Cinema cinema = new Cinema();
+
+					cinema = cinemaService.buscaCinema(id);
+
+					model.addObject("cinemaRetorno", cinema);
+				} else {
+					// mensagem de erro "id nao existente no banco"
+				}
+			} else {
+				// msg de id invalido
+			}
+		} catch (Exception e) { // caso de erro
+			e.printStackTrace();
+		} finally { // sempre será execultado
+			return index();
+>>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		}
 		return index();
 	}
 	
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiCinema(@PathVariable("id") Integer id) {		
+<<<<<<< HEAD
 		Cinema cinema;
 		cinema = cinemaService.buscaCinema(id);
 		if (cinema != null) {
 			cinemaService.excluiCinema(cinema);
+=======
+		try {
+			Cinema cinema = new Cinema();
+			if (validaId(id) && existsByIdCinema(id)) {
+				cinema = cinemaService.buscaCinema(id);
+				cinemaService.excluiCinema(cinema);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			return index();
+>>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		}
 		return index();
 	}
@@ -93,9 +141,23 @@ public class CinemaController {
 	@RequestMapping("/atualizar/{id}")
 	public ModelAndView atualizaCinema(@PathVariable("id") Integer id) {
 		ModelAndView model = new ModelAndView("formulario-cinema");
+<<<<<<< HEAD
 		Cinema cinema = cinemaService.buscaCinema(id);
 		if (cinema != null) {
 			model.addObject(CINEMA, cinema);
+=======
+
+		try {
+			if (existsByIdCinema(id)) {
+				Cinema cinema = cinemaService.buscaCinema(id);
+
+				model.addObject("cinema", cinema);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			return model;
+>>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		}
 		return model;
 	}
@@ -105,7 +167,15 @@ public class CinemaController {
 											@RequestParam Integer idSala){
 
 	  ModelAndView model = new ModelAndView("redirect:/cinema/"+idCinema);
+<<<<<<< HEAD
 	  cinemaService.vinculaSalaAoCinema(idCinema, idSala);
+=======
+	  
+	  if (existsByIdCinema(idCinema) && salaController.existsByIdSala(idSala) && salaPertenceAoCinema(idCinema, idSala) == false) {
+		  cinemaService.vinculaSalaAoCinema(idCinema, idSala);
+	  }
+	  
+>>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 	  return model;
 	}
 	
@@ -116,6 +186,53 @@ public class CinemaController {
 		cinemaService.desvinculaSalaDoCinema(idCinema, idSala);
 		return model;
 	}
+<<<<<<< HEAD
 		
+=======
+	
+	public boolean vinculaSalaAoCinema(int idCine, int idSala) {
+		try {
+			if (validaId(idCine) && validaId(idSala)) {
+				return cinemaService.vinculaSalaAoCinema(idCine, idSala);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public void desvinculaSalaAoCinema(int idCine, int idSala) {
+		try {
+			if (validaId(idCine) && validaId(idSala)) {
+				cinemaService.desvinculaSalaDoCinema(idCine, idSala);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean validaId(int id) throws Exception {
+		if (id == 0) {
+			throw new Exception("Erro ID deve ser maior que zero");
+		} else if (id < 0) {
+			throw new Exception("Erro ID não pode ser negativo");
+		}
+		return true;
+	}
+	
+	public boolean salaPertenceAoCinema(int idCinema, int idSala) {
+		if (existsByIdCinema(idCinema) && salaController.existsByIdSala(idSala)) {
+			Cinema cinema = cinemaService.buscaCinema(idCinema);
+			for (Sala sala : cinema.getSalas()) {
+				if (sala.getId() == idSala) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	
+>>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 }
 

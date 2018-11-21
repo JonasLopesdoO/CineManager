@@ -19,6 +19,7 @@ public class GeneroController {
 	
 	@Autowired
 	private GeneroService generoService;
+<<<<<<< HEAD
 	
 	private static final String GENERO = "genero";
 	private static final String GENEROS = "generos";
@@ -30,6 +31,21 @@ public class GeneroController {
 		if (generos != null) {
 			model.addObject(GENEROS, generos);
 		}	
+=======
+	
+	@RequestMapping(path="/")
+	public ModelAndView index() {
+		ModelAndView model = new ModelAndView("genero");
+		try {
+			List<Genero> generos = getAllGenero();
+			
+			model.addObject("generos", generos);
+			return model;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+>>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		return model;
 	}
 	
@@ -53,6 +69,7 @@ public class GeneroController {
 
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaGenero(@PathVariable Integer id) {
+<<<<<<< HEAD
 		ModelAndView model = new ModelAndView(GENERO);
 		Genero genero;
 		genero = generoService.buscarGenero(id);
@@ -62,10 +79,27 @@ public class GeneroController {
 		List<Genero> generos = generoService.getAllGenero();
 		model.addObject(GENEROS, generos);
 		return model;
+=======
+		ModelAndView model = new ModelAndView("genero");
+		try {
+			if(existsByIdGenero(id)) {
+				Genero genero = new Genero();	
+				genero = generoService.buscarGenero(id);
+				model.addObject("generoRetorno", genero);
+			}	
+		} catch (Exception e) { 	// caso de erro 
+			e.printStackTrace();
+		} finally { // sempre será execultado
+			List<Genero> generos = generoService.getAllGenero();
+			model.addObject("generos", generos);
+			return model;
+		}
+>>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 	}
 
 	@GetMapping("/excluir/{id}")
 	public ModelAndView excluiGenero(@PathVariable("id") Integer id) {
+<<<<<<< HEAD
 		ModelAndView model = new ModelAndView(GENERO);
 		Genero genero;
 		genero = generoService.buscarGenero(id);
@@ -75,6 +109,23 @@ public class GeneroController {
 		List<Genero> generos = generoService.getAllGenero();
 		model.addObject(GENEROS, generos);
 		return model;
+=======
+		ModelAndView model = new ModelAndView("genero");
+		try {
+			Genero genero = new Genero();
+			if (existsByIdGenero(id)) { 
+				genero = generoService.buscarGenero(id);
+				generoService.excluirGenero(genero);
+		 	}
+			
+		} catch (Exception e) { 	// caso de erro 
+			e.printStackTrace();
+		} finally { // sempre será execultado
+			List<Genero> generos = generoService.getAllGenero();
+			model.addObject("generos", generos);
+			return model;
+		}
+>>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 	}
 
 	public List<Genero> getAllGenero() {		
@@ -86,15 +137,29 @@ public class GeneroController {
 	@RequestMapping("/atualizar/{id}")
 	public ModelAndView atualizaGenero(@PathVariable int id) {
 		ModelAndView model = new ModelAndView("formulario-genero");
+<<<<<<< HEAD
 		Genero genero;
 		genero = generoService.buscarGenero(id);
 		if(genero != null)		
 			model.addObject(GENERO, genero);
+=======
+		try {
+			if (existsByIdGenero(id)) {
+				Genero genero = generoService.buscarGenero(id);
+				
+				model.addObject("genero", genero);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			return model;
+		}
+>>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		
 		return model;		
 	}
 	
-	protected Genero buscaPorNome(String nome) {
+	public Genero buscaPorNome(String nome) {
 		return generoService.buscaPorNome(nome);
 	}
 	
