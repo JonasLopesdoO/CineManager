@@ -35,26 +35,15 @@ public class FilmeController {
 	@Autowired
 	GeneroService generoService;
 	
-<<<<<<< HEAD
 	private static final String FILME = "filme";
 	private static final String REDIRECT = "redirect:/filme/";
 
-=======
-	@SuppressWarnings("finally")
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView(FILME);
 		List<Filme> filmes = getAllFilme();
 		if (filmes != null) {
 			model.addObject("filmes", filmes);
-<<<<<<< HEAD
-=======
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			return model;
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		}
 		return model;
 	}
@@ -87,51 +76,23 @@ public class FilmeController {
 	
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaFilme(@PathVariable Integer id) {
-<<<<<<< HEAD
 		ModelAndView model = new ModelAndView(FILME);
 		Filme filme;
 		filme = filmeService.buscarFilme(id);
 		if (filme != null) {
 			model.addObject("filmeRetorno", filme);
-=======
-		ModelAndView model = new ModelAndView("filme");
-		try {
-			if (existsByIdFilme(id)) {
-				Filme filme = new Filme();
-				filme = filmeService.buscarFilme(id);
-				model.addObject("filmeRetorno", filme);
-			} 
-		} catch (Exception e) { // caso de erro
-			e.printStackTrace();
-		} finally { // sempre será execultado
-			return index();
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		}
 		return index();
 	}
 
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiFilme(@PathVariable("id") Integer id) {		
-<<<<<<< HEAD
 		Filme filme;
 		filme = filmeService.buscarFilme(id);
 		if (filme != null) {
 			filmeService.excluirFilme(filme);
 		}			
 		return index();
-=======
-		try {
-			Filme filme = new Filme();
-			if (existsByIdFilme(id)) {
-				filme = filmeService.buscarFilme(id);
-				filmeService.excluirFilme(filme);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			return index();
-		}
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 	}
 
 	public List<Filme> getAllFilme() {		
@@ -144,45 +105,19 @@ public class FilmeController {
 	@RequestMapping("/atualizar/{id}")
 	public ModelAndView atualizaFilme(@PathVariable("id") Integer id) {
 		ModelAndView model = new ModelAndView("formulario-filme");
-<<<<<<< HEAD
 		Filme filme = filmeService.buscarFilme(id);
 		if (filme != null) {
 			model.addObject(FILME, filme);
 		}	
 		return model;
-=======
-
-		try {
-			if (existsByIdFilme(id)) {
-				Filme filme = filmeService.buscarFilme(id);
-
-				model.addObject("filme", filme);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			return model;
-		}
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 	}
 	
 	@RequestMapping(path="/{idFilme}/adicionarAtor", method=RequestMethod.POST)
 	public ModelAndView vincularAtorAoFilme(@PathVariable("idFilme") Integer idFilme, 
 											@RequestParam Integer idAtor ){
-<<<<<<< HEAD
 		
 	  ModelAndView model = new ModelAndView(REDIRECT + idFilme);
 	  filmeService.vinculaAtorAoFilme(idFilme, idAtor);
-=======
-
-	  ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
-	  
-	  if (existsByIdFilme(idFilme) && atorService.buscaAtor(idAtor) 
-			  			&& atorPertenceAoFilme(idFilme, idAtor) != true) {
-		  filmeService.vinculaAtorAoFilme(idFilme, idAtor);
-	  }
-	  
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 	  return model;
 	}
 	
@@ -199,17 +134,8 @@ public class FilmeController {
 	public ModelAndView vincularDiretorAoFilme(@PathVariable("idFilme") Integer idFilme, 
 											@RequestParam Integer idDiretor ){
 
-<<<<<<< HEAD
 	  ModelAndView model = new ModelAndView(REDIRECT + idFilme);
 	  filmeService.vinculaDiretorAoFilme(idFilme, idDiretor);
-=======
-	  ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
-	  if (existsByIdFilme(idFilme) && diretorService.buscaDiretor(idDiretor) 
-			  	&& diretorPertenceAoFilme(idFilme, idDiretor) != true){
-		  filmeService.vinculaDiretorAoFilme(idFilme, idDiretor);
-	  }
-	  
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 	  return model;
 	}
 	
@@ -226,17 +152,8 @@ public class FilmeController {
 	public ModelAndView vincularGeneroAoFilme(@PathVariable("idFilme") Integer idFilme, 
 												@RequestParam Integer idGenero){
 
-<<<<<<< HEAD
 		ModelAndView model = new ModelAndView(REDIRECT + idFilme);
 		filmeService.vinculaGeneroAoFilme(idFilme, idGenero);
-=======
-		ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
-		if (existsByIdFilme(idFilme) && generoService.buscaGenero(idGenero) 
-					&& generoPertenceAoFilme(idFilme, idGenero) != true){
-		  filmeService.vinculaGeneroAoFilme(idFilme, idGenero);
-		}
-		  
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		return model;
 	}
 	
@@ -244,15 +161,8 @@ public class FilmeController {
 	public ModelAndView desvinculaGeneroDoFilme(
 					@PathVariable("idFilme") Integer idFilme, 
 						@PathVariable("idGenero") Integer idGenero) {
-<<<<<<< HEAD
 		ModelAndView model = new ModelAndView(REDIRECT + idFilme);
 		filmeService.desvinculaGeneroDoFilme(idFilme, idGenero);
-=======
-		ModelAndView model = new ModelAndView("redirect:/filme/"+idFilme);
-		if(generoPertenceAoFilme(idFilme, idGenero)) {
-			filmeService.desvinculaGeneroDoFilme(idFilme, idGenero);;
-		}
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		return model;
 	}
 

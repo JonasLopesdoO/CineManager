@@ -18,11 +18,8 @@ import br.ufc.vev.service.DiretorService;
 public class DiretorController {
 	@Autowired
 	private DiretorService diretorService;
-<<<<<<< HEAD
 	
 	private static final String DIRETOR = "diretor";
-=======
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 
 	@RequestMapping(path = "/")
 	public ModelAndView index() {
@@ -30,13 +27,6 @@ public class DiretorController {
 		List<Diretor> diretores = getAllDiretores();
 		if (diretores != null) {
 			model.addObject("diretores", diretores);
-<<<<<<< HEAD
-=======
-			return model;
-
-		} catch (Exception e) {
-			e.printStackTrace();
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		}
 		return model;
 	}
@@ -59,48 +49,21 @@ public class DiretorController {
 
 	@RequestMapping("/buscar/{id}")
 	public ModelAndView buscaDiretor(@PathVariable Integer id) {
-<<<<<<< HEAD
 		ModelAndView model = new ModelAndView(DIRETOR);
 		Diretor diretor;
 		diretor = diretorService.buscarDiretor(id);
 		if (diretor != null) {
 			model.addObject("diretorRetorno", diretor);
-=======
-		ModelAndView model = new ModelAndView("diretor");
-		try {
-			if (existsByIdDiretor(id)) {
-				Diretor diretor = new Diretor();
-				diretor = diretorService.buscarDiretor(id);
-				model.addObject("diretorRetorno", diretor);
-			} 
-		} catch (Exception e) { // caso de erro
-			e.printStackTrace();
-		} finally { // sempre será execultado
-			return index();
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		}
 		return index();
 	}
 
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluiDiretor(@PathVariable("id") Integer id) {
-<<<<<<< HEAD
 		Diretor diretor;
 		diretor = diretorService.buscarDiretor(id);
 		if (diretor != null) {
 			diretorService.excluirDiretor(diretor);
-=======
-		try {
-			Diretor diretor = new Diretor();
-			if (existsByIdDiretor(id)) {
-				diretor = diretorService.buscarDiretor(id);
-				diretorService.excluirDiretor(diretor);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			return index();
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		}
 		return index();
 	}
@@ -115,23 +78,10 @@ public class DiretorController {
 	@RequestMapping("/atualizar/{id}")
 	public ModelAndView atualizaDiretor(@PathVariable("id") Integer id) {
 		ModelAndView model = new ModelAndView("formulario-diretor");
-<<<<<<< HEAD
 		Diretor diretor;
 		diretor = diretorService.buscarDiretor(id);
 		if (diretor != null) {
 			model.addObject(DIRETOR, diretor);
-=======
-
-		try {
-			if (existsByIdDiretor(id)) {
-				Diretor diretor = diretorService.buscarDiretor(id);
-				model.addObject("diretor", diretor);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			return model;
->>>>>>> parent of 9573420... vulnerabilidades na situação BOM!
 		}
 		return model;
 	}
