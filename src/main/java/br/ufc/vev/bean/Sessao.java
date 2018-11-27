@@ -45,11 +45,11 @@ public class Sessao {
 	}
 	
 	public Sessao(LocalTime horario, LocalDate inicio, LocalDate fim, Filme filme, Sala sala) {
-		this.setFilme(filme);
-		this.setSala(sala);
-		this.setHorario(horario);
-		this.setDataInicio(inicio);
-		this.setDataFim(fim);
+		this.filme = filme;
+		this.sala = sala;
+		this.horario = horario;
+		this.dataInicio = inicio;
+		this.dataFim = fim;
 	}
 	
 	public Sessao() {

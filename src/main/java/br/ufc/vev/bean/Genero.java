@@ -60,16 +60,6 @@ public class Genero {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) return true;
-		if (obj == null || getClass() != obj.getClass()) return false;
-		
-		Genero genero = (Genero) obj;
-		
-		return id == genero.id;
-	}
-
-	@Override
 	public String toString() {
 		return "Genero [id=" + id + ", nome=" + nome + "]";
 	}

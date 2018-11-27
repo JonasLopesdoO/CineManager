@@ -57,7 +57,7 @@ public class SessaoService {
 	}
 
 	public List<Sessao> getSessaoPorData(LocalDate dataInicial, LocalDate dataFinal) {
-		List<Sessao> sessoes = new ArrayList<Sessao>();
+		List<Sessao> sessoes = new ArrayList<>();
 		for (Sessao sessao : getAllSessao()) {
 			if (sessao.getDataInicio().isAfter(dataInicial) 
 					&& sessao.getDataFim().isBefore(dataFinal)) {
@@ -68,7 +68,7 @@ public class SessaoService {
 	}
 
 	public List<Sessao> getSessaoPorCidade(String cidade) {
-		List<Sessao> sessoes = new ArrayList<Sessao>();
+		List<Sessao> sessoes = new ArrayList<>();
 		
 		for (Sessao sessao : getAllSessao()) {
 			if (sessao.getSala() != null && sessao.getSala().getCinema() != null
@@ -84,7 +84,7 @@ public class SessaoService {
 	}
 
 	public List<Sessao> getSessaoPorGenero(Genero genero) {
-		List<Sessao> sessoes = new ArrayList<Sessao>();
+		List<Sessao> sessoes = new ArrayList<>();
 		
 		for (Sessao sessao : this.getAllSessao()) {
 			if (sessao.getFilme() != null && sessao.getFilme().getGeneros() != null) {

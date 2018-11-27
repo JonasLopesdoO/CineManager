@@ -142,19 +142,4 @@ public class Filme {
 				+ ", atores=" + atores + ", diretores =" + diretores + ", generos =" + generos + "]";
 	}
 	
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) return true;
-		if (obj == null || getClass() != obj.getClass()) return false;
-		
-		Filme filme = (Filme) obj;
-		
-		return id == filme.id;
-	}
-
-	public boolean removeSessao(Sessao sessao) {
-		sessao.setFilme(null);
-		return this.sessoes.remove(sessao);
-	}
 }

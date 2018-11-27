@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufc.vev.bean.Sala;
@@ -38,7 +38,7 @@ public class SalaController {
 		return model;
 	}
 
-	@RequestMapping(path = "/salvar", method = RequestMethod.POST)
+	@PostMapping(path = "/salvar")
 	public ModelAndView salvaSala(Sala sala) {
 		ModelAndView model = new ModelAndView(SALA);
 		salaService.salvarSala(sala);

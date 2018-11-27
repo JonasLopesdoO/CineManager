@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -82,7 +81,8 @@ public class SessaoController {
 
 		Sessao sessao = new Sessao();
 		LocalTime horarioConvert;
-		LocalDate dataInicioConvert, dataFimConvert;
+		LocalDate dataInicioConvert;
+		LocalDate dataFimConvert;
 		try {
 			horarioConvert = LocalTime.parse(horario);
 			sessao.setHorario(horarioConvert);
@@ -137,7 +137,7 @@ public class SessaoController {
 		return index();
 	}
 	
-	@RequestMapping(path="/{idSessao}/adicionarFilme", method=RequestMethod.POST)
+	@PostMapping(path="/{idSessao}/adicionarFilme")
 	public ModelAndView vincularFilmeASessao(@PathVariable("idSessao") Integer idSessao, 
 											@RequestParam Integer idFilme){
 
@@ -155,7 +155,7 @@ public class SessaoController {
 		return model;
 	}
 	
-	@RequestMapping(path="/{idSessao}/adicionarSala", method=RequestMethod.POST)
+	@PostMapping(path="/{idSessao}/adicionarSala")
 	public ModelAndView vincularSalaASessao(@PathVariable("idSessao") Integer idSessao, 
 											@RequestParam Integer idSala){
 
@@ -173,7 +173,7 @@ public class SessaoController {
 		return model;
 	}
 	
-	@RequestMapping(path = "/porData", method = RequestMethod.POST)
+	@PostMapping(path = "/porData")
 	public ModelAndView verTodasPorData(@RequestParam String dataInicio, @RequestParam String dataFim) {
 // 	todasAsSessoesPorData
 		ModelAndView model = new ModelAndView(BUSCA);
@@ -194,7 +194,7 @@ public class SessaoController {
 		return model;
 	}
 	
-	@RequestMapping(path = "/porCidade", method = RequestMethod.POST)
+	@PostMapping(path = "/porCidade")
 	public ModelAndView verTodasPorCidade(@RequestParam String cidade) {
 		ModelAndView model = new ModelAndView(BUSCA);
 		if (cidade != null && !cidade.equals("")) {
@@ -204,7 +204,7 @@ public class SessaoController {
 		return model;
 	}
 	
-	@RequestMapping(path = "/porFilme", method = RequestMethod.POST)
+	@PostMapping(path = "/porFilme")
 	public ModelAndView verTodasPorFilme(@RequestParam String nome) {
 		ModelAndView model = new ModelAndView(BUSCA);
 		Filme filme = filmeController.buscarPorNome(nome);
@@ -216,7 +216,7 @@ public class SessaoController {
 		return model;
 	}
 	
-	@RequestMapping(path = "/porGenero", method = RequestMethod.POST)
+	@PostMapping(path = "/porGenero")
 	public ModelAndView verTodasPorGenero(@RequestParam String nome) {
 		ModelAndView model = new ModelAndView(BUSCA);
 		Genero genero = generoController.buscaPorNome(nome);

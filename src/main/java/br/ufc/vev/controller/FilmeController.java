@@ -10,7 +10,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -67,7 +66,7 @@ public class FilmeController {
 	}
 
 	@PostMapping(path = "/salvar")
-	public ModelAndView salvaFilme(Filme filme) {
+	public ModelAndView salvaFilme(@RequestParam Filme filme) {
 		ModelAndView model = new ModelAndView(FILME);
 		filmeService.salvarFilme(filme);
 		model.addObject("filmeRetorno", filme);
@@ -112,7 +111,7 @@ public class FilmeController {
 		return model;
 	}
 	
-	@RequestMapping(path="/{idFilme}/adicionarAtor", method=RequestMethod.POST)
+	@PostMapping(path="/{idFilme}/adicionarAtor")
 	public ModelAndView vincularAtorAoFilme(@PathVariable("idFilme") Integer idFilme, 
 											@RequestParam Integer idAtor ){
 		
@@ -130,7 +129,7 @@ public class FilmeController {
 		return model;
 	}
 	
-	@RequestMapping(path="/{idFilme}/adicionarDiretor", method=RequestMethod.POST)
+	@PostMapping(path="/{idFilme}/adicionarDiretor")
 	public ModelAndView vincularDiretorAoFilme(@PathVariable("idFilme") Integer idFilme, 
 											@RequestParam Integer idDiretor ){
 
@@ -148,7 +147,7 @@ public class FilmeController {
 		return model;
 	}
 	
-	@RequestMapping(path="/{idFilme}/adicionarGenero", method=RequestMethod.POST)
+	@PostMapping(path="/{idFilme}/adicionarGenero")
 	public ModelAndView vincularGeneroAoFilme(@PathVariable("idFilme") Integer idFilme, 
 												@RequestParam Integer idGenero){
 
