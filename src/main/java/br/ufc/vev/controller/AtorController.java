@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufc.vev.bean.Ator;
@@ -38,8 +39,9 @@ public class AtorController {
 	}
 
 	@PostMapping(path="/salvar")
-	public ModelAndView salvaAtor(Ator ator) {
+	public ModelAndView salvaAtor(@RequestParam String nome, @RequestParam String sobre) {
 		ModelAndView model = new ModelAndView("ator");
+		Ator ator = new Ator(nome, sobre);
 		atorService.salvarAtor(ator);
 		model.addObject("atorRetorno", ator);
 		return index();

@@ -43,9 +43,7 @@ public class CinemaControllerTest {
 		String cidade = "Quixada";
 		String endereco = "Rua A, Planalto Universitario";
 		String nome = "Cine o bom vizinho";		
-		
-		Cinema cinema = new Cinema(nome, endereco, cidade);
-		assertNotNull(controller.salvaCinema(cinema));
+		assertNotNull(controller.salvaCinema(nome, endereco, cidade));
 	}
 			
 	@Test
@@ -58,11 +56,9 @@ public class CinemaControllerTest {
 		Cinema cinemaUp = new Cinema();
 		
 		cinemaUp = cinemaService.salvarCinema(cinema);
-		cinemaUp.setCidade("Quixadá");
-		cinemaUp.setEndereco("Rua José de Queiroz Pessoa, 2500 - Planalto Universitário");
-		cinemaUp.setNome("Cine Bom Vizinho");
 		
-		assertNotNull(controller.salvaCinema(cinemaUp));
+		int id = cinemaUp.getId();
+		assertNotNull(controller.atualizaCinema(id));
 	}
 	
 	@Test

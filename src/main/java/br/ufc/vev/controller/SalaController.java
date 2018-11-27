@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufc.vev.bean.Sala;
+import br.ufc.vev.bean.TipoSala;
 import br.ufc.vev.service.SalaService;
 
 @Controller
@@ -39,8 +41,17 @@ public class SalaController {
 	}
 
 	@PostMapping(path = "/salvar")
-	public ModelAndView salvaSala(Sala sala) {
+	public ModelAndView salvaSala(@RequestParam String nome, @RequestParam String tipo,
+									@RequestParam int capacidade) {
 		ModelAndView model = new ModelAndView(SALA);
+		TipoSala tipoSala;
+		if (tipo.equals("3D")) {
+			tipoSala = TipoSala.D3;
+		} else {
+			tipoSala = TipoSala.D2;
+		}
+		
+		Sala sala = new Sala(nome, tipoSala, capacidade);
 		salaService.salvarSala(sala);
 		model.addObject("salaRetorno", sala);
 		return index();

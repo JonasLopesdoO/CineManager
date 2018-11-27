@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufc.vev.bean.Genero;
@@ -41,8 +42,9 @@ public class GeneroController {
 	}
 	
 	@PostMapping(path="/salvar")
-	public ModelAndView salvaGenero(Genero genero) {
+	public ModelAndView salvaGenero(@RequestParam String nome) {
 		ModelAndView model = new ModelAndView(GENERO);
+		Genero genero = new Genero(nome);
 		generoService.salvarGenero(genero);	
 		model.addObject("generoRetorno", genero);
 		List<Genero> generos = getAllGenero();

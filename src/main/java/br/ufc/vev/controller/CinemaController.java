@@ -58,8 +58,10 @@ public class CinemaController {
 	}
 
 	@PostMapping(path = "/salvar")
-	public ModelAndView salvaCinema(Cinema cinema) {
+	public ModelAndView salvaCinema(@RequestParam String nome, @RequestParam String endereco, 
+										@RequestParam String cidade) {
 		ModelAndView model = new ModelAndView(CINEMA);
+		Cinema cinema = new Cinema(nome, endereco, cidade);
 		cinemaService.salvarCinema(cinema);
 		model.addObject("cinemaRetorno", cinema);
 		return index();

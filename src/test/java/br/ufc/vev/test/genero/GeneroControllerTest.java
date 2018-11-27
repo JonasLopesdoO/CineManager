@@ -43,12 +43,8 @@ public class GeneroControllerTest {
 	
 	@Test 
 	public void salvarGeneroControllerTest() {
-		String nome = "Romance";
-		
-		Genero genero = new Genero();
-		genero.setNome(nome);
-		
-		assertNotNull(generoController.salvaGenero(genero));
+		String nome = "Romance";	
+		assertNotNull(generoController.salvaGenero(nome));
 	}
 	
 	@Test
@@ -96,11 +92,7 @@ public class GeneroControllerTest {
 	@Test
 	public void buscaTodosGeneroControllerTest() {
 		String nome = "Terror";
-		
-		Genero genero = new Genero();
-		genero.setNome(nome);
-		
-		generoController.salvaGenero(genero);
+		generoController.salvaGenero(nome);
 		
 		assertNotNull(generoController.getAllGenero());
 	}

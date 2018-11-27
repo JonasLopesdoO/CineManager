@@ -1,5 +1,6 @@
 package br.ufc.vev.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -32,6 +33,7 @@ public class Cinema {
 		this.nome = nome;
 		this.endereco = endereco;
 		this.cidade = cidade;
+		this.salas = new ArrayList<>();
 	}
 	
 	public Cinema() { } 

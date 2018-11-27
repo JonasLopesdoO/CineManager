@@ -37,12 +37,7 @@ public class AtorControllerTest {
 		String nome = "José Amadeu";
 		String sobre = "Caba arretado";
 		
-		Ator ator = new Ator();
-		
-		ator.setNome(nome);
-		ator.setSobre(sobre);
-		
-		assertNotNull(atorController.salvaAtor(ator));
+		assertNotNull(atorController.salvaAtor(nome, sobre));
 	}
 	
 	@Test

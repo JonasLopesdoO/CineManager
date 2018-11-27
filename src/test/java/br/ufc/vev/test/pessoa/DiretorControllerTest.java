@@ -36,12 +36,7 @@ public class DiretorControllerTest {
 		String nome = "José Jucaaa";
 		String sobre = "Diretor Caba arretado";
 		
-		Diretor diretor = new Diretor();
-		
-		diretor.setNome(nome);
-		diretor.setSobre(sobre);
-		
-		assertNotNull(diretorController.salvaDiretor(diretor));
+		assertNotNull(diretorController.salvaDiretor(nome, sobre));
 	}
 	
 	@Test

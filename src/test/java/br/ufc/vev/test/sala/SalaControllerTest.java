@@ -35,13 +35,9 @@ public class SalaControllerTest {
 	@Test
 	public void adicionarSalaControllerTest() {
 		String nome = "Sala A1";
+		String tipo = "2D";
 		int capacidade = 150;
-
-		Sala sala = new Sala();
-		sala.setNome(nome);
-		sala.setCapacidade(capacidade);
-
-		assertNotNull(controller.salvaSala(sala));
+		assertNotNull(controller.salvaSala(nome, tipo, capacidade));
 	}
 
 	@Test

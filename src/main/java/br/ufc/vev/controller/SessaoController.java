@@ -178,7 +178,8 @@ public class SessaoController {
 // 	todasAsSessoesPorData
 		ModelAndView model = new ModelAndView(BUSCA);
 		
-		LocalDate dataInicioConvert, dataFimConvert;
+		LocalDate dataInicioConvert; 
+		LocalDate dataFimConvert;
 		try {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 			dataInicioConvert = LocalDate.parse(dataInicio, formatter);

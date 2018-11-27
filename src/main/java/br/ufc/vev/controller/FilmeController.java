@@ -66,8 +66,10 @@ public class FilmeController {
 	}
 
 	@PostMapping(path = "/salvar")
-	public ModelAndView salvaFilme(@RequestParam Filme filme) {
+	public ModelAndView salvaFilme(@RequestParam String nome, @RequestParam String sinopse,
+									@RequestParam int duracao) {
 		ModelAndView model = new ModelAndView(FILME);
+		Filme filme = new Filme(nome, sinopse, duracao);
 		filmeService.salvarFilme(filme);
 		model.addObject("filmeRetorno", filme);
 		return index();

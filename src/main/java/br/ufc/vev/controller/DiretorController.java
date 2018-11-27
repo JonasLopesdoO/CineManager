@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufc.vev.bean.Diretor;
@@ -39,8 +40,9 @@ public class DiretorController {
 	}
 
 	@PostMapping(path = "/salvar")
-	public ModelAndView salvaDiretor(Diretor diretor) {
+	public ModelAndView salvaDiretor(@RequestParam String nome, @RequestParam String sobre) {
 		ModelAndView model = new ModelAndView(DIRETOR);
+		Diretor diretor = new Diretor(nome, sobre);
 		diretorService.salvarDiretor(diretor);
 		model.addObject("diretorRetorno", diretor);
 		return index();

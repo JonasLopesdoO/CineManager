@@ -48,8 +48,7 @@ public class FilmeControllerTest {
 		String nome = "DeadPool";
 		String sinopse = "Filme Top";
 		int duracao = 90;		
-		Filme filme = new Filme(nome, sinopse, duracao);
-		assertNotNull(filmeController.salvaFilme(filme));
+		assertNotNull(filmeController.salvaFilme(nome, sinopse, duracao));
 	}
 	
 	@Test
@@ -293,8 +292,8 @@ public class FilmeControllerTest {
 		String nomeGen = "Fantasia";
 		
 		Genero genero = new Genero();
-		genero.setNome(nomeGen);
-		genero = (Genero) generoController.salvaGenero(genero).getModel().get("generoRetorno");
+		
+		genero = (Genero) generoController.salvaGenero(nomeGen).getModel().get("generoRetorno");
 		
 		assertNotNull(filmeController.vincularGeneroAoFilme(filmeSalvo.getId(), genero.getId()));
 		assertNotNull(filmeController.desvinculaGeneroDoFilme(filmeSalvo.getId(), genero.getId()));
