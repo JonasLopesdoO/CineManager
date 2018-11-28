@@ -6,4 +6,4 @@ As tecnologias usadas foram SpringBoot utilizando o padrão arquitetural MVC - M
 Como persistência, utilizamos Hibernate e Postgresql
 O Sistema foi desenevolvido para a plataforma Web, podendo ser adequado para outra plataforma devido a facilidade do MVC.
 
-test conection linux mint from maike
+
